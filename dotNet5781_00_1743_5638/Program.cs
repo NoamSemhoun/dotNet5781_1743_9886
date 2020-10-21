@@ -18,7 +18,7 @@ namespace doNet5781_00_1743_5638
 
         private static void Welcome1743()
         {
-            Console.WriteLine("Enter your name: ");
+            Console.WriteLine("Enter your user name: ");
             string name = Console.ReadLine();
             Console.WriteLine("{0}, welcome to my first console application", name);
         }
