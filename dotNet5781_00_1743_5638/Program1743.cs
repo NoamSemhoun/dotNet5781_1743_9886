@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace doNet5781_00_1743_5638
+namespace dotNet5781_00_1743_5638
 {
     partial class Program
     {
