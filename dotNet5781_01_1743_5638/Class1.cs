@@ -104,7 +104,7 @@ namespace dotNet5781_01_1743_5638
         {
             Checkup = DateTime.Now;
             Km = 0;
-            Fuel = FULLTANK;
+        
 
         }
 
