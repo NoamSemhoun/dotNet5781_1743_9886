@@ -26,7 +26,7 @@ namespace dotNet5781_01_1743_5638
                 throw new Exception("invalid StartDate string format");
             }
             
-            Console.Write("License number: ");
+            Console.Write("License number : ");
             License = Console.ReadLine();
             Console.WriteLine("Is the bus was new at the purchase ? \n Y: Yes / N:No ");
             string reponse = Console.ReadLine();
