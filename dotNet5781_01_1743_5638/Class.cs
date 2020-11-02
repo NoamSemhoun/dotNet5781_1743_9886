@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,17 +25,14 @@ namespace dotNet5781_01_1743_5638
             {
                 throw new Exception("invalid StartDate string format");
             }
-            else
-            {
-
-            }
+            
             Console.Write("License number: ");
             License = Console.ReadLine();
             Console.WriteLine("Is the bus was new at the purchase ? \n Y: Yes / N:No ");
             string reponse = Console.ReadLine();
             if (reponse == "Y")
                 Checkup = StartDate;
-            else
+            else if (reponse == "N")
             {
                 Console.WriteLine("Please type the last maintenance date :");
                 bool result1 = DateTime.TryParse(Console.ReadLine(), out Checkup);
@@ -45,6 +42,11 @@ namespace dotNet5781_01_1743_5638
                 }
 
             }
+            else
+            {
+                throw new Exception("Invalid answer ");
+            }
+
             Fuel = FULLTANK;
 
         }
@@ -110,7 +112,7 @@ namespace dotNet5781_01_1743_5638
 
         public override string ToString()
         {
-            return String.Format("license: {0,-10}, lastCheckupDate: {1}, km: {2},fuel: {3}", License, Checkup, Km, Fuel);
+            return String.Format("license: {0,-10}, lastCheckupDate: {1}, km: {2}, fuel: {3}", License, Checkup, Km, Fuel);
         }
 
     }

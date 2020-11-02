@@ -49,7 +49,7 @@ namespace dotNet5781_01_1743_5638
                     case Actions.FIND:
                         {
                             bool flagy = false;
-                            Console.WriteLine("Enter a number license :");/*type it with -*/
+                            Console.WriteLine("Enter a number license (with -) :"); /*type it with -*/
                             string rep = Console.ReadLine();
                             for (int a = 0; a < buses.Count; a++)
                             {
@@ -77,14 +77,14 @@ namespace dotNet5781_01_1743_5638
                             }
                             if (!flagy)
                             {
-                                Console.WriteLine("This bus doesn't exist");
+                                Console.WriteLine("This bus doesn't exist\n");
                             }
                         }
                         break;
                     case Actions.MAINTENANCE:
                         {
                             bool flagy = false;
-                            Console.WriteLine("Enter a number license");/*type it with -*/
+                            Console.WriteLine("Enter a number license (with -) ");/*type it with -*/
                             string rep = Console.ReadLine();
                             for (int a = 0; a < buses.Count; a++)
                             {
@@ -97,14 +97,14 @@ namespace dotNet5781_01_1743_5638
                             }
                             if (!flagy)
                             {
-                                Console.WriteLine("This bus doesn't exist");
+                                Console.WriteLine("This bus doesn't exist\n");
                             }
                         }
                         break;
                     case Actions.REFUEL:
                         {
                             bool flagy = false;
-                            Console.WriteLine("Enter a number license");/*type it with */
+                            Console.WriteLine("Enter a number license (with -) ");/*type it with */
                             string rep = Console.ReadLine();
                             for (int a = 0; a < buses.Count; a++)
                             {
@@ -116,7 +116,7 @@ namespace dotNet5781_01_1743_5638
                             }
                             if (!flagy)
                             {
-                                Console.WriteLine("This bus doesn't exist");
+                                Console.WriteLine("This bus doesn't exist\n");
                             }
                         }
                         break;
