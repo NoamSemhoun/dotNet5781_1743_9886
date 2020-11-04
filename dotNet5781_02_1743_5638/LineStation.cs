@@ -14,8 +14,8 @@ namespace dotNet5781_02_1743_5638
         int time;     // avec la station précedente
 
         // object 
-    }
-
+    };
+    /*
     class Line  // simple  List
     {
         List<string> trajet;            // masloul
@@ -34,5 +34,5 @@ namespace dotNet5781_02_1743_5638
     class NewLine    // que 2 fois la mm ligne : dans les 2 sens 
     {
 
-    }
+    }            */
 }
