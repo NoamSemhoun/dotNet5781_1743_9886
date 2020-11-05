@@ -6,24 +6,33 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_1743_5638
 {
-    class Station
+    public class Station            //  POSITION : 
     {
 
-        private int NumStation { get; set; } // code à 6 chiifres max
+        private int NumStation;  // code à 6 chiifres max     { get; set; } ??
 
         //Position     	:
-        double Latitude;   // -90, 90     ISR : [31,33.3]  unicode U+00B0 
-        double Longitude;  // -180, 180   ISR : [34.3,35.5]   
-        string adress;
+        private double latitude;   // -90, 90     ISR : [31,33.3]  unicode U+00B0 
+        private double longitude;  // -180, 180   ISR : [34.3,35.5]   
+        private string address;
 
+        List<string> listAddresses;
 
-        public Station() { } //ctor
-        ~Station() { }  // dtor
+        public Station() // ctor   position
+        {
+            listAddresses = new List<string> { "12 Chazar, Jerusalem", "30 Havaad Heleumi, Jerusalem", "21 Begin, Jerusalem", "12 Hebron Road, Jerusalem", "5 Herzl, Jerusalem" };
 
+            Random r = new Random();
+            latitude = r.NextDouble() * 2.3 + 31;       // [31,33.3] להגריל     
+            longitude = r.NextDouble() * 1.2 + 34.3;        // [34.3,35.5] 
+
+            int index = r.Next() * (listAddresses.Count - 1);   // כתובת להגריל 
+            address = listAddresses.ElementAt(index); // listAddresses[index];
+        } 
 
         public override string ToString()
         {
-            return $"Bus Station Code: {NumStation},{Latitude}\u00b0N  {Longitude}°E";
+            return $"Bus Station Code: {NumStation},{latitude}\u00b0N  {longitude}°E";
         }
     }
     

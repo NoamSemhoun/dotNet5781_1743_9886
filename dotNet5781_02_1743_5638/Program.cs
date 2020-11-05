@@ -12,8 +12,22 @@ namespace dotNet5781_02_1743_5638
     //  public enum Actions { }    PAS besoin titre trop long
     class Program
     {
-        static void Main(string[] args)
+            
+            //BusLine busLine = new BusLine();
+            //foreach (var line in busLine)
+            //{
+
+            //}
+
+            //foreach (string element in list)
+            //{
+            //    Console.WriteLine(element.ToUpper());
+            //}
+
+
+          static void Main(string[] args)
         {
+         
             // 10 ligne  40 station
             int choice;
             do

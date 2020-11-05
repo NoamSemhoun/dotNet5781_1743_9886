@@ -44,7 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LineStation.cs" />
+    <Compile Include="Line.cs" />
+    <Compile Include="StationLine.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
