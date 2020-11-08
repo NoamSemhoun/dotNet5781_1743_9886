@@ -3,48 +3,63 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace dotNet5781_02_1743_5638
 {
-    //  public enum Actions { }    PAS besoin titre trop long
     class Program
     {
-            
-            //BusLine busLine = new BusLine();
-            //foreach (var line in busLine)
-            //{
 
-            //}
+        //expl FOr each :
+        //BusLine busLine = new BusLine();
+        //foreach (var line in busLine)
+        //{
 
-            //foreach (string element in list)
-            //{
-            //    Console.WriteLine(element.ToUpper());
-            //}
+        //}
 
+        //foreach (string element in list)
+        //{
+        //    Console.WriteLine(element.ToUpper());
+        //}
 
-          static void Main(string[] args)
+        static List<Line> listLines;
+
+        static void Init()  // initialisation : 40 station in 10line (all in Jerusalem)
         {
-            // 10 ligne  40 station
+            listLines = new List<Line>();
+            for (int i = 0; i < 10; i++)
+            {
+                listLines.Add(new Line());
+            }
+            //Line l1 = listLines.First();
+            //Line l2 = listLines.Last();
 
+            //l1 > l2;  comparable
+        }
+
+        static void Main(string[] args)
+        {
+            Init();  // Initialisation
             int choice;
             do
             {
                 Console.WriteLine("* MENU * : Please Enter your choice : \n\n " +
                 "\t1 to add a New Line,\n" +
-                "\t2 to add a New Station,\n" +
+                "\t2 to add a New Station in a Line\n" +
                 "\t3 to delete a Line\n" +
-                "\t4 to delete a Station\n" +
-                "\t5 to Search a Line in a Station\n" +
-                "\t6 to 2 Station\n" +   ////////
+                "\t4 to delete a Station from a Line\n" +
+                "\t5 to Search Lines in a Station\n" +
+                "\t6 to Find the route between 2 Station\n" +   ////////
                 "\t7 to Print all Lines\n" +
-                "\t8 to Print all the Stations (and them Line)\n" +
+                "\t8 to Print all the Stations (and their Lines)\n" +
                 "\t0 to Exit ");
 
                 bool ok = false;
-
                 ok = int.TryParse(Console.ReadLine(), out choice);
                 while (!ok || choice > 8 || choice < 0) // if it's KELET ERROR
                 {
@@ -57,11 +72,11 @@ namespace dotNet5781_02_1743_5638
                     case 0:
                         Console.WriteLine("Thank You, Good Bye !");
                         break;
+
                     case 1:  // ADD NEW LINE
                         Console.WriteLine("Enter the number of the new Bus Line");
-                        List<StationLine> list1 = new List<StationLine>();  // VERIFIER LE KELET
-                        int num1 = int.Parse(Console.ReadLine());
-                        list1.Add(new StationLine(num1)); 
+                        int numberLine = int.Parse(Console.ReadLine());
+
                         Console.WriteLine("Enter the area of this new Bus Line :\n" +
                             "1 to General,\n" +
                             "2 to North,\n" +
@@ -69,43 +84,76 @@ namespace dotNet5781_02_1743_5638
                             "4 to Center\n" +
                             "or 5 to Jerusalem)\n");
                         int area = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Enter the Number of the First Station of this Bus Line :");
+                        int First = int.Parse(Console.ReadLine());
 
-                        Line L1 = new Line(num1,area,list1);
-                        Console.WriteLine( L1 ); 
+                        Console.WriteLine("Enter the Number of the Last Station of this Bus Line :");
+                        int Last = int.Parse(Console.ReadLine());
+
+
+                        listLines.Add(new Line(numberLine,area,First,Last));  //  Create the New Line
+
+
+
+                        // Console.WriteLine(L1);
                         break;
 
-                    case 2:  // // ADD NEW Station
-                        // verifier si elle existe pas deja
-                        //try {} catch  {Console.WriteLine("Error");}
+                    case 2:  // // to add a New Station in a Line
+                        
+                        Console.WriteLine("Enter the Number of the Line :");
+                        int NumLine = int.Parse(Console.ReadLine());
+                        //do
+                        //{
+                        //    try
+                        //    {
+                                Console.WriteLine("Enter the Number of the Station to add :");
+                                int NumStation = int.Parse(Console.ReadLine());
+                                
+                                Station S1 = new StationLine(NumStation); 
+                        // create the station 
+                       //}
+                       //catch (ArgumentException e)
+                       //{
+                       //    Console.WriteLine(e.Message);
+                       //    ok = false;
+                       //}
 
+                        //} while (!ok);
 
-                        Station S1 = new Station() { };
-                        // ok = int.TryParse(Console.ReadLine(), out NumStation);
-
-
-                        // trajet.Add(1) // Ajouter a la liste
-
-
-                        Console.WriteLine($"New station added successfully:\n" + S1);
+                      //  Line.addline(NumLine,  S1); // Ajouter a la liste station
+                        
+                        // Console.WriteLine($"New station added successfully:\n" + S1);
                         break;
-                    case 3:   // remove
+
+                    case 3:   // delete a Line
                         Console.WriteLine("Enter the number Line to delete :");
-                        int.TryParse(Console.ReadLine(), out int num);
+                        try
+                        {
+                            int.TryParse(Console.ReadLine(), out int NumLine);
+                        }
+                        catch
+                        {
+                            Console.WriteLine("No existing Line, Error ");
+                        }
+
+                       //  Line.deleteaLine(NumLine);
                         break;
 
                     case 4:
                         Console.WriteLine("Enter the Station to delete :");
-                        int.TryParse(Console.ReadLine(), out  num);
+                        int.TryParse(Console.ReadLine(), out int num);
+                       // Line.deleteStation(num);
                         break;
                     case 5:
                         Console.WriteLine("Enter the line to search and the stations in which it is located:");
-
+                        //Line.search(Line L1);
                         //  search(line, station);
                         break;
 
                     case 6:
                         break;
-                    case 7:
+                    case 7:  //Print all the Stations(and their Lines)
+
                         //foreach(list<StationLine> list in Line)
                         //{
                         //    Console.WriteLine(list);
@@ -114,7 +162,11 @@ namespace dotNet5781_02_1743_5638
                         // printLines();
                         break;
                     case 8:
-                       //  printStations();  // avec les lignes
+                        foreach (Line line in listLines)
+                        {
+                            Console.WriteLine(line);
+                        }
+                        //  printStations();  // avec les lignes
                         break;
 
                 }
@@ -124,5 +176,5 @@ namespace dotNet5781_02_1743_5638
             Console.Read();
         }
     }
-    
+
 }
