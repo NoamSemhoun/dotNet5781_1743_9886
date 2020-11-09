@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,8 @@ namespace dotNet5781_02_1743_5638
     public class Station            //  POSITION : 
     {
 
-        protected int shelterNumber;  //   { get; set; } ??   
+        protected int shelterNumber; 
+        public int ShelterNumber{ get=>shelterNumber;set=>shelterNumber=value;} 
 
         //Position     	:
         protected double latitude;   // -90, 90       unicode U+00B0 

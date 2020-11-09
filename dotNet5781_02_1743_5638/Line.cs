@@ -13,7 +13,7 @@ namespace dotNet5781_02_1743_5638
     public class Line : IEnumerable  // IComparable  ?    //    List   KAV BODED    with all ther station
     {
         /*  // 1 et 2 
-                bool SearchStation(int Kav,int code); // code de la station sur une ligne
+                bool SearchStation(int Kav,int code); code de la station sur une ligne
                 int Distance(int NumStation1, int NumStation2); // distance entre les 2 station
                 int Time(int NumStation1, int NumStation2); // temp  entre les 2 station      */
 

@@ -37,7 +37,7 @@ namespace dotNet5781_02_1743_5638
                 throw new ArgumentException("Object is not a StationLine");
         }
 
-        public int GetStationNumber() => shelterNumber;  //
+        public int GetStationNumber() {get=> shelterNumber;}  //
 
         public override string ToString()  
         {
