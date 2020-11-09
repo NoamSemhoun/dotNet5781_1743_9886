@@ -113,7 +113,8 @@ namespace dotNet5781_02_1743_5638
                         Console.WriteLine("Enter the number Line to delete :");
                         try
                         {
-                            int numLine =int.TryParse(Console.ReadLine());
+                             int numLine;
+                            int.TryParse(Console.ReadLine(),out numLine);
                         }
                         catch
                         {
