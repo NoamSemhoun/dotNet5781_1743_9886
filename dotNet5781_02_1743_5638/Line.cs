@@ -48,15 +48,24 @@ namespace dotNet5781_02_1743_5638
             lastStation = listStations.Last();
         }
 
-        public Line(int Numbus, int thearea, int First, int Last)   // 2nd ctor    attention area missoug Enum Area
+        public Line(int a)   // 2nd ctor    attention area missoug Enum Area
         {
+                 busLineNumber = a;
+            Console.WriteLine("Enter the area of this new Bus Line :\n" +
+                             "1 to General,\n" +
+                             "2 to North,\n" +
+                             "3 to South,\n" +
+                             "4 to Center\n" +
+                             "or 5 to Jerusalem)\n");
+            int temp = int.Parse(Console.ReadLine());
+            area = (Area)temp;
             listStations = new List<StationLine>();  // New Kav
-            listStations.Add(new StationLine(First));
-            listStations.Add(new StationLine(Last));
-            listStations.Sort();
-            busLineNumber = Numbus;
-            area = Area.General;  // ///////////////////
-
+            Console.WriteLine("Enter the shellterNumber of your first station :");
+            int first = int.Parse(Console.ReadLine());
+            listStations.Add(new StationLine(first));
+            Console.WriteLine("Enter the shellterNumber of your last station :");
+            int last = int.Parse(Console.ReadLine());
+            listStations.Add(new StationLine(first));
             firstStation = listStations.First();
             lastStation = listStations.Last();
         }
@@ -68,7 +77,7 @@ namespace dotNet5781_02_1743_5638
 
         #region FONCTION
         public static bool IsNumberStationExists(int numStation) =>       // verifier TOUTE station
-           listStations.Exists(station => station.GetStationNumber() == numStation);
+           listStations.Exists(station => station.ShelterNumber == numStation);
         // check number station
         public static void addline(int NumLine, StationLine S) // a quel station l'ajouter ??
         {

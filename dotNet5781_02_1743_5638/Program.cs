@@ -74,27 +74,11 @@ namespace dotNet5781_02_1743_5638
                         break;
 
                     case 1:  // ADD NEW LINE
-                        Console.WriteLine("Enter the number of the new Bus Line");
-                        int numberLine = int.Parse(Console.ReadLine());
-
-                        Console.WriteLine("Enter the area of this new Bus Line :\n" +
-                            "1 to General,\n" +
-                            "2 to North,\n" +
-                            "3 to South,\n" +
-                            "4 to Center\n" +
-                            "or 5 to Jerusalem)\n");
-                        int area = int.Parse(Console.ReadLine());
-                        Console.WriteLine("Enter the Number of the First Station of this Bus Line :");
-                        int First = int.Parse(Console.ReadLine());
-
-                        Console.WriteLine("Enter the Number of the Last Station of this Bus Line :");
-                        int Last = int.Parse(Console.ReadLine());
-
-
-                        listLines.Add(new Line(numberLine,area,First,Last));  //  Create the New Line
-
-
-
+                     
+                          Console.WriteLine("Enter the number of the new Bus Line");
+                        int a= int.Parse(Console.ReadLine());
+                        listLines.Add(new Line(a));
+                        
                         // Console.WriteLine(L1);
                         break;
 
@@ -129,7 +113,7 @@ namespace dotNet5781_02_1743_5638
                         Console.WriteLine("Enter the number Line to delete :");
                         try
                         {
-                            int.TryParse(Console.ReadLine(), out int NumLine);
+                            int numLine =int.TryParse(Console.ReadLine());
                         }
                         catch
                         {
