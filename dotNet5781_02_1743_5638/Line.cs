@@ -1,103 +1,221 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Runtime.Remoting.Services;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace dotNet5781_02_1743_5638
 {
-    enum Area { General, North, South, Center, Jerusalem }
-    public class Line : IEnumerable  // IComparable  ?    //    List   KAV BODED    with all ther station
+   enum Area { General, North, South, Center, Jerusalem }
+    class Line : IEnumerable  
     {
-        /*  // 1 et 2 
-                bool SearchStation(int Kav,int code); code de la station sur une ligne
-                int Distance(int NumStation1, int NumStation2); // distance entre les 2 station
-                int Time(int NumStation1, int NumStation2); // temp  entre les 2 station      */
-
-        private  int busLineNumber;
-        private StationLine firstStation;
-        private StationLine lastStation;
+       
+       private int busLineNumber;
+        public StationLine firstStation;
+        public StationLine lastStation;
         private Area area;
-        private static List<StationLine> listStations;  // List des Stations de cette Kav
+        public  List<StationLine> listStations;  
 
-        private static int sampleShelterNumber = 10000;   //  code  6 numbers 
+        private static int sampleShelterNumber = 10000;    
         private static int sampleLineNumber = 1;
-
         #region Constructors
-
-        public Line()   // ctor  create for      Initialisation
+       public int BusLineNumber { get => busLineNumber; set => busLineNumber = value; }
+        public Line()   
         {
-            //    Tirer au sort le num/ Random random = new Random();  //    NumStation.Station.firstStation = random.NextDouble() * 999999;   // 1000 to 99999 ; //    NumStation.Station.lastStation = random.Next() * 999999;   // 1 to 999999 ;
-
-            listStations = new List<StationLine>();  // New Kav
+        
+            listStations = new List<StationLine>();  
             for (int i = 0; i < 4; ++i, ++sampleShelterNumber)
             {
-                //++sampleShelterNumber;
+               
                 listStations.Add(new StationLine(sampleShelterNumber));
             }
-
-            //listStations.Sort();
-
             busLineNumber = sampleLineNumber++;
             area = Area.Jerusalem;
-
             firstStation = listStations.First();
             lastStation = listStations.Last();
         }
-
-        public Line(int a)   // 2nd ctor    attention area missoug Enum Area
+        public Line(Line l)
         {
-                 busLineNumber = a;
-            Console.WriteLine("Enter the area of this new Bus Line :\n" +
-                             "1 to General,\n" +
-                             "2 to North,\n" +
-                             "3 to South,\n" +
-                             "4 to Center\n" +
-                             "or 5 to Jerusalem)\n");
-            int temp = int.Parse(Console.ReadLine());
-            area = (Area)temp;
-            listStations = new List<StationLine>();  // New Kav
-            Console.WriteLine("Enter the shellterNumber of your first station :");
-            int first = int.Parse(Console.ReadLine());
-            listStations.Add(new StationLine(first));
-            Console.WriteLine("Enter the shellterNumber of your last station :");
-            int last = int.Parse(Console.ReadLine());
-            listStations.Add(new StationLine(first));
-            firstStation = listStations.First();
-            lastStation = listStations.Last();
+            listStations = new List<StationLine>();
+            busLineNumber = l.busLineNumber;
+            area = l.area;
+            listStations = l.listStations;
         }
+       
+        public Line(int a)   
+        {
+                busLineNumber = a;
+                Console.WriteLine("Enter the area of this new Bus Line :\n" +
+                                 "0 to General,\n" +
+                                 "1 to North,\n" +
+                                 "2 to South,\n" +
+                                 "3 to Center\n" +
+                                 "or 4 to Jerusalem\n");
+            bool ok = int.TryParse(Console.ReadLine(), out int temp);
+            while (temp<0||temp>4)
+                {
+                    Console.WriteLine("Error of Input,try again :");
+                    temp = int.Parse(Console.ReadLine());
+                }
+                area = (Area)temp;
+                listStations = new List<StationLine>();  
+                Console.WriteLine("Enter the shellterNumber of your first station :");
+            bool ok2 = int.TryParse(Console.ReadLine(), out int first);
+            if (!ok2) { throw new ExceptionTarguil2("Enter a number only !"); }
 
+            StationLine First = new StationLine(first);
+            TimeSpan timeoftheFirst = new TimeSpan(0, 0, 0);
+            First.Temps = (timeoftheFirst);
+            First.Distance = 0;
+                listStations.Add(First);
+                Console.WriteLine("Enter the shellterNumber of your last station :");
+            bool ok3 = int.TryParse(Console.ReadLine(), out int last);
+            if (!ok3) { throw new ExceptionTarguil2("Enter a number only !"); }
+            while (last==first)
+            {
+                Console.WriteLine("You can't type the same station for the departure and the arrival ! Type again the station of arrival :");
+                last = int.Parse(Console.ReadLine());
+            }
+                StationLine Last = new StationLine(last);
+                listStations.Add(Last);
+                firstStation = listStations.First();
+                lastStation = listStations.Last();
+        }
+        public Line(int a,string Null)
+        {
+            busLineNumber = a;
+            listStations = new List<StationLine>();
+            Console.WriteLine("Enter the shellterNumber of your first station :");
+            bool ok = int.TryParse(Console.ReadLine(), out int first);
+            if (!ok) { throw new ExceptionTarguil2("Enter a number only !"); }
+            firstStation = new StationLine(first);
+            listStations.Add(firstStation);
+            TimeSpan Premier = new TimeSpan(0, 0, 0);
+            firstStation.Temps = Premier;
+            Console.WriteLine("Enter the shellterNumber of your last station :");
+            bool ok2 = int.TryParse(Console.ReadLine(), out int last);
+            if (!ok2) { throw new ExceptionTarguil2("Enter a number only !"); }
+            lastStation = new StationLine(last);
+            listStations.Add(lastStation);
+        }
         #endregion
 
-
-
-
         #region FONCTION
-        public static bool IsNumberStationExists(int numStation) =>       // verifier TOUTE station
+        public  bool IsNumberStationExists(int numStation) =>      
            listStations.Exists(station => station.ShelterNumber == numStation);
-        // check number station
-        public static void addline(int NumLine, StationLine S) // a quel station l'ajouter ??
+        
+        public void addStation()
         {
-            listStations.Add(S);
+            Console.WriteLine("Enter the number of the station to add :");
+            bool ok = int.TryParse(Console.ReadLine(), out int number);
+            if (!ok) { throw new ExceptionTarguil2("Enter a number only !"); }
+            if (!IsNumberStationExists(number))
+            {
+                int AvailabeIndex = listStations.Count()-1;
+                StationLine newStation = new StationLine(number);
+                listStations.Insert(AvailabeIndex,newStation);
+            }
+            else
+                throw new ExceptionTarguil2("This station already exists !");
         }
-        //public static void search(StationLine S) // retourne
-        //{
-        //    listStations.Find(S);
-        //}
-      //  public static void deleteStation(StationLine S) // a quel station l'ajouter ??
-        //{
-        //    listStations.Find(S);
-        //      delete
-        //}
-        //public static void deleteaLine(List<StationLine> L1)
-        //{
-        //    L1.Clear();
-        //    //L1.Remove();
-        //}
+       public void setArea(int l)
+        {
+            area = (Area)l;
+        }
+        public int getArea()
+        {
+            return (int)area;
+        }
+        public  void deleteStation() 
+        {
+            Console.WriteLine("Enter the number of the station to delete :");
+            bool ok = int.TryParse(Console.ReadLine(), out int stationTodelete);
+            if (!ok) { throw new ExceptionTarguil2("Enter a number only !"); }
+            if (IsNumberStationExists(stationTodelete))
+            {
+                listStations.RemoveAll(station => station.ShelterNumber == stationTodelete);
+            }
+            else
+            {
+                throw new ExceptionTarguil2("This station doesn't exists !");
+            }
 
+        }
+   
+        public TimeSpan TimeBetween(StationLine s1,StationLine s2)
+        {
+            if (IsNumberStationExists(s1.ShelterNumber) && IsNumberStationExists(s2.ShelterNumber))
+            {
+                TimeSpan Timer = new TimeSpan(0, 0, 0);
+                int begin = listStations.FindIndex(station => station.ShelterNumber == s1.ShelterNumber);
+                int end = listStations.FindIndex(station => station.ShelterNumber == s2.ShelterNumber);
+                for (; begin < end + 1; begin++)
+                {
+                    Timer += listStations[begin].Temps;
+                }
+                return Timer;
+            }
+            else
+                throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
+        }
+        public double DistanceBetween (StationLine s1,StationLine s2)
+        {
+            if (IsNumberStationExists(s1.ShelterNumber) && IsNumberStationExists(s2.ShelterNumber))
+            {
+                double distanciation = 0;
+                int begin = listStations.FindIndex(station => station.ShelterNumber == s1.ShelterNumber);
+                int end = listStations.FindIndex(station => station.ShelterNumber == s2.ShelterNumber);
+                for (; begin<end+1; begin++)
+                {
+                    distanciation += listStations[begin].Distance;
+                }
+                return distanciation;
+                
+            }
+            else
+                throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
+            
+        }
+        
+        public Line TatMasloul(StationLine s1,StationLine s2)
+        {
+            if (IsNumberStationExists(s1.ShelterNumber) && IsNumberStationExists(s2.ShelterNumber))
+            {
+                Line l1 = new Line(0,"null");
+                int begin = listStations.FindIndex(station => station.ShelterNumber == s1.ShelterNumber);
+                int end= listStations.FindIndex(station => station.ShelterNumber == s2.ShelterNumber);
+                for (;begin<end+1;begin++)
+                {
+                    l1.listStations.Add(listStations[begin]);
+                }
+                return l1;
+            }
+            else
+                throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
+        }
+
+        public int CompareTo(object obj,StationLine Start,StationLine Stop)
+        {
+            
+            if(Start.ShelterNumber==Stop.ShelterNumber)
+            {
+                throw new ExceptionTarguil2("Impossible ,your Start location and Stop location are the same ");
+               
+            }
+            if (obj == null) return 1;
+            Line otherLine = obj as Line;
+            if (otherLine != null)
+                return this.TimeBetween(Start,Stop).CompareTo(otherLine.TimeBetween(Start,Stop));
+            else
+                throw new ExceptionTarguil2("Object is not a Line");
+        }
         #endregion
 
         #region Admin
@@ -110,13 +228,15 @@ namespace dotNet5781_02_1743_5638
         public override string ToString()
         {
             string result = $"Bus Line Number: {busLineNumber}, in {area}, Stations : \n";
-            foreach (Station station in listStations)
-            { 
-                result += station.ToString() + "\n";  // print all the stations    /// pblmmm
+            foreach (StationLine station in listStations)
+            {
+               result+= station.ToString() + "\n";
             }
             return result;
+          
         }
 
         #endregion
     }
 }
+

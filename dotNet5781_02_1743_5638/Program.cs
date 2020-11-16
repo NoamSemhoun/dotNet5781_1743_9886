@@ -1,7 +1,4 @@
-﻿// TARGIL 2   in same solution
-//   Noam
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,54 +11,28 @@ namespace dotNet5781_02_1743_5638
 {
     class Program
     {
-
-        //expl FOr each :
-        //BusLine busLine = new BusLine();
-        //foreach (var line in busLine)
-        //{
-
-        //}
-
-        //foreach (string element in list)
-        //{
-        //    Console.WriteLine(element.ToUpper());
-        //}
-
-        static List<Line> listLines;
-
-        static void Init()  // initialisation : 40 station in 10line (all in Jerusalem)
-        {
-            listLines = new List<Line>();
-            for (int i = 0; i < 10; i++)
-            {
-                listLines.Add(new Line());
-            }
-            //Line l1 = listLines.First();
-            //Line l2 = listLines.Last();
-
-            //l1 > l2;  comparable
-        }
-
         static void Main(string[] args)
         {
-            Init();  // Initialisation
+
             int choice;
+            HandleCollectionBus h = new HandleCollectionBus();
             do
             {
+
                 Console.WriteLine("* MENU * : Please Enter your choice : \n\n " +
-                "\t1 to add a New Line,\n" +
-                "\t2 to add a New Station in a Line\n" +
-                "\t3 to delete a Line\n" +
+                "\t1 to add a New Line \n" +
+                "\t2 to add a New Staion  \n" +
+                "\t3 to delete a Line \n" +
                 "\t4 to delete a Station from a Line\n" +
-                "\t5 to Search Lines in a Station\n" +
-                "\t6 to Find the route between 2 Station\n" +   ////////
+                "\t5 to print Lines in a Station\n" +
+                "\t6 to Find the faster Line between 2 Station\n" +   ////////
                 "\t7 to Print all Lines\n" +
-                "\t8 to Print all the Stations (and their Lines)\n" +
+                "\t8 to Print all the Stations and the lines that pass through it\n" +
                 "\t0 to Exit ");
 
                 bool ok = false;
                 ok = int.TryParse(Console.ReadLine(), out choice);
-                while (!ok || choice > 8 || choice < 0) // if it's KELET ERROR
+                while (!ok || choice > 8 || choice < 0)
                 {
                     Console.WriteLine("\nPlease enter a Number between 0 to 9\n");
                     ok = int.TryParse(Console.ReadLine(), out choice);
@@ -72,94 +43,105 @@ namespace dotNet5781_02_1743_5638
                     case 0:
                         Console.WriteLine("Thank You, Good Bye !");
                         break;
-
-                    case 1:  // ADD NEW LINE
-                     
-                          Console.WriteLine("Enter the number of the new Bus Line");
-                        int a= int.Parse(Console.ReadLine());
-                        listLines.Add(new Line(a));
-                        
-                        // Console.WriteLine(L1);
-                        break;
-
-                    case 2:  // // to add a New Station in a Line
-                        
-                        Console.WriteLine("Enter the Number of the Line :");
-                        int NumLine = int.Parse(Console.ReadLine());
-                        //do
-                        //{
-                        //    try
-                        //    {
-                                Console.WriteLine("Enter the Number of the Station to add :");
-                                int NumStation = int.Parse(Console.ReadLine());
-                                
-                                Station S1 = new StationLine(NumStation); 
-                        // create the station 
-                       //}
-                       //catch (ArgumentException e)
-                       //{
-                       //    Console.WriteLine(e.Message);
-                       //    ok = false;
-                       //}
-
-                        //} while (!ok);
-
-                      //  Line.addline(NumLine,  S1); // Ajouter a la liste station
-                        
-                        // Console.WriteLine($"New station added successfully:\n" + S1);
-                        break;
-
-                    case 3:   // delete a Line
-                        Console.WriteLine("Enter the number Line to delete :");
+                    case 1:
                         try
                         {
-                             int numLine;
-                            int.TryParse(Console.ReadLine(),out numLine);
+                            h.addLine();
                         }
-                        catch
+                        catch (ExceptionTarguil2 s)
                         {
-                            Console.WriteLine("No existing Line, Error ");
+                            Console.WriteLine(s.Message);
                         }
+                        break;
 
-                       //  Line.deleteaLine(NumLine);
+                    case 2:
+                        Console.WriteLine("What is the number of the line where you want to add a station :");
+                        int reponse = int.Parse(Console.ReadLine());
+                        if (h.IsNumberLineExists(reponse))
+                        {
+                            Console.WriteLine("Line found !");
+                            try
+                            { h.AddStation(reponse); }
+                            catch (ExceptionTarguil2 e) { Console.WriteLine(e.Message); }
+                        }
+                        else
+                        {
+                            Console.WriteLine("This line doesn't exists");
+                        }
+                        break;
+                    case 3:
+                        try { h.deleteLine(); }
+                        catch (ExceptionTarguil2 e) { Console.WriteLine(e.Message); }
+
                         break;
 
                     case 4:
-                        Console.WriteLine("Enter the Station to delete :");
-                        int.TryParse(Console.ReadLine(), out int num);
-                       // Line.deleteStation(num);
+                        Console.WriteLine("What is the number of the line where you want to delete a station :");
+                        reponse = int.Parse(Console.ReadLine());
+                        if (h.IsNumberLineExists(reponse))
+                        {
+                            Console.WriteLine("Line found !");
+                            try { h.DeleteStation(reponse); }
+                            catch (ExceptionTarguil2 e)
+                            { Console.WriteLine(e.Message); }
+                        }
+                        else
+                        {
+                            Console.WriteLine("This line doesn't exists");
+                        }
                         break;
+
                     case 5:
-                        Console.WriteLine("Enter the line to search and the stations in which it is located:");
-                        //Line.search(Line L1);
-                        //  search(line, station);
+                        Console.WriteLine("Please enter the ShellterNumber you want to search");
+                        reponse = int.Parse(Console.ReadLine());
+                        try { h.ThroughStation(reponse); }
+                        catch (ExceptionTarguil2 e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
 
                     case 6:
+                        try
+                        {
+                            h.Faster();
+                        }
+                        catch (ExceptionTarguil2 e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                         break;
-                    case 7:  //Print all the Stations(and their Lines)
+                    case 7:
+                        if (h.listLine.Count != 0)
+                        {
+                            foreach (Line line in h.listLine)
+                            {
+                                Console.WriteLine(line.ToString());
+                            }
+                        }
+                        else { Console.WriteLine("Your system is empty !"); }
 
-                        //foreach(list<StationLine> list in Line)
-                        //{
-                        //    Console.WriteLine(list);
-                        //}
-
-                        // printLines();
                         break;
                     case 8:
-                        foreach (Line line in listLines)
+                        List<StationLine> StationL = new List<StationLine>(h.getStation());
+                        Console.WriteLine("Here's all the Stations saved and number of line bus that pass through them :");
+                        Console.WriteLine();
+                        foreach (StationLine station in StationL)
                         {
-                            Console.WriteLine(line);
+                            Console.WriteLine(station.ShelterNumber);
+                            h.ThroughStation(station.ShelterNumber);
+                            Console.WriteLine();
                         }
-                        //  printStations();  // avec les lignes
                         break;
 
                 }
 
             } while (choice != 0);
+        
 
-            Console.Read();
-        }
+    }
+
     }
 
 }
+

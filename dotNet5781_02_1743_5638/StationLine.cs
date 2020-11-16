@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -7,41 +8,52 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_1743_5638
 {
-   
-    public class StationLine : Station, IComparable     //   MASLOUL    
-    {
 
-        private double distance;    // with the precedent station 
-        private int time;           // avec la station précedente
+    public class StationLine : Station, IComparable
+    { 
 
-        public StationLine(int StationNumber) : base(StationNumber)  // shelter !!      // ctor  father : Station Class
+        private double distance;    
+        private static Random r;
+        private TimeSpan temps;
+       
+        public TimeSpan Temps { get => temps; set => temps = value; }
+    
+        public double Distance { get => distance; set => distance = value; }
+        public StationLine(int StationNumber) : base(StationNumber)
         {
-            Random random = new Random(); 
-            distance = random.NextDouble() * 500;   // 1 to 500m
-            time = random.Next(2,15);          // 2 to 15 minutes
+            
+            
+            r= new Random();
+            distance = r.Next(0,500);
+            if(distance>250)
+            {
+                Temps = new TimeSpan(0,r.Next(5, 10),r.Next(0,60));
+            }
+            else
+            {
+                Temps = new TimeSpan(0, r.Next(0, 5), r.Next(0, 60));
+            }
+                     
         }
 
-        public StationLine(int num, double distance, int time) : base(num)  // 2nd ctor to 
-        {
-
-        }
-
+       
         public int CompareTo(object obj)
         {
             if (obj == null) return 1;
 
             StationLine otherStationLine = obj as StationLine;
             if (otherStationLine != null)
-                return this.time.CompareTo(otherStationLine.time);
+                return this.temps.CompareTo(otherStationLine.temps);
             else
                 throw new ArgumentException("Object is not a StationLine");
         }
 
-        public override string ToString()  
+        public override string ToString()
         {
-            return $"Bus Station Code: {this.shelterNumber}, {this.latitude}\u00b0N {longitude}°E"; ///  BYAAAA
+            return $"Bus Station Code: {this.shelterNumber}, {this.latitude}\u00b0N {longitude}°E ,Distance from the last Stop : {distance}, Time from the last Stop :{temps.ToString()}";
+         
         }
 
     };
-    
+
 }
