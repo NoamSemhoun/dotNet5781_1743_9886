@@ -33,8 +33,18 @@ namespace dotNet5781_02_1743_5638
             listStations = new List<StationLine>();  
             for (int i = 0; i < 4; ++i, ++sampleShelterNumber)
             {
-               
-                listStations.Add(new StationLine(sampleShelterNumber));
+                if (i == 0)
+                {
+                    StationLine s = new StationLine(sampleShelterNumber);
+                    TimeSpan zero = new TimeSpan(0, 0, 0);
+                    s.Temps = zero;
+                    s.Distance = 0;
+                    listStations.Add(s);
+                }
+                else
+                {
+                    listStations.Add(new StationLine(sampleShelterNumber));
+                }
             }
             busLineNumber = sampleLineNumber++;
             area = Area.Jerusalem;
@@ -239,4 +249,5 @@ namespace dotNet5781_02_1743_5638
         #endregion
     }
 }
+
 

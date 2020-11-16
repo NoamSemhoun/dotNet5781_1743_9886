@@ -13,7 +13,7 @@ namespace dotNet5781_02_1743_5638
     { 
 
         private double distance;    
-        private static Random r;
+        private static Random r=new Random();
         private TimeSpan temps;
        
         public TimeSpan Temps { get => temps; set => temps = value; }
@@ -21,9 +21,7 @@ namespace dotNet5781_02_1743_5638
         public double Distance { get => distance; set => distance = value; }
         public StationLine(int StationNumber) : base(StationNumber)
         {
-            
-            
-            r= new Random();
+             
             distance = r.Next(0,500);
             if(distance>250)
             {

@@ -14,6 +14,7 @@ namespace dotNet5781_02_1743_5638
         protected double latitude;          
         protected double longitude;     
         protected string address;
+        private static Random r = new Random();
 
         public int ShelterNumber { get => shelterNumber; set => shelterNumber = value; }
 
@@ -23,7 +24,6 @@ namespace dotNet5781_02_1743_5638
         protected Station(int StationNumber) 
         {
             ShelterNumber = StationNumber;
-            Random r = new Random();
             latitude = r.NextDouble() * 2.3 + 31;    
             longitude = r.NextDouble() * 1.2 + 34.3;
             int Address = r.Next(0, listAddresses.Count());

@@ -16,7 +16,11 @@ namespace dotNet5781_02_1743_5638
         public HandleCollectionBus()
         {
             listLine = new List<Line>();
-            //Line l = new Line(10);
+          for(int a=0;a<10;a++)
+            {
+                Line l = new Line();
+                listLine.Add(l);
+            }
         }
         public bool IsNumberLineExists(int verif) =>
         listLine.Exists(Line => Line.BusLineNumber == verif);
