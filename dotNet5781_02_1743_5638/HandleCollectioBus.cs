@@ -13,7 +13,7 @@ namespace dotNet5781_02_1743_5638
         public List<Line> listLine;
 
         public bool CheckFirstLast(Line l2) => listLine.Exists(Line => Line.listStations.First().ShelterNumber == l2.listStations.Last().ShelterNumber && Line.listStations.Last().ShelterNumber == l2.listStations.First().ShelterNumber);
-        public HandleCollectionBus()
+        public HandleCollectionBus() //Init with 10 line 4 station/per line
         {
             listLine = new List<Line>();
           for(int a=0;a<10;a++)
@@ -22,10 +22,10 @@ namespace dotNet5781_02_1743_5638
                 listLine.Add(l);
             }
         }
-        public bool IsNumberLineExists(int verif) =>
+        public bool IsNumberLineExists(int verif) =>//check if line already exists in the List
         listLine.Exists(Line => Line.BusLineNumber == verif);
 
-        public void AddStation(int ligne)
+        public void AddStation(int ligne)//Take firstly the Line to add the station and check if the line is unique & deal with
         {
             int occurence = listLine.Where(line => line.BusLineNumber == ligne).Count();
             if (occurence == 1)
@@ -52,7 +52,7 @@ namespace dotNet5781_02_1743_5638
 
             }
         }
-        public List<StationLine> getStation()
+        public List<StationLine> getStation()//Return a list which contain all the Station saved in all lines (Its for the option 8 in the menu) 
         {
             List<StationLine> retour = new List<StationLine>();
             foreach (Line line in listLine)
@@ -67,7 +67,7 @@ namespace dotNet5781_02_1743_5638
             }
             return retour;
         }
-        public void DeleteStation(int ligne)
+        public void DeleteStation(int ligne)//Before deletion it check the 2 obligatory station in the line and if the Line is unique
         {
             if (listLine.Find(line => line.BusLineNumber == ligne).listStations.Count == 2)
             {
@@ -99,7 +99,7 @@ namespace dotNet5781_02_1743_5638
 
             }
         }
-        public void addLine()
+        public void addLine()//Adding Line without duplication and line path return verification 
         {
             Console.WriteLine("Enter the number of the line to add :");
             int number = int.Parse(Console.ReadLine());
@@ -133,7 +133,7 @@ namespace dotNet5781_02_1743_5638
                 listLine.Add(l);
             }
         }
-        public void deleteLine()
+        public void deleteLine()//same thing of the adding 
         {
             Console.WriteLine("Enter the number of the line to delete");
             int linetoDelete = int.Parse(Console.ReadLine());
@@ -152,7 +152,7 @@ namespace dotNet5781_02_1743_5638
             }
             else { throw new ExceptionTarguil2("This Line doesn't exists !"); }
         }
-        public void ThroughStation(int a)
+        public void ThroughStation(int a)//print all lines passing through the num of the station passed in the parameter
         {
             int count = 0;
             Console.WriteLine("Here's the line(s) passing through this stop :");
@@ -178,7 +178,26 @@ namespace dotNet5781_02_1743_5638
             }
             return result;
         }
-        public void Faster()
+        public HandleCollectionBus this[int Line]//Indexer function
+        {
+            get
+            {
+                HandleCollectionBus h = new HandleCollectionBus();
+                for(int a=0a<listLine.Count();a++)
+                {
+                    if(listLine[a].busLineNumber==Line)
+                    {
+                        h.listLine.Add(listLine[a]);
+                    }
+                }
+                if(h.listLine.Count()==0)
+                {
+                    h = null;
+                }
+                return h;
+            }
+        }
+        public void Faster()//This function works only with an !emptyList ,take 2 stations and check the time beetween them in all the line which contains those stations ,and return the List ordered by the faster time to the longer
         {
             if (listLine.Count() != 0)
             {
