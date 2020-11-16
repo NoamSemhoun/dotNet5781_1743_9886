@@ -72,7 +72,7 @@ namespace dotNet5781_02_1743_5638
             if (listLine.Find(line => line.BusLineNumber == ligne).listStations.Count == 2)
             {
                 throw new ExceptionTarguil2("but you can't let less than 2 stations in this line !");
-                return;
+                
             }
             int occurence = listLine.Where(line => line.BusLineNumber == ligne).Count();
             if (occurence == 1)
@@ -109,7 +109,7 @@ namespace dotNet5781_02_1743_5638
                 if (listLine.Where(ligne => ligne.BusLineNumber == number).Count() == 2)
                 {
                     throw new ExceptionTarguil2("This line already exists in both directions !");
-                    return;
+                  
                 }
 
                 Console.WriteLine("This line already exists, you just can type its second way \n");
@@ -123,7 +123,7 @@ namespace dotNet5781_02_1743_5638
                 else
                 {
                     throw new ExceptionTarguil2("ERROR ! you didn't listen to me !");
-                    return;
+                    
                 }
             }
 
