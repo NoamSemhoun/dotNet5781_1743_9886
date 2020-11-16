@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionTarguil2.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="StationLine.cs" />
     <Compile Include="Station.cs" />

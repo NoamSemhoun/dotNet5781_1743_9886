@@ -1,3 +1,4 @@
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,4 +16,3 @@ namespace dotNet5781_02_1743_5638
         public ExceptionTarguil2(string msg) : base(msg) { }
     }
 }
-
