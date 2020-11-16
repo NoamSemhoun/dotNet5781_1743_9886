@@ -23,8 +23,8 @@ namespace dotNet5781_02_1743_5638
         private Area area;
         public  List<StationLine> listStations;  
 
-        private static int sampleShelterNumber = 10000;    
-        private static int sampleLineNumber = 1;
+        private static int sampleShelterNumber = 100000;    // code at 6 number
+        private static int sampleLineNumber = 0;
         #region Constructors
        public int BusLineNumber { get => busLineNumber; set => busLineNumber = value; }
         public Line()//This ctor is only for the initialisation for the targuil ,so no parameter,only random values   
@@ -107,6 +107,7 @@ namespace dotNet5781_02_1743_5638
             if (!ok) { throw new ExceptionTarguil2("Enter a number only !"); }
             firstStation = new StationLine(first);
             listStations.Add(firstStation);
+
             TimeSpan Premier = new TimeSpan(0, 0, 0);
             firstStation.Temps = Premier;
             Console.WriteLine("Enter the shellterNumber of your last station :");
@@ -135,6 +136,8 @@ namespace dotNet5781_02_1743_5638
                     int AvailabeIndex = listStations.Count() - 1;
                     StationLine newStation = new StationLine(number);
                     listStations.Insert(AvailabeIndex, newStation);
+                    Console.WriteLine("success !");
+
                 }
                 else
                     throw new ExceptionTarguil2("This station already exists !");
@@ -145,7 +148,9 @@ namespace dotNet5781_02_1743_5638
                 int Indexto = listStations.FindIndex(station => station.ShelterNumber == response);
                 StationLine newStation = new StationLine(number);
                 listStations.Insert(Indexto, newStation);
-             
+                Console.WriteLine("success !");
+
+
             }
             else
                 throw new ExceptionTarguil2("This station doesn't exists !");

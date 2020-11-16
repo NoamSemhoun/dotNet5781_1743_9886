@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Hillel and Noam 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace dotNet5781_02_1743_5638
         {
 
             int choice;
-            HandleCollectionBus h = new HandleCollectionBus();
+            HandleCollectionBus h = new HandleCollectionBus(); // init
             do
             {
 
