@@ -27,7 +27,7 @@ namespace dotNet5781_02_1743_5638
         private static int sampleLineNumber = 1;
         #region Constructors
        public int BusLineNumber { get => busLineNumber; set => busLineNumber = value; }
-        public Line()   
+        public Line()//This ctor is only for the initialisation for the targuil ,so no parameter,only random values   
         {
         
             listStations = new List<StationLine>();  
@@ -51,7 +51,7 @@ namespace dotNet5781_02_1743_5638
             firstStation = listStations.First();
             lastStation = listStations.Last();
         }
-        public Line(Line l)
+        public Line(Line l)//This ctor is a copy ctor thats I use in my getStation function in HandleCollectionBus ,it was easier to pass trough a copy ctor for my needs 
         {
             listStations = new List<StationLine>();
             busLineNumber = l.busLineNumber;
@@ -59,7 +59,7 @@ namespace dotNet5781_02_1743_5638
             listStations = l.listStations;
         }
        
-        public Line(int a)   
+        public Line(int a)   //This ctor will be used in all Adding line ,there's lot of data because ..no more random values,only the data of the User
         {
                 busLineNumber = a;
                 Console.WriteLine("Enter the area of this new Bus Line :\n" +
@@ -98,7 +98,7 @@ namespace dotNet5781_02_1743_5638
                 firstStation = listStations.First();
                 lastStation = listStations.Last();
         }
-        public Line(int a,string Null)
+        public Line(int a,string Null)//This ctor will help us for the return path Line because here we dont need to know what is the Area of the user wants ,the string parameter is here just to make a difference beetween the previous ctor 
         {
             busLineNumber = a;
             listStations = new List<StationLine>();
@@ -121,19 +121,35 @@ namespace dotNet5781_02_1743_5638
         public  bool IsNumberStationExists(int numStation) =>      
            listStations.Exists(station => station.ShelterNumber == numStation);
         
-        public void addStation()
+        public void addStation()//This function add station beetwween the first and the last Stations ,one after the other or not  
         {
-            Console.WriteLine("Enter the number of the station to add :");
+          Console.WriteLine("Enter the number of the station to add :");
             bool ok = int.TryParse(Console.ReadLine(), out int number);
             if (!ok) { throw new ExceptionTarguil2("Enter a number only !"); }
-            if (!IsNumberStationExists(number))
+            Console.WriteLine("Tape 0 to insert your station by default ,or Tape the ShellterNumber of the station where do you want to add the new One just before :");
+            bool ok2 = int.TryParse(Console.ReadLine(), out int response);
+            if (response == 0)
             {
-                int AvailabeIndex = listStations.Count()-1;
+                if (!IsNumberStationExists(number))
+                {
+                    int AvailabeIndex = listStations.Count() - 1;
+                    StationLine newStation = new StationLine(number);
+                    listStations.Insert(AvailabeIndex, newStation);
+                }
+                else
+                    throw new ExceptionTarguil2("This station already exists !");
+            }
+            else if (IsNumberStationExists(response))
+            {
+
+                int Indexto = listStations.FindIndex(station => station.ShelterNumber == response);
                 StationLine newStation = new StationLine(number);
-                listStations.Insert(AvailabeIndex,newStation);
+                listStations.Insert(Indexto, newStation);
+             
             }
             else
-                throw new ExceptionTarguil2("This station already exists !");
+                throw new ExceptionTarguil2("This station doesn't exists !");
+          
         }
        public void setArea(int l)
         {
@@ -143,7 +159,7 @@ namespace dotNet5781_02_1743_5638
         {
             return (int)area;
         }
-        public  void deleteStation() 
+        public  void deleteStation() //Same as adding function
         {
             Console.WriteLine("Enter the number of the station to delete :");
             bool ok = int.TryParse(Console.ReadLine(), out int stationTodelete);
@@ -159,7 +175,7 @@ namespace dotNet5781_02_1743_5638
 
         }
    
-        public TimeSpan TimeBetween(StationLine s1,StationLine s2)
+        public TimeSpan TimeBetween(StationLine s1,StationLine s2)//Function take 2 Stations and return a TimeSpan value that corresponds on the time elapsed between
         {
             if (IsNumberStationExists(s1.ShelterNumber) && IsNumberStationExists(s2.ShelterNumber))
             {
@@ -175,7 +191,7 @@ namespace dotNet5781_02_1743_5638
             else
                 throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
         }
-        public double DistanceBetween (StationLine s1,StationLine s2)
+        public double DistanceBetween (StationLine s1,StationLine s2)//Function take 2 stations and return the distance bewteen them 
         {
             if (IsNumberStationExists(s1.ShelterNumber) && IsNumberStationExists(s2.ShelterNumber))
             {
@@ -194,7 +210,7 @@ namespace dotNet5781_02_1743_5638
             
         }
         
-        public Line TatMasloul(StationLine s1,StationLine s2)
+        public Line TatMasloul(StationLine s1,StationLine s2)//This function returns a Line object and in his list of the stations there's all the station between the 2 stations passed in parameters
         {
             if (IsNumberStationExists(s1.ShelterNumber) && IsNumberStationExists(s2.ShelterNumber))
             {
@@ -211,7 +227,7 @@ namespace dotNet5781_02_1743_5638
                 throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
         }
 
-        public int CompareTo(object obj,StationLine Start,StationLine Stop)
+        public int CompareTo(object obj,StationLine Start,StationLine Stop)//This function compare the time elapsed in 2 station ,between 2 Line 
         {
             
             if(Start.ShelterNumber==Stop.ShelterNumber)

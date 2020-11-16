@@ -183,20 +183,21 @@ namespace dotNet5781_02_1743_5638
             get
             {
                 HandleCollectionBus h = new HandleCollectionBus();
-                for(int a=0a<listLine.Count();a++)
+                for (int a = 0; a < listLine.Count(); a++)
                 {
-                    if(listLine[a].busLineNumber==Line)
+                    if (listLine[a].BusLineNumber == Line)
                     {
                         h.listLine.Add(listLine[a]);
                     }
                 }
-                if(h.listLine.Count()==0)
+                if (h.listLine.Count() == 0)
                 {
                     h = null;
                 }
                 return h;
             }
         }
+
         public void Faster()//This function works only with an !emptyList ,take 2 stations and check the time beetween them in all the line which contains those stations ,and return the List ordered by the faster time to the longer
         {
             if (listLine.Count() != 0)

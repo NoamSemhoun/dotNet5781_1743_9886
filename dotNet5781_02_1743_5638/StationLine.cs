@@ -23,7 +23,7 @@ namespace dotNet5781_02_1743_5638
         {
              
             distance = r.Next(0,500);
-            if(distance>250)
+            if(distance>250)//I tried to make it logic ...the distance against the time.
             {
                 Temps = new TimeSpan(0,r.Next(5, 10),r.Next(0,60));
             }
