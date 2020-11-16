@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExceptionTarguil2.cs" />
+    <Compile Include="HandleCollectioBus.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="StationLine.cs" />
     <Compile Include="Station.cs" />

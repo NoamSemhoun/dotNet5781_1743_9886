@@ -1,4 +1,4 @@
-using System;  
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace dotNet5781_02_1743_5638
         public HandleCollectionBus() //Init with 10 line 4 station/per line
         {
             listLine = new List<Line>();
-          for(int a=0;a<10;a++)
+            for (int a = 0; a < 10; a++)
             {
                 Line l = new Line();
                 listLine.Add(l);
