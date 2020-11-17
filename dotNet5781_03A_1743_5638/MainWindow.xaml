@@ -19,11 +19,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-           
+
             <ComboBox Name="cbBusLines"
             HorizontalAlignment= "Stretch"
             VerticalAlignment="Stretch"
-            Grid.Column="1"/>
+            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1"/>
 
             <TextBox Name ="tbArea"
             HorizontalAlignment= "Stretch"
@@ -32,8 +32,10 @@
             Text="{Binding Path=Area}" Background="Red" CaretBrush="#FF46ACD3"/>
 
         </Grid>
-        
-        <ListBox Name="lbBusLineStations"        HorizontalAlignment="Left" Height="100" Margin="76,129,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"
+
+        <ListBox Name="lbBusLineStations"
+        HorizontalAlignment="Left" Height="190" Margin="10,139,0,0" Grid.Row="1" VerticalAlignment="Top" Width="264"
         ItemsSource="{Binding}"/>
+
     </Grid>
 </Window>
