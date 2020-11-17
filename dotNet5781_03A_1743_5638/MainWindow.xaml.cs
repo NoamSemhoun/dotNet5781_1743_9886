@@ -18,11 +18,20 @@ namespace dotNet5781_03A_1743_5638
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
+    /// 
+    
     public partial class MainWindow : Window
     {
+        // reference avec le projet du targil 2 
         public MainWindow()
         {
             InitializeComponent();
+            // Ossef
+        }
+
+        private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

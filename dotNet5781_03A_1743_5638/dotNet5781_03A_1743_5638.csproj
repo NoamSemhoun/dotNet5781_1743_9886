@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dotNet5781_02_1743_5638\dotNet5781_02_1743_5638.csproj">
+      <Project>{613b5373-c475-4241-af33-989635f83935}</Project>
+      <Name>dotNet5781_02_1743_5638</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

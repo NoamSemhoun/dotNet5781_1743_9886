@@ -5,6 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03A_1743_5638"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+        Title="MainWindow" Height="640" Width="800">
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="400*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
+        VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+           
+            <ComboBox Name="cbBusLines"
+            HorizontalAlignment= "Stretch"
+            VerticalAlignment="Stretch"
+            Grid.Column="1"/>
+
+            <TextBox Name ="tbArea"
+            HorizontalAlignment= "Stretch"
+            VerticalAlignment="Stretch"
+            Grid.Column="3"
+            Text="{Binding Path=Area}" Background="Red" CaretBrush="#FF46ACD3"/>
+
+        </Grid>
+        
+        <ListBox Name="lbBusLineStations"        HorizontalAlignment="Left" Height="100" Margin="76,129,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100"
+        ItemsSource="{Binding}"/>
+    </Grid>
 </Window>
