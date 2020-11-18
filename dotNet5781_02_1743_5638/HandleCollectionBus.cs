@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_1743_5638
 {
-    class HandleCollectionBus : Line
+    public class HandleCollectionBus : Line
     {
         public List<Line> listLine;
 

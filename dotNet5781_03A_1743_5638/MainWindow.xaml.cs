@@ -25,36 +25,37 @@ namespace dotNet5781_03A_1743_5638
     public partial class MainWindow : Window
     {
 
-        private Line currentDisplayBusLine;
-       
+        private dotNet5781_02_1743_5638.Line currentDisplayBusLine;   // Because There are 2 Line class
 
 
         public  MainWindow()  // ctor
         {
             InitializeComponent();
-            
 
-            cbBusLines.ItemsSource = listLine;
+            HandleCollectionBus h = new HandleCollectionBus(); // initialisation of 10 lines
+ 
+            cbBusLines.ItemsSource = h ;
             cbBusLines.DisplayMemberPath = " BusLineNum ";
             cbBusLines.SelectedIndex = 0;
             //ShowBusLine(……….)
 
         }
 
-        private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //ShowBusLine((cbBusLines.SelectedValue as Line).Bus);
+        //private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
             
-        }
+        //}
+
         private void ShowBusLine(int index)
         {
-            currentDisplayBusLine = listLine [index];
+            currentDisplayBusLine = HandleCollectionBus[index]/*.First()*/;
             UpGrid.DataContext = currentDisplayBusLine;
-            lbBusLineStations.DataContext = currentDisplayBusLine.Stations;
+            lbBusLineStations.DataContext = currentDisplayBusLine.firstStation;
         }
 
         private void cbBusLines_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
+            ShowBusLine((cbBusLines.SelectedValue as dotNet5781_02_1743_5638.Line).BusLineNumber);
 
         }
     }

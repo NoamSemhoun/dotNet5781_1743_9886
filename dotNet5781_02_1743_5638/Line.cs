@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace dotNet5781_02_1743_5638
 {
    enum Area { General, North, South, Center, Jerusalem }
-    class Line : IEnumerable  
+   public  class Line : IEnumerable  
     {
        
        private int busLineNumber;
