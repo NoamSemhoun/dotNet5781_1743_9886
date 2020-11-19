@@ -42,7 +42,7 @@ namespace dotNet5781_03A_1743_5638
         {
             currentDisplayBusLine = h[index];
             UpGrid.DataContext = currentDisplayBusLine.BusLineNumber;
-            lbBusLineStations.DataContext = currentDisplayBusLine.ToString();
+            lbBusLineStations.DataContext = currentDisplayBusLine.listStations;
         }
 
         private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
