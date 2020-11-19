@@ -48,7 +48,7 @@ namespace dotNet5781_02_1743_5638
 
         public override string ToString()
         {
-            return $"Bus Station Code: {this.shelterNumber}, {this.latitude}\u00b0N {longitude}°E ,Distance from the last Stop : {distance}, Time from the last Stop :{temps.ToString()}";
+            return $"Bus Station Code: {this.shelterNumber},  {this.latitude}\u00b0N  {longitude}°E , Distance from the last Stop : {distance},  Time from the last Stop : {temps.ToString()}\n";
          
         }
 

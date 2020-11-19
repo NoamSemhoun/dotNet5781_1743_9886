@@ -46,16 +46,16 @@ namespace dotNet5781_03A_1743_5638
             currentDisplayBusLine = h[index];
             UpGrid.DataContext = currentDisplayBusLine.BusLineNumber;
             lbBusLineStations.DataContext = currentDisplayBusLine.listStations;
-            //tbArea_TextChanged(currentDisplayBusLine);
+            tbArea_TextChanged(currentDisplayBusLine);
         }
 
 
 
-        //private void tbArea_TextChanged(dotNet5781_02_1743_5638.Line currentDisplayBusLine)
-        //{
-        //    // afiicher la zone Area de la ligne 
-        //    tbArea.DataContext = currentDisplayBusLine.area;
-        //}
+        private void tbArea_TextChanged(dotNet5781_02_1743_5638.Line currentDisplayBusLine)
+        {
+            // afiicher la zone Area de la ligne 
+            tbArea.DataContext = currentDisplayBusLine.area;
+        }
 
         private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

@@ -39,9 +39,9 @@
         <ListBox Name="lbBusLineStations"
         HorizontalAlignment="Left" Height="520" Margin="10,11,0,0" Grid.Row="1" VerticalAlignment="Top" Width="769"
         ItemsSource="{Binding}"
-        SelectionChanged="lbBusLineStations_SelectionChanged" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" TextOptions.TextFormattingMode="Display" FontStretch="UltraExpanded">
+        SelectionChanged="lbBusLineStations_SelectionChanged" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontStretch="UltraExpanded" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" FontWeight="Medium">
             <ListBox.Background>
-                <ImageBrush ImageSource="BUSstation .png" Opacity="0.3"/>
+                <ImageBrush ImageSource="BUSstation .png" Opacity="0.25"/>
             </ListBox.Background>
         </ListBox>
 
