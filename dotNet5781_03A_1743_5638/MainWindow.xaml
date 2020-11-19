@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03A_1743_5638"
         mc:Ignorable="d"
-       Title="MainWindow" Height="640" Width="800">
+                Title="MainWindow" Height="640" Width="800">
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
@@ -21,9 +21,7 @@
             </Grid.ColumnDefinitions >
 
             <ComboBox Name="cbBusLines"
-            HorizontalAlignment= "Stretch"
-            VerticalAlignment="Stretch"
-            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1"/>
+            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Left" Width="190"/>
 
             <TextBox Name ="tbArea"
             HorizontalAlignment= "Stretch"
@@ -35,8 +33,8 @@
 
         </Grid>
         <ListBox Name="lbBusLineStations"
-        HorizontalAlignment="Left" Height="190" Margin="10,139,0,0" Grid.Row="1" VerticalAlignment="Top" Width="264"
-        ItemsSource="{Binding}"/>
+        HorizontalAlignment="Left" Height="520" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="769"
+        ItemsSource="{Binding}" SelectionChanged="lbBusLineStations_SelectionChanged"/>
 
     </Grid>
 </Window>

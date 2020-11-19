@@ -179,23 +179,32 @@ namespace dotNet5781_02_1743_5638
             }
             return result;
         }
-        public HandleCollectionBus this[int Line]//Indexer function
+      public Line this[int Line]//Indexer function
         {
             get
             {
-                HandleCollectionBus h = new HandleCollectionBus();
-                for (int a = 0; a < listLine.Count(); a++)
+                if (listLine.Count() != 0)
                 {
-                    if (listLine[a].BusLineNumber == Line)
+                    Line l = new Line();
+                    bool flag = false;
+                    for (int a = 0; a < listLine.Count(); a++)
                     {
-                        h.listLine.Add(listLine[a]);
+                        if (listLine[a].BusLineNumber == Line)
+                        {
+                            l = new Line(listLine[a]);
+                            flag = true;
+                        }
                     }
+                    if (flag == true)
+                    {
+                        return l;
+                    }
+                    else
+                        throw new ExceptionTarguil2("Line not found !");
+                  
                 }
-                if (h.listLine.Count() == 0)
-                {
-                    h = null;
-                }
-                return h;
+                else
+                    throw new ExceptionTarguil2("Your system is empty !");
             }
         }
 

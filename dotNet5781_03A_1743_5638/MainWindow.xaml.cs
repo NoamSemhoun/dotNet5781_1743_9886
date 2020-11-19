@@ -21,41 +21,32 @@ namespace dotNet5781_03A_1743_5638
     /// </summary>
     /// 
     
-    
-    public partial class MainWindow : Window
+       public partial class MainWindow : Window
     {
-
-        private dotNet5781_02_1743_5638.Line currentDisplayBusLine;   // Because There are 2 Line class
-
-
-        public  MainWindow()  // ctor
+        private dotNet5781_02_1743_5638.Line currentDisplayBusLine;
+        public HandleCollectionBus h;
+        public MainWindow()  // ctor
         {
             InitializeComponent();
-
-            HandleCollectionBus h = new HandleCollectionBus(); // initialisation of 10 lines
- 
-            cbBusLines.ItemsSource = h ;
-            cbBusLines.DisplayMemberPath = " BusLineNum ";
+            h = new HandleCollectionBus();
+            cbBusLines.ItemsSource = h.listLine;
+            cbBusLines.DisplayMemberPath = "BusLineNumber";
             cbBusLines.SelectedIndex = 0;
-            //ShowBusLine(……….)
-
-        }
-
-        //private void cbBusLines_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-            
-        //}
-
-        private void ShowBusLine(int index)
-        {
-            currentDisplayBusLine = HandleCollectionBus[index]/*.First()*/;
-            UpGrid.DataContext = currentDisplayBusLine;
-            lbBusLineStations.DataContext = currentDisplayBusLine.firstStation;
         }
 
         private void cbBusLines_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             ShowBusLine((cbBusLines.SelectedValue as dotNet5781_02_1743_5638.Line).BusLineNumber);
+        }
+        private void ShowBusLine(int index)
+        {
+            currentDisplayBusLine = h[index];
+            UpGrid.DataContext = currentDisplayBusLine.BusLineNumber;
+            lbBusLineStations.DataContext = currentDisplayBusLine.ToString();
+        }
+
+        private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }
