@@ -8,38 +8,38 @@
                 Title="MainWindow" Height="640" Width="800" Background="{x:Null}">
     <Grid Name="MainGrid" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="74*"/>
-            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-        VerticalAlignment="Stretch" Width="auto" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Grid.ColumnSpan="2">
+        VerticalAlignment="Stretch" Width="auto" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions >
 
             <ComboBox Name="cbBusLines"
-            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Center" Width="190" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Center" Width="190" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="4,0"/>
 
             <TextBox Name ="tbArea"
             HorizontalAlignment= "Stretch"
             VerticalAlignment="Stretch"
             Grid.Column="3"
             Text="{Binding Path= Area}" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" CaretBrush="#FF46ACD3" TextChanged="tbArea_TextChanged"/>
-            <TextBlock HorizontalAlignment="Left" Margin="19,24,0,18" Text="Bus Line Number :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" Width="178" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="19,24,0,17" Text="Bus Line Number :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" Width="178" FontWeight="Bold"/>
             <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="81,24,0,17" Text="Area :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
 
         </Grid>
         <ListBox Name="lbBusLineStations"
         HorizontalAlignment="Left" Height="520" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="769"
         ItemsSource="{Binding}"
-        SelectionChanged="lbBusLineStations_SelectionChanged" Grid.ColumnSpan="2" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Foreground="{x:Null}">
+        SelectionChanged="lbBusLineStations_SelectionChanged" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Foreground="{x:Null}">
             <ListBox.Background>
                 <ImageBrush ImageSource="BUSstation .png" Opacity="0.3">
                     <ImageBrush.RelativeTransform>
