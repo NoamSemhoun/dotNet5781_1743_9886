@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{99EEC5C4-C895-4BF2-8641-376DA160B9D4}</ProjectGuid>
+    <ProjectGuid>{A9C5FF63-30E8-4FDA-A703-EED82F560921}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>dotNet5781_03A_1743_5638</RootNamespace>
     <AssemblyName>dotNet5781_03A_1743_5638</AssemblyName>
@@ -95,13 +95,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="BUSstation .png" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\dotNet5781_02_1743_5638\dotNet5781_02_1743_5638.csproj">
       <Project>{613b5373-c475-4241-af33-989635f83935}</Project>
       <Name>dotNet5781_02_1743_5638</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="BUSstation .png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

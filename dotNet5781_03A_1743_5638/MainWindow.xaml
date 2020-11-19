@@ -25,7 +25,7 @@
             </Grid.ColumnDefinitions >
 
             <ComboBox Name="cbBusLines"
-            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Center" Width="190" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="4,0"/>
+            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Width="190" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="4,0" FontSize="18"/>
 
             <TextBox Name ="tbArea"
             HorizontalAlignment= "Stretch"
@@ -37,20 +37,11 @@
 
         </Grid>
         <ListBox Name="lbBusLineStations"
-        HorizontalAlignment="Left" Height="520" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="769"
+        HorizontalAlignment="Left" Height="520" Margin="10,11,0,0" Grid.Row="1" VerticalAlignment="Top" Width="769"
         ItemsSource="{Binding}"
-        SelectionChanged="lbBusLineStations_SelectionChanged" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Foreground="{x:Null}">
+        SelectionChanged="lbBusLineStations_SelectionChanged" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" TextOptions.TextFormattingMode="Display" FontStretch="UltraExpanded">
             <ListBox.Background>
-                <ImageBrush ImageSource="BUSstation .png" Opacity="0.3">
-                    <ImageBrush.RelativeTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </ImageBrush.RelativeTransform>
-                </ImageBrush>
+                <ImageBrush ImageSource="BUSstation .png" Opacity="0.3"/>
             </ListBox.Background>
         </ListBox>
 
