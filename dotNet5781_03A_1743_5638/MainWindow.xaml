@@ -34,7 +34,8 @@
         </Grid>
         <ListBox Name="lbBusLineStations"
         HorizontalAlignment="Left" Height="520" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="769"
-        ItemsSource="{Binding}" SelectionChanged="lbBusLineStations_SelectionChanged"/>
+        ItemsSource="{Binding}"
+        SelectionChanged="lbBusLineStations_SelectionChanged"/>
 
     </Grid>
 </Window>

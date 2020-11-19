@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_1743_5638
 {
-   enum Area { General, North, South, Center, Jerusalem }
+    public  enum Area { General, North, South, Center, Jerusalem }
    public  class Line : IEnumerable  
     {
        
        private int busLineNumber;
         public StationLine firstStation;
         public StationLine lastStation;
-        private Area area;
+        public Area area;
         public  List<StationLine> listStations;  
 
         private static int sampleShelterNumber = 100000;    // code at 6 number

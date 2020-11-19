@@ -179,7 +179,7 @@ namespace dotNet5781_02_1743_5638
             }
             return result;
         }
-      public Line this[int Line]//Indexer function
+      public Line this[int Line] //Indexer function
         {
             get
             {
