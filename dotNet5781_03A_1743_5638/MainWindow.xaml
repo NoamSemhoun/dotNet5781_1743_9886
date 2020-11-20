@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03A_1743_5638"
         mc:Ignorable="d"
-                Title="MainWindow" Height="640" Width="800" Background="{x:Null}">
+                Title="Moovit 2.0" Height="640" Width="800" Background="{x:Null}">
     <Grid Name="MainGrid" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
