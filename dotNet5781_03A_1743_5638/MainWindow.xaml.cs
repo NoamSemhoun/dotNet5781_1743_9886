@@ -32,7 +32,6 @@ namespace dotNet5781_03A_1743_5638
             cbBusLines.ItemsSource = h.listLine;
             cbBusLines.DisplayMemberPath = "BusLineNumber";
             cbBusLines.SelectedIndex = 0;
-            //ShowBusLine(cbBusLines.SelectedIndex);   // index ou aussi kav list 
 
             // lbBusLineStations.datacontext = cbBusLines.item.stations;
         }
@@ -46,15 +45,8 @@ namespace dotNet5781_03A_1743_5638
             currentDisplayBusLine = h[index];
             UpGrid.DataContext = currentDisplayBusLine.BusLineNumber;
             lbBusLineStations.DataContext = currentDisplayBusLine.listStations;
-            tbArea_TextChanged(currentDisplayBusLine);
-        }
+            tbArea.Text = h[index].GetArea().ToString();
 
-
-
-        private void tbArea_TextChanged(dotNet5781_02_1743_5638.Line currentDisplayBusLine)
-        {
-            // afiicher la zone Area de la ligne 
-            tbArea.DataContext = currentDisplayBusLine.area;
         }
 
         private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)

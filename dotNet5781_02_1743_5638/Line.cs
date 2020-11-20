@@ -164,6 +164,10 @@ namespace dotNet5781_02_1743_5638
         {
             return (int)area;
         }
+        public Area GetArea()
+         {
+        return area;
+         }
         public  void deleteStation() //Same as adding function
         {
             Console.WriteLine("Enter the number of the station to delete :");
