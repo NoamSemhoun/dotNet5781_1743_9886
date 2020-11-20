@@ -22,7 +22,7 @@ namespace dotNet5781_02_1743_5638
         public StationLine lastStation;
         public Area area;
         public  List<StationLine> listStations;  
-
+        private static Random r = new Random();
         private static int sampleShelterNumber = 100000;    // code at 6 number
         private static int sampleLineNumber = 0;
         #region Constructors
@@ -47,7 +47,7 @@ namespace dotNet5781_02_1743_5638
                 }
             }
             busLineNumber = sampleLineNumber++;
-            area = Area.Jerusalem;
+             area = (Area)r.Next(0, 4);
             firstStation = listStations.First();
             lastStation = listStations.Last();
         }
