@@ -32,9 +32,7 @@ namespace dotNet5781_03A_1743_5638
             cbBusLines.ItemsSource = h.listLine;
             cbBusLines.DisplayMemberPath = "BusLineNumber";
             cbBusLines.SelectedIndex = 0;
-            Uri myiconbus = new Uri("https://drive.google.com/uc?export=download&id=1gS3nIhLhq6oRSxNdthxQdIpMIwi53lxZ", UriKind.RelativeOrAbsolute);
-
-            this.Icon = BitmapFrame.Create(myiconbus);
+            
             // lbBusLineStations.datacontext = cbBusLines.item.stations;
         }
 

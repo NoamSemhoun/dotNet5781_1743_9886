@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03A_1743_5638"
         mc:Ignorable="d"
-                Title="Moovit 2.0" Height="640" Width="800" Background="{x:Null}">
+                Title="Moovit 2.0" Height="640" Width="800" Background="{x:Null}" Icon="Iconblock-Remixed-Bus.ico">
     <Grid Name="MainGrid" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -25,14 +25,13 @@
             </Grid.ColumnDefinitions >
 
             <ComboBox Name="cbBusLines"
-            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Width="190" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="4,0" FontSize="18"/>
+            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Width="190" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="4,0" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
             <TextBox Name ="tbArea"
-            HorizontalAlignment= "Stretch"
             VerticalAlignment="Stretch"
             Grid.Column="3"
             IsReadOnly="True"
-            Text="{Binding Path= Area}" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" CaretBrush="#FF46ACD3" TextChanged="tbArea_TextChanged"/>
+            Text="{Binding Path= Area}" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" CaretBrush="#FF46ACD3" TextChanged="tbArea_TextChanged" FontSize="20" FontStretch="UltraExpanded" TextOptions.TextFormattingMode="Display" TextWrapping="WrapWithOverflow" Margin="0" Width="196" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <TextBlock HorizontalAlignment="Left" Margin="19,24,0,17" Text="Bus Line Number :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" Width="178" FontWeight="Bold"/>
             <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="81,24,0,17" Text="Area :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
 
