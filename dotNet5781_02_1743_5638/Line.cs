@@ -47,7 +47,7 @@ namespace dotNet5781_02_1743_5638
                 }
             }
             busLineNumber = sampleLineNumber++;
-             area = (Area)r.Next(0, 4);
+             area = (Area)r.Next(0, 5);
             firstStation = listStations.First();
             lastStation = listStations.Last();
         }
@@ -166,7 +166,7 @@ namespace dotNet5781_02_1743_5638
         }
         public Area GetArea()
          {
-        return area;
+               return area;
          }
         public  void deleteStation() //Same as adding function
         {
