@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:dotNet5781_03A_1743_5638"
         mc:Ignorable="d"
                 Title="Moovit 2.0" Height="640" Width="800" Background="{x:Null}" Icon="Iconblock-Remixed-Bus.ico">
-    <Grid Name="MainGrid" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}">
+    <Grid Name="MainGrid" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
@@ -16,7 +16,7 @@
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
-        VerticalAlignment="Stretch" Width="auto" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        VerticalAlignment="Stretch" Width="auto" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -24,24 +24,30 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions >
 
-            <ComboBox Name="cbBusLines"
-            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" ItemsSource="{Binding}" HorizontalAlignment="Stretch" Width="190" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="4,0" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <ComboBox Name="cbBusLines" 
+                      
+            Grid.Column="1" SelectionChanged="cbBusLines_SelectionChanged_1" 
+                      ItemsSource="{Binding}" HorizontalAlignment="Stretch" Width="190" 
+                      Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"
+                      BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" 
+            Margin="12,-1,194,1" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FFE28311" FontWeight="Bold" Grid.ColumnSpan="2" IsReadOnly="True"/>
+
 
             <TextBox Name ="tbArea"
             VerticalAlignment="Stretch"
             Grid.Column="3"
             IsReadOnly="True"
-            Text="{Binding Path= Area}" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" CaretBrush="#FF46ACD3" TextChanged="tbArea_TextChanged" FontSize="20" FontStretch="UltraExpanded" TextOptions.TextFormattingMode="Display" TextWrapping="WrapWithOverflow" Margin="0" Width="196" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Left" Margin="19,24,0,17" Text="Bus Line Number :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" Width="178" FontWeight="Bold"/>
-            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="81,24,0,17" Text="Area :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            Text="{Binding Path= Area}" CaretBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" TextChanged="tbArea_TextChanged" FontSize="26" FontStretch="UltraExpanded" TextOptions.TextFormattingMode="Display" TextWrapping="WrapWithOverflow" Margin="0" Width="196" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionBrush="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" FontWeight="Bold" TextDecorations="{x:Null}" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Foreground="#FFE28311" FontFamily="Yu Gothic UI Semibold" FontStyle="Italic"/>
+            <TextBlock HorizontalAlignment="Left" Margin="19,24,0,17" Text="Bus Line Number :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="20" Width="178" TextDecorations="{x:Null}" Foreground="#FFE28311"/>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="79,20,0,16" Text="Area :" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" TextDecorations="{x:Null}" Foreground="#FFE28311"/>
 
         </Grid>
         <ListBox Name="lbBusLineStations"
         HorizontalAlignment="Left" Height="520" Margin="10,11,0,0" Grid.Row="1" VerticalAlignment="Top" Width="769"
         ItemsSource="{Binding}"
-        SelectionChanged="lbBusLineStations_SelectionChanged" BorderBrush="{DynamicResource {x:Static SystemColors.InfoTextBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontStretch="UltraExpanded" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" FontWeight="Medium">
+        SelectionChanged="lbBusLineStations_SelectionChanged" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontStretch="UltraExpanded" OpacityMask="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontWeight="Medium" Foreground="#FFE28311">
             <ListBox.Background>
-                <ImageBrush ImageSource="BUSstation .png" Opacity="0.25"/>
+                <ImageBrush ImageSource="BUSstation .png" Opacity="0.2"/>
             </ListBox.Background>
         </ListBox>
 

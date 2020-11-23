@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using dotNet5781_02_1743_5638;
+using dotNet5781_02_1743_5638;      // reference
 
 namespace dotNet5781_03A_1743_5638
 {
@@ -23,17 +23,16 @@ namespace dotNet5781_03A_1743_5638
 
     public partial class MainWindow : Window
     {
-        private dotNet5781_02_1743_5638.Line currentDisplayBusLine;
-        public HandleCollectionBus h;
-        public MainWindow()  // ctor
+        private dotNet5781_02_1743_5638.Line currentDisplayBusLine;         // because there is 2 type of "Line"
+        public HandleCollectionBus h;           
+        public MainWindow()  
         {
             InitializeComponent();
-            h = new HandleCollectionBus();
+            h = new HandleCollectionBus();       // initialisation of 10lines and 4stations/lines in the ctor
             cbBusLines.ItemsSource = h.listLine;
             cbBusLines.DisplayMemberPath = "BusLineNumber";
-            cbBusLines.SelectedIndex = 0;
+            //cbBusLines.SelectedIndex = 0;         to not print before push in the combobox
             
-            // lbBusLineStations.datacontext = cbBusLines.item.stations;
         }
 
         private void cbBusLines_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -49,14 +48,11 @@ namespace dotNet5781_03A_1743_5638
 
         }
 
-        private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        private void lbBusLineStations_SelectionChanged(object sender, SelectionChangedEventArgs e) {}
 
         private void tbArea_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // print only
         }
     }
 }
