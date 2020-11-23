@@ -23,7 +23,7 @@ namespace dotNet5781_03A_1743_5638
 
     public partial class MainWindow : Window
     {
-        private dotNet5781_02_1743_5638.Line currentDisplayBusLine;         // because there is 2 type of "Line"
+        private dotNet5781_02_1743_5638.Line currentDisplayBusLine;         // because there is 2 type of class "Line"
         public HandleCollectionBus h;           
         public MainWindow()  
         {
@@ -31,8 +31,8 @@ namespace dotNet5781_03A_1743_5638
             h = new HandleCollectionBus();       // initialisation of 10lines and 4stations/lines in the ctor
             cbBusLines.ItemsSource = h.listLine;
             cbBusLines.DisplayMemberPath = "BusLineNumber";
-            //cbBusLines.SelectedIndex = 0;         to not print before push in the combobox
-            
+            Uri myiconbus = new Uri("https://drive.google.com/uc?export=download&id=1Zr869QzmcUEFupc0Lds2s_peichAIG4T", UriKind.RelativeOrAbsolute);
+            this.Icon = BitmapFrame.Create(myiconbus);
         }
 
         private void cbBusLines_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
