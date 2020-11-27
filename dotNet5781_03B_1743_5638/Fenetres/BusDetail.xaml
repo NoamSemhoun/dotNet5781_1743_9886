@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03B_1743_5638.Fenetres"
         mc:Ignorable="d"
-        Title="BusDetail" Height="450" Width="800">
-    <Grid>
+        Title="BusDetail" Height="650" Width="500">
+    <Grid Margin="0,0,0,0">
+        <TextBox Name="StartingDate" HorizontalAlignment="Left" Margin="226,41,0,0" IsReadOnly="true" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Height="28"/>
+        <TextBox Name ="LicenseNumber" HorizontalAlignment="Left" Margin="226,100,0,0" IsReadOnly="true" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Height="36"/>
+        <TextBox Name="Gasoil" HorizontalAlignment="Left" Margin="226,170,0,0" IsReadOnly="true" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Height="36" />
+        <TextBox Name="Kilometration" HorizontalAlignment="Left" Margin="226,241,0,0"  IsReadOnly="true" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Height="37"/>
+        <TextBox Name ="CheckupDatee" HorizontalAlignment="Left" Margin="226,301,0,0" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="147" Height="31"/>
+        <TextBlock  HorizontalAlignment="Left" Margin="48,41,0,0" Text="StartingDate :" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="94"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,109,0,0" Text="License Number :" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="132"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="42,245,0,0" Text="Kilometrages :" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" Width="100"/>
+        <TextBlock HorizontalAlignment="Left" Margin="42,301,0,0" Text="LastCheckupDate :" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="132"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,174,0,0" Text="Fuel :" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" RenderTransformOrigin="-0.136,0.473" Width="94"/>
+        <TextBlock HorizontalAlignment="Left" Margin="42,412,0,0" Text="Driver Name :" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="94"/>
+        <TextBox Name="Drivername" HorizontalAlignment="Left" Margin="229,410,0,0" IsReadOnly="False" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Height="32" TextChanged="Drivername_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="51,475,0,0" Text="Status :" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="82"/>
+        <TextBox Name="State" HorizontalAlignment="Left" Margin="232,469,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Height="32"/>
+        <Button Content="Valider" HorizontalAlignment="Left" Margin="378,580,0,0" VerticalAlignment="Top" Height="26" Width="87" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="48,529,0,0" Text="Seat Available :" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="98"/>
+        <TextBox Name="Seat" IsReadOnly="False" HorizontalAlignment="Left" Margin="232,526,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" Height="31" TextChanged="Seat_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="42,353,0,0" Text="KmAfterLastMaintenance :" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="152"/>
+        <TextBox Name="kmAfterMaintenance" IsReadOnly="True" HorizontalAlignment="Left" Margin="226,353,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" Height="36"/>
         
     </Grid>
 </Window>

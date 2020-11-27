@@ -19,9 +19,38 @@ namespace dotNet5781_03B_1743_5638.Fenetres
     /// </summary>
     public partial class GoClicked : Window
     {
-        public GoClicked()
+        Bus temp;//We will see the copy of the bus passed in parameters to make our research to his possibility to go on road
+        public bool flag;
+        public GoClicked(Bus bus)
         {
             InitializeComponent();
+            temp = bus;
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            int d;
+            flag = int.TryParse(Distance.Text, out d);
+            if (flag == false)
+            {
+                MessageBox.Show("Error , you have to type an integer value !");
+            }
+            else if (temp.Fuel < int.Parse(Distance.Text))
+            {
+                MessageBox.Show("Impossible ! Not enough fuel ! Gasoil time !");
+                flag = false;
+            }
+            else if (temp.Km + int.Parse(Distance.Text) >= 20000)
+            {
+                MessageBox.Show("Impossible ! Your Kilometrages will be over 20.000 km !Garage time !");
+                flag = false;
+            }
+            else
+            {
+                flag = true;
+                this.Close();
+            }
+
         }
     }
 }
