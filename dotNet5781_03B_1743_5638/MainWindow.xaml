@@ -4,16 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03B_1743_5638"
+        xmlns:fenetres="clr-namespace:dotNet5781_03B_1743_5638.Fenetres"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Name="MainGrid" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+        Title="MainBus" Height="900" Width="800">
+    <Grid>
+        <ListView Name="ListBus" Margin="0,74,0,0" ItemsSource="{Binding}" MouseDoubleClick="ListBus_SelectionDetail">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="License Number" DisplayMemberBinding="{Binding License}" Width="120"/>
+                    <GridViewColumn Header="Date of Start " DisplayMemberBinding="{Binding startingdate}" Width="120"/>
+                    <GridViewColumn Header="Kilometrages" DisplayMemberBinding="{Binding Km}" Width="100"/>
+                    <GridViewColumn Header="Status " Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar x:Name="StatusBar" Width="80" Height="20" Foreground="Green" Minimum="0" Maximum="100" Value="100" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn x:Name="salut" Header="Go on Road !" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Let's Go" Click="LetsGoClicked"   />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Gasoil side !" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Refuel" Click="RefuelClicked" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Garage side !" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Maintenance" Click="MaintenanceClicked" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
-        <Button Name="Add" Content="Add" HorizontalAlignment="Left" Height="51" Margin="686,10,0,0" VerticalAlignment="Top" Width="78" Click="Button_Click" ClickMode="Press" FontSize="22"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Add new bus" HorizontalAlignment="Left" Margin="677,10,0,0" VerticalAlignment="Top" Height="59" Width="123" Click="Button_Click"/>
+        <Button Content="See all the traffic " HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="59" Width="128"/>
 
-        <ListView x:Name="Lvbus" HorizontalAlignment="Left" Height="351" VerticalAlignment="Top" Width="636" Margin="31,42,0,0" 
-                  ItemsSource= "{Binding}" SelectionChanged="Lvbus_SelectionChanged" FontSize="15"/>
-
-
+        <ContentControl  Content="{Binding}"/>
 
     </Grid>
 </Window>
