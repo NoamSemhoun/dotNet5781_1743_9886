@@ -101,7 +101,7 @@ namespace dotNet5781_03B_1743_5638
             BusDetail window = new BusDetail(buses[index]);
             window.ShowDialog();
             
-            if (window.TextWasChanged > 2)
+            if (window.TextWasChanged > 2)//It mean that the user modified the data that he is able to modify, NameDriver and number of seat available 
             {
                 buses[index].SeatNumber = int.Parse(window.Seat.Text);
                 buses[index].namechauffeur = window.Drivername.Text;
