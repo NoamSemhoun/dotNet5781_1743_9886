@@ -26,29 +26,31 @@ namespace dotNet5781_03B_1743_5638.Fenetres
             InitializeComponent();
             temp = bus;
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
-
-            int d;
-            flag = int.TryParse(Distance.Text, out d);
-            if (flag == false)
+            if (e.Key == Key.Enter)
             {
-                MessageBox.Show("Error , you have to type an integer value !");
-            }
-            else if (temp.Fuel < int.Parse(Distance.Text))
-            {
-                MessageBox.Show("Impossible ! Not enough fuel ! Gasoil time !");
-                flag = false;
-            }
-            else if (temp.Km + int.Parse(Distance.Text) >= 20000)
-            {
-                MessageBox.Show("Impossible ! Your Kilometrages will be over 20.000 km !Garage time !");
-                flag = false;
-            }
-            else
-            {
-                flag = true;
-                this.Close();
+                int d;
+                flag = int.TryParse(Distance.Text, out d);
+                if (flag == false)
+                {
+                    MessageBox.Show("Error , you have to type an integer value !");
+                }
+                else if (temp.Fuel < int.Parse(Distance.Text))
+                {
+                    MessageBox.Show("Impossible ! Not enough fuel ! Gasoil time !");
+                    flag = false;
+                }
+                else if (temp.KmAfterLastMaintenance+int.Parse(Distance.Text) >= 20000)
+                {
+                    MessageBox.Show("Impossible ! Your Kilometrages will be over 20.000 km !Garage time !");
+                    flag = false;
+                }
+                else
+                {
+                    flag = true;
+                    this.Close();
+                }
             }
 
         }

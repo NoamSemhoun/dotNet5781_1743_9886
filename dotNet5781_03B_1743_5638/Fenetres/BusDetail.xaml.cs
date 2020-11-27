@@ -47,5 +47,14 @@ namespace dotNet5781_03B_1743_5638.Fenetres
         {
             TextWasChanged++;
         }
+
+        private void refuel_Click(object sender, RoutedEventArgs e)
+        {
+            //Need to implement this function,this will be bind us to the refuel button in the MainList
+        }
+        private void maintenance_Click(object sender, RoutedEventArgs e)
+        {
+            //Need to implement this function,this will be bind us to the maintenance button in the MainList
+        }
     }
 }

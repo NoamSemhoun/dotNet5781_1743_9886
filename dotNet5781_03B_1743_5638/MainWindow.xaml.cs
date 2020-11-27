@@ -30,30 +30,15 @@ namespace dotNet5781_03B_1743_5638
             {
                 buses.Add(new Bus());
             }
-            int committoMade = 0;
-            for (; committoMade < 10; committoMade++)//This loop will search the first occurence of a bus which it StartDate is less than 2 years from now,in ordre to declare a Maintenance one year after and then ..now ?One bus which have to pass in maintenance
-            {
-                if (DateTime.Now.Year - buses[committoMade].StartDate.Year >= 2)
-                {
-                    break;
-                }
-            }
-            buses[committoMade].Checkup = buses[committoMade].StartDate;
-            buses[committoMade].Checkup = buses[committoMade].Checkup.AddYears(1);
-            if (committoMade > 0 && committoMade < 9)//Targuil 3B said that all the specifics required had to be on different buses
-            {
-                buses[0].Km = 19500;
-                buses[9].Fuel = 100;
-            }
-            else
-            {
-                buses[1].Km = 19500;
-                buses[1].Fuel = 800;
-                buses[8].Fuel = 100;
-            }
+         
+            buses[0].Checkup = buses[0].StartDate;
+            buses[0].Checkup = buses[0].Checkup.AddYears(1);//This will be the bus with a overdued DateCheckup 
+            buses[1].Checkup = DateTime.Now.AddMonths(-2);//This will be the bus with a kilometrages close to a maintenance
+            buses[1].KmAfterLastMaintenance = 19800;
+            buses[2].Fuel = 100;//This will be the bus with not much gasoil
+
 
             ListBus.DataContext = buses;
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)//Function to add Bus to our Listview/ListBus
@@ -83,7 +68,9 @@ namespace dotNet5781_03B_1743_5638
                 if (window.flag == true)//It will take the road only if we get our flag=true,this will mean that we can make it 
                 {
                     c.Km += int.Parse(window.Distance.Text);
+                    c.KmAfterLastMaintenance += int.Parse(window.Distance.Text);
                     c.Fuel -= int.Parse(window.Distance.Text);
+                    MessageBox.Show("The journey has started !");
                 }
 
             }
@@ -104,15 +91,16 @@ namespace dotNet5781_03B_1743_5638
             var goodContext = btn.DataContext as Bus;
             goodContext.Checkup = DateTime.Now;
             goodContext.KmAfterLastMaintenance = 0;
+            goodContext.Fuel = 1200;
             MessageBox.Show("Ready to go !");
             ListBus.Items.Refresh();
-
         }
         private void ListBus_SelectionDetail(object sender, MouseButtonEventArgs e)//Function to mrk the index of the DataContext of the line we clicked ,and open new window with all the details about this Line
         {
             int index = ListBus.SelectedIndex;
             BusDetail window = new BusDetail(buses[index]);
             window.ShowDialog();
+            
             if (window.TextWasChanged > 2)
             {
                 buses[index].SeatNumber = int.Parse(window.Seat.Text);
