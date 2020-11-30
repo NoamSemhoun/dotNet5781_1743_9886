@@ -11,7 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Threading;
+using System.Windows.Threading;
 using System.Windows.Shapes;
+using System.ComponentModel;
 using dotNet5781_03B_1743_5638.Fenetres;
 namespace dotNet5781_03B_1743_5638
 {
@@ -21,9 +24,14 @@ namespace dotNet5781_03B_1743_5638
     public partial class MainWindow : Window
     {
         public List<Bus> buses;
+        public float timetoRoad;
+        GoClicked window;
+        BackgroundWorker threadMaintenance;
+        BackgroundWorker threadRefuel;
+        BackgroundWorker threadRoad;
         public MainWindow()
         {
-
+           
             InitializeComponent();
             buses = new List<Bus>();
             for (int a = 0; a < 10; a++)
@@ -41,6 +49,7 @@ namespace dotNet5781_03B_1743_5638
             ListBus.DataContext = buses;
         }
 
+     
         private void Button_Click(object sender, RoutedEventArgs e)//Function to add Bus to our Listview/ListBus
         {
             AddingBus window1 = new AddingBus();
@@ -61,47 +70,173 @@ namespace dotNet5781_03B_1743_5638
             {
                 MessageBox.Show("Impossible ! You need a Maintenance !");
             }
+            else if(c.Percent!=100)
+            {
+                MessageBox.Show("Your bus is not avilable right now ,try later !");
+            }
             else//If the Line dont have to go on maintenance ,then it will be possible to it to go on road
             {
-                GoClicked window = new GoClicked(c);
+                window = new GoClicked(c);
                 window.ShowDialog();
                 if (window.flag == true)//It will take the road only if we get our flag=true,this will mean that we can make it 
-                {
-                    c.Km += int.Parse(window.Distance.Text);
-                    c.KmAfterLastMaintenance += int.Parse(window.Distance.Text);
-                    c.Fuel -= int.Parse(window.Distance.Text);
-                    MessageBox.Show("The journey has started !");
+                {  
+                    c.returnStatus = "OnRoad";
+                    ListBus.Items.Refresh();
+                    timetoRoad = ((float.Parse(window.Distance.Text) / (c.Speed)) * 360000) / 100;
+                    threadRoad = new BackgroundWorker();
+                    threadRoad.DoWork += threadRoad_DoWork;
+                    threadRoad.WorkerReportsProgress = true;
+                    threadRoad.RunWorkerCompleted += threadRoad_RunWorkerCompleted;
+                    threadRoad.RunWorkerAsync(c);
                 }
+            }
+            
+        }
+        private void threadRoad_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            var mine = (Bus)e.Argument;//mine will be the bus we passed in parameter of the runworkerasynch
+            for (int i = 0; i < 100; i++)
+            {
+                mine.Percent = i;
+                Thread.Sleep((int)timetoRoad);
+               
+            }
+            mine.Percent = 100;
+            e.Result = mine;
+        }
+        private void threadRoad_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                var mine = (Bus)e.Result;
+                if (!window.checkfloat)
+                {
+                    mine.Km += int.Parse(window.Distance.Text);
+                    mine.KmAfterLastMaintenance += int.Parse(window.Distance.Text);
+                    mine.Fuel -= int.Parse(window.Distance.Text);
+                    mine.returnStatus = "Ready";
+                    ListBus.Items.Refresh();
+                }
+                else
+                mine.Km += float.Parse(window.Distance.Text);
+                mine.KmAfterLastMaintenance += float.Parse(window.Distance.Text);
+                mine.Fuel -= float.Parse(window.Distance.Text);
+                mine.returnStatus = "Ready";
+                ListBus.Items.Refresh();
 
             }
-            ListBus.Items.Refresh();
+            else
+                MessageBox.Show("Error !");
         }
+
         private void RefuelClicked(object sender, RoutedEventArgs e)//Function to take the DataContext of the line containing this button and set it fuel to fulltank
         {
             var btn = sender as Button;
             var goodContext = btn.DataContext as Bus;
-            goodContext.Fuel = 1200;
-            MessageBox.Show("Your bus is full of gasoil now !");
-            ListBus.Items.Refresh();
+            if (goodContext.Percent == 100)
+            {
+                goodContext.returnStatus = "RefuelTime";
+                ListBus.Items.Refresh();
+                threadRefuel = new BackgroundWorker();
+                threadRefuel.DoWork += threadRefuel_DoWork;
+                threadRefuel.WorkerReportsProgress = true;
+                threadRefuel.RunWorkerCompleted += threadRefuel_RunWorkerCompleted;
+                threadRefuel.RunWorkerAsync(goodContext);
+            }
+            else
+                MessageBox.Show("Your bus is not available right now,try later !");
+        }
+        private void threadRefuel_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            var mine = (Bus)e.Argument;//mine will be the bus we passed in parameter of the runworkerasynch
 
+            for (int i = 0; i < 100; i++)
+            {
+                Thread.Sleep(10);
+                mine.Percent = i;
+            }
+            mine.returnStatus = "Ready";
+            mine.Percent = 100;
+            e.Result = mine;
+        }
+
+        private void threadRefuel_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var item = (Bus)e.Result;
+            if (e.Error == null)//If all's good so we make the maintenance
+            {
+                
+                item.Fuel = 1200;
+                ListBus.Items.Refresh();
+            }
+            else
+                MessageBox.Show("Error !");
         }
         private void MaintenanceClicked(object sender, RoutedEventArgs e)//Function to take the DataContext of the line containing this button and set is MaintenanceDate to the current Date and set it kmAfterMaintenance to 0 because its now..
         {
             var btn = sender as Button;
             var goodContext = btn.DataContext as Bus;
-            goodContext.Checkup = DateTime.Now;
-            goodContext.KmAfterLastMaintenance = 0;
-            goodContext.Fuel = 1200;
-            MessageBox.Show("Ready to go !");
-            ListBus.Items.Refresh();
+            if (goodContext.Percent == 100)
+            {
+                goodContext.returnStatus = "InMaintenance";
+                ListBus.Items.Refresh();
+                threadMaintenance = new BackgroundWorker();
+                threadMaintenance.DoWork += threadMaintenance_DoWork;
+                threadMaintenance.WorkerReportsProgress = true;
+                threadMaintenance.RunWorkerCompleted += threadMaintenance_RunWorkerCompleted;
+                threadMaintenance.RunWorkerAsync(goodContext);
+            }
+            else
+                MessageBox.Show("Your bus is not available right now,try later !");
+           
         }
+
+        private void threadMaintenance_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            var mine = (Bus)e.Argument;//mine will be the bus we passed in parameter of the runworkerasynch
+
+            for (int i = 0; i < 100; i++)
+            {
+                Thread.Sleep(10);
+                mine.Percent = i;
+            }
+            mine.returnStatus = "Ready";
+            mine.Percent = 100;
+            e.Result = mine;
+        }
+        private void threadMaintenance_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var item = (Bus)e.Result;
+            if (e.Error == null)//If all's good so we make the maintenance
+            {
+                item.Checkup = DateTime.Now;
+                item.KmAfterLastMaintenance = 0;
+                item.Fuel = 1200;
+                ListBus.Items.Refresh();
+            }
+            else
+                MessageBox.Show("Error !");
+        }
+
         private void ListBus_SelectionDetail(object sender, MouseButtonEventArgs e)//Function to mrk the index of the DataContext of the line we clicked ,and open new window with all the details about this Line
         {
             int index = ListBus.SelectedIndex;
             BusDetail window = new BusDetail(buses[index]);
             window.ShowDialog();
-            
-            if (window.TextWasChanged > 2)//It mean that the user modified the data that he is able to modify, NameDriver and number of seat available 
+            if(window.refuelWasClicked)
+            {
+                buses[index].returnStatus = "RefuelTime";
+                ListBus.Items.Refresh();
+                threadRefuel.RunWorkerAsync(buses[index]);
+            }
+            else if(window.maintenanceWasClicked)
+            {
+                buses[index].returnStatus = "OnMaintenance";
+                ListBus.Items.Refresh();
+                threadMaintenance.RunWorkerAsync(buses[index]);
+            }
+            else if (window.TextWasChanged > 2)//It mean that the user modified the data that he is able to modify, NameDriver and number of seat available 
             {
                 buses[index].SeatNumber = int.Parse(window.Seat.Text);
                 buses[index].namechauffeur = window.Drivername.Text;

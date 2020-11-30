@@ -9,6 +9,7 @@
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,59,0,0" Text="Enter the distance of the trip in km and press enter :" TextWrapping="Wrap" VerticalAlignment="Top" Height="36" Width="248"/>
         <TextBox Name="Distance" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="29" KeyDown="OnKeyDownHandler" Margin="0,107,0,0"/>
+        
 
 
     </Grid>

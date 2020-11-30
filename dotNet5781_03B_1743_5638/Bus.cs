@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Threading;
 
 namespace dotNet5781_03B_1743_5638
 {
@@ -23,25 +25,29 @@ namespace dotNet5781_03B_1743_5638
             return start.AddDays(gen.Next(range)).AddHours(gen.Next(0, 24)).AddMinutes(gen.Next(0, 60)).AddSeconds(gen.Next(0, 60));
         }
     }
-    public class Bus
+    public class Bus:INotifyPropertyChanged
     {
+        private int percent = 100;
+        public event PropertyChangedEventHandler PropertyChanged;  
+        private float speed;
         const int FULLTANK = 1200;
         public DateTime StartDate;
         private string license;
-        private int km;
+        private float km;
         public string namechauffeur;
         public Status status;
-        public int Km { get => km; set => km = value; }
-        public int Fuel { get; set; }
+        public float Km { get => km; set => km = value; }
+        public float Fuel { get; set; }
         public DateTime Checkup;
-        private int kmAfterLastMaintenace;
+        private float kmAfterLastMaintenace;
         private static Random LicenseKmFuel = new Random();
         private static RandomDateTime randomDate = new RandomDateTime();
         private int seatNumber;
         public int SeatNumber { get => seatNumber; set => seatNumber = value; }
-        public int KmAfterLastMaintenance { get => kmAfterLastMaintenace; set => kmAfterLastMaintenace = value; }
+        public float KmAfterLastMaintenance { get => kmAfterLastMaintenace; set => kmAfterLastMaintenace = value; }
         private string StartingDate;
         public string startingdate { get => StartDate.ToString(); }
+        
         public Bus()//ctor for random 
         {
 
@@ -57,6 +63,7 @@ namespace dotNet5781_03B_1743_5638
             }
             km = LicenseKmFuel.Next(0, 20000);
             Fuel = LicenseKmFuel.Next(0, 1200);
+            speed = LicenseKmFuel.Next(20, 51);
 
         }
         public Bus(string date, string license, string newone, string kilometrages, string checkup, string seat, string drivername, string kmAMaintenance)
@@ -69,7 +76,7 @@ namespace dotNet5781_03B_1743_5638
             }
             else if (newone == "N")
             {
-                Checkup = StartDate;
+                Checkup = DateTime.Now;
                 km = 0;
             }
             else if (newone == "O")
@@ -100,7 +107,7 @@ namespace dotNet5781_03B_1743_5638
             if (flag == false)
                 throw new Exception("Even if there's no place avilable you have to type 0 ");
             namechauffeur = drivername;
-
+            speed = LicenseKmFuel.Next(20, 51);
         }
         public Bus(Bus bus)
         {
@@ -114,6 +121,35 @@ namespace dotNet5781_03B_1743_5638
             kmAfterLastMaintenace = bus.KmAfterLastMaintenance;
             StartDate = bus.StartDate;
             seatNumber = bus.SeatNumber;
+            speed = bus.speed;
+        }
+        protected void NotifyPropertyChange(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        public string returnStatus
+        {
+            get => status.ToString();
+            set
+            {
+                status = (Status)Enum.Parse(typeof(Status), value);
+            }
+
+        }
+
+        public int Percent//Value of our progressbar need to be bind and changed in synhcronization from the mainWindow
+        {
+            get { return percent; }
+            set
+            {
+                percent = value;
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs("Percent"));
+
+            }
         }
 
         public string License
@@ -156,7 +192,7 @@ namespace dotNet5781_03B_1743_5638
                 }
             }
         }
-
+        public float Speed { get => speed; set => speed = value; }
         public bool needMaintenance()
         {
             if ((DateTime.Compare(Checkup.Date, DateTime.Now.AddYears(-1))) < 0 || Km >= 20000)

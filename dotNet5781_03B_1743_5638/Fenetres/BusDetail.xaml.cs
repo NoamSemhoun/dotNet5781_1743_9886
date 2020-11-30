@@ -19,6 +19,8 @@ namespace dotNet5781_03B_1743_5638.Fenetres
     /// </summary>
     public partial class BusDetail : Window
     {
+        public bool refuelWasClicked = false;
+        public bool maintenanceWasClicked = false;
         public int TextWasChanged;//We have to increment 2 times this variable to be sure that we dont change the driver and seat value,because if we changed it ,we have to declare it to MainWindow
         public BusDetail(Bus b)
         {
@@ -50,11 +52,13 @@ namespace dotNet5781_03B_1743_5638.Fenetres
 
         private void refuel_Click(object sender, RoutedEventArgs e)
         {
-            //Need to implement this function,this will be bind us to the refuel button in the MainList
+            refuelWasClicked = true;
+            MessageBox.Show("All's good , a Refuel will be launched at your exit !");
         }
         private void maintenance_Click(object sender, RoutedEventArgs e)
         {
-            //Need to implement this function,this will be bind us to the maintenance button in the MainList
+            maintenanceWasClicked = true;
+            MessageBox.Show("All's good, a Maintenance will be launched at your exit !");
         }
     }
 }
