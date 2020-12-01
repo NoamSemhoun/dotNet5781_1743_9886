@@ -46,7 +46,7 @@ namespace dotNet5781_03B_1743_5638.Fenetres
                         MessageBox.Show("Impossible ! Not enough fuel ! Gasoil time !");
                         flag = false;
                     }
-                    else if  (temp.KmAfterLastMaintenance + float.Parse(Distance.Text) >= 20000)
+                    else if  (temp.KmAfterLastMaintenance + float.Parse(Distance.Text) > 20000)
                     {
                         MessageBox.Show("Impossible ! Your Kilometrages will be over 20.000 km !Garage time !");
                         flag = false;

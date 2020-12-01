@@ -195,7 +195,7 @@ namespace dotNet5781_03B_1743_5638
         public float Speed { get => speed; set => speed = value; }
         public bool needMaintenance()
         {
-            if ((DateTime.Compare(Checkup.Date, DateTime.Now.AddYears(-1))) < 0 || kmAfterLastMaintenance >= 20000)
+            if ((DateTime.Compare(Checkup.Date, DateTime.Now.AddYears(-1))) < 0 || kmAfterLastMaintenance == 20000)
             {
                 return true;
             }

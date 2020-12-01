@@ -117,8 +117,8 @@ namespace dotNet5781_03B_1743_5638
                 var mine = (Bus)e.Result;
                 if (!window.checkfloat)
                 {
-                    mine.Km += int.Parse(window.Distance.Text);
                     mine.KmAfterLastMaintenance += int.Parse(window.Distance.Text);
+                    mine.Km += mine.KmAfterLastMaintenance;
                     mine.Fuel -= int.Parse(window.Distance.Text);
                     mine.returnStatus = "Ready";
                     mine.checkStatus();
