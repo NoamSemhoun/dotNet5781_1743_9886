@@ -28,22 +28,27 @@ namespace dotNet5781_03B_1743_5638.Fenetres
         }
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                b = new Bus(StartingD.Text, LicenseN.Text, newOneorNot.Text, Kilometrages.Text, CheckupD.Text, Seat.Text, Chauffeurname.Text, kmafterMaintenance.Text);
-                b.checkStatus();
-                this.Close();
-            }
-            catch (Exception s)
-            {
-                MessageBox.Show(s.Message);
-            }
-
-            if (LicenseN.Text.Length < 1 && StartingD.Text.Length < 1 && newOneorNot.Text.Length < 1)
+            if (LicenseN.Text.Length < 1 || StartingD.Text.Length < 1 || newOneorNot.Text.Length < 1)//Only when we put all the minimum required data ,we can move ahead
             {
 
                 MessageBox.Show("You didnt input all the needed data !");
             }
+            else
+            {
+                try
+                {
+                    b = new Bus(StartingD.Text, LicenseN.Text, newOneorNot.Text, Kilometrages.Text, CheckupD.Text, Seat.Text, Chauffeurname.Text, kmafterMaintenance.Text);
+
+                    b.checkStatus();
+                    this.Close();
+                }
+                catch (Exception s)
+                {
+                    MessageBox.Show(s.Message);
+                }
+
+            }
+          
         }
 
         private void newOneorNot_TextChanged(object sender, TextChangedEventArgs e)

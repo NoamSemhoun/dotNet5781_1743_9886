@@ -31,7 +31,7 @@ namespace dotNet5781_03B_1743_5638.Fenetres
             Kilometration.Text = b.Km.ToString();
             CheckupDatee.Text = b.Checkup.ToString();
             Drivername.Text = b.namechauffeur;
-            State.Text = b.status.ToString();
+            State.Text = b.returnStatus.ToString();
             Seat.Text = b.SeatNumber.ToString();
             kmAfterMaintenance.Text = b.KmAfterLastMaintenance.ToString();
         }

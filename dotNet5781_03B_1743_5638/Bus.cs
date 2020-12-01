@@ -31,29 +31,29 @@ namespace dotNet5781_03B_1743_5638
         public event PropertyChangedEventHandler PropertyChanged;  
         private float speed;
         const int FULLTANK = 1200;
-        public DateTime StartDate;
+        private DateTime startDate;
+        public string StartDate { get => startDate.ToString(); set => startDate = DateTime.Parse(value); }
         private string license;
         private float km;
-        public string namechauffeur;
-        public Status status;
         public float Km { get => km; set => km = value; }
+        public string namechauffeur;
+        private Status status;
         public float Fuel { get; set; }
         public DateTime Checkup;
         private float kmAfterLastMaintenance;
-        private static Random LicenseKmFuel = new Random();
-        private static RandomDateTime randomDate = new RandomDateTime();
+        public float KmAfterLastMaintenance { get => kmAfterLastMaintenance; set => kmAfterLastMaintenance = value; }
+        private static Random LicenseKmFuel = new Random();//this variable will be used For our random value initialization
+        private static RandomDateTime randomDate = new RandomDateTime();//this too ,for the initialization at the beggining in the MainWindow
         private int seatNumber;
         public int SeatNumber { get => seatNumber; set => seatNumber = value; }
-        public float KmAfterLastMaintenance { get => kmAfterLastMaintenance; set => kmAfterLastMaintenance = value; }
-        private string StartingDate;
-        public string startingdate { get => StartDate.ToString(); }
-        
+       
+     
         public Bus()//ctor for random 
         {
 
-            StartDate = randomDate.Next();
+            startDate = randomDate.Next();
             Checkup = DateTime.Now;
-            if (StartDate.Year < 2018)
+            if (startDate.Year < 2018)
             {
                 License = LicenseKmFuel.Next(1000000, 10000000).ToString();
             }
@@ -69,12 +69,12 @@ namespace dotNet5781_03B_1743_5638
         public Bus(string date, string license, string newone, string kilometrages, string checkup, string seat, string drivername, string kmAMaintenance)
         {
 
-            bool result = DateTime.TryParse(date, out StartDate);
+            bool result = DateTime.TryParse(date, out startDate);
             if (result == false)
             {
                 throw new Exception("invalid StartDate string format");
             }
-            else if (newone == "N")
+            else if (newone == "N")//If the bus is new so the date we added to the company,it is clean so the checkupdate will be the current date 
             {
                 Checkup = DateTime.Now;
                 km = 0;
@@ -177,7 +177,7 @@ namespace dotNet5781_03B_1743_5638
 
             private set
             {
-                if ((StartDate.Year < 2018 && value.Length == 7) || (StartDate.Year >= 2018 && value.Length == 8))
+                if ((startDate.Year < 2018 && value.Length == 7) || (startDate.Year >= 2018 && value.Length == 8))
                 {
                     for (int i = 0; i < value.Length; i++)
                     {
@@ -214,6 +214,10 @@ namespace dotNet5781_03B_1743_5638
             {
                 returnStatus = "NeedRefuel";
                 Percent = 0;
+            }
+            else if(needMaintenance()&&Fuel==0)//The on who needs to refuel and maintenance ,pass in NeedMaintenance mode
+            {
+                returnStatus = "NeedMaintenance";
             }
 
         }

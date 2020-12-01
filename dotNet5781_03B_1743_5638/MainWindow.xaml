@@ -12,7 +12,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="License Number" DisplayMemberBinding="{Binding License}" Width="120"/>
-                    <GridViewColumn Header="Date of Start " DisplayMemberBinding="{Binding startingdate}" Width="120"/>
+                    <GridViewColumn Header="Date of Start " DisplayMemberBinding="{Binding StartDate}" Width="120"/>
                     <GridViewColumn Header="Kilometrages" DisplayMemberBinding="{Binding Km}" Width="100"/>
                     <GridViewColumn Header="Status " Width="110">
                         <GridViewColumn.CellTemplate>
