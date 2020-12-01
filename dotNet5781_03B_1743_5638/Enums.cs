@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_03B_1743_5638
 {
-    public enum Status { Ready, OnRoad, RefuelTime, InMaintenance }
+    public enum Status { Ready, OnRoad, RefuelTime, InMaintenance,NeedMaintenance,NeedRefuel }
 }

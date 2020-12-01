@@ -31,6 +31,7 @@ namespace dotNet5781_03B_1743_5638.Fenetres
             try
             {
                 b = new Bus(StartingD.Text, LicenseN.Text, newOneorNot.Text, Kilometrages.Text, CheckupD.Text, Seat.Text, Chauffeurname.Text, kmafterMaintenance.Text);
+                b.checkStatus();
                 this.Close();
             }
             catch (Exception s)

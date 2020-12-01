@@ -14,11 +14,11 @@
                     <GridViewColumn Header="License Number" DisplayMemberBinding="{Binding License}" Width="120"/>
                     <GridViewColumn Header="Date of Start " DisplayMemberBinding="{Binding startingdate}" Width="120"/>
                     <GridViewColumn Header="Kilometrages" DisplayMemberBinding="{Binding Km}" Width="100"/>
-                    <GridViewColumn Header="Status " Width="100">
+                    <GridViewColumn Header="Status " Width="110">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <ProgressBar Width="80" Height="20" Foreground="Green" Minimum="0" Maximum="100" Value="{Binding Percent,UpdateSourceTrigger=PropertyChanged}" />
+                                    <ProgressBar Width="110" Height="20" Foreground="Green" Minimum="0" Maximum="100" Value="{Binding Percent,UpdateSourceTrigger=PropertyChanged}" />
                                 <TextBlock Name="textinside" Text="{Binding returnStatus,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
     </DataTemplate>

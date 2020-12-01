@@ -43,8 +43,13 @@ namespace dotNet5781_03B_1743_5638
             buses[0].Checkup = buses[0].Checkup.AddYears(1);//This will be the bus with a overdued DateCheckup 
             buses[1].Checkup = DateTime.Now.AddMonths(-2);//This will be the bus with a kilometrages close to a maintenance
             buses[1].KmAfterLastMaintenance = 19800;
-            buses[2].Fuel = 100;//This will be the bus with not much gasoil
+            buses[1].Km += buses[1].KmAfterLastMaintenance;
+            buses[2].Fuel = 1;//This will be the bus with not much gasoil
+           for(int a=0;a<10;a++)
+            {
+                buses[a].checkStatus();
 
+            }
 
             ListBus.DataContext = buses;
         }
@@ -116,6 +121,7 @@ namespace dotNet5781_03B_1743_5638
                     mine.KmAfterLastMaintenance += int.Parse(window.Distance.Text);
                     mine.Fuel -= int.Parse(window.Distance.Text);
                     mine.returnStatus = "Ready";
+                    mine.checkStatus();
                     ListBus.Items.Refresh();
                 }
                 else
@@ -123,6 +129,7 @@ namespace dotNet5781_03B_1743_5638
                 mine.KmAfterLastMaintenance += float.Parse(window.Distance.Text);
                 mine.Fuel -= float.Parse(window.Distance.Text);
                 mine.returnStatus = "Ready";
+                mine.checkStatus();
                 ListBus.Items.Refresh();
 
             }
@@ -134,18 +141,23 @@ namespace dotNet5781_03B_1743_5638
         {
             var btn = sender as Button;
             var goodContext = btn.DataContext as Bus;
-            if (goodContext.Percent == 100)
+            if (goodContext.Percent == 100||goodContext.returnStatus=="NeedRefuel")
             {
                 goodContext.returnStatus = "RefuelTime";
                 ListBus.Items.Refresh();
-                threadRefuel = new BackgroundWorker();
-                threadRefuel.DoWork += threadRefuel_DoWork;
-                threadRefuel.WorkerReportsProgress = true;
-                threadRefuel.RunWorkerCompleted += threadRefuel_RunWorkerCompleted;
-                threadRefuel.RunWorkerAsync(goodContext);
+                doRefuel(goodContext);
+                
             }
             else
                 MessageBox.Show("Your bus is not available right now,try later !");
+        }
+        private void doRefuel(Bus b)
+        {
+            threadRefuel = new BackgroundWorker();
+            threadRefuel.DoWork += threadRefuel_DoWork;
+            threadRefuel.WorkerReportsProgress = true;
+            threadRefuel.RunWorkerCompleted += threadRefuel_RunWorkerCompleted;
+            threadRefuel.RunWorkerAsync(b);
         }
         private void threadRefuel_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -177,19 +189,25 @@ namespace dotNet5781_03B_1743_5638
         {
             var btn = sender as Button;
             var goodContext = btn.DataContext as Bus;
-            if (goodContext.Percent == 100)
+            if (goodContext.Percent == 100||goodContext.returnStatus=="NeedMaintenance")
             {
                 goodContext.returnStatus = "InMaintenance";
                 ListBus.Items.Refresh();
-                threadMaintenance = new BackgroundWorker();
-                threadMaintenance.DoWork += threadMaintenance_DoWork;
-                threadMaintenance.WorkerReportsProgress = true;
-                threadMaintenance.RunWorkerCompleted += threadMaintenance_RunWorkerCompleted;
-                threadMaintenance.RunWorkerAsync(goodContext);
+                doMaintenance(goodContext);
             }
             else
                 MessageBox.Show("Your bus is not available right now,try later !");
            
+        }
+
+
+        private void doMaintenance(Bus b)
+        {
+            threadMaintenance = new BackgroundWorker();
+            threadMaintenance.DoWork += threadMaintenance_DoWork;
+            threadMaintenance.WorkerReportsProgress = true;
+            threadMaintenance.RunWorkerCompleted += threadMaintenance_RunWorkerCompleted;
+            threadMaintenance.RunWorkerAsync(b);
         }
 
         private void threadMaintenance_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -228,13 +246,13 @@ namespace dotNet5781_03B_1743_5638
             {
                 buses[index].returnStatus = "RefuelTime";
                 ListBus.Items.Refresh();
-                threadRefuel.RunWorkerAsync(buses[index]);
+                doRefuel(buses[index]);
             }
             else if(window.maintenanceWasClicked)
             {
-                buses[index].returnStatus = "OnMaintenance";
+                buses[index].returnStatus = "InMaintenance";
                 ListBus.Items.Refresh();
-                threadMaintenance.RunWorkerAsync(buses[index]);
+                doMaintenance(buses[index]);
             }
             else if (window.TextWasChanged > 2)//It mean that the user modified the data that he is able to modify, NameDriver and number of seat available 
             {

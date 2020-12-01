@@ -39,12 +39,12 @@ namespace dotNet5781_03B_1743_5638
         public float Km { get => km; set => km = value; }
         public float Fuel { get; set; }
         public DateTime Checkup;
-        private float kmAfterLastMaintenace;
+        private float kmAfterLastMaintenance;
         private static Random LicenseKmFuel = new Random();
         private static RandomDateTime randomDate = new RandomDateTime();
         private int seatNumber;
         public int SeatNumber { get => seatNumber; set => seatNumber = value; }
-        public float KmAfterLastMaintenance { get => kmAfterLastMaintenace; set => kmAfterLastMaintenace = value; }
+        public float KmAfterLastMaintenance { get => kmAfterLastMaintenance; set => kmAfterLastMaintenance = value; }
         private string StartingDate;
         public string startingdate { get => StartDate.ToString(); }
         
@@ -62,7 +62,7 @@ namespace dotNet5781_03B_1743_5638
                 License = LicenseKmFuel.Next(10000000, 100000000).ToString();
             }
             km = LicenseKmFuel.Next(0, 20000);
-            Fuel = LicenseKmFuel.Next(0, 1200);
+            Fuel = LicenseKmFuel.Next(10, 1200);
             speed = LicenseKmFuel.Next(20, 51);
 
         }
@@ -118,7 +118,7 @@ namespace dotNet5781_03B_1743_5638
             status = bus.status;
             namechauffeur = bus.namechauffeur;
             km = bus.km;
-            kmAfterLastMaintenace = bus.KmAfterLastMaintenance;
+            kmAfterLastMaintenance = bus.KmAfterLastMaintenance;
             StartDate = bus.StartDate;
             seatNumber = bus.SeatNumber;
             speed = bus.speed;
@@ -195,14 +195,28 @@ namespace dotNet5781_03B_1743_5638
         public float Speed { get => speed; set => speed = value; }
         public bool needMaintenance()
         {
-            if ((DateTime.Compare(Checkup.Date, DateTime.Now.AddYears(-1))) < 0 || Km >= 20000)
+            if ((DateTime.Compare(Checkup.Date, DateTime.Now.AddYears(-1))) < 0 || kmAfterLastMaintenance >= 20000)
             {
                 return true;
             }
             else
                 return false;
         }
+        public void checkStatus()
+        {
+            if (needMaintenance())//Only the bus who have to pass in maintenance cant be ready
+            {
+                returnStatus = "NeedMaintenance";
+                Percent = 0;
+            }
 
+            else if (Fuel == 0)
+            {
+                returnStatus = "NeedRefuel";
+                Percent = 0;
+            }
+
+        }
         public override string ToString()
         {
             return String.Format("license: {0,-10}, StartDate: {1}, km: {2}", License, StartDate, Km);
