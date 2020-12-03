@@ -1,18 +1,22 @@
-﻿//Made by Hillel
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Dynamic;
+using System.Collections.Specialized;
+using System.Data;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Runtime.Remoting.Services;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace dotNet5781_02_1743_5638
 {
-    public class HandleCollectionBus : Line
+    class HandleCollectionBus : Line
     {
-        public List<Line> listLine;
-
+        private List<Line> listLine;
+       
+       
         public bool CheckFirstLast(Line l2) => listLine.Exists(Line => Line.listStations.First().ShelterNumber == l2.listStations.Last().ShelterNumber && Line.listStations.Last().ShelterNumber == l2.listStations.First().ShelterNumber);
         public HandleCollectionBus() //Init with 10 line 4 station/per line
         {
@@ -22,6 +26,8 @@ namespace dotNet5781_02_1743_5638
                 Line l = new Line();
                 listLine.Add(l);
             }
+          
+           
         }
         public bool IsNumberLineExists(int verif) =>//check if line already exists in the List
         listLine.Exists(Line => Line.BusLineNumber == verif);
@@ -41,7 +47,7 @@ namespace dotNet5781_02_1743_5638
             }
             else
             {
-                Console.WriteLine("There's more of one line with this number,specify the line by the number of the First Station of it :");
+                Console.WriteLine("There's more of one line with this number, specify the line by the number of the First Station of it :");
                 int first = int.Parse(Console.ReadLine());
                 for (int a = 0; a < listLine.Count(); a++)
                 {
@@ -73,7 +79,7 @@ namespace dotNet5781_02_1743_5638
             if (listLine.Find(line => line.BusLineNumber == ligne).listStations.Count == 2)
             {
                 throw new ExceptionTarguil2("but you can't let less than 2 stations in this line !");
-                
+
             }
             int occurence = listLine.Where(line => line.BusLineNumber == ligne).Count();
             if (occurence == 1)
@@ -110,7 +116,7 @@ namespace dotNet5781_02_1743_5638
                 if (listLine.Where(ligne => ligne.BusLineNumber == number).Count() == 2)
                 {
                     throw new ExceptionTarguil2("This line already exists in both directions !");
-                  
+
                 }
 
                 Console.WriteLine("This line already exists, you just can type its second way \n");
@@ -124,7 +130,7 @@ namespace dotNet5781_02_1743_5638
                 else
                 {
                     throw new ExceptionTarguil2("ERROR ! you didn't listen to me !");
-                    
+
                 }
             }
 
@@ -172,6 +178,10 @@ namespace dotNet5781_02_1743_5638
         }
         public override string ToString()
         {
+            if(listLine.Count()==0)
+            {
+                Console.WriteLine("There's no bus saved");
+            }
             string result = "Voici la liste des bus :\n";
             foreach (Line line in listLine)
             {
@@ -179,32 +189,22 @@ namespace dotNet5781_02_1743_5638
             }
             return result;
         }
-      public Line this[int Line] //Indexer function
+        public Line this[int Line]//Indexer function
         {
             get
             {
-                if (listLine.Count() != 0)
+                Line h;
+                for (int a = 0; a < listLine.Count(); a++)
                 {
-                    Line l = new Line();
-                    bool flag = false;
-                    for (int a = 0; a < listLine.Count(); a++)
+                    if (listLine[a].BusLineNumber == Line)
                     {
-                        if (listLine[a].BusLineNumber == Line)
-                        {
-                            l = new Line(listLine[a]);
-                            flag = true;
-                        }
+                        h = new Line(listLine[a]);
+                        return h;
                     }
-                    if (flag == true)
-                    {
-                        return l;
-                    }
-                    else
-                        throw new ExceptionTarguil2("Line not found !");
-                  
                 }
-                else
-                    throw new ExceptionTarguil2("Your system is empty !");
+                throw new ExceptionTarguil2("There's nos bus at this index !");
+                
+              
             }
         }
 
@@ -217,7 +217,7 @@ namespace dotNet5781_02_1743_5638
 
                 bool ok = int.TryParse(Console.ReadLine(), out int current);
                 if (!ok) { throw new ExceptionTarguil2("Enter a number only !"); }
-                int count = listLine.Where(line => line.IsNumberStationExists(current) == true).Count();
+                int count = listLine.Where(line => line.IsNumberStationExists(current) == true).Count();//Return the occurence of the existence of this station in our system ,to check if it exists
                 if (count == 0)
                 {
                     throw new ExceptionTarguil2("This number station doesn't exists !");
@@ -227,30 +227,36 @@ namespace dotNet5781_02_1743_5638
                 Console.WriteLine("Enter your destination Station :");
                 bool ok2 = int.TryParse(Console.ReadLine(), out int destination);
                 if (!ok2) { throw new ExceptionTarguil2("Enter a number only !"); }
-                count = listLine.Where(line => line.IsNumberStationExists(destination) == true).Count();
+                count = listLine.Where(line => line.IsNumberStationExists(destination) == true).Count();//If count=0 that will mean that there's nos bus with this number station saved in our system
                 if (count == 0)
                 {
                     throw new ExceptionTarguil2("This number Station doesn't exists ");
 
                 }
                 StationLine Destination = new StationLine(destination);
-                int size = listLine.Count();
-                for (int i = 1; i < size; i++)
+                List<Line> tempy = new List<Line>();//We create our new List and it will contains only the Line which contains our Station that we search for 
+               for(int a=0;a<listLine.Count();a++)
+                {
+                    if (listLine[a].IsNumberStationExists(current) && listLine[a].IsNumberStationExists(destination))//" "
+                        tempy.Add(listLine[a]);
+                }
+                int size = tempy.Count();
+                for (int i = 1; i < size; i++)//Bubble sort on the new List ,in ordre to have the faster line for the 2 stations at the first index and the longer to the end 
                 {
                     for (int j = 0; j < (size - i); j++)
                     {
-                        if (listLine[j].CompareTo(listLine[j + 1], Current, Destination) == 1)
+                        if (tempy[j].CompareTo(tempy[j + 1], Current, Destination) == 1)
                         {
-                            Line temp = new Line(listLine[j]);
-                            listLine[j] = listLine[j + 1];
-                            listLine[j + 1] = temp;
+                            Line temp = new Line(tempy[j]);
+                            tempy[j] = tempy[j + 1];
+                            tempy[j + 1] = temp;
                         }
                     }
                 }
                 Console.WriteLine("Here's all your possibilities,from the faster to the longer ");
-                foreach (Line line in listLine)
+                foreach (Line line in tempy)
                 {
-                    Console.WriteLine("Bus number {0} make it in {1}", line.BusLineNumber, line.TimeBetween(Current, Destination));
+                    Console.WriteLine("Bus number {0} make it in {1}", line.BusLineNumber, line.TimeBetween(Current, Destination));//Finally we print all the Line which ontains our station passed in parameter and the time that their take to do the road 
                 }
             }
             else
