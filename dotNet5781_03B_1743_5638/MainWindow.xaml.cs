@@ -164,15 +164,17 @@ namespace dotNet5781_03B_1743_5638
         {
             var btn = sender as Button;
             var goodContext = btn.DataContext as Bus;
-            if (goodContext.Percent == 100||goodContext.returnStatus=="NeedRefuel")
+            if (goodContext.Percent == 100 || goodContext.returnStatus == "NeedRefuel")
             {
                 goodContext.returnStatus = "RefuelTime";
                 ListBus.Items.Refresh();
                 doRefuel(goodContext);
-                
+
             }
+            else if (goodContext.returnStatus == "NeedMaintenance")
+                MessageBox.Show("You have to pass in maintenance and you will fo out with a FULLTANK !");
             else
-                MessageBox.Show("Your bus is not available right now,try later !");
+                MessageBox.Show("Your bus is not avilable right now ,try later !");
         }
         private void doRefuel(Bus b)
         {
