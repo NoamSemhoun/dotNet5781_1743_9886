@@ -24,6 +24,9 @@
         <TextBox Name="Chauffeurname" HorizontalAlignment="Left" Margin="282,434,0,0" IsReadOnly="False" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="32"/>
         <TextBlock HorizontalAlignment="Left" Margin="48,495,0,0" Text="KmAfterLastMaintenance :" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="150"/>
         <TextBox Name="kmafterMaintenance" HorizontalAlignment="Left" Margin="282,495,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalAlignment="Top" Width="178" Height="32"/>
-        
+        <Label Content="*" HorizontalAlignment="Left" Margin="33,40,0,0" VerticalAlignment="Top" Foreground="Red" Height="20" Width="24"/>
+        <Label Content="*" HorizontalAlignment="Left" Margin="34,101,0,0" VerticalAlignment="Top" Foreground="Red"/>
+        <Label Content="*" HorizontalAlignment="Left" Margin="33,176,0,0" VerticalAlignment="Top" Foreground="Red" Width="15"/>
+
     </Grid>
 </Window>

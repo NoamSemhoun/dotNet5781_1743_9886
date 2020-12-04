@@ -24,16 +24,13 @@ namespace dotNet5781_03B_1743_5638.Fenetres
         public int TextWasChanged;//We have to increment 2 times this variable to be sure that we dont change the driver and seat value,because if we changed it ,we have to declare it to MainWindow
         public BusDetail(Bus b)
         {
+
             InitializeComponent();
-            StartingDate.Text = b.StartDate.ToString();
+            this.myGrid.DataContext = b;
             LicenseNumber.Text = b.License;
-            Gasoil.Text = b.Fuel.ToString();
-            Kilometration.Text = b.Km.ToString();
             CheckupDatee.Text = b.Checkup.ToString();
             Drivername.Text = b.namechauffeur;
-            State.Text = b.returnStatus.ToString();
-            Seat.Text = b.SeatNumber.ToString();
-            kmAfterMaintenance.Text = b.KmAfterLastMaintenance.ToString();
+            
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

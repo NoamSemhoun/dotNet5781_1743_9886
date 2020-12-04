@@ -13,8 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Threading;
 using System.Windows.Threading;
+using System.Windows.Threading;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.IO;
 using dotNet5781_03B_1743_5638.Fenetres;
 namespace dotNet5781_03B_1743_5638
 {
@@ -29,6 +31,7 @@ namespace dotNet5781_03B_1743_5638
         BackgroundWorker threadMaintenance;
         BackgroundWorker threadRefuel;
         BackgroundWorker threadRoad;
+        DispatcherTimer TimerLeft;
         public MainWindow()
         {
            
@@ -75,7 +78,7 @@ namespace dotNet5781_03B_1743_5638
             {
                 MessageBox.Show("Impossible ! You need a Maintenance !");
             }
-            else if(c.Percent!=100)
+            else if(c.returnStatus!="Ready")
             {
                 MessageBox.Show("Your bus is not avilable right now ,try later !");
             }
@@ -87,7 +90,10 @@ namespace dotNet5781_03B_1743_5638
                 {  
                     c.returnStatus = "OnRoad";
                     ListBus.Items.Refresh();
-                    timetoRoad = ((float.Parse(window.Distance.Text) / (c.Speed)) * 360000) / 100;
+                    timetoRoad = (float)((float.Parse(window.Distance.Text) / (c.Speed) * 3600000) * 0.1 / 60);
+                   TimeSpan timeLeft = new TimeSpan(TimeSpan.FromSeconds(timetoRoad/1000).Hours, TimeSpan.FromSeconds(timetoRoad/1000).Minutes, TimeSpan.FromSeconds(timetoRoad/1000).Seconds);
+                    c.TimeBeforeArrival = timeLeft;
+                    makeTimer(c);
                     threadRoad = new BackgroundWorker();
                     threadRoad.DoWork += threadRoad_DoWork;
                     threadRoad.WorkerReportsProgress = true;
@@ -97,25 +103,42 @@ namespace dotNet5781_03B_1743_5638
             }
             
         }
+        private void makeTimer(Bus c)
+        {
+            TimerLeft = new DispatcherTimer();
+            TimerLeft.Interval = new TimeSpan(0, 0, 1);
+            TimerLeft.Tick += (s, args) =>
+            {
+                if (c.TimeBeforeArrival.Seconds == 0)
+                    TimerLeft.Stop();
+                else
+                    c.TimeBeforeArrival = c.TimeBeforeArrival.Subtract(TimeSpan.FromSeconds(1));
+
+            };
+        }
         private void threadRoad_DoWork(object sender, DoWorkEventArgs e)
         {
-
+            
             var mine = (Bus)e.Argument;//mine will be the bus we passed in parameter of the runworkerasynch
+            
             for (int i = 0; i < 100; i++)
             {
+                TimerLeft.Start();
                 mine.Percent = i;
-                Thread.Sleep((int)timetoRoad);
-               
+              // mine.TimeBeforeArrival
+                Thread.Sleep((int)timetoRoad/100);
             }
             mine.Percent = 100;
             e.Result = mine;
         }
+       
         private void threadRoad_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Error == null)
             {
                 var mine = (Bus)e.Result;
-                if (!window.checkfloat)
+
+                if (!window.checkfloat)//If checkFloat return false this will mean that we have to parse all our data in integer
                 {
                     mine.KmAfterLastMaintenance += int.Parse(window.Distance.Text);
                     mine.Km += mine.KmAfterLastMaintenance;
