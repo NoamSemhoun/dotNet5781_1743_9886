@@ -27,8 +27,9 @@ namespace dotNet5781_03B_1743_5638
     }
     public class Bus:INotifyPropertyChanged
     {
-        private int percent = 100;
-        private TimeSpan timeBeforeArrival;
+        private int percent = 100;//For the progressbar Value
+        private TimeSpan timeBeforeArrival;//For the timer when in Road
+        public float timeToRoad;
         public event PropertyChangedEventHandler PropertyChanged;  
         private float speed;
         const int FULLTANK = 1200;
@@ -140,6 +141,7 @@ namespace dotNet5781_03B_1743_5638
             }
 
         }
+      
         public int Percent//Value of our progressbar need to be bind and changed in synhcronization from the mainWindow
         {
             get { return percent; }

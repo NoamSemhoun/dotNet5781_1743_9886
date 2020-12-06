@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Threading;
 using System.Windows.Threading;
-using System.Windows.Threading;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.IO;
@@ -31,7 +30,7 @@ namespace dotNet5781_03B_1743_5638
         BackgroundWorker threadMaintenance;
         BackgroundWorker threadRefuel;
         BackgroundWorker threadRoad;
-        DispatcherTimer TimerLeft;
+        DispatcherTimer TimerLeftRoad;
         public MainWindow()
         {
            
@@ -43,7 +42,7 @@ namespace dotNet5781_03B_1743_5638
             }
          
             buses[0].Checkup =DateTime.Parse(buses[0].StartDate);
-            buses[0].Checkup = buses[0].Checkup.AddYears(1);//This will be the bus with a overdued DateCheckup 
+            buses[0].Checkup = buses[0].Checkup.AddYears(1);//This will be the bus with a overdued DateCheckup (you have 1/80 chance to get a bad date for the example,if its the case redebug it
             buses[1].Checkup = DateTime.Now.AddMonths(-2);//This will be the bus with a kilometrages close to a maintenance
             buses[1].KmAfterLastMaintenance = 19995;
             buses[1].Km += buses[1].KmAfterLastMaintenance;
@@ -90,11 +89,13 @@ namespace dotNet5781_03B_1743_5638
                 {  
                     c.returnStatus = "OnRoad";
                     ListBus.Items.Refresh();
-                    timetoRoad = (float)((float.Parse(window.Distance.Text) / (c.Speed) * 3600000) * 0.1 / 60);
-                   TimeSpan timeLeft = new TimeSpan(TimeSpan.FromSeconds(timetoRoad/1000).Hours, TimeSpan.FromSeconds(timetoRoad/1000).Minutes, TimeSpan.FromSeconds(timetoRoad/1000).Seconds);
-                    c.TimeBeforeArrival = timeLeft;
-                    makeTimer(c);
-                    threadRoad = new BackgroundWorker();
+                    c.timeToRoad = ((float)((float.Parse(window.Distance.Text) / (c.Speed) * 3600000)*0.1/60));//Set the time for the progressbar (have to /100 in the loop for)
+                    
+                    c.TimeBeforeArrival = new TimeSpan(TimeSpan.FromMilliseconds(c.timeToRoad).Hours, TimeSpan.FromMilliseconds(c.timeToRoad).Minutes, TimeSpan.FromMilliseconds(c.timeToRoad).Seconds);//Set the value timer in BusDetail Window 
+                    TimerLeftRoad = new DispatcherTimer();
+                    makeTimer(c);//Set the timer
+
+                    threadRoad = new BackgroundWorker();//Set the thread
                     threadRoad.DoWork += threadRoad_DoWork;
                     threadRoad.WorkerReportsProgress = true;
                     threadRoad.RunWorkerCompleted += threadRoad_RunWorkerCompleted;
@@ -105,28 +106,39 @@ namespace dotNet5781_03B_1743_5638
         }
         private void makeTimer(Bus c)
         {
-            TimerLeft = new DispatcherTimer();
-            TimerLeft.Interval = new TimeSpan(0, 0, 1);
-            TimerLeft.Tick += (s, args) =>
+            TimerLeftRoad.Interval = new TimeSpan(0, 0, 1);
+            TimerLeftRoad.Tick += (s, args) =>
             {
                 if (c.TimeBeforeArrival.Seconds == 0)
-                    TimerLeft.Stop();
+                {
+                    if (c.TimeBeforeArrival.Minutes > 0)
+                    {
+                        c.TimeBeforeArrival = c.TimeBeforeArrival.Subtract(TimeSpan.FromMinutes(1));
+                        c.TimeBeforeArrival = c.TimeBeforeArrival.Add(TimeSpan.FromSeconds(59));
+                    }
+                    else if (c.TimeBeforeArrival.Minutes == 0 && c.TimeBeforeArrival.Hours > 0)
+                    {
+                        c.TimeBeforeArrival = c.TimeBeforeArrival.Subtract(TimeSpan.FromHours(1));
+                        c.TimeBeforeArrival = c.TimeBeforeArrival.Add(TimeSpan.FromMinutes(59));
+                        c.TimeBeforeArrival = c.TimeBeforeArrival.Add(TimeSpan.FromSeconds(59));
+                    }
+                    else
+                        TimerLeftRoad.Stop();
+                }
                 else
                     c.TimeBeforeArrival = c.TimeBeforeArrival.Subtract(TimeSpan.FromSeconds(1));
-
+                    
             };
         }
         private void threadRoad_DoWork(object sender, DoWorkEventArgs e)
         {
             
             var mine = (Bus)e.Argument;//mine will be the bus we passed in parameter of the runworkerasynch
-            
             for (int i = 0; i < 100; i++)
             {
-                TimerLeft.Start();
+                TimerLeftRoad.Start();
                 mine.Percent = i;
-              // mine.TimeBeforeArrival
-                Thread.Sleep((int)timetoRoad/100);
+                Thread.Sleep((int)mine.timeToRoad/100);
             }
             mine.Percent = 100;
             e.Result = mine;
@@ -169,10 +181,11 @@ namespace dotNet5781_03B_1743_5638
                 goodContext.returnStatus = "RefuelTime";
                 ListBus.Items.Refresh();
                 doRefuel(goodContext);
+            
 
             }
             else if (goodContext.returnStatus == "NeedMaintenance")
-                MessageBox.Show("You have to pass in maintenance and you will fo out with a FULLTANK !");
+                MessageBox.Show("You have to pass in maintenance and you will go out with a FULLTANK !");
             else
                 MessageBox.Show("Your bus is not avilable right now ,try later !");
         }
@@ -190,7 +203,8 @@ namespace dotNet5781_03B_1743_5638
 
             for (int i = 0; i < 100; i++)
             {
-                Thread.Sleep(10);
+              
+                Thread.Sleep(12000/100);
                 mine.Percent = i;
             }
             mine.returnStatus = "Ready";
@@ -218,6 +232,7 @@ namespace dotNet5781_03B_1743_5638
             {
                 goodContext.returnStatus = "InMaintenance";
                 ListBus.Items.Refresh();
+            
                 doMaintenance(goodContext);
             }
             else
@@ -240,9 +255,9 @@ namespace dotNet5781_03B_1743_5638
             var mine = (Bus)e.Argument;//mine will be the bus we passed in parameter of the runworkerasynch
 
             for (int i = 0; i < 100; i++)
-            {
-                Thread.Sleep(10);
+            { 
                 mine.Percent = i;
+                Thread.Sleep(144000 / 100);
             }
             mine.returnStatus = "Ready";
             mine.Percent = 100;

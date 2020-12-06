@@ -30,7 +30,7 @@
         <Button Name ="refuel" Content="Refuel" HorizontalAlignment="Left" Margin="42,580,0,0" VerticalAlignment="Top" Width="75" Click="refuel_Click" Height="26"/>
         <Button Name="maintenance" Content="Maintenance" HorizontalAlignment="Left" Margin="122,580,0,0" VerticalAlignment="Top" Width="75" Height="26" Click="maintenance_Click"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="410,23,0,0" TextWrapping="Wrap" Name="TimeLeft" Text="{Binding TimeBeforeArrival,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top" Width="113"/>
-        <TextBlock HorizontalAlignment="Left" Margin="397,2,0,0" TextWrapping="Wrap" Text="Time until the ComeBack :" VerticalAlignment="Top" Height="15"/>
+        <TextBlock HorizontalAlignment="Left" Margin="410,0,0,0" TextWrapping="Wrap" Text="Time before Arrival :" VerticalAlignment="Top" Height="15"/>
 
     </Grid>
 </Window>
