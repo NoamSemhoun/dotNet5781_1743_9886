@@ -29,7 +29,7 @@ namespace dotNet5781_03A_1743_5638
         {
             InitializeComponent();
             h = new HandleCollectionBus();                                  // initialisation of 10lines and 4stations/lines in the ctor
-            cbBusLines.ItemsSource = h.listLine;
+            cbBusLines.ItemsSource = h.listLine; 
             cbBusLines.DisplayMemberPath = "BusLineNumber";
             Uri myiconbus = new Uri("https://drive.google.com/uc?export=download&id=1Zr869QzmcUEFupc0Lds2s_peichAIG4T", UriKind.RelativeOrAbsolute);
             this.Icon = BitmapFrame.Create(myiconbus);                      // icon by link
