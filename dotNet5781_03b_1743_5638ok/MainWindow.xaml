@@ -8,7 +8,7 @@
         Title="MainWindow" Height="550" Width="810" Icon="{DynamicResource bus}">
     <Window.Resources>
         <BitmapImage x:Key="ImageSource1" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Autobus.jpg"/>
-        <BitmapImage x:Key="bus" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="C:\Users\33768\Desktop\C#\Targilim (test)\Targil 3b LOCAL\dotNet5781_03B_1743_5638\Autobus.jpg"/>
+        <BitmapImage x:Key="bus" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Autobus.jpg"/>
     </Window.Resources>
     <Grid Name="MainGrid" Cursor="Arrow">
         <Grid.RowDefinitions>
