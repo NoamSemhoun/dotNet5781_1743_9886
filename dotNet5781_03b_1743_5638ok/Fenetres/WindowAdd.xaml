@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="52*"/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Height="45" Margin="251,-4,0,0" TextWrapping="Wrap" Text="Add a New Bus" VerticalAlignment="Top" Width="294" FontSize="42" FontFamily="Verdana Pro Cond Semibold" Foreground="#FFFF8000"/>
+        <TextBlock HorizontalAlignment="Left" Height="45" Margin="251,-4,0,0" TextWrapping="Wrap" Text="Add a new bus" VerticalAlignment="Top" Width="294" FontSize="42" FontFamily="Verdana Pro Cond Semibold" Foreground="#FFFF8000"/>
         <Label Content="Bus Number:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Width="145" FontSize="20" Margin="238,59,0,315" Height="45" FontWeight="Bold"/>
         <TextBox x:Name="busNumber" HorizontalAlignment="Left" Height="22" Margin="396,69,0,328" Grid.Row="0" Text="{Binding License, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         <Label Content="Date Start:" Grid.Column="0" HorizontalAlignment="Left" Margin="238,109,0,271" VerticalAlignment="Center" Height="39" Width="126" FontSize="20" FontWeight="Bold"/>
