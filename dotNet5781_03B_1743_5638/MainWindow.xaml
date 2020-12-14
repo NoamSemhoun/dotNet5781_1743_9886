@@ -50,7 +50,7 @@
             </ListView.View>
         </ListView>
         <Button Content="Add new bus" HorizontalAlignment="Left" Margin="677,10,0,0" VerticalAlignment="Top" Height="59" Width="123" Click="Button_Click"/>
-        <Button Content="See all the traffic " HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="59" Width="128"/>
+       
 
         <ContentControl  Content="{Binding}"/>
 

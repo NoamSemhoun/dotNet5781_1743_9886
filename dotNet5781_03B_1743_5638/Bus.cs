@@ -63,7 +63,7 @@ namespace dotNet5781_03B_1743_5638
             {
                 License = LicenseKmFuel.Next(10000000, 100000000).ToString();
             }
-            km = LicenseKmFuel.Next(0, 20000);
+            km = LicenseKmFuel.Next(0, 2000);
             Fuel = LicenseKmFuel.Next(10, 1200);
             speed = LicenseKmFuel.Next(20, 51);
 
@@ -206,7 +206,7 @@ namespace dotNet5781_03B_1743_5638
         public float Speed { get => speed; set => speed = value; }
         public bool needMaintenance()
         {
-            if ((DateTime.Compare(Checkup.Date, DateTime.Now.AddYears(-1))) < 0 || kmAfterLastMaintenance == 20000)
+            if ((DateTime.Compare(Checkup.Date, DateTime.Now.AddYears(-1))) < 0 || kmAfterLastMaintenance == 2000)
             {
                 return true;
             }

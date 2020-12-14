@@ -44,7 +44,7 @@ namespace dotNet5781_03B_1743_5638
             buses[0].Checkup =DateTime.Parse(buses[0].StartDate);
             buses[0].Checkup = buses[0].Checkup.AddYears(1);//This will be the bus with a overdued DateCheckup (you have 1/80 chance to get a bad date for the example,if its the case redebug it
             buses[1].Checkup = DateTime.Now.AddMonths(-2);//This will be the bus with a kilometrages close to a maintenance
-            buses[1].KmAfterLastMaintenance = 19995;
+            buses[1].KmAfterLastMaintenance = 1995;
             buses[1].Km += buses[1].KmAfterLastMaintenance;
             buses[2].Fuel = 3;//This will be the bus with not much gasoil
            for(int a=0;a<10;a++)
