@@ -156,7 +156,7 @@ namespace dotNet5781_03B_1743_5638
             {
                 var mine = (Bus)e.Result;
 
-                float distance = float.Parse(window.Distance.Text);
+                float distance = float.Parse( window.Distance.Text);
                 mine.Km_remaining -= distance;
                 mine.KmTotal += distance;
                 mine.Fuel -= distance;
