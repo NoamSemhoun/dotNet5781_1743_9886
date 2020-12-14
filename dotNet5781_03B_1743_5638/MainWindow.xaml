@@ -83,7 +83,7 @@
                                 <Button x:Name="FUEL" HorizontalAlignment="Center" VerticalAlignment="Center"
                                      Click="Button_DelekClick" 
                                         ToolTip="   Refuel this bus  "  ToolTipService.ShowDuration="50000"
-                                        Margin="0" Background="#FF6BD413" >
+                                        Margin="0" Background="#FF6BD413" > 
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Icon refuel.png" Height="26" Width="26"/>
                                         <Label Content="REFUEL" HorizontalAlignment="Center" Background="#FF6BD413" Foreground="#FFEAEAEA"/>
