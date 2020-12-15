@@ -37,7 +37,7 @@ namespace dotNet5781_03B_1743_5638
             State.Text = bus.Status.ToString();
             kmRemaining.Text = bus.Km_remaining.ToString();
             seat.Text = bus.seat.ToString();
-            KmAfterLastMaintenance.Text = (2000 - bus.Km_remaining).ToString();
+            KmAfterLastMaintenance.Text = bus.KmAfterLastMaintenance.ToString();
 
         }
         private void Button_Click(object sender, RoutedEventArgs e)

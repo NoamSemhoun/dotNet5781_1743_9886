@@ -5,52 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dotNet5781_03B_1743_5638"
         mc:Ignorable="d"
-        Title="WindowAdd" Height="450" Width="800" Loaded="Window_Loaded" >
+        Title="WindowAdd" Height="630" Width="800" Loaded="Window_Loaded" >
     <Window.Resources>
         <CollectionViewSource x:Key="busViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Bus}, CreateList=True}"/>
     </Window.Resources>
 
-    <Grid Name="MainGrid" Background="#FF383838" DataContext="{StaticResource busViewSource}">
-        <Grid x:Name="interne" Margin="196,48,205,39" Background="#FFFF8000">
+    <Grid Name="MainGrid" Background="#FF383838" DataContext="{StaticResource busViewSource}" Margin="0,0,-5.4,-19.6">
+        <Grid x:Name="interne" Margin="208,41,193,0" Background="#FFFF8000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="93*"/>
                 <ColumnDefinition Width="52*"/>
             </Grid.ColumnDefinitions>
+            <RadioButton x:Name="New" Content="New" HorizontalAlignment="Left" Margin="93,322,0,0" VerticalAlignment="Top" Width="52" FontWeight="Bold" Height="28" Checked="New_Checked"/>
+            <RadioButton x:Name="Old" Content="Old" HorizontalAlignment="Left" Margin="255,322,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="37" Width="39" Checked="Old_Checked" Grid.ColumnSpan="2"/>
+            <Label Content="KmAfterLastMaintenance :" HorizontalAlignment="Left" Margin="10,407,0,0" VerticalAlignment="Top" Height="30" Width="171" FontWeight="Bold" FontSize="13"/>
+            <TextBox x:Name="KmAfterLastMaintenance" HorizontalAlignment="Left" Height="30" Margin="199,407,0,0" TextWrapping="Wrap" IsReadOnly="True" VerticalAlignment="Top" Width="126" Grid.ColumnSpan="2"/>
+            <Label Content="LastCheckupDate :" HorizontalAlignment="Left" Margin="10,459,0,0" VerticalAlignment="Top" Width="171" Height="29" FontWeight="Bold" FontSize="13"/>
+            <DatePicker Name="LastCheckupD" HorizontalAlignment="Left" Margin="199,461,0,0"  VerticalAlignment="Top" Grid.ColumnSpan="2" Width="163"  />
         </Grid>
-        <TextBlock HorizontalAlignment="Left" Height="45" Margin="251,-4,0,0" TextWrapping="Wrap" Text="Add a new bus" VerticalAlignment="Top" Width="294" FontSize="42" FontFamily="Verdana Pro Cond Semibold" Foreground="#FFFF8000"/>
-        <Label Content="Bus Number:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Width="145" FontSize="20" Margin="238,59,0,315" Height="45" FontWeight="Bold"/>
-        <TextBox x:Name="busNumber" HorizontalAlignment="Left" Height="22" Margin="396,69,0,328" Grid.Row="0" Text="{Binding License, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Date Start:" Grid.Column="0" HorizontalAlignment="Left" Margin="238,109,0,271" VerticalAlignment="Center" Height="39" Width="126" FontSize="20" FontWeight="Bold"/>
-        <DatePicker x:Name="dateStartDatePicker" HorizontalAlignment="Left" Margin="396,117,0,279" SelectedDate="{Binding DateStart, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="23" Width="149"/>
-        <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="238,155,0,225" VerticalAlignment="Center" Height="39" Width="68" FontSize="20" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Height="45" Margin="251,-4,0,0" TextWrapping="Wrap" Text="Add a new bus" VerticalAlignment="Top" Width="315" FontSize="35" FontFamily="Verdana Pro Cond Semibold" Foreground="#FFFF8000"/>
+        <Label Content="Bus Number:" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Center" Width="150" FontSize="15" Margin="222,81,0,497" Height="32" FontWeight="Bold"/>
+        <TextBox x:Name="busNumber" HorizontalAlignment="Left" Height="25" Margin="395,88,0,497" Grid.Row="0" Text="{Binding License, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        <Label Content="Date Start:" Grid.Column="0" HorizontalAlignment="Left" Margin="222,142,0,429" VerticalAlignment="Center" Height="39" Width="126" FontSize="15" FontWeight="Bold"/>
+        <DatePicker x:Name="dateStartDatePicker" HorizontalAlignment="Left" Margin="395,146,0,441" SelectedDate="{Binding DateStart, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Height="23" Width="149"/>
+        <Label Content="Fuel:" Grid.Column="0" HorizontalAlignment="Left" Margin="222,194,0,377" VerticalAlignment="Center" Height="39" Width="60" FontSize="15" FontWeight="Bold"/>
 
 
-        <DockPanel VerticalAlignment="Center" Margin="396,162,228,233">
+        <DockPanel VerticalAlignment="Center" Margin="396,50,228,233">
             <TextBox Text="{Binding ElementName=FUEL, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
             <Slider Maximum="1200" TickPlacement="BottomRight" TickFrequency="5" IsSnapToTickEnabled="True" Name="FUEL" ValueChanged="Fuel" />
         </DockPanel>
 
-        <Label Content="Km Total:" Grid.Column="0" HorizontalAlignment="Left" Margin="238,0,0,186" VerticalAlignment="Bottom" Height="34" Width="113" FontSize="20" FontWeight="Bold"/>
-        <TextBox x:Name="kmTotal" HorizontalAlignment="Left" Height="21" Margin="396,208,0,190" Text="{Binding KmTotal, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-        <Label Content="Status :" Grid.Column="0" HorizontalAlignment="Left" Margin="238,248,0,123" VerticalAlignment="Center" Height="48" Width="158" FontSize="20" FontWeight="Bold"/>
-        <ComboBox x:Name="statusComboBox"  HorizontalAlignment="Left" Height="21" Margin="396,256,0,142" 
-         Text="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" SelectionChanged="statusComboBox_SelectionChanged">
-
-            <ComboBoxItem>READY</ComboBoxItem>
-            <ComboBoxItem>NEED_MAINTENANCE</ComboBoxItem>
-            <ComboBoxItem>NEED_REFUEL</ComboBoxItem>
-
-        </ComboBox>
-
-        <Label Content="Name of driver :" Grid.Column="0" HorizontalAlignment="Left" Margin="236,292,0,87" VerticalAlignment="Center" Height="40" Width="175" FontSize="20" FontWeight="Bold"/>
-        <TextBox x:Name="Driver" HorizontalAlignment="Left" Height="21" Margin="399,302,0,96" Text="{Binding drivername, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="Driver_TextChanged"/>
+        <Label Content="Km Total:" Grid.Column="0" HorizontalAlignment="Left" Margin="222,0,0,182" VerticalAlignment="Bottom" Height="30" Width="150" FontSize="13" FontWeight="Bold"/>
+        <TextBox x:Name="kmTotal" HorizontalAlignment="Left" Height="27" IsReadOnly="True" Margin="400,398,0,185" Text="{Binding KmTotal, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
 
 
 
-        <Button Content="OK" HorizontalAlignment="Left" Height="33" Margin="520,384,0,0" VerticalAlignment="Top" Width="96" Click="Button_Click" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Seat :" Grid.Column="0" HorizontalAlignment="Left" Margin="238,0,0,49" VerticalAlignment="Bottom" Height="34" Width="158" FontSize="20" FontWeight="Bold"/>
-        <TextBox x:Name="seat" HorizontalAlignment="Left" Height="21" Margin="400,345,0,53" Text="{Binding seat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+
+
+        <Label Content="Name of driver :" Grid.Column="0" HorizontalAlignment="Left" Margin="219,306,0,264" VerticalAlignment="Center" Height="40" Width="176" FontSize="15" FontWeight="Bold"/>
+        <TextBox x:Name="Driver" HorizontalAlignment="Left" Height="21" Margin="400,306,0,283" Text="{Binding drivername, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" TextChanged="Driver_TextChanged"/>
+
+
+
+
+        <Button Content="OK" HorizontalAlignment="Left" Height="25" Margin="354,559,0,0" VerticalAlignment="Top" Width="70" Click="Button_Click" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Seat :" Grid.Column="0" HorizontalAlignment="Left" Margin="222,0,0,320" VerticalAlignment="Bottom" Height="34" Width="126" FontSize="15" FontWeight="Bold"/>
+        <TextBox x:Name="seat" HorizontalAlignment="Left" Height="21" Margin="400,263,0,326" Text="{Binding seat, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
 
 
     </Grid>

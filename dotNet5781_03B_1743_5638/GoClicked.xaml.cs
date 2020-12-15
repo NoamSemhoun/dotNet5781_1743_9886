@@ -44,9 +44,9 @@ namespace dotNet5781_03B_1743_5638
                         MessageBox.Show("Impossible ! Not enough fuel ! you need Gasoil before !");
                         flag = false;
                     }
-                    else if (temp.Km_remaining < distance) // the distance is too much => need maintenance
+                    else if (temp.KmAfterLastMaintenance+distance>=20000) // the distance is too much => need maintenance
                     {
-                        MessageBox.Show("Impossible ! Your Kilometrages will be over 2 000 km ! You need Maintenance before this trip !");
+                        MessageBox.Show("Impossible ! Your Kilometrages will be over 20.000 km ! You need Maintenance before this trip !");
                         flag = false;
                     }
                     else

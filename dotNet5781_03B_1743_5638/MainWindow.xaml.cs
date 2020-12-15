@@ -39,21 +39,21 @@ namespace dotNet5781_03B_1743_5638
             Lvbus.DataContext = ListBuses;
 
         }
-        private void init()
+        private void init()//If you get the first bus with a READY status,close the window et redebug the program please
         {
             for (int i = 0; i < 10; i++)
             {
-                ListBuses.Add(new Bus());
+                ListBuses.Add(new Bus());//
             }
-            ListBuses[1].Fuel = 1;  // a lot of gas  need refuel
-            ListBuses[2].KmTotal = 4000; // To see that he need maintenance
-            ListBuses[2].Km_remaining = 5;  // 2000 need Tipoul
-            ListBuses[0].DateOfMaintenance = ListBuses[0].DateOfMaintenance.AddYears(-1); // need tipoul too
-
-
-
+            ListBuses[0].DateOfMaintenance = DateTime.Parse(ListBuses[0].DateStart.ToString());
+            ListBuses[0].DateOfMaintenance = ListBuses[0].DateOfMaintenance.AddYears(1);//This will be the bus with a overdued DateCheckup (you have 1/80 chance to get a bad date for the example,if its the case redebug it
+            ListBuses[1].DateOfMaintenance = DateTime.Now.AddMonths(-8);//This will be the bus with a kilometrages close to a maintenance
+            ListBuses[1].KmAfterLastMaintenance = 19995;
+            ListBuses[1].KmTotal += ListBuses[1].KmAfterLastMaintenance;
+            ListBuses[2].Fuel = 3;//This will be the bus with not much gasoil
             for (int a = 0; a < 10; a++)
             {
+                ListBuses[a].setKmRemaining();
                 ListBuses[a].checkStatus();
             }
 
@@ -157,10 +157,11 @@ namespace dotNet5781_03B_1743_5638
                 var mine = (Bus)e.Result;
 
                 float distance = float.Parse( window.Distance.Text);
-                mine.Km_remaining -= distance;
+                mine.KmAfterLastMaintenance += distance;
                 mine.KmTotal += distance;
                 mine.Fuel -= distance;
                 mine.returnStatus = "READY";
+                mine.setKmRemaining();
                 mine.checkStatus();
                 Lvbus.Items.Refresh();
 
@@ -271,7 +272,7 @@ namespace dotNet5781_03B_1743_5638
             if (e.Error == null)//If all's good so we make the maintenance
             {
                 item.DateOfMaintenance = DateTime.Now;
-                item.Km_remaining = 2000;
+                item.setKmRemaining();
                 item.Fuel = 1200;
                 Lvbus.Items.Refresh();
             }

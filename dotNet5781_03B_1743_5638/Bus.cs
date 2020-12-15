@@ -27,7 +27,7 @@ namespace dotNet5781_03B_1743_5638
 
         public double KmTotal { get; set; } // Kilometrage total
         public string NameDriver = "Mr Vizen Arie"; // default
-        public float speed = 40; // default speed
+        public float speed; // default speed
         public int seat { get; set; } // in a bus
 
         public Status Status { get; set; } // enum
@@ -37,6 +37,7 @@ namespace dotNet5781_03B_1743_5638
         public double Km_remaining { get; set; }   // before the next maintenance 
                                                    // maintenance must be done every year or every 2000km
 
+        private float kmAfterlastMaintenance;
 
         private int percent = 100;//For the progressbar Value
 
@@ -49,7 +50,7 @@ namespace dotNet5781_03B_1743_5638
 
         #region Ctor BUS :
 
-
+        public float KmAfterLastMaintenance { get => kmAfterlastMaintenance; set => kmAfterlastMaintenance = value; }
         public Bus()   // ctor for the initialisation randomalit , Of 10 New buses :
         {
             DateStart = new DateTime(random.Next(1995, 2021), random.Next(1,13), random.Next(1,28) ); //The compagny has existed since 1995
@@ -62,27 +63,39 @@ namespace dotNet5781_03B_1743_5638
 
             Fuel = 1200;
             Status = Status.READY;  // aaa
-            KmTotal = random.Next(1000); // 1 to 1000 km au compteur
+            KmTotal = random.Next(0,2000); // 1 to 1000 km au compteur
             DateOfMaintenance = DateTime.Now;  // it's a new bus
-            Km_remaining = 2000 ;   // Maintenance = every 2000 km  or  every year
+            if (kmAfterlastMaintenance <= 20000)
+            {
+                Km_remaining = 20000 - kmAfterlastMaintenance;   // Maintenance = every 2000 km  or  every year
+            }
+            else
+                Km_remaining = 0;
             seat = 50;
+            speed = random.Next(20, 51);
+            KmAfterLastMaintenance = 0;
         }
 
-        public Bus(DateTime date, int mylicense, double myFuel, Status mystatus, string drivername, int myKmTotal, int myseat)
+        public Bus(DateTime date, int mylicense, double myFuel, string drivername, int myKmTotal,float kmAfterLastMaintenance,DateTime lastCheckupDate, int myseat)
         {
-            // RAJOUTER : frequentation bus,
+           
             DateStart = date;
             License = mylicense.ToString(); 
             if (mylicense > 10000000 && DateStart.Year < 2018 || mylicense < 10000000 && DateStart.Year > 2018)
             {
                throw new Exception("Incorrect Liscense format (year - digits)");
             }
-
-            DateOfMaintenance = DateTime.Now;  // all buses are undergoing maintenance before they are put into service,  => .Now
+            KmAfterLastMaintenance = kmAfterLastMaintenance;
+            DateOfMaintenance = lastCheckupDate; // all buses are undergoing maintenance before they are put into service,  => .Now
             KmTotal = myKmTotal; // New Bus
-            Km_remaining = 2000 - (myKmTotal % 2000) ; // if Km total = 3500, km remaining BEFORE next maintenance = 500
+            if (kmAfterlastMaintenance <= 20000)
+            {
+                Km_remaining = 20000 - kmAfterlastMaintenance;   // Maintenance = every 2000 km  or  every year
+            }
+            else
+                Km_remaining = 0; // if Km total = 3500, km remaining BEFORE next maintenance = 500
             Fuel = myFuel;
-            Status = mystatus; // GEREEEEE     KM  MAINTENANCE ETCC ////////////------------
+             // GEREEEEE     KM  MAINTENANCE ETCC ////////////------------
             seat = myseat;
             NameDriver = drivername;
             speed = random.Next(20, 51);
@@ -131,9 +144,20 @@ namespace dotNet5781_03B_1743_5638
             }
 
         }
+    public void setKmRemaining()
+        {
+            if (kmAfterlastMaintenance <= 20000)
+            {
+                Km_remaining = 20000 - KmAfterLastMaintenance;
+            }
+            else
+                Km_remaining = 0;
+        }
+
+
         public void checkStatus()
         {
-            if ((DateTime.Compare(DateOfMaintenance.Date, DateTime.Now.AddYears(-1))) < 0 || Km_remaining == 0)
+            if ((DateTime.Compare(DateOfMaintenance.Date, DateTime.Now.AddYears(-1))) < 0 || kmAfterlastMaintenance>20000)
             {
                 returnStatus = "NEED_MAINTENANCE";
                 Percent = 0;

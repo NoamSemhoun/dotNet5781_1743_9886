@@ -20,6 +20,8 @@ namespace dotNet5781_03B_1743_5638
     public partial class WindowAdd : Window
     {
         private Bus myNewBus;
+        bool OldBus;
+        bool changed = false;
         public WindowAdd()
         {
             InitializeComponent();
@@ -41,25 +43,25 @@ namespace dotNet5781_03B_1743_5638
                 bool result = DateTime.TryParse(dateStartDatePicker.Text, out DateTime date);
                 if (result == false)
                 {
-                    throw new Exception("invalid Star tDate string format");
+                    throw new Exception("invalid StartDate string format");
                 }
                 bool result1 = int.TryParse(busNumber.Text, out int liscence);
                 if (result1 == false)
                 {
-                    throw new Exception("invalid liscence format");
+                    throw new Exception("invalid license format");
                 }
-                bool result2 = int.TryParse(kmTotal.Text, out int Km);
-                if (result2 == false)
+                if (changed == false)
                 {
-                    throw new Exception("invalid Kilometre input ");
+                    throw new Exception("You have to precise if the bus is new or not !");
+                }
+             if(OldBus==true&&(kmTotal.Text.Length==0||KmAfterLastMaintenance.Text.Length==0))
+                    {
+                    throw new Exception("You have to type all the data of your old bus !");
                 }
                 double myfuel = FUEL.Value;
-                if (myfuel < 8 && (statusComboBox.Text != "NEED_REFUEL"))
-                {
-                    throw new Exception("invalid Status,\n you have a lot of gasoil so you NEED REFUEL ");
-                }
+                
 
-                Status mystatus = (Status)Enum.Parse(typeof(Status), statusComboBox.Text);
+
                 //bool result3 = Status.TryParse(statusComboBox.Text, out Status mystatus);  
 
                 bool result4 = int.TryParse(seat.Text, out int myseat);
@@ -69,25 +71,31 @@ namespace dotNet5781_03B_1743_5638
                 }
 
                 /*this.dateStartDatePicker.DisplayDate*/
+                if (OldBus == true)
+                {
+                    myNewBus = new Bus(date, liscence, myfuel, Driver.Text,int.Parse(kmTotal.Text),float.Parse(KmAfterLastMaintenance.Text),DateTime.Parse(LastCheckupD.Text),myseat);
+                    MainWindow.ListBuses.Add(myNewBus);
+          
+                    myNewBus.checkStatus();
+                    this.Close();
+                    MessageBox.Show("Bus added successfully !");
+                }
+                else
+                {
+                    myNewBus = new Bus(date, liscence, myfuel, Driver.Text, 0, 0, DateTime.Now, myseat);
+                    MainWindow.ListBuses.Add(myNewBus);
 
-                myNewBus = new Bus(date, liscence, myfuel, mystatus, Driver.Text, Km, myseat);
-                MainWindow.ListBuses.Add(myNewBus);
-
-                myNewBus.checkStatus();
-                this.Close();
-                MessageBox.Show("Bus added successfully !");
+                    myNewBus.checkStatus();
+                    this.Close();
+                    MessageBox.Show("Bus added successfully !");
+                }
+              
 
             }
             catch (Exception s)
             {
                 MessageBox.Show(s.Message);
             }
-        }
-
-
-        private void statusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void Driver_TextChanged(object sender, TextChangedEventArgs e)
@@ -108,6 +116,26 @@ namespace dotNet5781_03B_1743_5638
 
         }
 
+        private void Old_Checked(object sender, RoutedEventArgs e)
+        {
+            KmAfterLastMaintenance.IsReadOnly = false;
+            kmTotal.IsReadOnly = false;
+            KmAfterLastMaintenance.Visibility = Visibility.Visible;
+            kmTotal.Visibility = Visibility.Visible;
+            LastCheckupD.Visibility = Visibility.Visible;
+            OldBus = true;
+            changed = true;
+        }
 
+        private void New_Checked(object sender, RoutedEventArgs e)
+        {
+            LastCheckupD.Visibility = Visibility.Hidden;
+            OldBus = false;
+            KmAfterLastMaintenance.IsReadOnly = true;
+            KmAfterLastMaintenance.Visibility = Visibility.Hidden;
+            kmTotal.IsReadOnly = true;
+            kmTotal.Visibility = Visibility.Hidden;
+            changed = true;
+        }
     }
 }
