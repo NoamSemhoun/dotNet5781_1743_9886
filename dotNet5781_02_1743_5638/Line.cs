@@ -10,19 +10,18 @@ using System.Runtime.Remoting.Services;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace dotNet5781_02_1743_5638
 {
-    enum Area { General, North, South, Center, Jerusalem }
-    class Line : IEnumerable
+    public enum Area { General, North, South, Center, Jerusalem }
+    public class Line : IEnumerable
     {
 
         private int busLineNumber;
         public StationLine firstStation;
         public StationLine lastStation;
-        private Area area;
+        public Area area;
         public List<StationLine> listStations;
-
+        private static Random r = new Random();
         private static int sampleShelterNumber = 100000;    // code at 6 number
         private static int sampleLineNumber = 0;
         #region Constructors
@@ -47,7 +46,7 @@ namespace dotNet5781_02_1743_5638
                 }
             }
             busLineNumber = sampleLineNumber++;
-            area = Area.Jerusalem;
+            area = (Area)r.Next(0, 5);
             firstStation = listStations.First();
             lastStation = listStations.Last();
         }
@@ -81,7 +80,7 @@ namespace dotNet5781_02_1743_5638
             if (!ok2) { throw new ExceptionTarguil2("Enter a number only !"); }
 
             StationLine First = new StationLine(first);
-            TimeSpan timeoftheFirst = new TimeSpan(0, 0, 0);//Obviously the firstStation have zero value to it Distance from last stop and same thing for the time
+            TimeSpan timeoftheFirst = new TimeSpan(0, 0, 0);
             First.Temps = (timeoftheFirst);
             First.Distance = 0;
             listStations.Add(First);
@@ -106,12 +105,10 @@ namespace dotNet5781_02_1743_5638
             bool ok = int.TryParse(Console.ReadLine(), out int first);
             if (!ok) { throw new ExceptionTarguil2("Enter a number only !"); }
             firstStation = new StationLine(first);
-            firstStation.Distance = 0;
-            TimeSpan Premier = new TimeSpan(0, 0, 0);
-            firstStation.Temps = Premier;
             listStations.Add(firstStation);
 
-     
+            TimeSpan Premier = new TimeSpan(0, 0, 0);
+            firstStation.Temps = Premier;
             Console.WriteLine("Enter the shellterNumber of your last station :");
             bool ok2 = int.TryParse(Console.ReadLine(), out int last);
             if (!ok2) { throw new ExceptionTarguil2("Enter a number only !"); }
@@ -124,7 +121,7 @@ namespace dotNet5781_02_1743_5638
         public bool IsNumberStationExists(int numStation) =>
            listStations.Exists(station => station.ShelterNumber == numStation);
 
-        public void addStation()//This function add station beetwween the first and the last Stations ,one after the other and if we want a special order so we type it
+        public void addStation()//This function add station beetwween the first and the last Stations ,one after the other or not  
         {
             Console.WriteLine("Enter the number of the station to add :");
             bool ok = int.TryParse(Console.ReadLine(), out int number);
@@ -166,6 +163,10 @@ namespace dotNet5781_02_1743_5638
         {
             return (int)area;
         }
+        public Area GetArea()
+        {
+            return area;
+        }
         public void deleteStation() //Same as adding function
         {
             Console.WriteLine("Enter the number of the station to delete :");
@@ -184,20 +185,19 @@ namespace dotNet5781_02_1743_5638
 
         public TimeSpan TimeBetween(StationLine s1, StationLine s2)//Function take 2 Stations and return a TimeSpan value that corresponds on the time elapsed between
         {
-            TimeSpan Timer = new TimeSpan(0, 0, 0);
             if (IsNumberStationExists(s1.ShelterNumber) && IsNumberStationExists(s2.ShelterNumber))
             {
-         
+                TimeSpan Timer = new TimeSpan(0, 0, 0);
                 int begin = listStations.FindIndex(station => station.ShelterNumber == s1.ShelterNumber);
                 int end = listStations.FindIndex(station => station.ShelterNumber == s2.ShelterNumber);
                 for (; begin < end + 1; begin++)
                 {
                     Timer += listStations[begin].Temps;
                 }
-               
+                return Timer;
             }
-            return Timer;
-           
+            else
+                throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
         }
         public double DistanceBetween(StationLine s1, StationLine s2)//Function take 2 stations and return the distance bewteen them 
         {
@@ -214,7 +214,7 @@ namespace dotNet5781_02_1743_5638
 
             }
             else
-                throw new ExceptionTarguil2("One of your station in input doesn't exists !");
+                throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
 
         }
 
@@ -232,7 +232,7 @@ namespace dotNet5781_02_1743_5638
                 return l1;
             }
             else
-                throw new ExceptionTarguil2("One of your station in input doesn't exists !");
+                throw new ExceptionTarguil2("One of your staton in input doesn't exists !");
         }
 
         public int CompareTo(object obj, StationLine Start, StationLine Stop)//This function compare the time elapsed in 2 station ,between 2 Line 
@@ -273,5 +273,4 @@ namespace dotNet5781_02_1743_5638
         #endregion
     }
 }
-
 
