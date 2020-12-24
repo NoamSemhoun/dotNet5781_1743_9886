@@ -43,6 +43,8 @@ namespace DS
                 }
             };
 
+            List_BusesOnTrip = new List<BusOnTrip>();
+
 
         }
     }

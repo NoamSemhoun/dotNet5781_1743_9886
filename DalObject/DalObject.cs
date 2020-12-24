@@ -13,9 +13,13 @@ namespace DL
 
 
 
-    /*public*/ class DalObject : IDAL
+    public class DalObject : IDAL
     {
 
+        //public int check()
+        //{
+        //    return DataSource.List_BusesOnTrip.Count();
+        //}
 
 
         #region Bus
@@ -55,10 +59,7 @@ namespace DL
             return bus.Clone();
         }
 
-        //public int check()
-        //{
-        //    return DataSource.List_Buses.Count();
-        //}
+       
 
         public void UpdateBus(Bus bus)
         {
@@ -81,32 +82,45 @@ namespace DL
 
         public void AddBusOnTrip(BusOnTrip busOnTrip)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == busOnTrip.Id) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
+            DataSource.List_BusesOnTrip.Add(busOnTrip.Clone());
         }
 
         public void DeleteBusOnTrip(int id)
         {
-            throw new NotImplementedException();
+            DataSource.List_BusesOnTrip.RemoveAll(b => b.Id == id);
         }
 
         public IEnumerable<BusOnTrip> GetAllBusesOnTrip()
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_BusesOnTrip
+                   select item.Clone();
         }
 
         public IEnumerable<BusOnTrip> GetAllBusesOnTripBy(Predicate<BusOnTrip> predicate)
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_BusesOnTrip
+                   where predicate(item)
+                   select item.Clone();
         }
 
         public BusOnTrip GetBusOnTrip(int id)
         {
-            throw new NotImplementedException();
+            BusOnTrip busOnTrip = DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == id);
+            if (busOnTrip == null)
+                throw new Exception();
+            return busOnTrip.Clone();
         }
 
         public void UpdateBusOnTrip(BusOnTrip busOnTrip)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == busOnTrip.Id) == null)
+                throw new Exception(); //////////////
+            DataSource.List_BusesOnTrip.RemoveAll(b => b.Id == busOnTrip.Id);
+            DataSource.List_BusesOnTrip.Add(busOnTrip.Clone());
         }
 
         public void UpdateBusOnTrip(int id, Action<BusOnTrip> update)
