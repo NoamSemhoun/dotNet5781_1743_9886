@@ -6,10 +6,10 @@ namespace DO
 {
     public class Bus
     {
-        public int LicenseNum;
-        public DateTime FromDate;
-        public double TotalTrip;
-        public double FuelRemain;
-        public BusStatus Status;
+        public int LicenseNum { get; set; }
+        public DateTime FromDate { get; set; }
+        public double TotalTrip { get; set; }
+        public double FuelRemain { get; set; }
+        public BusStatus Status { get; set; }
     }
 }

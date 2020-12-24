@@ -2,7 +2,7 @@
 using System.Reflection;
 //using DO;
 
-namespace DalObject
+namespace DL
 {
     static class Cloning
     {

@@ -6,9 +6,9 @@ namespace DO
 {
     public class Station
     {
-        public int Code;
-        public string Name;
-        public int Longitude;
-        public int Latitude;
+        public int Code { get; set; }
+        public string Name { get; set; }
+        public int Longitude { get; set; }
+        public int Latitude { get; set; }
     }
 }

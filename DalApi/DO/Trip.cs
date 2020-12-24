@@ -6,12 +6,12 @@ namespace DO
 {
     public class Trip
     {
-        public int Id;
-        public string UserName;
-        public int Lined;
-        public int InStation;
-        public TimeSpan InAt;
-        public int OutStation;
-        public TimeSpan OutAt;
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public int Lined { get; set; }
+        public int InStation { get; set; }
+        public TimeSpan InAt { get; set; }
+        public int OutStation { get; set; }
+        public TimeSpan OutAt { get; set; }
     }
 }

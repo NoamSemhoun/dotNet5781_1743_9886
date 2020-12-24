@@ -7,10 +7,16 @@ using DalApi;
 using DO;
 using DS;
 
-namespace DalObject
+
+namespace DL
 {
-    class DalObject : IDAL
+
+
+
+    /*public*/ class DalObject : IDAL
     {
+
+
 
         #region Bus
 
@@ -43,8 +49,16 @@ namespace DalObject
 
         public Bus GetBus(int licenseNum)
         {
-            return DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum).Clone();
+            Bus bus = DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum);
+            if (bus == null)
+                throw new Exception();
+            return bus.Clone();
         }
+
+        //public int check()
+        //{
+        //    return DataSource.List_Buses.Count();
+        //}
 
         public void UpdateBus(Bus bus)
         {

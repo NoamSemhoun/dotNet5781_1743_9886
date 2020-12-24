@@ -6,7 +6,7 @@ namespace DO
 {
     class UserTrips  // Bonus
     {
-        public string UserName;
+        public string UserName { get; set; }
 
     }
 }

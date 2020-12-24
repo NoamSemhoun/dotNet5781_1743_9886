@@ -6,10 +6,10 @@ namespace DO
 {
     public class LineTrip
     {
-        public int Id;
-        public int lineId;
-        public TimeSpan StartAt;
-        public TimeSpan Frequency;
-        public TimeSpan FinishAt;
+        public int Id { get; set; }
+        public int lineId { get; set; }
+        public TimeSpan StartAt { get; set; }
+        public TimeSpan Frequency { get; set; }
+        public TimeSpan FinishAt { get; set; }
     }
 }
