@@ -21,7 +21,7 @@ namespace dotNet5781_03B_1743_5638
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+     public partial class MainWindow : Window
     {
         private static Random rand = new Random();
         public static List<Bus> ListBuses = new List<Bus>(); // protected ? for windows heritage
