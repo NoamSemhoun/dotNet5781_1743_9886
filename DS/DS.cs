@@ -12,15 +12,15 @@ namespace DS
         //Random r = new Random()
 
         #region collections
-        public static List<Bus> Buses;
-        public static List<AdjacentStation> AdjacentStations;
-        public static List<BusOnTrip> BusesOnTrip;
-        public static List<Line> Lines;
-        public static List<LineStation> LineStations;
-        public static List<LineTrip> LineTrips;
-        public static List<Station> Stations;
-        public static List<Trip> Trips;
-        public static List<User> Users;
+        public static List<Bus> List_Buses;
+        public static List<AdjacentStation> List_AdjacentStations;
+        public static List<BusOnTrip> List_BusesOnTrip;
+        public static List<Line> List_Lines;
+        public static List<LineStation> List_LineStations;
+        public static List<LineTrip> List_LineTrips;
+        public static List<Station> List_Stations;
+        public static List<Trip> List_Trips;
+        public static List<User> List_Users;
         #endregion
 
 
@@ -30,7 +30,7 @@ namespace DS
         }
         static void InitAllLists()
         {
-            Buses = new List<Bus>
+            List_Buses = new List<Bus>
             {
                 new Bus
                 {
