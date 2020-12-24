@@ -7,7 +7,7 @@ using DO;
 
 namespace DS
 {
-    public class DS
+    public class DataSource
     {
         //Random r = new Random()
 
