@@ -5,7 +5,7 @@ using DO;
 
 namespace DalApi
 {
-    public interface IDAL
+     public interface IDAL
     {
         //object this[Type type, object obj];
 

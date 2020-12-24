@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dotNet5781_02_1743_5638
 {
-    public class Station           
+    public class Station            
     {
 
         protected int shelterNumber;
