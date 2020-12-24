@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DO\UserTrips.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="DO\AdjacentStation.cs" />
     <Compile Include="DO\Bus.cs" />
