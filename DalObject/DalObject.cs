@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 using DO;
+using DS;
 
 namespace DalObject
 {
@@ -15,32 +16,42 @@ namespace DalObject
 
         public void AddBus(Bus bus)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == bus.LicenseNum) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
+            DataSource.List_Buses.Add(bus.Clone());
         }
 
         public void DeleteBus(int licenseNum)
         {
-            throw new NotImplementedException();
+            DataSource.List_Buses.RemoveAll(b => b.LicenseNum == licenseNum);            
         }
 
         public IEnumerable<Bus> GetAllBus()
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_Buses
+                    select item.Clone();
         }
 
         public IEnumerable<Bus> GetAllBusBy(Predicate<Bus> predicate)
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_Buses
+                   where predicate(item)
+                   select item.Clone();
         }
 
         public Bus GetBus(int licenseNum)
         {
-            throw new NotImplementedException();
+            return DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum).Clone();
         }
 
         public void UpdateBus(Bus bus)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == bus.LicenseNum) == null)
+                throw new Exception(); //////////////
+            DataSource.List_Buses.RemoveAll(b => b.LicenseNum == bus.LicenseNum);
+            DataSource.List_Buses.Add(bus.Clone());
         }
 
         public void UpdateBus(int licenseNum, Action<Bus> update)
@@ -326,45 +337,6 @@ namespace DalObject
 
 
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
