@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNet5781_03B_1743_5638", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TARGILIM", "TARGILIM", "{69CC7603-20D4-4D5B-9BF0-E4CFC7E02CC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlCon", "PlCon\PlCon.csproj", "{7BD05BCB-A5A4-4D61-86E6-8E56B50BE4EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlCon", "PlCon\PlCon.csproj", "{7BD05BCB-A5A4-4D61-86E6-8E56B50BE4EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{C9BCA807-7963-4D57-A23A-F10E3D12FA0A}"
 EndProject
@@ -28,6 +28,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlGui", "PlGui\PlGui.csproj", "{C1A8B9E9-584F-4387-8BAE-58E0E0FE17C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{2A72FE50-770F-45F9-BA33-CCA7C3F341C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{47BCED70-CC6C-46F2-9384-2D429F2BBAD4}"
+	ProjectSection(SolutionItems) = preProject
+		bin\config.xml = bin\config.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
