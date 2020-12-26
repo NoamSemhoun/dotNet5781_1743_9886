@@ -403,34 +403,48 @@ namespace DL
 
         public void AddAdjacentStation(AdjacentStation adjacentStation)
         {
-            throw new NotImplementedException();
+
+            if (DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
+            DataSource.List_AdjacentStations.Add(adjacentStation.Clone());
         }
 
-        public void DeleteAdjacentStation(int id)
+        public void DeleteAdjacentStation(int station1, int station2)
         {
-            throw new NotImplementedException();
+            DataSource.List_AdjacentStations.RemoveAll(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
         }
 
         public AdjacentStation GetAdjacentStation(int station1, int station2)
         {
-            throw new NotImplementedException();
+            AdjacentStation adjacentStation = DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
+            if (adjacentStation == null)
+                throw new Exception();
+            return adjacentStation.Clone();
         }
 
         public IEnumerable<AdjacentStation> GetAllAdjacentStations()
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_AdjacentStations
+                   select item.Clone();
         }
 
 
         public IEnumerable<AdjacentStation> GetAllAdjacentStationsBy(Predicate<AdjacentStation> predicate)
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_AdjacentStations
+                   where predicate(item)
+                   select item.Clone();
         }
 
 
         public void UpdateAdjacentStation(AdjacentStation adjacentStation)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2) == null)
+                throw new Exception(); //////////////
+            DataSource.List_AdjacentStations.RemoveAll(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2);
+            DataSource.List_AdjacentStations.Add(adjacentStation.Clone());
         }
 
 
