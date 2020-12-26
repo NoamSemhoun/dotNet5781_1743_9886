@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{C9BC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalApi", "DalApi\DalApi.csproj", "{E4A02426-D47A-4749-BA9E-2BF451A9A8D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalObject", "DalObject\DalObject.csproj", "{65BE3EF4-B898-4937-A6F9-1C94701BAE27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLObject", "DalObject\DLObject.csproj", "{65BE3EF4-B898-4937-A6F9-1C94701BAE27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS", "DS\DS.csproj", "{4AFB087D-864D-4433-862A-4476C3E020D6}"
 EndProject
@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		bin\config.xml = bin\config.xml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Console\Console.csproj", "{EBE28A28-33CE-4ED3-B21E-63B92655A246}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,10 @@ Global
 		{2A72FE50-770F-45F9-BA33-CCA7C3F341C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A72FE50-770F-45F9-BA33-CCA7C3F341C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A72FE50-770F-45F9-BA33-CCA7C3F341C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE28A28-33CE-4ED3-B21E-63B92655A246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE28A28-33CE-4ED3-B21E-63B92655A246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE28A28-33CE-4ED3-B21E-63B92655A246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE28A28-33CE-4ED3-B21E-63B92655A246}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

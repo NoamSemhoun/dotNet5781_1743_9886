@@ -10,7 +10,7 @@ using DS;
 
 namespace DL
 {
-
+                                                                                                                                   
 
 
     public class DalObject : IDAL
@@ -20,7 +20,12 @@ namespace DL
         //{
         //    return DataSource.List_BusesOnTrip.Count();
         //}
-
+        #region singlton
+        static readonly DalObject instance = new DalObject();
+        static DalObject() { }// static ctor to ensure instance init is done just before first usage
+        DalObject() { } // default => private
+        public static DalObject Instance { get => instance; }// The public Instance property to use  
+#endregion
 
         #region Bus
 
@@ -135,33 +140,46 @@ namespace DL
 
         public void AddLine(Line line)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_Lines.FirstOrDefault(l => l.Id == line.Id) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
+            DataSource.List_Lines.Add(line.Clone());
         }
 
         public void DeleteLine(int id)
         {
-            throw new NotImplementedException();
+            DataSource.List_Lines.RemoveAll(l => l.Id == id);
         }
 
         public IEnumerable<Line> GetAllLines()
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_Lines
+                   select item.Clone();
         }
 
         public IEnumerable<Line> GetAllLinesBy(Predicate<Line> predicate)
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_Lines
+                   where predicate(item)
+                   select item.Clone();
         }
 
         public Line GetLine(int id)
         {
-            throw new NotImplementedException();
+            Line line = DataSource.List_Lines.FirstOrDefault(l => l.Id == id);
+            if (line == null)
+                throw new Exception();
+            return line.Clone();
         }
 
 
         public void UpdateLine(Line line)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_Lines.FirstOrDefault(l => l.Id == line.Id) == null)
+                throw new Exception(); //////////////
+            DataSource.List_Lines.RemoveAll(l => l.Id == line.Id);
+            DataSource.List_Lines.Add(line.Clone());
         }
 
         public void UpdateLine(int id, Action<Line> update)
