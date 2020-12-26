@@ -348,35 +348,48 @@ namespace DL
 
         public void AddTrip(Trip trip)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
+            DataSource.List_Trips.Add(trip.Clone());
         }
 
 
         public void DeleteTrip(int id)
         {
-            throw new NotImplementedException();
+            DataSource.List_Trips.RemoveAll(t => t.Id == id);
         }
 
 
         public IEnumerable<Trip> GetAllTrips()
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_Trips
+                   select item.Clone();
         }
 
         public IEnumerable<Trip> GetAllTripsBy(Predicate<Trip> predicate)
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_Trips
+                   where predicate(item)
+                   select item.Clone();
         }
 
 
         public Trip GetTrip(int id)
         {
-            throw new NotImplementedException();
+            Trip trip = DataSource.List_Trips.FirstOrDefault(t => t.Id == id);
+            if (trip == null)
+                throw new Exception();
+            return trip.Clone();
         }
 
         public void UpdateTrip(Trip trip)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) == null)
+                throw new Exception(); //////////////
+            DataSource.List_Trips.RemoveAll(t => t.Id == trip.Id);
+            DataSource.List_Trips.Add(trip.Clone());
         }
 
 
