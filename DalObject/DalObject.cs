@@ -195,27 +195,37 @@ namespace DL
 
         public void AddLineStation(LineStation lineStation)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineId == lineStation.LineId) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
+            DataSource.List_LineStations.Add(lineStation.Clone());
         }
 
         public void DeleteLineStation(int lineId, int stationId)
         {
-            throw new NotImplementedException();
+            DataSource.List_LineStations.RemoveAll(l => l.Code == stationId && l.LineId == lineId);
         }
 
         public IEnumerable<LineStation> GetAllLineStations()
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_LineStations
+                   select item.Clone();
         }
 
         public IEnumerable<LineStation> GetAllLineStationsBy(Predicate<LineStation> predicate)
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_LineStations
+                   where predicate(item)
+                   select item.Clone();
         }
 
         public LineStation GetLineStation(int lineId, int stationId)
         {
-            throw new NotImplementedException();
+            LineStation lineStation = DataSource.List_LineStations.FirstOrDefault(l => l.Code == stationId && l.LineId == lineId);
+            if (lineStation == null)
+                throw new Exception();
+            return lineStation.Clone();
         }
 
         public void UpdateLineStation(LineStation lineStation)
