@@ -230,7 +230,10 @@ namespace DL
 
         public void UpdateLineStation(LineStation lineStation)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineId == lineStation.LineId) == null)
+                throw new Exception(); //////////////
+            DataSource.List_LineStations.RemoveAll(l => l.Code == lineStation.Code && l.LineId == lineStation.LineId);
+            DataSource.List_LineStations.Add(lineStation.Clone());
         }
 
 
@@ -240,33 +243,47 @@ namespace DL
 
         public void AddLineTrip(LineTrip lineTrip)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_LineTrips.FirstOrDefault(l => l.Id == lineTrip.Id) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
+            DataSource.List_LineTrips.Add(lineTrip.Clone());
         }
 
         public void DeleteLineTrip(int id)
         {
-            throw new NotImplementedException();
+            DataSource.List_LineTrips.RemoveAll(l => l.Id == id);
         }
+       
         public IEnumerable<LineTrip> GetAllLineTrips()
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_LineTrips
+                   select item.Clone();
         }
 
         public IEnumerable<LineTrip> GetAllLineTripsBy(Predicate<LineTrip> predicate)
         {
-            throw new NotImplementedException();
+            return from item in DataSource.List_LineTrips
+                   where predicate(item)
+                   select item.Clone();
         }
 
 
         public LineTrip GetLineTrip(int id)
         {
-            throw new NotImplementedException();
+            LineTrip lineTrip = DataSource.List_LineTrips.FirstOrDefault(l => l.Id == id);
+            if (lineTrip == null)
+                throw new Exception();
+            return lineTrip.Clone();
         }
 
 
         public void UpdateLineTrip(LineTrip lineTrip)
         {
-            throw new NotImplementedException();
+            if (DataSource.List_LineTrips.FirstOrDefault(l => l.Id == lineTrip.Id) == null)
+                throw new Exception(); //////////////
+            DataSource.List_LineTrips.RemoveAll(l => l.Id == lineTrip.Id);
+            DataSource.List_LineTrips.Add(lineTrip.Clone());
         }
 
 
