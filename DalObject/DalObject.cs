@@ -410,7 +410,7 @@ namespace DL
 
             DataSource.List_AdjacentStations.Add(adjacentStation.Clone());
         }
-
+        
         public void DeleteAdjacentStation(int station1, int station2)
         {
             DataSource.List_AdjacentStations.RemoveAll(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
