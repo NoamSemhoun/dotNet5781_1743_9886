@@ -10,8 +10,6 @@ namespace DS
 {
     public class DataSource
     {
-        //Random r = new Random()
-
         #region collections
         public static List<Bus> List_Buses;
         public static List<AdjacentStation> List_AdjacentStations;
