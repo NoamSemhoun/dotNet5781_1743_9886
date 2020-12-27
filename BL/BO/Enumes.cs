@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BL
+namespace BO
 {
-    class BLImp
+    class Enumes
     {
+        public enum BusStatus { Available, OnDrive, Intreatment, InRefuling }
+
     }
 }
