@@ -10,7 +10,7 @@ namespace BO
     {
         public int Code { get; set; }
         public TimeSpan Time_ToNext { get; set; }
-        public int Distance_ToNext { get; set; }
+        public double Distance_ToNext { get; set; }
         public int LineId { get; set; }
 
 
