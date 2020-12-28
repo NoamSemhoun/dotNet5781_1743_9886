@@ -93,7 +93,7 @@ namespace BL
             return from item in dal.GetAllLines()
                    select GetLine(item.Id);
         }
-
+        
         public Line GetLine(int id)
         {
             Line line = new Line();
