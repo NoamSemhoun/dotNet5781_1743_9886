@@ -6,11 +6,11 @@ namespace DO
 {
     public class LineStation    // Station in Line Context
     {
-        public int LineId { get; set; }
-        public int Stations { get; set; }
+        public int LineID { get; set; }    
+        public int Code { get; set; }   // Of the Station 
+        public int Num_Stations { get; set; }
         public int LineStationIndex { get; set; }
         public int PrevStation { get; set; }
         public int NextStation { get; set; }
-        public int Code { get; set; }   // Of the Station 
     }
 }

@@ -9,11 +9,11 @@ namespace BO
     public class Bus
     {
         public int LicenseNum { get; set; }
-        public DateTime FromDate { get; set; }
-        public double TotalTrip { get; set; }
-        public double FuelRemain { get; set; }
+        public DateTime StartDate { get; set; }
+        public double Total_Km { get; set; } // Kilometrage
+        public double Fuel { get; set; }  // Remain
         public BusStatus Status { get; set; }
-        public double TripSinceLastService { get; set; }
-        public DateTime LastServiceDate { get; set; }
+        public double Km_LastMaintenance { get; set; }  // Since the last maintenance
+        public DateTime Date_LastMaintenance { get; set; }
     }
 }

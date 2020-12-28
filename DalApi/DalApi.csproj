@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DLConfig.cs" />
-    <Compile Include="DO\UserTrips.cs" />
+    <Compile Include="DO\UserTrip.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="DO\AdjacentStation.cs" />
@@ -53,7 +53,6 @@
     <Compile Include="DO\LineStation.cs" />
     <Compile Include="DO\LineTrip.cs" />
     <Compile Include="DO\Station.cs" />
-    <Compile Include="DO\Trip.cs" />
     <Compile Include="DO\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

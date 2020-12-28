@@ -35,14 +35,14 @@ namespace BL
 
         private void maintenance(DO.Bus b)
         {
-            b.TripSinceLastService = 0;
-            b.FuelRemain = 1200;
-            b.LastServiceDate = DateTime.Now;
+            b.Km_LastMaintenance = 0;
+            b.Fuel = 1200;
+            b.Date_LastMaintenance = DateTime.Now;
         }
 
         public void RefuelBus(int liscenseNumber)
         {
-            dal.UpdateBus(liscenseNumber, b => b.FuelRemain = 1200);
+            dal.UpdateBus(liscenseNumber, b => b.Fuel = 1200);
         }
 
         public void UpdateBus(Bus bus)
@@ -91,7 +91,7 @@ namespace BL
         public IEnumerable<Line> GetAllLines()
         {
             return from item in dal.GetAllLines()
-                   select GetLine(item.Id);
+                   select GetLine(item.LineID);
         }
         
         public Line GetLine(int id)
@@ -100,7 +100,7 @@ namespace BL
 
             DO.Line lineDo = dal.GetLine(id);
             lineDo.Clone(line);
-            List<DO.LineStation> DoLs_list = (List<DO.LineStation>) dal.GetAllLineStationsBy(ls => ls.LineId == id);
+            List<DO.LineStation> DoLs_list = (List<DO.LineStation>) dal.GetAllLineStationsBy(ls => ls.LineID == id);
             var lineStationList = createStationListFromDoObjects(DoLs_list);
             line.List_LineStations = lineStationList;
 
@@ -121,7 +121,7 @@ namespace BL
                 list.Add(new LineStation
                 {
                     Code = lS.Code,
-                    LineId = lS.LineId,
+                    LineId = lS.LineID,
                     LineStationIndex = lS.LineStationIndex,
                     NextStation = lS.NextStation,
                     PrevStation = lS.PrevStation,
