@@ -220,6 +220,14 @@ namespace BL
             throw new NotImplementedException();
         }
 
-      
+        public void UpdateTime(int firstStationCode, int lastStationCode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateDistance(int firstStationCode, int lastStationCode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
