@@ -76,7 +76,7 @@ namespace DL
 
         public void UpdateBus(int licenseNum, Action<Bus> update)
         {
-            throw new NotImplementedException();
+            update( DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum));            
         }
 
 

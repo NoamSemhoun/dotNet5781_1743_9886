@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DalApi;
 using DO;
+using BL;
 
 namespace Console
 {
@@ -12,56 +13,26 @@ namespace Console
     {
         static void Main(string[] args)
         {
-            IDAL dal = DalFactory.GetDal();
+            //BlAPI.IBL bl = new BLImp();
+            //bl.AddBus(new BO.Bus { LicenseNum = 1111111, Status = BO.BusStatus.InRefuling });
 
-            dal.AddLine(new DO.Line { Id = 12 });
+            IDAL dal = DalApi.DalFactory.GetDal();
 
-            System.Console.WriteLine(dal.GetLine(12).Id);
+            dal.AddBus(new Bus{ LicenseNum = 12345678, Status = BusStatus.Intreatment});
 
+            var l = dal.GetAllBus();
 
+            foreach (Bus b in l)
+                System.Console.WriteLine(b.LicenseNum + " " + b.Status);
 
-            dal.AddLine(new Line { Id = 35, Area = Areas.Center });
-            dal.AddLine(new Line { Id = 36, Area = Areas.General });
-            dal.AddLine(new Line { Id = 37, Area = Areas.General });
-            dal.AddLine(new Line { Id = 38, Area = Areas.Center });
-     
+            dal.UpdateBus(12345678, b => b.Status = BusStatus.Available);
 
+            l = dal.GetAllBus();
 
-            Line l1 = dal.GetLine(1);
+            foreach (Bus b in l)
+                System.Console.WriteLine(b.LicenseNum + " " + b.Status);
 
-            System.Console.WriteLine(l1.Area);
-
-            var l = dal.GetAllLines();
-
-            foreach (Line b2 in l)
-                System.Console.WriteLine(b2.Id);
-
-            dal.DeleteLine(4);
-
-            l = dal.GetAllLines();
-
-            foreach (Line b2 in l)
-                System.Console.WriteLine(b2.Id);
-
-            l = dal.GetAllLinesBy(b2 => b2.Area == Areas.General);
-
-            foreach (Line b2 in l)
-                System.Console.WriteLine(b2.Id);
-
-            dal.UpdateLine(new Line { Id = 3, Area = Areas.South });
-
-            l = dal.GetAllLines();
-            foreach (Line b2 in l)
-                System.Console.WriteLine(b2.Id + " " + b2.Area);
-
-
-
-
-
-
-            System.Console.WriteLine("Hello World!");
-
-            System.Console.Read();
+            System.Console.ReadLine();
         }
     }
 }
