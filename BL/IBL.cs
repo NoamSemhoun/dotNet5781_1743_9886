@@ -25,8 +25,8 @@ namespace BlAPI
 
         IEnumerable<Station> GetAllStations();
         Station GetStation(int code);
-        void UpdateTime(int firstStationCode,int lastStationCode);
-        void UpdateDistance(int firstStationCode, int lastStationCode);
+        void UpdateTime(int firstStationCode,int lastStationCode, TimeSpan time);
+        void UpdateDistance(int firstStationCode, int lastStationCode, double distance);
         void AddStation(Station station);
         void UpdateStation(Station station);
         void DeleteStation(int code);

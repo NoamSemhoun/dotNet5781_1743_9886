@@ -11,7 +11,11 @@ namespace BO
     {
         public int Code { get; set; }
         public string Name { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
 
-        List<Line> List_Lines; // pass through
+        public string Address { get; set; }
+
+        public List<Line> List_Lines; // pass through
     }
 }

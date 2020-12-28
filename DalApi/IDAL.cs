@@ -105,7 +105,7 @@ namespace DalApi
         AdjacentStation GetAdjacentStation(int station1, int station2);
         void AddAdjacentStation(AdjacentStation adjacentStation);
         void UpdateAdjacentStation(AdjacentStation adjacentStation);
-        //void UpdateAdjacentStation(int id, Action<AdjacentStation> update); //method that knows to updt specific fields
+        void UpdateAdjacentStation(int station1, int station2, Action<AdjacentStation> update); //method that knows to updt specific fields
         void DeleteAdjacentStation(int station1, int station2);
 
         #endregion

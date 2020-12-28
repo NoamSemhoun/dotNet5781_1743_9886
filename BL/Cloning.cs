@@ -50,6 +50,17 @@ namespace BL
             }
         }
 
+        public static Station DoObjectsToStation(int code)
+        {
+            DalApi.IDAL dal = DalApi.DalFactory.GetDal();
+            Station station = new Station();
+            dal.GetStation(code).Clone(station);
+            station.List_Lines = (from item in dal.GetAllLineStationsBy(lS => lS.Code == code)
+                                  select (Line)dal.GetLine(item.LineID).CloneNew(typeof(Line))).ToList();
+            return station;
+        }
+
+
 
 
     

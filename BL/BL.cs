@@ -168,6 +168,8 @@ namespace BL
 
         #endregion
 
+        #region station
+
         public void AddStation(Station station)
         {
             DO.Station station1 = new DO.Station();
@@ -181,30 +183,36 @@ namespace BL
             dal.DeleteStation(code);
         }
 
-      
+        public Station GetStation(int code)
+        {
+            return Cloning.DoObjectsToStation(code);
+        }
 
 
 
         public IEnumerable<Station> GetAllStations()
         {
-            throw new NotImplementedException();
+            return from item in dal.GetAllStationes()
+                   select Cloning.DoObjectsToStation(item.Code);
         }
 
+        #endregion
 
-        public Station GetStation(int code)
+
+
+        public void UpdateDistance(int firstStationCode, int lastStationCode, double distance)
         {
-            throw new NotImplementedException();
+            dal.UpdateAdjacentStation(firstStationCode, lastStationCode, aS => aS.Distance = distance);
         }
 
-
-        public void UpdateDistance(int firstStationCode, int lastStationCode)
+        public void UpdateTime(int firstStationCode, int lastStationCode, TimeSpan time)
         {
-            throw new NotImplementedException();
+            dal.UpdateAdjacentStation(firstStationCode, lastStationCode, aS => aS.Time = time);
         }
 
         public void UpdateLine(Line line)
         {
-            throw new NotImplementedException();
+            line
         }
 
         public void UpdateStation(Station station)
@@ -212,9 +220,6 @@ namespace BL
             throw new NotImplementedException();
         }
 
-        public void UpdateTime(int firstStationCode, int lastStationCode)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

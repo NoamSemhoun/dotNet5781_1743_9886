@@ -442,9 +442,16 @@ namespace DL
         public void UpdateAdjacentStation(AdjacentStation adjacentStation)
         {
             if (DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2) == null)
-                throw new Exception(); //////////////
+                throw new Exception(); //////////////**//////////////////////**////////////////////**//////////////////**///////////////
             DataSource.List_AdjacentStations.RemoveAll(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2);
             DataSource.List_AdjacentStations.Add(adjacentStation.Clone());
+        }
+
+        public void UpdateAdjacentStation(int station1, int station2, Action<AdjacentStation> update)
+        {
+            try { update(DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2)); }
+            catch
+            { throw new Exception(); }//********************************//*********************//*************************
         }
 
 
