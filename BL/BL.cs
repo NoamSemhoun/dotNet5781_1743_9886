@@ -150,16 +150,15 @@ namespace BL
 
         public void AddStation(Station station)
         {
-            throw new NotImplementedException();
+            DO.Station station1 = new DO.Station();
+            station.Clone(station1);
+            dal.AddStation(station1); // Is existing ?
         }
 
 
-
- 
-
         public void DeleteStation(int code)
         {
-            throw new NotImplementedException();
+            dal.DeleteStation(code);
         }
 
         public IEnumerable<Bus> GetAllBuses()
