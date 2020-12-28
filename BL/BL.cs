@@ -52,6 +52,21 @@ namespace BL
             dal.UpdateBus(b);
         }
 
+
+        public Bus GetBus(int liscenseNumber)
+        {
+            DO.Bus b = dal.GetBus(liscenseNumber);
+            Bus bus = new Bus();
+            b.Clone(bus);
+            return bus;
+        }
+
+        public IEnumerable<Bus> GetAllBuses()
+        {
+            return from item in  dal.GetAllBus()
+                   select (Bus)item.CloneNew(typeof(Bus));
+        }
+
         #endregion
 
         #region Line
@@ -62,6 +77,8 @@ namespace BL
             dal.AddLine(l);
             saveLineStationList(line.List_LineStations);
         }
+
+
 
         private void saveLineStationList(List<LineStation> list)
         {
@@ -85,7 +102,10 @@ namespace BL
 
         public void DeleteLine(int id)
         {
-            throw new NotImplementedException();
+            dal.DeleteLine(id);
+            IEnumerable<DO.LineStation> tmp = dal.GetAllLineStationsBy(lS => lS.LineID == id);
+            foreach (DO.LineStation lS in tmp)
+                dal.DeleteLineStation(lS.LineID, lS.Code);
         }
 
         public IEnumerable<Line> GetAllLines()
@@ -161,19 +181,11 @@ namespace BL
             dal.DeleteStation(code);
         }
 
-        public IEnumerable<Bus> GetAllBuses()
-        {
-            throw new NotImplementedException();
-        }
+      
 
 
 
         public IEnumerable<Station> GetAllStations()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Bus GetBus(int liscenseNumber)
         {
             throw new NotImplementedException();
         }
