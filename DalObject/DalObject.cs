@@ -13,14 +13,14 @@ namespace DL
                                                                                                                                    
 
 
-    public class DalObject : IDAL
+    public class DalObject : IDAL             // CRUD Function
     {
 
         //public int check()
         //{
         //    return DataSource.List_BusesOnTrip.Count();
         //}
-        #region singlton
+        #region singleton
         static readonly DalObject instance = new DalObject();
         static DalObject() { }// static ctor to ensure instance init is done just before first usage
         DalObject() { } // default => private
@@ -76,7 +76,7 @@ namespace DL
 
         public void UpdateBus(int licenseNum, Action<Bus> update)
         {
-            update( DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum));            
+            throw new NotImplementedException();
         }
 
 
@@ -140,7 +140,7 @@ namespace DL
 
         public void AddLine(Line line)
         {
-            if (DataSource.List_Lines.FirstOrDefault(l => l.Id == line.Id) != null)
+            if (DataSource.List_Lines.FirstOrDefault(l => l.LineID == line.LineID) != null)
                 // adapt to our Exeption
                 throw new Exception();// adapt to our Exeption
 
@@ -149,7 +149,7 @@ namespace DL
 
         public void DeleteLine(int id)
         {
-            DataSource.List_Lines.RemoveAll(l => l.Id == id);
+            DataSource.List_Lines.RemoveAll(l => l.LineID == id);
         }
 
         public IEnumerable<Line> GetAllLines()
@@ -167,7 +167,7 @@ namespace DL
 
         public Line GetLine(int id)
         {
-            Line line = DataSource.List_Lines.FirstOrDefault(l => l.Id == id);
+            Line line = DataSource.List_Lines.FirstOrDefault(l => l.LineID == id);
             if (line == null)
                 throw new Exception();
             return line.Clone();
@@ -176,9 +176,9 @@ namespace DL
 
         public void UpdateLine(Line line)
         {
-            if (DataSource.List_Lines.FirstOrDefault(l => l.Id == line.Id) == null)
+            if (DataSource.List_Lines.FirstOrDefault(l => l.LineID == line.LineID) == null)
                 throw new Exception(); //////////////
-            DataSource.List_Lines.RemoveAll(l => l.Id == line.Id);
+            DataSource.List_Lines.RemoveAll(l => l.LineID == line.LineID);
             DataSource.List_Lines.Add(line.Clone());
         }
 
@@ -195,7 +195,7 @@ namespace DL
 
         public void AddLineStation(LineStation lineStation)
         {
-            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineId == lineStation.LineId) != null)
+            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID) != null)
                 // adapt to our Exeption
                 throw new Exception();// adapt to our Exeption
 
@@ -204,7 +204,7 @@ namespace DL
 
         public void DeleteLineStation(int lineId, int stationId)
         {
-            DataSource.List_LineStations.RemoveAll(l => l.Code == stationId && l.LineId == lineId);
+            DataSource.List_LineStations.RemoveAll(l => l.Code == stationId && l.LineID == lineId);
         }
 
         public IEnumerable<LineStation> GetAllLineStations()
@@ -222,7 +222,7 @@ namespace DL
 
         public LineStation GetLineStation(int lineId, int stationId)
         {
-            LineStation lineStation = DataSource.List_LineStations.FirstOrDefault(l => l.Code == stationId && l.LineId == lineId);
+            LineStation lineStation = DataSource.List_LineStations.FirstOrDefault(l => l.Code == stationId && l.LineID == lineId);
             if (lineStation == null)
                 throw new Exception();
             return lineStation.Clone();
@@ -230,9 +230,9 @@ namespace DL
 
         public void UpdateLineStation(LineStation lineStation)
         {
-            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineId == lineStation.LineId) == null)
+            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID) == null)
                 throw new Exception(); //////////////
-            DataSource.List_LineStations.RemoveAll(l => l.Code == lineStation.Code && l.LineId == lineStation.LineId);
+            DataSource.List_LineStations.RemoveAll(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID);
             DataSource.List_LineStations.Add(lineStation.Clone());
         }
 
@@ -344,9 +344,9 @@ namespace DL
 
         #endregion
 
-        #region Trip
+        #region UserTrip
 
-        public void AddTrip(Trip trip)
+        public void AddTrip(UserTrip trip)
         {
             if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) != null)
                 // adapt to our Exeption
@@ -362,13 +362,13 @@ namespace DL
         }
 
 
-        public IEnumerable<Trip> GetAllTrips()
+        public IEnumerable<UserTrip> GetAllTrips()
         {
             return from item in DataSource.List_Trips
                    select item.Clone();
         }
 
-        public IEnumerable<Trip> GetAllTripsBy(Predicate<Trip> predicate)
+        public IEnumerable<UserTrip> GetAllTripsBy(Predicate<UserTrip> predicate)
         {
             return from item in DataSource.List_Trips
                    where predicate(item)
@@ -376,15 +376,15 @@ namespace DL
         }
 
 
-        public Trip GetTrip(int id)
+        public UserTrip GetTrip(int id)
         {
-            Trip trip = DataSource.List_Trips.FirstOrDefault(t => t.Id == id);
+            UserTrip trip = DataSource.List_Trips.FirstOrDefault(t => t.Id == id);
             if (trip == null)
                 throw new Exception();
             return trip.Clone();
         }
 
-        public void UpdateTrip(Trip trip)
+        public void UpdateTrip(UserTrip trip)
         {
             if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) == null)
                 throw new Exception(); //////////////

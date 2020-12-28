@@ -8,11 +8,11 @@ namespace DO
     {
         public int Id { get; set; }
         public int LicenceNum { get; set; }
-        public int LineId { get; set; }
-        public TimeSpan PlannedTakeOff { get; set; }
-        public TimeSpan ActualTakeOff { get; set; }
+        public int LineID { get; set; }
+        public TimeSpan Depart_Planned { get; set; }
+        public TimeSpan Real_Depart { get; set; }
         public int PrevStation { get; set; }
-        public TimeSpan PrevStationAt { get; set; }
-        public TimeSpan nextStationAt { get; set; }
+        public TimeSpan Timeto_PrevStation { get; set; }
+        public TimeSpan Timeto_NextStation { get; set; }
     }
 }

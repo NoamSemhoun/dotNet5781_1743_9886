@@ -86,13 +86,13 @@ namespace DalApi
 
         #endregion
 
-        #region Trip
+        #region UserTrip
 
-        IEnumerable<Trip> GetAllTrips();
-        IEnumerable<Trip> GetAllTripsBy(Predicate<Trip> predicate);
-        Trip GetTrip(int id);
-        void AddTrip(Trip trip);
-        void UpdateTrip(Trip trip);
+        IEnumerable<UserTrip> GetAllTrips();
+        IEnumerable<UserTrip> GetAllTripsBy(Predicate<UserTrip> predicate);
+        UserTrip GetTrip(int id);
+        void AddTrip(UserTrip trip);
+        void UpdateTrip(UserTrip trip);
         void UpdateTrip(int id, Action<Line> update); //method that knows to updt specific fields
         void DeleteTrip(int id);
 

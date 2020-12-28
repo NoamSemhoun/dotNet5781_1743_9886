@@ -7,9 +7,12 @@ namespace DO
     public class LineTrip
     {
         public int Id { get; set; }
-        public int lineId { get; set; }
+        public int LineID { get; set; }
         public TimeSpan StartAt { get; set; }
-        public TimeSpan Frequency { get; set; }
+        public TimeSpan Frequency { get; set; } 
         public TimeSpan FinishAt { get; set; }
+
+        // bonus : Trafic 
+
     }
 }

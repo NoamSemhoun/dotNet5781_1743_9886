@@ -18,7 +18,7 @@ namespace Console
 
             IDAL dal = DalApi.DalFactory.GetDal();
 
-            dal.AddBus(new Bus{ LicenseNum = 12345678, Status = BusStatus.Intreatment});
+            dal.AddBus(new Bus{ LicenseNum = 12345678, Status = BusStatus.InMaintenance});
 
             var l = dal.GetAllBus();
 
