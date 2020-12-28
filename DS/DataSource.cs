@@ -22,38 +22,39 @@ namespace DS
         public static List<User> List_Users;
         #endregion
 
-       
-        
-
         private static Random random = new Random();
-
+      // FOR TEST :
+        public static List<string> List_Addresses = new List<string> {"12 Chazar", "30 Havaad Heleumi", "21 Begin",
+               "12 Hebron Road","32 Bayt vagan", "51 Herzl" ,"79 Ben Gourion","26 Harav Kook","61 Ben Yeouda"};   // Num between 10-99 only
         static DataSource()
         {
             InitAllLists();
         }
         static void InitAllLists()    // 50 stations ,  10lines with each 10stations,  20Buses  etc... 
-            // Check existing 
+                                                              // Check existing 
         {
+            #region create 10 buses Random :
+            List_Buses = new List<Bus>();
+            for (int i = 0; i < 20; i++)  // Create 20 Buses 
+            {
+                List_Buses.Add(
+                new Bus
+                {
+                    LicenseNum = 10000000 + i,   // 100-00-000 to 100-00-020
+                    StartDate = new DateTime(2021, 01, 01),
+                    Total_Km = random.Next(0, 999),
+                    Fuel = random.Next(0, 1200),
+                    Status = BusStatus.Available
+                });
+
+
+            }
+
+            #endregion
+
+            #region Boot 50 Real Stations  //איתחול תחנות 
+
             List_Stations = new List<Station> {
-                #region Create 50 Stations with Random Location :
-                /* 
-               * public static List<string> List_Addresses = new List<string> {"12 Chazar", "30 Havaad Heleumi", "21 Begin", 
-               * "12 Hebron Road","32 Bayt vagan", "51 Herzl" ,"79 Ben Gourion","26 Harav Kook","61 Ben Yeouda"};   // Num between 10-99 only
-
-              for (int i = 0; i < 50; i++)  // Create 50 Stations with Random Location
-              {
-               List_Stations.Add(
-                  new Station { 
-                  Code= 10000+i,            //  or : random.Next(0,999)    (code existing !)
-                  Longitude = random.NextDouble() * 1.2 + 34.3,       // In ISRAEL :  [34.3, 35.5]
-                  Latitude = random.NextDouble() * 2.3 + 31,          //              [31, 33.3]
-                  Address = List_Addresses[ i % List_Addresses.Count() ],
-                  Name = List_Addresses[i % List_Addresses.Count()].Substring(3) +  "/" + List_Addresses[i % List_Addresses.Count()].Substring(3) //    Begin/Hebron  9=this Adress  (??
-                  });
-              }*/
-                #endregion
-
-                #region Boot 50 Real Stations  //איתחול תחנות 
                 new Station
                 {
                     Code = 73,
@@ -466,33 +467,33 @@ namespace DS
 
             #endregion
 
+            #region Create 50 Stations with Random Location :       
 
-
-            List_Buses = new List<Bus>() ;
-            for (int i = 0; i < 20; i++)  // Create 20 Buses 
+            for (int i = 0; i < 50; i++)  // Create 50 Stations with Random Location
             {
-                List_Buses.Add(
-                new Bus
-                {
-                    LicenseNum = 10000000 + i,   // 10000000 to 10000020
-                    StartDate = new DateTime(2021, 01, 01),
-                    Total_Km = random.Next(0, 999),
-                    Fuel = random.Next(0, 1200),
-                    Status = BusStatus.Available
-                });
+                List_Stations.Add(
+                   new Station
+                   {
+                       Code = 10000 + i,            //  or : random.Next(0,999)    (code existing !)
+                      Longitude = random.NextDouble() * 1.2 + 34.3,       // In ISRAEL :  [34.3, 35.5]
+                      Latitude = random.NextDouble() * 2.3 + 31,          //              [31, 33.3]
+                      Address = List_Addresses[i % List_Addresses.Count()],
+                       Name = List_Addresses[i % List_Addresses.Count()].Substring(3) + "/" + List_Addresses[i % List_Addresses.Count()].Substring(3) //    Begin/Hebron  9=this Adress  (??
+                  });
+            }
+            #endregion
 
+            #region Create 10 Lines With 10 Line stations each, with Random Location :       
 
-            };
-
-            List_Lines = new List<Line>(); // Create 10 Line stations (= Masloul)
-            List_LineStations = new List<LineStation>();   // With 10 Lines each
+            List_Lines = new List<Line>(); // Create 10  Line 
+            List_LineStations = new List<LineStation>();   // With 10 Line stations each ( Masloul)
             for (int i = 0; i < 10; i++)
             {
             List_Lines.Add(
                 new Line {
                     LineID = 1 + i,
                     Area = (Areas)random.Next(0, 5),
-                    Code =10000+i,  // CodeLine ??
+                    Code =  10000+i,      // CodeLine ??
                     FirstStation= 10000 + i*10,
                     LastStation= 10009 + i*10
                 });
@@ -512,6 +513,7 @@ namespace DS
 
             }
 
+            #endregion
         }
     }
 }
