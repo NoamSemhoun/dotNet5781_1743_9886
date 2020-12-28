@@ -61,31 +61,32 @@ namespace BL
             line.Clone(l);
             dal.AddLine(l);
             saveLineStationList(line.List_LineStations);
-
         }
 
         private void saveLineStationList(List<LineStation> list)
         {
-            foreach (LineStation lineStation in list)
-            {
-                if (dal.GetStation(lineStation.Code) == null) 
-                    throw new Exception();// /// /////////////////////////////////---**********************************
-                DO.LineStation doLStation = new DO.LineStation();
-                lineStation.Clone(doLStation);
-                dal.AddLineStation(doLStation);
-
-                if(lineStation.NextStation != -1)
-                dal.AddAdjacentStation(new DO.AdjacentStation
+            List<DO.AdjacentStation> AS_List = new List<DO.AdjacentStation>();
+            List<DO.LineStation> doLS_List = new List<DO.LineStation>();
+            list.LineStationListToDoObjectsLists(doLS_List, AS_List);
+            foreach (DO.LineStation lS in doLS_List)
+                try { dal.AddLineStation((DO.LineStation)lS.CloneNew(Type.GetType("LineStation"))); }
+                catch
                 {
-                    Statoin1 = lineStation.Code,
-                    Station2 = lineStation.NextStation,
-                    Distance = lineStation.Distance_ToNext,
-                    Time =  lineStation.Time_ToNext
-                });
-            }
+                    /////**************************************//////////////**************///////////
+                }
+            foreach (DO.AdjacentStation aS in AS_List)
+                try { dal.AddAdjacentStation((DO.AdjacentStation)aS.CloneNew(Type.GetType("AdjacentStation"))); }
+                catch 
+                {//**************************/****************/************/****************/**********/
+                }
         }
 
+        
 
+        public void DeleteLine(int id)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         public void AddStation(Station station)
@@ -95,10 +96,7 @@ namespace BL
 
 
 
-        public void DeleteLine(int id)
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public void DeleteStation(int code)
         {

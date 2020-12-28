@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
 
 namespace BL
 {
@@ -28,12 +29,29 @@ namespace BL
             from.Clone(to);
             return to;
         }
-        //public static BO.StudentCourse CloneToStudentCourse(this DO.Course course, DO.StudentInCourse sic)
-        //{
-        //    BO.StudentCourse result = (BO.StudentCourse)course.CloneNew(typeof(BO.StudentCourse));
-        //    // propertys' names changed? copy them here...
-        //    result.Grade = sic.Grade;
-        //    return result;
-        //}
+
+        public static void LineStationListToDoObjectsLists(this List<LineStation> list, List<DO.LineStation> doLS_List, List<DO.AdjacentStation> doAS_List)
+        {
+
+            foreach (LineStation lineStation in list)
+            {
+                DO.LineStation doLStation = new DO.LineStation();
+                lineStation.Clone(doLStation);
+                doLS_List.Add(doLStation);
+
+                if (lineStation.NextStation != -1)
+                    doAS_List.Add(new DO.AdjacentStation
+                    {
+                        Statoin1 = lineStation.Code,
+                        Station2 = lineStation.NextStation,
+                        Distance = lineStation.Distance_ToNext,
+                        Time = lineStation.Time_ToNext
+                    });
+            }
+        }
+
+
+
+    
     }
 }
