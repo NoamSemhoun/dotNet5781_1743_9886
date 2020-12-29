@@ -39,10 +39,21 @@ namespace BlAPI
         Line GetLine(int id);
         void AddLine(Line line);
         void UpdateLine(Line line);
-        void DeleteLine(int id); 
+        void DeleteLine(int id);
 
         #endregion
 
+      #region Admin
+        bool CheckAdmin(string userName, string password);
 
+        void AddAdmin(string userName, string password);
+
+        void UpdatePassword(string userName, string newPassword);
+
+        void UpdatUser();
+
+        void deleteUser();
+
+        #endregion
     }
 }

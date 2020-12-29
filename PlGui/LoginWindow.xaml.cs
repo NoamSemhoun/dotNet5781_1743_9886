@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlAPI;
 
 namespace PlGui
 {
@@ -21,8 +22,10 @@ namespace PlGui
     {
         public LoginWindow()
         {
-            InitializeComponent();
+            InitializeComponent();        
         }
+
+        IBL bl = BLFactory.GetBL(); 
 
        
 

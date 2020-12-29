@@ -33,6 +33,8 @@ namespace BL
             dal.UpdateBus(liscenseNumber, maintenance); 
         }
 
+        
+
         private void maintenance(DO.Bus b)
         {
             b.Km_LastMaintenance = 0;
@@ -220,9 +222,34 @@ namespace BL
             foreach (Line l in station.List_Lines)
                 dal.UpdateLine((DO.Line)l.CloneNew(typeof(DO.Line)));
         }
+
+
         #endregion
 
+        public bool CheckAdmin(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void AddAdmin(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdatePassword(string userName, string newPassword)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdatUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void deleteUser()
+        {
+            throw new NotImplementedException();
+        }
 
 
 
