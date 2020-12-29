@@ -24,5 +24,9 @@ namespace PlGui
             InitializeComponent();
         }
 
+        private void UserName_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

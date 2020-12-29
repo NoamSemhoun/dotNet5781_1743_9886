@@ -24,6 +24,14 @@ namespace PlGui
             InitializeComponent();
         }
 
-    
+       
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            // if password 
+            MenuWindow Menu = new MenuWindow();
+            Menu.Show();
+            this.Close();
+        }
     }
 }

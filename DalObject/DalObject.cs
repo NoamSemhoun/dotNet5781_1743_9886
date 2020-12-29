@@ -304,7 +304,7 @@ namespace DL
         public void UpdateLineTrip(LineTrip lineTrip)
         {
             if (DataSource.List_LineTrips.FirstOrDefault(l => l.Id == lineTrip.Id) == null)
-                throw new ItemNotExeistExeption(typeof(LineTrip), id);
+                throw new ItemNotExeistExeption(typeof(LineTrip), Id);
             DataSource.List_LineTrips.RemoveAll(l => l.Id == lineTrip.Id);
             DataSource.List_LineTrips.Add(lineTrip.Clone());
         }

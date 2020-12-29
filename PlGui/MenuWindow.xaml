@@ -13,16 +13,16 @@
                 <GradientStop Color="#FF212F3C" Offset="0.996"/>
             </RadialGradientBrush>
         </Grid.Background>
-        <TextBox HorizontalAlignment="Left" Height="48" Margin="112,42,0,0" TextWrapping="Wrap" Text="Welcome to you  " VerticalAlignment="Top" Width="390" TextChanged="TextBox_TextChanged" FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
-        <TextBox HorizontalAlignment="Left" Height="48" Margin="370,42,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="282" TextChanged="TextBox_TextChanged" FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
-        <Button Content="BUS " HorizontalAlignment="Left" VerticalAlignment="Top" Width="141" Margin="28,222,0,0" Height="96" FontSize="36"/>
+        <TextBox HorizontalAlignment="Left" Height="48" Margin="112,42,0,0" TextWrapping="Wrap" Text="Welcome to you  " VerticalAlignment="Top" Width="390"  FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
+        <TextBox HorizontalAlignment="Left" Height="48" Margin="370,42,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="282" TextChanged="UserName_TextBox_TextChanged" FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
+        <Button Content="BUS " HorizontalAlignment="Left" VerticalAlignment="Top" Width="155" Margin="28,222,0,0" Height="96" FontSize="36"/>
         <Button Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="576,222,0,0" Height="96" FontSize="36"/>
-        <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Margin="298,222,0,0" Height="96" FontSize="36"/>
-        <TextBox HorizontalAlignment="Left" Height="48" Margin="0,144,0,0" TextWrapping="Wrap" Text="Choose your Display screen :" VerticalAlignment="Top" Width="477" TextChanged="TextBox_TextChanged" FontSize="30" Background="{x:Null}" FontFamily="Arial Nova Cond Light" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
+        <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="298,222,0,0" Height="96" FontSize="36"/>
+        <TextBox HorizontalAlignment="Left" Height="48" Margin="0,140,0,0" TextWrapping="Wrap" Text="Choose your Display screen :" VerticalAlignment="Top" Width="477" FontSize="30" Background="{x:Null}" FontFamily="Arial Nova Cond Light" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
 
         <DockPanel Background="Wheat" Margin="657,18,25,366">
             <Menu DockPanel.Dock="Top" HorizontalAlignment="Right" Background="Transparent">
-                <MenuItem Header="  Admin" FontSize="20" FontWeight="Bold" Foreground="#FF25166A" Height="34" Width="107" Click="MenuItem_Click">
+                <MenuItem Header="  Admin" FontSize="20" FontWeight="Bold" Foreground="#FF25166A" Height="34" Width="107" >
                     <MenuItem.Icon>
                         <Image Source="C:\Users\33768\source\repos\dotNet5781_1743_9886\PlGui\Images\Admin.jpg" Margin="-7,-9,-21,-8" />
                     </MenuItem.Icon>

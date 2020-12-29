@@ -31,5 +31,12 @@ namespace PlGui
             // Charger les données en définissant la propriété CollectionViewSource.Source :
             // lineViewSource.Source = [source de données générique]
         }
+
+     
+
+        private void ListLine_SelectionDetail_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }
