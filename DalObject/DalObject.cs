@@ -75,7 +75,7 @@ namespace DL
             DataSource.List_Buses.RemoveAll(b => b.LicenseNum == bus.LicenseNum);
             DataSource.List_Buses.Add(bus.Clone());
         }
-
+        
         public void UpdateBus(int licenseNum, Action<Bus> update)
         {
             Bus bus = DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum);
