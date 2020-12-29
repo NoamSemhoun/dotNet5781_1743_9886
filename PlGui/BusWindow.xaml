@@ -22,10 +22,10 @@
             </RadialGradientBrush>
         </Grid.Background>
 
-        <Button Name="Add" Content="+" Height="41" Margin="0,4,41,0" Width="48" Click="Button_Click" ClickMode="Press" FontSize="58" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Panel.ZIndex="1" MinWidth="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,-25,1,1"
+        <Button Name="Add" Content="+" Height="41" Margin="0,4,41,0" Width="48" Click="Add_Click" ClickMode="Press" FontSize="58" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Panel.ZIndex="1" MinWidth="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,-25,1,1"
                 ToolTip="  Add a New Bus "  ToolTipService.ShowDuration="50000"/>
 
-        <ListView x:Name="ListView_Bus" HorizontalAlignment="Center" Width="787" MouseDoubleClick="ListBus_SelectionDetail" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+        <ListView x:Name="ListView_Bus" HorizontalAlignment="Center" Width="787" MouseDoubleClick="ListBus_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
             ItemsSource= "{Binding}" Margin="0,0,5,-5" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Grid.Row="1" >
 
 
@@ -37,7 +37,7 @@
 
 
             <ListView.Background>
-                <ImageBrush ImageSource="Busesjpg.jpg" Opacity="0.3"/>
+                <ImageBrush Opacity="0.3" ImageSource="Busesjpg.jpg"/>
             </ListView.Background>
 
 
@@ -81,7 +81,7 @@
 
 
                                 <Button x:Name="FUEL" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                     Click="Button_DelekClick" 
+                                     Click="Fuel_ButtonClick" 
                                         ToolTip="   Refuel this bus  "  ToolTipService.ShowDuration="50000"
                                         Margin="0" Background="#FF6BD413" >
                                     <StackPanel Orientation="Horizontal">

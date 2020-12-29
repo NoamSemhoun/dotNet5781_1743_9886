@@ -14,17 +14,19 @@
                 <GradientStop Color="#FF323231" Offset="0.996"/>
             </RadialGradientBrush>
         </Grid.Background>
-        <TextBox HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="Login as :" VerticalAlignment="Top" Width="235" TextChanged="TextBox_TextChanged" Margin="23,52,0,0" FontSize="35" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
+        <TextBox HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="Login as :" VerticalAlignment="Top" Width="235"  Margin="23,52,0,0" FontSize="35" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
         <RadioButton Content=" Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="347,107,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center" Padding="6,-1,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="! ברוך הבא" VerticalAlignment="Top" Width="271" TextChanged="TextBox_TextChanged" Margin="263,-10,0,0" FontSize="48" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
+        <TextBox HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="! ברוך הבא" VerticalAlignment="Top" Width="271" Margin="263,-10,0,0" FontSize="48" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
         <RadioButton Content=" Traveller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="45,107,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center"/>
-        <StackPanel Margin="379,170,45,10" Background="#FF444444">
+        <StackPanel Margin="391,156,33,24" Background="#FF444444">
             <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="User Name :" Background="#FF444444"/>
-            <TextBox Height="42" />
+            <TextBox Height="42" FontSize="26" />
             <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="Password :" Background="#FF444444"/>
-            <PasswordBox Height="42" />
+            <PasswordBox Height="46" FontSize="26" />
+            <Button Content="Login" HorizontalAlignment="Left" Height="39" VerticalAlignment="Top" Width="100" FontSize="20" Click="Login_Click" Margin="228,0,0,0"/>
+
         </StackPanel>
+
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="744,0,0,0" Height="38" Width="43" Foreground="White" FontSize="16"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
-        <Button Content="Login" HorizontalAlignment="Left" Height="33" Margin="608,374,0,0" VerticalAlignment="Top" Width="100" FontSize="20"/>
     </Grid>
 </Window>

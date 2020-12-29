@@ -23,5 +23,32 @@ namespace PlGui
         {
             InitializeComponent();
         }
+
+     
+
+        private void Add_Click(object sender, RoutedEventArgs e)   // Button
+        {
+
+        }
+
+        private void Fuel_ButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Maintenance_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListBus_SelectionDetail_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Button_STARTClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
