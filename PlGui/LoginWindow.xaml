@@ -16,7 +16,7 @@
         </Grid.Background>
         <TextBox HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="Login as :" VerticalAlignment="Top" Width="235"  Margin="23,52,0,0" FontSize="35" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
         <RadioButton Content=" Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="347,107,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center" Padding="6,-1,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="! ברוך הבא" VerticalAlignment="Top" Width="271" Margin="263,-10,0,0" FontSize="48" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="! ברוך הבא" VerticalAlignment="Top" Width="271" Margin="263,-10,0,0" FontSize="48" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
         <RadioButton Content=" Traveller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="45,107,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center"/>
         <StackPanel Margin="391,156,33,24" Background="#FF444444">
             <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="User Name :" Background="#FF444444"/>

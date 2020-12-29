@@ -38,5 +38,10 @@ namespace PlGui
         {
 
         }
+
+        private void ListView_Lines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
