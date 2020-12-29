@@ -28,5 +28,19 @@ namespace PlGui
         {
 
         }
+
+        private void Lines_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            LinesWindow linesWindow = new LinesWindow();
+            linesWindow.Show();
+        }
+
+        private void Bus_ButtonClick(object sender, RoutedEventArgs e)
+        {
+            BusWindow BusWindow = new BusWindow();
+            BusWindow.Show();
+        }
+
+      
     }
 }

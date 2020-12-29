@@ -135,5 +135,15 @@ namespace DalApi
 
         #endregion
 
+
+        #region User
+
+        void AddUser(User user);
+
+        void DeleteUser(string username);  // Or ID
+
+        void UpdateUser(User user);
+
+        #endregion
     }
 }

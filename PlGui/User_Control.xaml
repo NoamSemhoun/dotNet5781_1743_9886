@@ -1,0 +1,14 @@
+﻿<Window x:Class="PlGui.User_Control"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+        mc:Ignorable="d"
+        Title="User_Control" Height="450" Width="800">
+    <Grid Background="#FF613B3B">
+
+        <Image Source="Images\Admin.jpg" HorizontalAlignment="Left" Height="210" Margin="292,209,0,0" VerticalAlignment="Top" Width="248" Opacity="0.47"/>
+        <Button Content="Add Admin" HorizontalAlignment="Left" Height="56" Margin="540,235,0,0" VerticalAlignment="Top" Width="188" FontSize="20" Click="AddAdmin_Button_Click"/>
+    </Grid>
+</Window>

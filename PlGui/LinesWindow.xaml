@@ -63,6 +63,7 @@
             <Label Content="Line Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7,0,12" Grid.Row="4" VerticalAlignment="Center" Height="26" Width="48"/>
             <TextBox x:Name="lineIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,10,0,12" Grid.Row="4" Text="{Binding LineId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="752,0,-3,0" Height="38" Width="43" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
 
 
 
