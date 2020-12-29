@@ -32,17 +32,15 @@ namespace DL
         public void AddBus(Bus bus)
         {
             if (DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == bus.LicenseNum) != null)
-               
-                throw new ItemAlreadyExeistExeption(typeof(Bus), bus.LicenseNum);
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
             DataSource.List_Buses.Add(bus.Clone());
         }
 
         public void DeleteBus(int licenseNum)
         {
-            if (DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum) == null)
-                throw new ItemNotExeistExeption(typeof(Bus), licenseNum);
-
-            DataSource.List_Buses.RemoveAll(b => b.LicenseNum == licenseNum);
+            DataSource.List_Buses.RemoveAll(b => b.LicenseNum == licenseNum);            
         }
 
         public IEnumerable<Bus> GetAllBus()
@@ -62,7 +60,7 @@ namespace DL
         {
             Bus bus = DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum);
             if (bus == null)
-                throw new ItemNotExeistExeption(typeof(Bus), licenseNum);
+                throw new Exception();
             return bus.Clone();
         }
 
@@ -71,19 +69,14 @@ namespace DL
         public void UpdateBus(Bus bus)
         {
             if (DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == bus.LicenseNum) == null)
-                throw new ItemNotExeistExeption(typeof(Bus), bus.LicenseNum); 
+                throw new Exception(); //////////////
             DataSource.List_Buses.RemoveAll(b => b.LicenseNum == bus.LicenseNum);
             DataSource.List_Buses.Add(bus.Clone());
         }
 
         public void UpdateBus(int licenseNum, Action<Bus> update)
         {
-            Bus bus = DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum);
-            if (bus == null)
-                throw new ItemNotExeistExeption(typeof(Bus), bus.LicenseNum);
-            try { update(DataSource.List_Buses.FirstOrDefault(b => b.LicenseNum == licenseNum)); }
-            catch
-            { throw new BadActionExeption(typeof(Bus)); }
+            throw new NotImplementedException();
         }
 
 
@@ -95,17 +88,15 @@ namespace DL
         public void AddBusOnTrip(BusOnTrip busOnTrip)
         {
             if (DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == busOnTrip.Id) != null)
-                throw new ItemAlreadyExeistExeption(typeof(BusOnTrip), busOnTrip.Id);
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
 
             DataSource.List_BusesOnTrip.Add(busOnTrip.Clone());
         }
 
         public void DeleteBusOnTrip(int id)
         {
-            BusOnTrip busOnTrip = DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == id);
-            if (busOnTrip == null)
-                throw new ItemNotExeistExeption(typeof(BusOnTrip), id);
-            DataSource.List_BusesOnTrip.Remove(busOnTrip);
+            DataSource.List_BusesOnTrip.RemoveAll(b => b.Id == id);
         }
 
         public IEnumerable<BusOnTrip> GetAllBusesOnTrip()
@@ -125,24 +116,21 @@ namespace DL
         {
             BusOnTrip busOnTrip = DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == id);
             if (busOnTrip == null)
-                throw new ItemNotExeistExeption(typeof(BusOnTrip), id);
+                throw new Exception();
             return busOnTrip.Clone();
         }
 
         public void UpdateBusOnTrip(BusOnTrip busOnTrip)
         {
             if (DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == busOnTrip.Id) == null)
-                throw new ItemNotExeistExeption(typeof(BusOnTrip), busOnTrip.Id); 
+                throw new Exception(); //////////////
             DataSource.List_BusesOnTrip.RemoveAll(b => b.Id == busOnTrip.Id);
             DataSource.List_BusesOnTrip.Add(busOnTrip.Clone());
         }
 
         public void UpdateBusOnTrip(int id, Action<BusOnTrip> update)
         {
-            BusOnTrip busOnTrip = DataSource.List_BusesOnTrip.FirstOrDefault(b => b.Id == id);
-            if (busOnTrip == null)
-                throw new ItemNotExeistExeption(typeof(BusOnTrip), id);
-            update(busOnTrip);
+            throw new NotImplementedException();
         }
 
 
@@ -153,19 +141,15 @@ namespace DL
         public void AddLine(Line line)
         {
             if (DataSource.List_Lines.FirstOrDefault(l => l.LineID == line.LineID) != null)
-
-                throw new ItemNotExeistExeption(typeof(Line), line.LineID);
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
 
             DataSource.List_Lines.Add(line.Clone());
         }
 
         public void DeleteLine(int id)
         {
-            Line line = DataSource.List_Lines.FirstOrDefault(l => l.LineID == id);
-            if (line == null)
-                throw new ItemNotExeistExeption(typeof(Line), id);
-
-             DataSource.List_Lines.RemoveAll(l => l.LineID == id);
+            DataSource.List_Lines.RemoveAll(l => l.LineID == id);
         }
 
         public IEnumerable<Line> GetAllLines()
@@ -185,7 +169,7 @@ namespace DL
         {
             Line line = DataSource.List_Lines.FirstOrDefault(l => l.LineID == id);
             if (line == null)
-                throw new ItemNotExeistExeption(typeof(Line), id);
+                throw new Exception();
             return line.Clone();
         }
 
@@ -193,18 +177,14 @@ namespace DL
         public void UpdateLine(Line line)
         {
             if (DataSource.List_Lines.FirstOrDefault(l => l.LineID == line.LineID) == null)
-                throw new ItemNotExeistExeption(typeof(Line), line.LineID);
+                throw new Exception(); //////////////
             DataSource.List_Lines.RemoveAll(l => l.LineID == line.LineID);
             DataSource.List_Lines.Add(line.Clone());
         }
 
         public void UpdateLine(int id, Action<Line> update)
         {
-            Line line = DataSource.List_Lines.FirstOrDefault(l => l.LineID == id);
-            if (line == null)
-                throw new ItemNotExeistExeption(typeof(Line), id);
-            try { update(line); }
-            catch { throw new BadActionExeption(typeof(Line)); }
+            throw new NotImplementedException();
         }
 
 
@@ -216,16 +196,14 @@ namespace DL
         public void AddLineStation(LineStation lineStation)
         {
             if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID) != null)
-                throw new ItemAlreadyExeistExeption(typeof(LineStation), lineStation.Code, lineStation.LineID);
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
 
             DataSource.List_LineStations.Add(lineStation.Clone());
         }
 
         public void DeleteLineStation(int lineId, int stationId)
         {
-            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == stationId && l.LineID == lineId) == null)
-                throw new ItemNotExeistExeption(typeof(LineStation), lineId, stationId);
-
             DataSource.List_LineStations.RemoveAll(l => l.Code == stationId && l.LineID == lineId);
         }
 
@@ -246,14 +224,14 @@ namespace DL
         {
             LineStation lineStation = DataSource.List_LineStations.FirstOrDefault(l => l.Code == stationId && l.LineID == lineId);
             if (lineStation == null)
-                throw new ItemNotExeistExeption(typeof(LineStation), lineId, stationId);
+                throw new Exception();
             return lineStation.Clone();
         }
 
         public void UpdateLineStation(LineStation lineStation)
         {
             if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID) == null)
-                throw new ItemNotExeistExeption(typeof(LineStation), lineStation.LineID, lineStation.Code);
+                throw new Exception(); //////////////
             DataSource.List_LineStations.RemoveAll(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID);
             DataSource.List_LineStations.Add(lineStation.Clone());
         }
@@ -266,15 +244,14 @@ namespace DL
         public void AddLineTrip(LineTrip lineTrip)
         {
             if (DataSource.List_LineTrips.FirstOrDefault(l => l.Id == lineTrip.Id) != null)
-                throw new ItemAlreadyExeistExeption(typeof(LineTrip), lineTrip.Id);
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
 
             DataSource.List_LineTrips.Add(lineTrip.Clone());
         }
 
         public void DeleteLineTrip(int id)
         {
-            if (DataSource.List_LineTrips.FirstOrDefault(l => l.Id == id) == null)
-                throw new ItemNotExeistExeption(typeof(LineTrip), id);
             DataSource.List_LineTrips.RemoveAll(l => l.Id == id);
         }
        
@@ -296,7 +273,7 @@ namespace DL
         {
             LineTrip lineTrip = DataSource.List_LineTrips.FirstOrDefault(l => l.Id == id);
             if (lineTrip == null)
-                throw new ItemNotExeistExeption(typeof(LineTrip), id);
+                throw new Exception();
             return lineTrip.Clone();
         }
 
@@ -304,7 +281,7 @@ namespace DL
         public void UpdateLineTrip(LineTrip lineTrip)
         {
             if (DataSource.List_LineTrips.FirstOrDefault(l => l.Id == lineTrip.Id) == null)
-                throw new ItemNotExeistExeption(typeof(LineTrip), id);
+                throw new Exception(); //////////////
             DataSource.List_LineTrips.RemoveAll(l => l.Id == lineTrip.Id);
             DataSource.List_LineTrips.Add(lineTrip.Clone());
         }
@@ -317,15 +294,15 @@ namespace DL
 
         public void AddStation(Station station)
         {
-            if (DataSource.List_Stations.FirstOrDefault(l => l.Code == station.Code) != null)
-                throw new ItemAlreadyExeistExeption(typeof(Station), station.Code);
+             if (DataSource.List_Stations.FirstOrDefault(l => l.Code == station.Code) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
+
               DataSource.List_Stations.Add(station.Clone());
         }
 
         public void DeleteStation(int code)
         {
-            if (DataSource.List_Stations.FirstOrDefault(l => l.Code == code) == null)
-                throw new ItemNotExeistExeption(typeof(Station), code);
             DataSource.List_Stations.RemoveAll(l => l.Code == code);
         }
 
@@ -347,7 +324,7 @@ namespace DL
         {
             Station station = DataSource.List_Stations.FirstOrDefault(l => l.Code == code);
             if (station == null)
-                throw new ItemNotExeistExeption(typeof(Station), code);
+                throw new Exception();
             return station.Clone();
         }
 
@@ -355,76 +332,72 @@ namespace DL
         public void UpdateStation(Station station)
         {
             if (DataSource.List_Stations.FirstOrDefault(l => l.Code == station.Code) == null)
-                throw new ItemNotExeistExeption(typeof(Station), station.Code);
+                throw new Exception(); //////////////
             DataSource.List_Stations.RemoveAll(l => l.Code == station.Code);
             DataSource.List_Stations.Add(station.Clone());
         }
-
         public void UpdateStation(int code, Action<Station> update)
         {
-            Station station = DataSource.List_Stations.FirstOrDefault(s => s.Code == code);
-            if(station == null)
-                throw new ItemNotExeistExeption(typeof(Station), code);
-            update(station);
+            ((IDAL)Instance).UpdateStation(code, update);
         }
+
+        
 
         #endregion
 
         #region UserTrip
 
-        //public void AddTrip(UserTrip trip)
-        //{
-        //    if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) != null)
-        //        throw new ItemAlreadyExeistExeption(typeof(UserTrip), trip.Id);
+        public void AddTrip(UserTrip trip)
+        {
+            if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) != null)
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
 
-        //    DataSource.List_Trips.Add(trip.Clone());
-        //}
-
-
-        //public void DeleteTrip(int id)
-        //{
-        //    if (DataSource.List_Trips.FirstOrDefault(t => t.Id == id) == null)
-        //        throw new ItemNotExeistExeption(typeof(UserTrip), id);
-        //    DataSource.List_Trips.RemoveAll(t => t.Id == id);
-        //}
+            DataSource.List_Trips.Add(trip.Clone());
+        }
 
 
-        //public IEnumerable<UserTrip> GetAllTrips()
-        //{
-        //    return from item in DataSource.List_Trips
-        //           select item.Clone();
-        //}
-
-        //public IEnumerable<UserTrip> GetAllTripsBy(Predicate<UserTrip> predicate)
-        //{
-        //    return from item in DataSource.List_Trips
-        //           where predicate(item)
-        //           select item.Clone();
-        //}
+        public void DeleteTrip(int id)
+        {
+            DataSource.List_Trips.RemoveAll(t => t.Id == id);
+        }
 
 
-        //public UserTrip GetTrip(int id)
-        //{
-        //    UserTrip trip = DataSource.List_Trips.FirstOrDefault(t => t.Id == id);
-        //    if (trip == null)
-        //        throw new ItemNotExeistExeption(typeof(UserTrip), id); 
-        //    return trip.Clone();
-        //}
+        public IEnumerable<UserTrip> GetAllTrips()
+        {
+            return from item in DataSource.List_Trips
+                   select item.Clone();
+        }
 
-        //public void UpdateTrip(UserTrip trip)
-        //{
-        //    if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) == null)
-        //        throw new ItemNotExeistExeption(typeof(UserTrip), trip.Id);
-        //    DataSource.List_Trips.RemoveAll(t => t.Id == trip.Id);
-        //    DataSource.List_Trips.Add(trip.Clone());
-        //}
+        public IEnumerable<UserTrip> GetAllTripsBy(Predicate<UserTrip> predicate)
+        {
+            return from item in DataSource.List_Trips
+                   where predicate(item)
+                   select item.Clone();
+        }
 
 
-        //public void UpdateTrip(int id, Action<Line> update)
-        //{
-        //    if (DataSource.List_Trips.FirstOrDefault(t => t.Id == id) 
-        //        throw new ItemNotExeistExeption(typeof(UserTrip), trip.Id);
-        //}
+        public UserTrip GetTrip(int id)
+        {
+            UserTrip trip = DataSource.List_Trips.FirstOrDefault(t => t.Id == id);
+            if (trip == null)
+                throw new Exception();
+            return trip.Clone();
+        }
+
+        public void UpdateTrip(UserTrip trip)
+        {
+            if (DataSource.List_Trips.FirstOrDefault(t => t.Id == trip.Id) == null)
+                throw new Exception(); //////////////
+            DataSource.List_Trips.RemoveAll(t => t.Id == trip.Id);
+            DataSource.List_Trips.Add(trip.Clone());
+        }
+
+
+        public void UpdateTrip(int id, Action<Line> update)
+        {
+            throw new NotImplementedException();  /////// To do
+        }
         #endregion
 
         #region AdjacentStation
@@ -433,23 +406,22 @@ namespace DL
         {
 
             if (DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2) != null)
-                throw new ItemAlreadyExeistExeption(typeof(AdjacentStation), adjacentStation.Statoin1, adjacentStation.Station2);
+                // adapt to our Exeption
+                throw new Exception();// adapt to our Exeption
 
             DataSource.List_AdjacentStations.Add(adjacentStation.Clone());
         }
         
         public void DeleteAdjacentStation(int station1, int station2)
         {
-            if (DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2) == null)
-                throw new ItemNotExeistExeption(typeof(AdjacentStation), station1, station2);
-                DataSource.List_AdjacentStations.RemoveAll(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
+            DataSource.List_AdjacentStations.RemoveAll(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
         }
 
         public AdjacentStation GetAdjacentStation(int station1, int station2)
         {
             AdjacentStation adjacentStation = DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
             if (adjacentStation == null)
-                throw new ItemNotExeistExeption(typeof(AdjacentStation), station1, station2);
+                throw new Exception();
             return adjacentStation.Clone();
         }
 
@@ -471,20 +443,19 @@ namespace DL
         public void UpdateAdjacentStation(AdjacentStation adjacentStation)
         {
             if (DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2) == null)
-                throw new ItemNotExeistExeption(typeof(AdjacentStation), adjacentStation.Statoin1, adjacentStation.Station2);
+                throw new Exception(); //////////////**//////////////////////**////////////////////**//////////////////**///////////////
             DataSource.List_AdjacentStations.RemoveAll(aS => aS.Statoin1 == adjacentStation.Statoin1 && aS.Station2 == adjacentStation.Station2);
             DataSource.List_AdjacentStations.Add(adjacentStation.Clone());
         }
 
         public void UpdateAdjacentStation(int station1, int station2, Action<AdjacentStation> update)
         {
-            AdjacentStation adstaion = (DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2));
-            if(adstaion == null)
-                throw new ItemNotExeistExeption(typeof(AdjacentStation), station1, station2);
-            try { update(adstaion); }
+            try { update(DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2)); }
             catch
-            { throw new BadActionExeption(typeof(AdjacentStation)); }
+            { throw new Exception(); }//********************************//*********************//*************************
         }
+
+      
 
 
 
