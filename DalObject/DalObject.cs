@@ -35,7 +35,7 @@ namespace DL
                
                 throw new ItemAlreadyExeistExeption(typeof(Bus), bus.LicenseNum);
             DataSource.List_Buses.Add(bus.Clone());
-        }
+        }   
 
         public void DeleteBus(int licenseNum)
         {
