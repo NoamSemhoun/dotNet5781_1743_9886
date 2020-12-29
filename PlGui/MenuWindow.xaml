@@ -20,20 +20,33 @@
         <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="298,222,0,0" Height="96" FontSize="36" Click="Lines_ButtonClick"/>
         <Label Content="Choose your Display screen :" HorizontalAlignment="Left" Height="48" Margin="0,136,0,0"  VerticalAlignment="Top" Width="477" FontSize="30" Background="{x:Null}" FontFamily="Arial Nova Cond Light" BorderBrush="{x:Null}" Foreground="White"  />
 
-        <DockPanel Background="Wheat" Margin="657,18,25,366">
-            <Menu DockPanel.Dock="Top" HorizontalAlignment="Right" Background="Transparent">
-                <MenuItem Header="  Admin" FontSize="20" FontWeight="Bold" Foreground="#FF25166A" Height="34" Width="107" >
+        <DockPanel Background="Wheat" Margin="628,18,10,360">
+            <Menu DockPanel.Dock="Top" HorizontalAlignment="Right" Background="Transparent" Height="40" Width="154">
+                <MenuItem Header="  Admin" FontSize="26" FontWeight="Bold" Foreground="#FF25166A" Height="31" Width="130" >
                     <MenuItem.Icon>
                         <Image Source="C:\Users\33768\source\repos\dotNet5781_1743_9886\PlGui\Images\Admin.jpg" Margin="-7,-9,-21,-8" />
                     </MenuItem.Icon>
-                    <MenuItem Icon="Images\Help.jpg" Header="Help"/>
+                    <MenuItem  Header="Help">
+                        <MenuItem.Icon>
+                            <Image Source="Images\Help.jpg" Margin="-3,-8,-8,-10"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
                     <MenuItem Header="Admin Access" Icon="Images\Admin.jpg" />
-                    <MenuItem Header="Sign Out" Icon="Images\SignOut.jpg"/>
-
+                    <MenuItem Header="Sign Out" Click="SignOut_Click">
+                        <MenuItem.Icon>
+                            <Image Source="Images\SignOut.jpg" Margin="-6,-6,-12,-6"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Manage users" Click="Click_ManageUsers">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/Admin.jpg" Margin="-14,-8,-19,-10" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </DockPanel>
 
+       
     </Grid>
 </Window>

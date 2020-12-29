@@ -55,8 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="User_Control.xaml.cs">
-      <DependentUpon>User_Control.xaml</DependentUpon>
+    <Compile Include="User_ControlWindow.xaml.cs">
+      <DependentUpon>User_ControlWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="BusWindow.xaml">
       <SubType>Designer</SubType>
@@ -87,7 +87,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User_Control.xaml">
+    <Page Include="User_ControlWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -19,9 +19,9 @@ namespace PlGui
     /// <summary>
     /// Logique d'interaction pour User_Control.xaml
     /// </summary>
-    public partial class User_Control : Window
+    public partial class User_ControlWindow : Window
     {
-        public User_Control()
+        public User_ControlWindow()
         {
             InitializeComponent();
 
