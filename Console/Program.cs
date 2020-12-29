@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalApi;
-using DO;
+using BO;
 using BL;
+using BlAPI;
 
 namespace Console
 {
@@ -13,26 +14,49 @@ namespace Console
     {
         static void Main(string[] args)
         {
-            //BlAPI.IBL bl = new BLImp();
-            //bl.AddBus(new BO.Bus { LicenseNum = 1111111, Status = BO.BusStatus.InRefuling });
 
-            IDAL dal = DalApi.DalFactory.GetDal();
+            //IBL bL = BLFactory.GetBL();
 
-            dal.AddBus(new Bus{ LicenseNum = 12345678, Status = BusStatus.InMaintenance});
+            //var l = bL.GetAllBuses();
+            //foreach(Bus b in l)
+            //    System.Console.WriteLine(b.LicenseNum + "  " + b.Status);
 
-            var l = dal.GetAllBus();
+            //bL.AddBus(new Bus { LicenseNum = 22222222, Status = BusStatus.InRefuling, Fuel = 100, Date_LastMaintenance = new DateTime(2019, 2,23), Km_LastMaintenance = 20000 });
 
-            foreach (Bus b in l)
-                System.Console.WriteLine(b.LicenseNum + " " + b.Status);
 
-            dal.UpdateBus(12345678, b => b.Status = BusStatus.Available);
+            //bL.MaintenanceBus(22222222);
 
-            l = dal.GetAllBus();
+            //print(bL);
 
-            foreach (Bus b in l)
-                System.Console.WriteLine(b.LicenseNum + " " + b.Status);
+            //bL.DeleteBus(22222222);
+
+            //print(bL);
+
+            IDAL dal = DalFactory.GetDal();
+
+            try
+            {
+                dal.DeleteBus(111);
+            }
+            catch(DO.ItemNotExeistExeption e)
+            {
+                System.Console.WriteLine(e);
+            }
+
+            
+
+
+
 
             System.Console.ReadLine();
+        }
+
+        public static void print(IBL bL)
+        {
+            var l = bL.GetAllBuses();
+            foreach (Bus b in l)
+                System.Console.WriteLine(b);
+
         }
     }
 }

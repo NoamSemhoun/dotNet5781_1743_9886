@@ -9,7 +9,7 @@ using BO;
 
 namespace BL 
 {
-    public class BLImp : IBL
+    class BLImp : IBL
     {
         DalApi.IDAL dal = DalApi.DalFactory.GetDal();
 
@@ -151,10 +151,16 @@ namespace BL
                     Name = dal.GetStation(lS.Code).Name
                 });
             
-            }
-
+            } 
 
             return list;
+        }
+
+        public void UpdateLine(Line line)
+        {
+            dal.UpdateLine((DO.Line)line.CloneNew(typeof(DO.Line)));
+            foreach (LineStation l in line.List_LineStations)
+                dal.UpdateLineStation((DO.LineStation)l.CloneNew(typeof(DO.LineStation)));
         }
 
         public static int LineStationComparison(DO.LineStation A, DO.LineStation B)
@@ -197,9 +203,6 @@ namespace BL
                    select Cloning.DoObjectsToStation(item.Code);
         }
 
-        #endregion
-
-
 
         public void UpdateDistance(int firstStationCode, int lastStationCode, double distance)
         {
@@ -211,24 +214,22 @@ namespace BL
             dal.UpdateAdjacentStation(firstStationCode, lastStationCode, aS => aS.Time = time);
         }
 
-        public void UpdateLine(Line line)
-        {
-            line;
-        }
-
         public void UpdateStation(Station station)
         {
-            throw new NotImplementedException();
+            dal.UpdateStation((DO.Station)station.CloneNew(typeof(DO.Station)));
+            foreach (Line l in station.List_Lines)
+                dal.UpdateLine((DO.Line)l.CloneNew(typeof(DO.Line)));
         }
+        #endregion
 
-        public void UpdateTime(int firstStationCode, int lastStationCode)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void UpdateDistance(int firstStationCode, int lastStationCode)
-        {
-            throw new NotImplementedException();
-        }
+
+
+
+
+
+
+
+
     }
 }

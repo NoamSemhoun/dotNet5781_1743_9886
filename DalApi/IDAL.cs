@@ -81,20 +81,20 @@ namespace DalApi
         Station GetStation(int code);
         void AddStation(Station station);
         void UpdateStation(Station station);
-        void UpdateStation(int code, Action<Line> update); //method that knows to updt specific fields
+        void UpdateStation(int code, Action<Station> update); //method that knows to updt specific fields
         void DeleteStation(int code);
 
         #endregion
 
         #region UserTrip
 
-        IEnumerable<UserTrip> GetAllTrips();
-        IEnumerable<UserTrip> GetAllTripsBy(Predicate<UserTrip> predicate);
-        UserTrip GetTrip(int id);
-        void AddTrip(UserTrip trip);
-        void UpdateTrip(UserTrip trip);
-        void UpdateTrip(int id, Action<Line> update); //method that knows to updt specific fields
-        void DeleteTrip(int id);
+        //IEnumerable<UserTrip> GetAllUserTrips();
+        //IEnumerable<UserTrip> GetAllUserTripsBy(Predicate<UserTrip> predicate);
+        //UserTrip GetUserTrip(int id);
+        //void AddUserTrip(UserTrip trip);
+        //void UpdateUserTrip(UserTrip trip);
+        //void UpdateUserTrip(int id, Action<Line> update); //method that knows to updt specific fields
+        //void DeleteUserTrip(int id);
 
         #endregion
 
