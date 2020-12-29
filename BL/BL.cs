@@ -94,7 +94,8 @@ namespace BL
             foreach (DO.AdjacentStation aS in AS_List)
                 try { dal.AddAdjacentStation((DO.AdjacentStation)aS.CloneNew(Type.GetType("AdjacentStation"))); }
                 catch 
-                {//**************************/****************/************/****************/**********/
+                {
+                    //**************************/****************/************/****************/**********/
                 }
         }
 
@@ -212,7 +213,7 @@ namespace BL
 
         public void UpdateLine(Line line)
         {
-            line
+            line;
         }
 
         public void UpdateStation(Station station)

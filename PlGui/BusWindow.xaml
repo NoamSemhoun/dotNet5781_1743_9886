@@ -1,0 +1,136 @@
+﻿<Window x:Class="PlGui.BusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+        mc:Ignorable="d"
+        Title="BusWindow" Height="450" Width="800">
+    <Window.Resources>
+        <BitmapImage x:Key="ImageSource1" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Images\Busesjpg.jpg"/>
+        <BitmapImage x:Key="bus" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Images\Busesjpg.jpg"/>
+    </Window.Resources>
+    <Grid Name="MainGrid" Cursor="Arrow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="White" Offset="0.087"/>
+                <GradientStop Color="#FF302B26" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+
+        <Button Name="Add" Content="+" Height="41" Margin="0,4,41,0" Width="48" Click="Button_Click" ClickMode="Press" FontSize="58" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Panel.ZIndex="1" MinWidth="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,-25,1,1"
+                ToolTip="  Add a New Bus "  ToolTipService.ShowDuration="50000"/>
+
+        <ListView x:Name="ListView_Bus" HorizontalAlignment="Center" Width="787" MouseDoubleClick="ListBus_SelectionDetail" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            ItemsSource= "{Binding}" Margin="0,0,5,-5" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Grid.Row="1" >
+
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+
+
+            <ListView.Background>
+                <ImageBrush ImageSource="Busesjpg.jpg" Opacity="0.3"/>
+            </ListView.Background>
+
+
+
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn  Header="Lisence" Width="90" DisplayMemberBinding="{Binding License}" />
+                    <GridViewColumn Header="Date of Start"  Width="90" DisplayMemberBinding="{Binding DateStart_str}"  />
+                    <GridViewColumn Header="Km remaining" Width="122" DisplayMemberBinding="{Binding Km_remaining}"/>
+
+                    <GridViewColumn Header="Drive" Width="60" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+
+                                <Button x:Name="StartDriving" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     Click="Button_STARTClick" 
+                                        ToolTip="   Start Driving for this bus  "  ToolTipService.ShowDuration="50000"
+                                        Margin="0" Background="#FFF4FF0B" 
+                                    Content="START" >
+                                </Button>
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Status " Width="180">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <ProgressBar x:Name="PROGRESSBAR" Width="160" Height="25"  Minimum="0" Maximum="100" Value="{Binding Percent,UpdateSourceTrigger=PropertyChanged}"
+                                                 Foreground="#FF05F005" />
+                                    <TextBlock Name="textinside" Text="{Binding returnStatus,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Refuel" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+
+
+                                <Button x:Name="FUEL" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     Click="Button_DelekClick" 
+                                        ToolTip="   Refuel this bus  "  ToolTipService.ShowDuration="50000"
+                                        Margin="0" Background="#FF6BD413" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--<Image Source="Icon refuel.png" Height="26" Width="26"/>-->
+                                        <Label Content="REFUEL" HorizontalAlignment="Center" Background="#FF6BD413" Foreground="#FFEAEAEA"/>
+                                    </StackPanel>
+                                </Button>
+
+
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Maintenance"  Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="Maintenance" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                        Click="Maintenance_Click"
+                                    ToolTip= "  Send this bus to Maintenance " ToolTipService.ShowDuration="50000"  Margin="0" Background="#FFE00404" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--<Image Source="icone__Maintenance.jpg" Height="26" Width="26"/>-->
+                                        <Label Content="Maintenance" HorizontalAlignment="Center" Background="#FFDE0707" Foreground="#FFEAEAEA"/>
+                                    </StackPanel>
+                                </Button>
+
+
+
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+
+
+
+
+                </GridView>
+
+
+            </ListView.View>
+
+
+        </ListView>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="764,0,0,0" Height="34" Width="23" Foreground="White" FontSize="10"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Height="29" TextWrapping="Wrap" Text="(Place the cursor on a button to see its usefulness)&#xD;&#xA;" VerticalAlignment="Top" Width="282" IsReadOnly="True"  Margin="6,8,0,0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}"/>
+
+
+
+
+    </Grid>
+</Window>
