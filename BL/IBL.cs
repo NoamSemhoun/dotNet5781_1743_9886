@@ -42,7 +42,7 @@ namespace BlAPI
         void DeleteLine(int id);
 
         #endregion
-
+           
       #region Admin
         bool CheckAdmin(string userName, string password);
 
