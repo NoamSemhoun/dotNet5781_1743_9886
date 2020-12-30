@@ -25,7 +25,6 @@ namespace PlGui
             InitializeComponent();        
         }
 
-        IBL bl = BLFactory.GetBL(); 
 
        
 

@@ -304,7 +304,7 @@ namespace DL
         public void UpdateLineTrip(LineTrip lineTrip)
         {
             if (DataSource.List_LineTrips.FirstOrDefault(l => l.Id == lineTrip.Id) == null)
-                throw new ItemNotExeistExeption(typeof(LineTrip), Id);
+                throw new ItemNotExeistExeption(typeof(LineTrip), lineTrip.Id);
             DataSource.List_LineTrips.RemoveAll(l => l.Id == lineTrip.Id);
             DataSource.List_LineTrips.Add(lineTrip.Clone());
         }
@@ -488,6 +488,31 @@ namespace DL
 
 
 
+        #endregion
+
+
+        #region User
+
+        public void DeleteUser(string username)
+        {
+            if (DataSource.List_Users.FirstOrDefault(b => b.UserName == username) == null)
+                //throw new ItemNotExeistExeption(typeof(Bus), id);  // id or username with string
+
+            DataSource.List_Users.RemoveAll(b => b.UserName == username);
+        }
+
+        public void AddUser(User user)
+        {
+            if (DataSource.List_Users.FirstOrDefault(l => l.UserName == user.UserName) != null)
+                throw new ItemAlreadyExeistExeption(typeof(LineTrip), user.ID_user);  // Or  Username with string
+
+            DataSource.List_Users.Add(user.Clone());
+        }
+
+        public void UpdateUser(User user)  // To new Password TOO
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
 

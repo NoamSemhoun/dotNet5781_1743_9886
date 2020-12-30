@@ -51,6 +51,7 @@
     <Compile Include="BO\Line.cs" />
     <Compile Include="BO\Station.cs" />
     <Compile Include="BO\LineStation.cs" />
+    <Compile Include="BO\User.cs" />
     <Compile Include="Cloning.cs" />
     <Compile Include="IBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

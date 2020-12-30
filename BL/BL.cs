@@ -20,7 +20,7 @@ namespace BL
         {
             DO.Bus doBus = new DO.Bus();
             bus.Clone(doBus);
-            dal.AddBus(doBus);            
+            dal.AddBus(doBus);
         }
 
         public void DeleteBus(int liscenseNumber)
@@ -30,10 +30,10 @@ namespace BL
 
         public void MaintenanceBus(int liscenseNumber)
         {
-            dal.UpdateBus(liscenseNumber, maintenance); 
+            dal.UpdateBus(liscenseNumber, maintenance);
         }
 
-        
+
 
         private void maintenance(DO.Bus b)
         {
@@ -65,7 +65,7 @@ namespace BL
 
         public IEnumerable<Bus> GetAllBuses()
         {
-            return from item in  dal.GetAllBus()
+            return from item in dal.GetAllBus()
                    select (Bus)item.CloneNew(typeof(Bus));
         }
 
@@ -95,13 +95,13 @@ namespace BL
                 }
             foreach (DO.AdjacentStation aS in AS_List)
                 try { dal.AddAdjacentStation((DO.AdjacentStation)aS.CloneNew(Type.GetType("AdjacentStation"))); }
-                catch 
+                catch
                 {
                     //**************************/****************/************/****************/**********/
                 }
         }
 
-        
+
 
         public void DeleteLine(int id)
         {
@@ -116,31 +116,31 @@ namespace BL
             return from item in dal.GetAllLines()
                    select GetLine(item.LineID);
         }
-        
+
         public Line GetLine(int id)
         {
             Line line = new Line();
 
             DO.Line lineDo = dal.GetLine(id);
             lineDo.Clone(line);
-            List<DO.LineStation> DoLs_list = (List<DO.LineStation>) dal.GetAllLineStationsBy(ls => ls.LineID == id);
+            List<DO.LineStation> DoLs_list = (List<DO.LineStation>)dal.GetAllLineStationsBy(ls => ls.LineID == id);
             var lineStationList = createStationListFromDoObjects(DoLs_list);
             line.List_LineStations = lineStationList;
 
             return (Line)line.CloneNew(typeof(Line));
         }
 
-        public List<LineStation> createStationListFromDoObjects( List<DO.LineStation> lS_List)
+        public List<LineStation> createStationListFromDoObjects(List<DO.LineStation> lS_List)
         {
             lS_List.Sort(LineStationComparison);
             List<LineStation> list = new List<LineStation>();
-            foreach(DO.LineStation lS in lS_List )
+            foreach (DO.LineStation lS in lS_List)
             {
                 DO.AdjacentStation aS;
                 if (lS.NextStation != -1)
                     aS = dal.GetAdjacentStation(lS.Code, lS.NextStation);
                 else
-                    aS = new DO.AdjacentStation{ Distance = 0, Time = new TimeSpan(0) };
+                    aS = new DO.AdjacentStation { Distance = 0, Time = new TimeSpan(0) };
                 list.Add(new LineStation
                 {
                     Code = lS.Code,
@@ -152,8 +152,8 @@ namespace BL
                     Time_ToNext = aS.Time,
                     Name = dal.GetStation(lS.Code).Name
                 });
-            
-            } 
+
+            }
 
             return list;
         }
@@ -226,33 +226,41 @@ namespace BL
 
         #endregion
 
+        #region User 
+        
         public bool CheckAdmin(string userName, string password)
         {
             throw new NotImplementedException();
+            // Bool isAdmin    User.isAdmin=true;
         }
 
-        public void AddAdmin(string userName, string password)
+        public void AddUser(User myuser)
         {
-            throw new NotImplementedException();
+            DO.User User1 = new DO.User();
+            myuser.Clone(User1);
+            dal.AddUser(User1); 
         }
+
+        public void DeleteUser(string username)  // Or ID           
+        {
+            dal.DeleteUser(username);
+        }
+
 
         public void UpdatePassword(string userName, string newPassword)
         {
             throw new NotImplementedException();
+
         }
 
-        public void UpdatUser()
+        public void UpdateUser(User user)
         {
             throw new NotImplementedException();
-        }
 
-        public void deleteUser()
-        {
-            throw new NotImplementedException();
         }
 
 
-
+        #endregion
 
 
 

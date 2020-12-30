@@ -32,7 +32,7 @@ namespace BlAPI
         void DeleteStation(int code);
 
         #endregion
-      
+     
       #region Line
 
         IEnumerable<Line> GetAllLines();
@@ -42,17 +42,20 @@ namespace BlAPI
         void DeleteLine(int id);
 
         #endregion
-           
-      #region Admin
+
+      #region User
+
+
         bool CheckAdmin(string userName, string password);
 
-        void AddAdmin(string userName, string password);
+        void AddUser(User user);
+
+        void DeleteUser(string username);  // Or ID
 
         void UpdatePassword(string userName, string newPassword);
 
-        void UpdatUser();
+        void UpdateUser(User user);
 
-        void deleteUser();
 
         #endregion
     }
