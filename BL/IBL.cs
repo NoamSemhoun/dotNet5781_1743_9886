@@ -32,7 +32,7 @@ namespace BlAPI
         void DeleteStation(int code);
 
         #endregion
-     
+      
       #region Line
 
         IEnumerable<Line> GetAllLines();
