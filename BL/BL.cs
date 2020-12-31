@@ -92,9 +92,13 @@ namespace BL
         {
             DO.Line l = new DO.Line();
             line.Clone(l);
+            var lineL = dal.GetAllLinesBy(L => L.LineNumber == line.LineNumber && L.FirstStation == line.FirstStation && L.LastStation == line.LastStation);
+            if (lineL.Any())
+                throw new ItemAlreadyExeistExeption(typeof(Line), line.LineNumber);
+            line.LineID = 0;
             try { dal.AddLine(l); }
             catch (DO.ItemAlreadyExeistExeption)
-            { throw new ItemAlreadyExeistExeption(typeof(Line), line.LineId); }
+            { throw new ItemAlreadyExeistExeption(typeof(Line), line.LineID); }
             saveLineStationList(line.List_LineStations);
         }
 
@@ -150,11 +154,14 @@ namespace BL
             { throw new ItemNotExeistExeption(typeof(Line), id); }
 
             lineDo.Clone(line);
-            List<DO.LineStation> DoLs_list = (List<DO.LineStation>)dal.GetAllLineStationsBy(ls => ls.LineID == id);
+            List<DO.LineStation> DoLs_list = dal.GetAllLineStationsBy(ls => ls.LineID == id).ToList();
             var lineStationList = createStationListFromDoObjects(DoLs_list);
             line.List_LineStations = lineStationList;
+            line.FirstStationName = lineStationList[0].Name;
+            line.LastStationName = lineStationList.Last().Name;
 
-            return (Line)line.CloneNew(typeof(Line));
+            
+            return line;
         }
 
         public List<LineStation> createStationListFromDoObjects(List<DO.LineStation> lS_List)
@@ -183,6 +190,14 @@ namespace BL
             }
 
             return list;
+        }
+
+        public int GetLineId(int lineNumber, int firstStation, int lastStation)
+        {
+            var l = dal.GetAllLinesBy(L => L.LineNumber == lineNumber && L.FirstStation == firstStation && L.LastStation == lastStation);
+            if (!l.Any())
+                throw new ItemNotExeistExeption(typeof(Line), lineNumber);
+            return l.First().LineID;
         }
 
         public void UpdateLine(Line line)
@@ -287,8 +302,9 @@ namespace BL
         }
 
 
+
         #endregion
-          
+
 
 
 

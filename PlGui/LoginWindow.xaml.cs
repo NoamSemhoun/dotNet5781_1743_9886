@@ -22,7 +22,10 @@ namespace PlGui
     {
         public LoginWindow()
         {
-            InitializeComponent();        
+            InitializeComponent();
+            LinesWindow win = new LinesWindow();
+            win.Show();
+            this.Close();
         }
 
 
@@ -31,8 +34,8 @@ namespace PlGui
         private void Login_Click(object sender, RoutedEventArgs e)
         {
 
-            if (UsernameEntrance.Text == "Noam" || UsernameEntrance.Text == "Yair")
-            {
+            //if (UsernameEntrance.Text == "Noam" || UsernameEntrance.Text == "Yair")
+            //{
                 //if (MyTextBox.Visibility = System.Windows.Visibility.Visible && Checkbox_passeword.IsChecked)
                 //{
                 //    MyTextBox.Text = PassewordEntrance.Password;   // To make sur recuperate the passeword of the TextBox
@@ -40,16 +43,16 @@ namespace PlGui
                     MenuWindow Menu = new MenuWindow();
                 Menu.Show();
                 this.Close();
-            }
-            else
-            {
-                UsernameEntrance.Clear(); 
-                UsernameEntrance.Focus();
-                PassewordEntrance.Clear() ;
-                MessageBox.Show("This Username no exist (Try Noam or Yair)");
-                //MessageBox.Show("incorrect Username Passeword ");
+            //}
+            //else
+            //{
+            //    UsernameEntrance.Clear(); 
+            //    UsernameEntrance.Focus();
+            //    PassewordEntrance.Clear() ;
+            //    MessageBox.Show("This Username no exist (Try Noam or Yair)");
+            //    //MessageBox.Show("incorrect Username Passeword ");
 
-            }
+            //}
         }
 
  

@@ -10,5 +10,10 @@ namespace DO
         public int Station2 { get; set; }
         public double Distance { get; set; }
         public TimeSpan Time { get; set; }
+
+        public override string ToString()
+        {
+            return $"Statoin1 { Statoin1 }  Station2 {Station2} Distance { Distance } Time {Time}";
+        }
     }
 }

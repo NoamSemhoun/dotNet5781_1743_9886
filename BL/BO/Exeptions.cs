@@ -1,70 +1,82 @@
-﻿    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+﻿using System;
 
-    namespace BO
+namespace BO
+{
+
+    public enum IDnums { one, two };
+    public class ItemAlreadyExeistExeption : Exception
     {
-        public enum IDnums { one, two };
-
-        public class ItemAlreadyExeistExeption : Exception
+        public readonly Type ItemType;
+        public readonly int Id;
+        public readonly int SecId;
+        private IDnums idnums;
+        public ItemAlreadyExeistExeption(Type t, int id, string message) : base(message) { ItemType = t; Id = id; idnums = IDnums.one; }
+        public ItemAlreadyExeistExeption(Type t, int id) { ItemType = t; Id = id; idnums = IDnums.one; }
+        public ItemAlreadyExeistExeption(Type t, int id, int secId) { ItemType = t; Id = id; SecId = secId; idnums = IDnums.two; }
+        public override string ToString()
         {
-            public readonly Type ItemType;
-            public readonly int Id;
-            public readonly int SecId;
-            private IDnums idnums;
-            public ItemAlreadyExeistExeption(Type t, int id, string message) : base(message) { ItemType = t; Id = id; idnums = IDnums.one; }
-            public ItemAlreadyExeistExeption(Type t, int id) { ItemType = t; Id = id; idnums = IDnums.one; }
-            public ItemAlreadyExeistExeption(Type t, int id, int secId) { ItemType = t; Id = id; SecId = secId; idnums = IDnums.two; }
-            public override string ToString()
+            switch (idnums)
             {
-                switch (idnums)
-                {
-                    case (IDnums.one):
-                        {
-                            return $"ERROR: the {Id} {ItemType} number already exeist at the datasource.";
-                        }
-                    case IDnums.two:
-                        {
-                            return $"ERROR: the {ItemType} with the numbers {Id} and {SecId} already exeist.";
-                        }
-                    default:
-                        return "";
-                }
-
+                case (IDnums.one):
+                    {
+                        return $"ERROR: the {Id} {ItemType} number already exeist at the datasource.";
+                    }
+                case IDnums.two:
+                    {
+                        return $"ERROR: the {ItemType} with the numbers {Id} and {SecId} already exeist.";
+                    }
+                default:
+                    return "";
             }
         }
+    }
 
-        public class ItemNotExeistExeption : Exception
+        //    Type type;
+        //private object obj;
+        //public ItemAlreadyExeistExeption(object o, string[]  props){ obj = o; type = o.GetType(); }
+
+        //public override string ToString()
+        //{
+        //    string returnString = $"the Item {type} with the data:\n ";
+        //    foreach (PropertyInfo prop in type.GetProperties())
+        //    {
+        //        returnString += $"{prop.Name}: {prop.GetValue(obj)}\n";
+        //    }
+        //    return returnString + "already exeist";
+        //}
+
+    
+
+
+    public class ItemNotExeistExeption : Exception
+    {
+        public readonly Type ItemType;
+        public readonly int Id;
+        public readonly int SecId;
+        private IDnums idnums;
+
+        public ItemNotExeistExeption(Type t, int id, string message) : base(message) { ItemType = t; Id = id; idnums = IDnums.one; }
+        public ItemNotExeistExeption(Type t, int id) { ItemType = t; Id = id; idnums = IDnums.one; }
+        public ItemNotExeistExeption(Type t, int id, int secId) { ItemType = t; Id = id; SecId = secId; idnums = IDnums.two; }
+
+        public override string ToString()
         {
-            public readonly Type ItemType;
-            public readonly int Id;
-            public readonly int SecId;
-            private IDnums idnums;
-
-            public ItemNotExeistExeption(Type t, int id, string message) : base(message) { ItemType = t; Id = id; idnums = IDnums.one; }
-            public ItemNotExeistExeption(Type t, int id) { ItemType = t; Id = id; idnums = IDnums.one; }
-            public ItemNotExeistExeption(Type t, int id, int secId) { ItemType = t; Id = id; SecId = secId; idnums = IDnums.two; }
-
-            public override string ToString()
+            switch (idnums)
             {
-                switch (idnums)
+                case (IDnums.one):
                 {
-                    case (IDnums.one):
-                        {
-                            return $"ERROR: the {Id} {ItemType} number didn't exeist at the datasource.";
+                    return $"ERROR: the {Id} {ItemType} number didn't exeist at the datasource.";
 
-                        }
-                    case IDnums.two:
-                        {
-                            return $"ERROR: the {ItemType} with the numbers {Id} and {SecId} didn't exeist.";
-                        }
-                    default:
-                        return "";
                 }
-            }
-        }
+                case IDnums.two:
+                {
+                    return $"ERROR: the {ItemType} with the numbers {Id} and {SecId} didn't exeist.";
+                }
+                default:
+                    return "";
+                }
+            }        
+    }
 
         //public class BadActionExeption : Exception
         //{
@@ -79,5 +91,5 @@
         //    }
         //}
 
-    }
-
+    
+}

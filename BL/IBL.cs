@@ -41,6 +41,8 @@ namespace BlAPI
         void UpdateLine(Line line);
         void DeleteLine(int id);
 
+        int GetLineId(int lineNumber, int firstStation, int lastStation);
+
         #endregion
 
       #region User

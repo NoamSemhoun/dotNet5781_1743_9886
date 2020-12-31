@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         mc:Ignorable="d"
-        Title="BusWindow" Height="450" Width="800">
+        Title="BusWindow" Height="650" Width="1000">
     <Window.Resources>
         <BitmapImage x:Key="ImageSource1" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Images\Busesjpg.jpg"/>
         <BitmapImage x:Key="bus" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="Images\Busesjpg.jpg"/>
@@ -25,8 +25,8 @@
         <Button Name="Add" Content="+" Height="41" Margin="0,4,41,0" Width="48" Click="Add_Click" ClickMode="Press" FontSize="58" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Panel.ZIndex="1" MinWidth="12" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,-25,1,1"
                 ToolTip="  Add a New Bus "  ToolTipService.ShowDuration="50000"/>
 
-        <ListView x:Name="ListView_Bus" HorizontalAlignment="Center" Width="787" MouseDoubleClick="ListBus_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" Margin="0,0,5,-5" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Grid.Row="1" >
+        <ListView x:Name="ListView_Bus" HorizontalAlignment="Center" Width="920" MouseDoubleClick="ListBus_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            ItemsSource= "{Binding}"  FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Grid.Row="1" >
 
 
             <ListView.ItemContainerStyle>
@@ -44,9 +44,9 @@
 
             <ListView.View>
                 <GridView >
-                    <GridViewColumn  Header="Lisence" Width="90" DisplayMemberBinding="{Binding License}" />
-                    <GridViewColumn Header="Date of Start"  Width="90" DisplayMemberBinding="{Binding DateStart_str}"  />
-                    <GridViewColumn Header="Km remaining" Width="122" DisplayMemberBinding="{Binding Km_remaining}"/>
+                    <GridViewColumn Header="Lisence" Width="90" DisplayMemberBinding="{Binding LicenseNum}" />
+                    <GridViewColumn Header="Date of Start"   DisplayMemberBinding="{Binding StartDate}"  />
+                    <GridViewColumn Header="Km since last maintenance"  DisplayMemberBinding="{Binding Km_LastMaintenance}"/>
 
                     <GridViewColumn Header="Drive" Width="60" >
                         <GridViewColumn.CellTemplate>

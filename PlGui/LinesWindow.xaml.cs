@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace PlGui
 {
@@ -19,9 +20,16 @@ namespace PlGui
     /// </summary>
     public partial class LinesWindow : Window
     {
+        BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
+        ObservableCollection<BO.Line> Lines_list;
+        ObservableCollection<BO.LineStation> LineStations_list;
+
+
         public LinesWindow()
         {
             InitializeComponent();
+            Lines_list = new ObservableCollection<BO.Line>( bl.GetAllLines());
+            ListView_Lines.DataContext = Lines_list; 
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -41,7 +49,12 @@ namespace PlGui
 
         private void ListView_Lines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Station_ListView.DataContext = ((sender as ListView).SelectedItem as BO.Line).List_LineStations;
+            //LineStations_list = new ObservableCollection<BO.LineStation>(((sender as ListView).SelectedItem as BO.Line).List_LineStations);
+            //Station_ListView.DataContext = LineStations_list;
 
         }
+
+
     }
 }

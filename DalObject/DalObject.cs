@@ -152,10 +152,10 @@ namespace DL
 
         public void AddLine(Line line)
         {
-            if (DataSource.List_Lines.FirstOrDefault(l => l.LineID == line.LineID) != null)
+            if (DataSource.List_Lines.FirstOrDefault(l => l.LineID == line.LineID ) != null)
 
                 throw new ItemNotExeistExeption(typeof(Line), line.LineID);
-
+            line.LineID = statics.LineId++;
             DataSource.List_Lines.Add(line.Clone());
         }
 
@@ -447,7 +447,9 @@ namespace DL
 
         public AdjacentStation GetAdjacentStation(int station1, int station2)
         {
-            AdjacentStation adjacentStation = DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
+            if (!DataSource.List_AdjacentStations.Any())
+                return null;
+            AdjacentStation adjacentStation  = DataSource.List_AdjacentStations.FirstOrDefault(aS => aS.Statoin1 == station1 && aS.Station2 == station2);
             if (adjacentStation == null)
                 throw new ItemNotExeistExeption(typeof(AdjacentStation), station1, station2);
             return adjacentStation.Clone();

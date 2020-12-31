@@ -34,29 +34,16 @@ namespace Console
 
             IDAL dal = DalFactory.GetDal();
 
-            try
-            {
-                dal.DeleteBus(111);
-            }
-            catch(DO.ItemNotExeistExeption e)
-            {
-                System.Console.WriteLine(e);
-            }
+            foreach (DO.Line l in dal.GetAllLines())
+                System.Console.WriteLine(l);
+        
+            foreach (DO.LineStation l in dal.GetAllLineStations())
+                System.Console.WriteLine(l);
 
-            
-
-
-
-
-            System.Console.ReadLine();
+            foreach (DO.AdjacentStation a in dal.GetAllAdjacentStations())
+                System.Console.WriteLine((a));
+            System.Console.ReadLine();        
         }
 
-        public static void print(IBL bL)
-        {
-            var l = bL.GetAllBuses();
-            foreach (Bus b in l)
-                System.Console.WriteLine(b);
-
-        }
     }
 }

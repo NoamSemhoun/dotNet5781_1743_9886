@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace PlGui
 {
@@ -19,9 +20,15 @@ namespace PlGui
     /// </summary>
     public partial class BusWindow : Window
     {
+        ObservableCollection<BO.Bus> busList;
+        BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
+
+
         public BusWindow()
         {
             InitializeComponent();
+            busList = new ObservableCollection<BO.Bus>(bl.GetAllBuses());
+            ListView_Bus.DataContext = busList;
         }
 
      

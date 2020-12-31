@@ -18,9 +18,12 @@ namespace BL
                 PropertyInfo propFrom = from.GetType().GetProperty(propTo.Name);
                 if (propFrom == null)
                     continue;
-                var value = propFrom.GetValue(from, null);
-                if (value is ValueType || value is string)
-                    propTo.SetValue(to, value);
+                if (!propFrom.GetIndexParameters().Any())
+                {
+                    var value = propFrom.GetValue(from, null);
+                    if (value is ValueType || value is string)
+                        propTo.SetValue(to, value);
+                }                    
             }
         }
         public static object CloneNew<S>(this S from, Type type)
@@ -29,6 +32,17 @@ namespace BL
             from.Clone(to);
             return to;
         }
+
+        public static IEnumerable<T> CloneList<T>(this IEnumerable<T> list)
+        {
+            if (typeof(T) is object)
+                return from item in list
+                       select (T)item.CloneNew(typeof(T));
+            else
+                return from item in list
+                       select item;
+        }
+
 
         public static void LineStationListToDoObjectsLists(this List<LineStation> list, List<DO.LineStation> doLS_List, List<DO.AdjacentStation> doAS_List)
         {
