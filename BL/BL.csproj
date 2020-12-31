@@ -55,6 +55,7 @@
     <Compile Include="Cloning.cs" />
     <Compile Include="IBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

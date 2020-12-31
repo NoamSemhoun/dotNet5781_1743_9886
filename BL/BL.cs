@@ -20,20 +20,26 @@ namespace BL
         {
             DO.Bus doBus = new DO.Bus();
             bus.Clone(doBus);
-            dal.AddBus(doBus);
+            try { dal.AddBus(doBus); }
+            catch (DO.ItemAlreadyExeistExeption e)
+            { throw (ItemAlreadyExeistExeption)e.CloneNew(typeof(ItemAlreadyExeistExeption)); }
         }
 
         public void DeleteBus(int liscenseNumber)
         {
-            dal.DeleteBus(liscenseNumber);
+            try { dal.DeleteBus(liscenseNumber); }
+            catch
+            { throw new ItemNotExeistExeption(typeof(Bus), liscenseNumber); }
         }
 
         public void MaintenanceBus(int liscenseNumber)
         {
-            dal.UpdateBus(liscenseNumber, maintenance);
+            try { dal.UpdateBus(liscenseNumber, maintenance); }
+            catch (DO.ItemNotExeistExeption) 
+            {
+                throw new ItemNotExeistExeption(typeof(Bus), liscenseNumber);
+            }
         }
-
-
 
         private void maintenance(DO.Bus b)
         {
@@ -44,20 +50,30 @@ namespace BL
 
         public void RefuelBus(int liscenseNumber)
         {
-            dal.UpdateBus(liscenseNumber, b => b.Fuel = 1200);
+            try { dal.UpdateBus(liscenseNumber, b => b.Fuel = 1200); }
+            catch (DO.ItemNotExeistExeption)
+            {
+                throw new ItemNotExeistExeption(typeof(Bus), liscenseNumber);
+            }
         }
 
         public void UpdateBus(Bus bus)
         {
             DO.Bus b = new DO.Bus();
             bus.Clone(b);
-            dal.UpdateBus(b);
+            try { dal.UpdateBus(b); }
+            catch (DO.ItemNotExeistExeption)
+            { throw new ItemNotExeistExeption(typeof(Bus), bus.LicenseNum); }
         }
-
 
         public Bus GetBus(int liscenseNumber)
         {
-            DO.Bus b = dal.GetBus(liscenseNumber);
+            DO.Bus b;
+            try { b = dal.GetBus(liscenseNumber); }
+            catch (DO.ItemNotExeistExeption)
+            {
+                throw new ItemNotExeistExeption(typeof(Bus), liscenseNumber);
+            }
             Bus bus = new Bus();
             b.Clone(bus);
             return bus;
@@ -76,7 +92,9 @@ namespace BL
         {
             DO.Line l = new DO.Line();
             line.Clone(l);
-            dal.AddLine(l);
+            try { dal.AddLine(l); }
+            catch (DO.ItemAlreadyExeistExeption)
+            { throw new ItemAlreadyExeistExeption(typeof(Line), line.LineId); }
             saveLineStationList(line.List_LineStations);
         }
 
@@ -88,16 +106,20 @@ namespace BL
             List<DO.LineStation> doLS_List = new List<DO.LineStation>();
             list.LineStationListToDoObjectsLists(doLS_List, AS_List);
             foreach (DO.LineStation lS in doLS_List)
-                try { dal.AddLineStation((DO.LineStation)lS.CloneNew(Type.GetType("LineStation"))); }
-                catch
+                try { dal.AddLineStation((DO.LineStation)lS.CloneNew(typeof(DO.LineStation))); }
+                catch (DO.ItemAlreadyExeistExeption) 
                 {
-                    /////**************************************//////////////**************///////////
+                    DO.LineStation linSt = dal.GetLineStation(lS.LineID, lS.Code);
+                    if (!lS.Equals(linSt))
+                        throw new ItemAlreadyExeistExeption(typeof(DO.LineStation), lS.LineID, lS.Code);
                 }
             foreach (DO.AdjacentStation aS in AS_List)
                 try { dal.AddAdjacentStation((DO.AdjacentStation)aS.CloneNew(Type.GetType("AdjacentStation"))); }
-                catch
+                catch (DO.ItemAlreadyExeistExeption)
                 {
-                    //**************************/****************/************/****************/**********/
+                    DO.AdjacentStation adSt = dal.GetAdjacentStation(aS.Statoin1, aS.Station2);
+                    if (!aS.Equals(adSt))
+                        throw new ItemAlreadyExeistExeption(typeof(DO.AdjacentStation), aS.Statoin1, aS.Station2);
                 }
         }
 
@@ -105,7 +127,9 @@ namespace BL
 
         public void DeleteLine(int id)
         {
-            dal.DeleteLine(id);
+            try { dal.DeleteLine(id); }
+            catch (DO.ItemNotExeistExeption)
+            { throw new ItemNotExeistExeption(typeof(Line), id); }
             IEnumerable<DO.LineStation> tmp = dal.GetAllLineStationsBy(lS => lS.LineID == id);
             foreach (DO.LineStation lS in tmp)
                 dal.DeleteLineStation(lS.LineID, lS.Code);
@@ -120,8 +144,11 @@ namespace BL
         public Line GetLine(int id)
         {
             Line line = new Line();
+            DO.Line lineDo;
+            try { lineDo = dal.GetLine(id); }
+            catch (DO.ItemNotExeistExeption e)
+            { throw new ItemNotExeistExeption(typeof(Line), id); }
 
-            DO.Line lineDo = dal.GetLine(id);
             lineDo.Clone(line);
             List<DO.LineStation> DoLs_list = (List<DO.LineStation>)dal.GetAllLineStationsBy(ls => ls.LineID == id);
             var lineStationList = createStationListFromDoObjects(DoLs_list);
@@ -261,7 +288,7 @@ namespace BL
 
 
         #endregion
-
+          
 
 
 
