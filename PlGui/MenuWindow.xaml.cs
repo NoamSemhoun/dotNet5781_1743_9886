@@ -51,9 +51,9 @@ namespace PlGui
 
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
             LoginWindow login = new LoginWindow();  // Return to the Login Window
             login.Show();
+            this.Close();
         }
     }
 }

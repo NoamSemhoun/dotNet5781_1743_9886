@@ -26,14 +26,54 @@ namespace PlGui
         }
 
 
-       
+
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
-            // if password 
-            MenuWindow Menu = new MenuWindow();
-            Menu.Show();
-            this.Close();
+
+            if (UsernameEntrance.Text == "Noam" || UsernameEntrance.Text == "Yair")
+            {
+                //if (MyTextBox.Visibility = System.Windows.Visibility.Visible && Checkbox_passeword.IsChecked)
+                //{
+                //    MyTextBox.Text = PassewordEntrance.Password;   // To make sur recuperate the passeword of the TextBox
+                //}
+                    MenuWindow Menu = new MenuWindow();
+                Menu.Show();
+                this.Close();
+            }
+            else
+            {
+                UsernameEntrance.Clear(); 
+                UsernameEntrance.Focus();
+                PassewordEntrance.Clear() ;
+                MessageBox.Show("This Username no exist (Try Noam or Yair)");
+                //MessageBox.Show("incorrect Username Passeword ");
+
+            }
+        }
+
+ 
+
+        private void DisplayPasseword(object sender, RoutedEventArgs e)
+        {
+            PassewordEntrance.Visibility = System.Windows.Visibility.Collapsed;
+            MyTextBox.Visibility = System.Windows.Visibility.Visible;
+            MyTextBox.Text = PassewordEntrance.Password ;
+
+            MyTextBox.Focus();
+
+        }
+        private void NotDisplayPasseword(object sender, RoutedEventArgs e)
+        {
+            PassewordEntrance.Visibility = System.Windows.Visibility.Visible;
+            MyTextBox.Visibility = System.Windows.Visibility.Collapsed;
+            PassewordEntrance.Password = MyTextBox.Text;
+            PassewordEntrance.Focus();
+        }
+
+        private void LicencePasswordBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
