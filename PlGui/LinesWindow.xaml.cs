@@ -23,6 +23,7 @@ namespace PlGui
         BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
         ObservableCollection<BO.Line> Lines_list;
         ObservableCollection<BO.LineStation> LineStations_list;
+        
 
 
         public LinesWindow()
@@ -49,12 +50,30 @@ namespace PlGui
 
         private void ListView_Lines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Station_ListView.DataContext = ((sender as ListView).SelectedItem as BO.Line).List_LineStations;
+            if((sender as ListView).SelectedItem != null)
+                Station_ListView.DataContext = ((sender as ListView).SelectedItem as BO.Line).List_LineStations;
             //LineStations_list = new ObservableCollection<BO.LineStation>(((sender as ListView).SelectedItem as BO.Line).List_LineStations);
             //Station_ListView.DataContext = LineStations_list;
 
         }
 
+        private void addLine_Click(object sender, RoutedEventArgs e)
+        {
+            AddLine_window win = new AddLine_window();
+            win.Show();
+            win.ALE += addLineEvent;
+        }
 
+        private void addLineEvent(object sender, EventArgs e)
+        {
+            Lines_list = new ObservableCollection<BO.Line>(bl.GetAllLines());
+            ListView_Lines.DataContext = Lines_list;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Lines_list = new ObservableCollection<BO.Line>(bl.GetAllLines());
+            ListView_Lines.DataContext = Lines_list;
+        }
     }
 }

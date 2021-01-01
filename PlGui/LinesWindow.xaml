@@ -79,14 +79,20 @@
                     <GridViewColumn  Header="index" Width="90" DisplayMemberBinding="{Binding LineStationIndex}" />
                     <GridViewColumn  Header="Code" Width="90" DisplayMemberBinding="{Binding Code}" />
                     <GridViewColumn  Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
-                    
+
                 </GridView>
             </ListView.View>
 
 
-       </ListView>
-        
-    
+        </ListView>
+        <StackPanel HorizontalAlignment="Left" Height="100" Margin="546,20,-0.4,0" VerticalAlignment="Top" Width="248">
+            <Button x:Name="addLine" Content="Add line" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="addLine_Click" Height="30"></Button>
+            <Button Content="Button" Click="Button_Click"/>
+
+
+        </StackPanel>
+
+
 
 
 

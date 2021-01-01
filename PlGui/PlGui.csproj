@@ -55,9 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddLine_window.xaml.cs">
+      <DependentUpon>AddLine_window.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PO\StationLine_View.cs" />
     <Compile Include="User_ControlWindow.xaml.cs">
       <DependentUpon>User_ControlWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddLine_window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

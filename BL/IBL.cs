@@ -40,6 +40,7 @@ namespace BlAPI
         void AddLine(Line line);
         void UpdateLine(Line line);
         void DeleteLine(int id);
+        void AddLine(int lineNumber, List<int> StationsCode, Areas area);
 
         int GetLineId(int lineNumber, int firstStation, int lastStation);
 

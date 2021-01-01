@@ -102,6 +102,80 @@ namespace BL
             saveLineStationList(line.List_LineStations);
         }
 
+        public void AddLine(int lineNumber, List<int> StationsCode, Areas area)
+        {
+            DO.Line line = new DO.Line 
+            {
+                LineID = 0,
+                LineNumber = lineNumber,
+                FirstStation = StationsCode[0],
+                LastStation = StationsCode.Last(),
+                Area = (DO.Areas)area
+            };
+            MyPredicat<DO.Line> ex = new MyPredicat<DO.Line>
+                (line,
+                line.GetType().GetProperty("LineNumber"),
+                line.GetType().GetProperty("FirstStation"),
+                line.GetType().GetProperty("LastStation"));
+            
+            if (dal.GetAllLinesBy(ex.MyPredicatFunc).Any())
+                throw new ItemAlreadyExeistExeption(typeof(Line), lineNumber);
+            
+            dal.AddLine((DO.Line)line.CloneNew(line.GetType()));
+
+            line = dal.GetAllLinesBy(ex.MyPredicatFunc).First();
+
+            //DO.LineStation liS = new DO.LineStation
+            //{
+            //    Code = StationsCode[0],
+            //    LineID = line.LineID,
+            //    NextStation = StationsCode[1],
+            //    PrevStation = -1,
+            //    LineStationIndex = 0
+            //};
+
+            //dal.AddLineStation(liS);
+
+            dal.AddLineStation(new DO.LineStation
+            {
+                Code = StationsCode[0],
+                LineID = line.LineID,
+                NextStation = StationsCode[1],
+                PrevStation = -1,
+                LineStationIndex = 0
+            });
+
+            int i;
+            for ( i = 1; i < StationsCode.Count() - 1 ; i++)
+            {
+                 dal.AddLineStation(new DO.LineStation 
+                 { 
+                     Code = StationsCode[i],
+                     LineID = line.LineID,
+                     NextStation = StationsCode[i + 1],
+                     PrevStation = StationsCode[i - 1],
+                     LineStationIndex = i 
+                 });
+            }
+
+            dal.AddLineStation(new DO.LineStation
+            {
+                Code = StationsCode[i],
+                LineID = line.LineID,
+                NextStation = -1,
+                PrevStation = StationsCode[i -1],
+                LineStationIndex = i
+            });
+
+            //for(i = 0;  i < StationsCode.Count(); i++)
+            //{
+            //    if (!dal.GetAllAdjacentStationsBy(aS => aS.Statoin1 == StationsCode[i] && aS.Station2 == StationsCode[i + 1]).Any())
+            //        throw new Exception();
+            //}
+
+
+        }
+
 
 
         private void saveLineStationList(List<LineStation> list)
@@ -216,6 +290,10 @@ namespace BL
             return 1;
         }
 
+        
+
+        
+
 
         #endregion
 
@@ -300,6 +378,8 @@ namespace BL
             throw new NotImplementedException();
 
         }
+
+        
 
 
 

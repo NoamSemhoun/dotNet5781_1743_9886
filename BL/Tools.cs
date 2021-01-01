@@ -7,17 +7,27 @@ using System.Reflection;
 
 namespace BL
 {
-    static class Tools
+    class MyPredicat<T>
     {
-        static bool isEqual<T>(this T current, T other)
+        private PropertyInfo[] propList;
+        private T obj;
+        public MyPredicat (T o, params PropertyInfo[] pl)
         {
-            Type type = current.GetType();
-            foreach (PropertyInfo prop in current.GetType().GetProperties())
+            propList = pl;
+            obj = o;
+        }
+
+        
+        
+        public bool MyPredicatFunc(T otherObj)
+        {
+            foreach(PropertyInfo prop in propList)
             {
-                if (prop.GetValue(current) != prop.GetValue(other))
+                if ((int)prop.GetValue(obj) != (int)prop.GetValue(otherObj))
                     return false;
             }
             return true;
         }
+        
     }
 }
