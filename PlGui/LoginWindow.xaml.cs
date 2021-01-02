@@ -24,7 +24,7 @@ namespace PlGui
         {
             InitializeComponent();
             //AddLine_window win = new AddLine_window();
-            LinesWindow win = new LinesWindow();
+            LinesWindow win = new LinesWindow();         
             win.Show();
             this.Close();
         }
