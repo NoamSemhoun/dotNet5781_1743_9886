@@ -64,7 +64,9 @@ namespace PlGui
         private void del_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show((sender as Button).DataContext.GetType().Name);
+            selectedStationList.Remove(((sender as Button).DataContext as BO.Station).Code);
             selectedStationListView.Remove((sender as Button).DataContext as BO.Station);
+            
 
         }
 
