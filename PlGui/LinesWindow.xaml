@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:PlGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.LinesWindow"
         mc:Ignorable="d"
-        Title="LinesWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="LinesWindow" Height="450" Width="900" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource lineViewSource}">
-        <ListView x:Name="ListView_Lines" HorizontalAlignment="Center" Width="540" MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" Margin="0,16,252,0" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFF7C07D" SelectionChanged="ListView_Lines_SelectionChanged"
+        <ListView x:Name="ListView_Lines" HorizontalAlignment="Center" Width="598" MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            ItemsSource= "{Binding}" Margin="0,16,294,0" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFF7C07D" SelectionChanged="ListView_Lines_SelectionChanged"
                   >
 
 
@@ -28,11 +28,11 @@
 
             <ListView.View>
                 <GridView >
-                    <GridViewColumn  Header="ID" Width="90" DisplayMemberBinding="{Binding LineID}" />
+                    <GridViewColumn  Header="ID" Width="50" DisplayMemberBinding="{Binding LineID}" />
                     <GridViewColumn  Header="Line number" Width="90" DisplayMemberBinding="{Binding LineNumber}" />
                     <GridViewColumn  Header="Area" Width="90" DisplayMemberBinding="{Binding Area}" />
-                    <GridViewColumn Header="Start" Width="122" DisplayMemberBinding="{Binding FirstStationName}"/>
-                    <GridViewColumn Header="End" Width="122" DisplayMemberBinding="{Binding LastStationName}"/>
+                    <GridViewColumn Header="Start" Width="181" DisplayMemberBinding="{Binding FirstStationName}"/>
+                    <GridViewColumn Header="End" Width="181" DisplayMemberBinding="{Binding LastStationName}"/>
 
 
 
@@ -69,25 +69,45 @@
 
 
 
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="752,0,-3,0" Height="38" Width="43" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="849,3,0,0" Height="38" Width="43" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
         <ListView x:Name="Station_ListView" ItemsSource="{Binding}"  
-            HorizontalAlignment="Right"  VerticalAlignment="Bottom"  Width="248" Height="300" 
-                 Margin="0,0,-0.4,0" Background="#FFF0B9A3" BorderBrush="#FFB1BDDF" BorderThickness="4">
+            HorizontalAlignment="Right"  VerticalAlignment="Bottom"  Width="294" Height="300" Background="#FFF0B9A3" BorderBrush="#FFB1BDDF" BorderThickness="4">
 
             <ListView.View>
                 <GridView >
-                    <GridViewColumn  Header="index" Width="90" DisplayMemberBinding="{Binding LineStationIndex}" />
-                    <GridViewColumn  Header="Code" Width="90" DisplayMemberBinding="{Binding Code}" />
-                    <GridViewColumn  Header="Name" Width="90" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn  Header="index" Width="40" DisplayMemberBinding="{Binding LineStationIndex}" />
+                    <GridViewColumn  Header="Code" Width="50" DisplayMemberBinding="{Binding Code}" />
+                    <GridViewColumn  Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
 
                 </GridView>
             </ListView.View>
 
 
         </ListView>
-        <StackPanel HorizontalAlignment="Left" Height="100" Margin="546,20,-0.4,0" VerticalAlignment="Top" Width="248">
-            <Button x:Name="addLine" Content="Add line" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="addLine_Click" Height="30"></Button>
+        <StackPanel HorizontalAlignment="Left" Height="122" Margin="620,16,0,0" VerticalAlignment="Top" Width="248">
+            <Button x:Name="addLine" ToolTip="   Add a NEW Line  "  ToolTipService.ShowDuration="50000" 
+              Click="addLine_Click" Height="45"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     
+                                        Margin="33,0,80,0" Width="135"  >
+                <StackPanel Orientation="Horizontal" Height="42" Width="134">
+                    <Image Source="Images\TRAJET.png" Width="57"/>
+                    <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
+              Click="Menu_Click" Height="38"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     
+                                        Margin="33,0,80,0" Width="135"  >
+                <StackPanel Orientation="Horizontal" Height="37" Width="134">
+                    <Image Source="Images\SignOut.jpg" Width="57"/>
+                    <Label Content="Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
+                </StackPanel>
+            </Button>
             <Button Content="Button" Click="Button_Click"/>
+
 
 
         </StackPanel>
