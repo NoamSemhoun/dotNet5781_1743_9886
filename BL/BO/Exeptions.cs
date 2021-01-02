@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BO
 {
@@ -77,6 +79,42 @@ namespace BO
                 }
             }        
     }
+
+
+    public class AddLineExeption: Exception
+    {
+        public class StationAdjMissNumbers
+        {
+            public int Station1, Station2;
+        }
+
+
+        public List<int> StationMiss { get; }
+        public List<StationAdjMissNumbers> StationAdjMisses { get; }
+
+        public AddLineExeption(List<int> SML, List<StationAdjMissNumbers> SAMNL) { StationMiss = SML; StationAdjMisses = SAMNL; }
+
+        public override string ToString()
+        {
+            string str = "";
+            if (StationMiss.Count != 0)
+            {
+                str += "the stations with the Code numbers:\n";
+                foreach (int i in StationMiss)
+                    str += $"{i}, ";
+                str += "did not exeist\n";
+            }
+            if(StationAdjMisses.Count != 0)
+            {
+                str += "the follow Station did not have adj Station data:";
+                foreach (StationAdjMissNumbers sA in StationAdjMisses)
+                    str += $"station 1: {sA.Station1}, station 2: {sA.Station2}\n";
+            }
+            return str;
+        }
+
+    }
+
 
         //public class BadActionExeption : Exception
         //{

@@ -4,8 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
+        xmlns:y ="clr-namespace:BO;assembly=BL"
+        xmlns:sys ="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="AddLine_window" Height="450" Width="800">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="AreasData" MethodName="GetValues" ObjectType="{x:Type y:Areas}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="y:Areas"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "1*"/>
@@ -47,5 +59,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="98,149.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Height="39" FontSize="15" Click="AddLine_Click"/>
+        <ComboBox x:Name="AreaCB" HorizontalAlignment="Left" Margin="148,143,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="0.5,0.5" Height="27"
+                  ItemsSource="{Binding Source={StaticResource AreasData}}" SelectionChanged="ComboBoxArea_SelectionChanged">
+        </ComboBox>
+        <Label Content="Area" HorizontalAlignment="Left" Margin="47,138,0,0" VerticalAlignment="Top" Width="68" FontSize="20"/>
     </Grid>
 </Window>

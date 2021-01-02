@@ -90,116 +90,169 @@ namespace BL
         #region Line
         public void AddLine(Line line)
         {
+            //create a DO.line adapt to the new BO.line to add and check if a line with that data already exeist:  
             DO.Line l = new DO.Line();
             line.Clone(l);
             var lineL = dal.GetAllLinesBy(L => L.LineNumber == line.LineNumber && L.FirstStation == line.FirstStation && L.LastStation == line.LastStation);
             if (lineL.Any())
                 throw new ItemAlreadyExeistExeption(typeof(Line), line.LineNumber);
             line.LineID = 0;
-            try { dal.AddLine(l); }
-            catch (DO.ItemAlreadyExeistExeption)
-            { throw new ItemAlreadyExeistExeption(typeof(Line), line.LineID); }
-            saveLineStationList(line.List_LineStations);
+
+            //chack if all the station exeist at the dal layer
+            foreach (LineStation lS in line.List_LineStations)
+                try { dal.GetStation(lS.Code); }
+                catch { throw new Exception(); } // ***************** // ********* // not fauond data exeption
+
+            List<DO.AdjacentStation> adjStationsToAdd = ConvertItems.GetAdjStationToAdd(line);
+
+            dal.AddLine(l);
+            foreach (DO.AdjacentStation aS in adjStationsToAdd)
+                dal.AddAdjacentStation(aS);
+
+            lineL = dal.GetAllLinesBy(L => L.LineNumber == l.LineNumber && L.FirstStation == l.FirstStation && L.LastStation == l.LastStation);
+            l = lineL.First();
+
+            List<DO.LineStation> lineStationsToAdd = ConvertItems.GetLineStationToAdd(l.LineID, line);
+
+            foreach (DO.LineStation lS in lineStationsToAdd)
+                dal.AddLineStation(lS);
+
         }
 
         public void AddLine(int lineNumber, List<int> StationsCode, Areas area)
         {
-            DO.Line line = new DO.Line 
+            if (StationsCode.Count < 2)
+                throw new Exception();//*********//  not adapt params exeption
+            Line line = createLine(lineNumber, StationsCode, area);
+            AddLine(line);
+        }
+
+        private Line createLine(int lineNumber, List<int> StationsCode, Areas area)
+        {
+            Line line = new Line
             {
-                LineID = 0,
-                LineNumber = lineNumber,
+                Area = area,
                 FirstStation = StationsCode[0],
                 LastStation = StationsCode.Last(),
-                Area = (DO.Areas)area
+                FirstStationName = dal.GetStation(StationsCode[0]).Name,
+                LastStationName = dal.GetStation(StationsCode.Last()).Name,
+                LineID = 0,
+                LineNumber = lineNumber,
+                List_LineStations = new List<LineStation>()
             };
-            MyPredicat<DO.Line> ex = new MyPredicat<DO.Line>
-                (line,
-                line.GetType().GetProperty("LineNumber"),
-                line.GetType().GetProperty("FirstStation"),
-                line.GetType().GetProperty("LastStation"));
-            
-            if (dal.GetAllLinesBy(ex.MyPredicatFunc).Any())
-                throw new ItemAlreadyExeistExeption(typeof(Line), lineNumber);
-            
-            dal.AddLine((DO.Line)line.CloneNew(line.GetType()));
 
-            line = dal.GetAllLinesBy(ex.MyPredicatFunc).First();
+            List<int> exeptionStations = new List<int>();
+            List<AddLineExeption.StationAdjMissNumbers> exeptioMissAdjData = new List<AddLineExeption.StationAdjMissNumbers>();
 
-            //DO.LineStation liS = new DO.LineStation
-            //{
-            //    Code = StationsCode[0],
-            //    LineID = line.LineID,
-            //    NextStation = StationsCode[1],
-            //    PrevStation = -1,
-            //    LineStationIndex = 0
-            //};
+            DO.Station station;
+            DO.AdjacentStation adjacent;
 
-            //dal.AddLineStation(liS);
-
-            dal.AddLineStation(new DO.LineStation
+            try 
             {
-                Code = StationsCode[0],
-                LineID = line.LineID,
-                NextStation = StationsCode[1],
-                PrevStation = -1,
-                LineStationIndex = 0
-            });
-
+                station = dal.GetStation(StationsCode[0]);
+                try 
+                {
+                    adjacent = dal.GetAdjacentStation(StationsCode[0], StationsCode[1]);
+                    line.List_LineStations.Add(new LineStation
+                    {
+                        Code = StationsCode[0],
+                        Distance_ToNext = adjacent.Distance,
+                        LineId = line.LineID,
+                        LineStationIndex = 0,
+                        Name = station.Name,
+                        NextStation = StationsCode[1],
+                        PrevStation = -1,
+                        Time_ToNext = adjacent.Time
+                    });
+                }
+                catch (DO.ItemNotExeistExeption)
+                {
+                    exeptioMissAdjData.Add(new AddLineExeption.StationAdjMissNumbers { Station1 = StationsCode[0], Station2 = StationsCode[1] });
+                }
+            }
+            catch (DO.ItemNotExeistExeption)
+            {
+                exeptionStations.Add(StationsCode[0]);
+            }
             int i;
-            for ( i = 1; i < StationsCode.Count() - 1 ; i++)
+            for ( i = 1; i < StationsCode.Count() - 1; i++)
             {
-                 dal.AddLineStation(new DO.LineStation 
-                 { 
-                     Code = StationsCode[i],
-                     LineID = line.LineID,
-                     NextStation = StationsCode[i + 1],
-                     PrevStation = StationsCode[i - 1],
-                     LineStationIndex = i 
-                 });
+                
+                try { station = dal.GetStation(StationsCode[i]); }
+                catch (DO.ItemNotExeistExeption) 
+                {
+                    exeptionStations.Add(StationsCode[i]);
+                    continue;
+                } 
+                try { adjacent = dal.GetAdjacentStation(StationsCode[i], StationsCode[i + 1]); }
+                catch (DO.ItemNotExeistExeption)
+                {
+                    exeptioMissAdjData.Add(new AddLineExeption.StationAdjMissNumbers { Station1 = StationsCode[i], Station2 = StationsCode[i + 1] });
+                    continue;
+                }
+
+                line.List_LineStations.Add(new LineStation
+                {
+                    Code = StationsCode[i],
+                    Distance_ToNext = adjacent.Distance,
+                    LineId = line.LineID,
+                    LineStationIndex = i,
+                    Name = station.Name,
+                    NextStation = StationsCode[i + 1],
+                    PrevStation = StationsCode[i - 1],
+                    Time_ToNext = adjacent.Time                  
+                }
+                );
             }
 
-            dal.AddLineStation(new DO.LineStation
+            try
             {
-                Code = StationsCode[i],
-                LineID = line.LineID,
-                NextStation = -1,
-                PrevStation = StationsCode[i -1],
-                LineStationIndex = i
-            });
+                station = dal.GetStation(StationsCode.Last());
+                line.List_LineStations.Add(new LineStation
+                {
+                    Code = StationsCode[i],
+                    Distance_ToNext = -1,
+                    LineId = line.LineID,
+                    LineStationIndex = i,
+                    Name = station.Name,
+                    NextStation = -1,
+                    PrevStation = StationsCode[i - 1]
+                });
+            }
+            catch (DO.ItemNotExeistExeption)
+            {
+                exeptionStations.Add(StationsCode[0]);
+            }
 
-            //for(i = 0;  i < StationsCode.Count(); i++)
-            //{
-            //    if (!dal.GetAllAdjacentStationsBy(aS => aS.Statoin1 == StationsCode[i] && aS.Station2 == StationsCode[i + 1]).Any())
-            //        throw new Exception();
-            //}
+            if (exeptionStations.Any() || exeptioMissAdjData.Any())
+                throw new AddLineExeption(exeptionStations, exeptioMissAdjData);
 
-
+            return line;
         }
 
 
-
-        private void saveLineStationList(List<LineStation> list)
-        {
-            List<DO.AdjacentStation> AS_List = new List<DO.AdjacentStation>();
-            List<DO.LineStation> doLS_List = new List<DO.LineStation>();
-            list.LineStationListToDoObjectsLists(doLS_List, AS_List);
-            foreach (DO.LineStation lS in doLS_List)
-                try { dal.AddLineStation((DO.LineStation)lS.CloneNew(typeof(DO.LineStation))); }
-                catch (DO.ItemAlreadyExeistExeption) 
-                {
-                    DO.LineStation linSt = dal.GetLineStation(lS.LineID, lS.Code);
-                    if (!lS.Equals(linSt))
-                        throw new ItemAlreadyExeistExeption(typeof(DO.LineStation), lS.LineID, lS.Code);
-                }
-            foreach (DO.AdjacentStation aS in AS_List)
-                try { dal.AddAdjacentStation((DO.AdjacentStation)aS.CloneNew(Type.GetType("AdjacentStation"))); }
-                catch (DO.ItemAlreadyExeistExeption)
-                {
-                    DO.AdjacentStation adSt = dal.GetAdjacentStation(aS.Statoin1, aS.Station2);
-                    if (!aS.Equals(adSt))
-                        throw new ItemAlreadyExeistExeption(typeof(DO.AdjacentStation), aS.Statoin1, aS.Station2);
-                }
-        }
+        //private void saveLineStationList(List<LineStation> list)
+        //{
+        //    List<DO.AdjacentStation> AS_List = new List<DO.AdjacentStation>();
+        //    List<DO.LineStation> doLS_List = new List<DO.LineStation>();
+        //    list.LineStationListToDoObjectsLists(doLS_List, AS_List);
+        //    foreach (DO.LineStation lS in doLS_List)
+        //        try { dal.AddLineStation((DO.LineStation)lS.CloneNew(typeof(DO.LineStation))); }
+        //        catch (DO.ItemAlreadyExeistExeption) 
+        //        {
+        //            DO.LineStation linSt = dal.GetLineStation(lS.LineID, lS.Code);
+        //            if (!lS.Equals(linSt))
+        //                throw new ItemAlreadyExeistExeption(typeof(DO.LineStation), lS.LineID, lS.Code);
+        //        }
+        //    foreach (DO.AdjacentStation aS in AS_List)
+        //        try { dal.AddAdjacentStation((DO.AdjacentStation)aS.CloneNew(typeof(DO.AdjacentStation))); }
+        //        catch (DO.ItemAlreadyExeistExeption)
+        //        {
+        //            //DO.AdjacentStation adSt = dal.GetAdjacentStation(aS.Statoin1, aS.Station2);
+        //            //if (!aS.Equals(adSt))
+        //            //    throw new ItemAlreadyExeistExeption(typeof(DO.AdjacentStation), aS.Statoin1, aS.Station2);
+        //        }
+        //}
 
 
 
