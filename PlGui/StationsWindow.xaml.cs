@@ -65,11 +65,27 @@ namespace PlGui
 
         private void addStation_Click(object sender, RoutedEventArgs e)
         {
-
+            AddStation_Window window = new AddStation_Window();
+            window.ShowDialog();
         }
 
         private void DeleteStation_Click(object sender, RoutedEventArgs e) // The selection
         {
+            MessageBoxResult result = MessageBox.Show("Are you sur to delete *** Elements ?","Delete this Stations", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+                    
+                    // ListViewStations.SelectedItems
+                    // DELETE THEM
+
+                    MessageBox.Show("These Stations have been deleted", "Deleted Stations");
+                    break;
+                
+                case MessageBoxResult.Cancel:
+                    MessageBox.Show("Ouf...", "Cancel");
+                    break;
+            }
 
         }
     }

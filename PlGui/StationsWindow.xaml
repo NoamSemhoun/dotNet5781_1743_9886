@@ -34,7 +34,7 @@
                     <GridViewColumn Header="Delete" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox x:Name="ToDelete">
+                                <CheckBox x:Name="ToDelete_checkBox">
 
                                 </CheckBox>
                             </DataTemplate>
@@ -45,7 +45,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="911,0,0,0" Height="23" Width="31" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="901,0,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
         <DockPanel HorizontalAlignment="Left" Height="256" LastChildFill="False" VerticalAlignment="Top" Width="410" Margin="522,28,0,0" DataContext="{StaticResource stationViewSource}" Background="#FFCDC8C8">
             <Grid x:Name="gridStations"   HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Width="348" Height="227">
                 <Grid.ColumnDefinitions>
