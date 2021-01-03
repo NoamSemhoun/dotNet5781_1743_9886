@@ -34,9 +34,8 @@
                     <GridViewColumn Header="Delete" Width="50">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox x:Name="ToDelete_checkBox">
+                                <CheckBox x:Name="ToDelete_checkBox" Content="{Binding Code}" Tag="{Binding Code}" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}}"/>
 
-                                </CheckBox>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
 

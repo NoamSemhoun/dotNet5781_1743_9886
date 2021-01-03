@@ -31,7 +31,6 @@ namespace PlGui
             InitializeComponent();
             Stations_list = new ObservableCollection<BO.Station>(bl.GetAllStations());
             ListViewStations.DataContext = Stations_list;
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -66,18 +65,37 @@ namespace PlGui
         private void addStation_Click(object sender, RoutedEventArgs e)
         {
             AddStation_Window window = new AddStation_Window();
-            window.ShowDialog();
+            window.ShowDialog();     
+
+            //ListViewStations.Items.Refresh();
+            Stations_list = new ObservableCollection<BO.Station>(bl.GetAllStations());
+            ListViewStations.DataContext = Stations_list;
         }
 
         private void DeleteStation_Click(object sender, RoutedEventArgs e) // The selection
         {
+            //
+
             MessageBoxResult result = MessageBox.Show("Are you sur to delete *** Elements ?","Delete this Stations", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             switch (result)
             {
                 case MessageBoxResult.OK:
-                    
-                    // ListViewStations.SelectedItems
-                    // DELETE THEM
+                    //var StationOk = new List<BO.Station>();
+                    //foreach ( Station item in ListViewStations.SelectedItems)
+                    //    //users.Add((Chapter)item);
+                    //// ListViewStations.SelectedItems
+                    //// DELETE THEM
+                    // bl.DeleteStation(code);
+
+                    //foreach (ListViewItem o in ListViewStations.ItemsSource)
+                    //{
+
+                    //    //if (o.IsSelected)
+                    //    //    ListViewStations.Items[1].ToString();
+                    //    //bl.DeleteStation(o.Content as BO.Station);
+
+
+                    //}
 
                     MessageBox.Show("These Stations have been deleted", "Deleted Stations");
                     break;
