@@ -13,9 +13,13 @@ namespace DO
 
         public string Address { get; set; }
 
-   
 
-        // bonus : bool Handicap, shelter ...
+
+        // bonus : (for user)
+        public bool disabled_access;
+        public bool Digital_PANNEL;
+        public bool covered_shelter; 
+            // ...
 
 
     }

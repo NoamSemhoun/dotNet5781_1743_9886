@@ -16,6 +16,13 @@ namespace BO
 
         public string Address { get; set; }
 
-        public List<Line> List_Lines; // pass through
+        public List<Line> List_Lines; // who pass through this Station
+                                      
+        // bonus : (for user)
+        public bool disabled_access;
+        public bool Digital_PANNEL;
+        public bool covered_shelter;
+        // ...
     }
+
 }

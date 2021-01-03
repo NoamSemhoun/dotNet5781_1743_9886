@@ -16,7 +16,7 @@
         <Label HorizontalAlignment="Left" Height="48" Margin="112,38,0,0" Content="Welcome to you  " VerticalAlignment="Top" Width="390"  FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" />
         <TextBox HorizontalAlignment="Left" Height="48" Margin="371,42,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="282" TextChanged="UserName_TextBox_TextChanged" FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
         <Button Content="BUS " HorizontalAlignment="Left" VerticalAlignment="Top" Click="Bus_ButtonClick" Width="155" Margin="28,222,0,0" Height="96" FontSize="36"/>
-        <Button Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="576,222,0,0" Height="96" FontSize="36"/>
+        <Button Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="576,222,0,0" Height="96" FontSize="36" Click="StationsButton_Click"/>
         <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="298,222,0,0" Height="96" FontSize="36" Click="Lines_ButtonClick"/>
         <Label Content="Choose your Display screen :" HorizontalAlignment="Left" Height="48" Margin="0,136,0,0"  VerticalAlignment="Top" Width="477" FontSize="30" Background="{x:Null}" FontFamily="Arial Nova Cond Light" BorderBrush="{x:Null}" Foreground="White"  />
 

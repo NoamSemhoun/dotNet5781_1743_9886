@@ -55,5 +55,13 @@ namespace PlGui
             login.Show();
             this.Close();
         }
+
+        private void StationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            StationsWindow stations = new StationsWindow();  // Return to the Login Window
+            stations.Show();
+            //this.Close();
+
+        }
     }
 }

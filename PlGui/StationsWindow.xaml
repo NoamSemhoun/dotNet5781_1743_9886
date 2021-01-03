@@ -1,0 +1,116 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+        xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.StationsWindow"
+        mc:Ignorable="d"
+        Title="StationsWindow" Height="550" Width="950" Loaded="Window_Loaded_1">
+    <Window.Resources>
+        <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid>
+        <ListView x:Name="ListViewStations"  ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="519"  Width="504" SelectionChanged="ListViewStations_SelectionChanged" FontSize="14" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+
+                <GridView>
+
+                    <GridViewColumn  Header="Code" Width="50" DisplayMemberBinding="{Binding Code}" />
+                    <GridViewColumn  Header="Name" Width="300" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Width="30" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image ToolTip="Disabled Access" Source="C:\Users\33768\source\repos\dotNet5781_1743_9886\PlGui\Images\disabledAccess.jpg" Width="20"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        
+                    </GridViewColumn>
+                    <GridViewColumn Header="Delete" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="ToDelete">
+
+                                </CheckBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="911,0,0,0" Height="23" Width="31" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
+        <DockPanel HorizontalAlignment="Left" Height="256" LastChildFill="False" VerticalAlignment="Top" Width="410" Margin="522,28,0,0" DataContext="{StaticResource stationViewSource}" Background="#FFCDC8C8">
+            <Grid x:Name="gridStations"   HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Width="348" Height="227">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="103"/>
+                    <ColumnDefinition Width="86"/>
+                    <ColumnDefinition Width="41"/>
+                    <ColumnDefinition Width="67*"/>
+                    <ColumnDefinition Width="51*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MinHeight="27"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="39"/>
+                    <RowDefinition Height="Auto" MinHeight="38"/>
+                    <RowDefinition Height="Auto" MinHeight="45"/>
+                </Grid.RowDefinitions>
+                <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7,0,1" Grid.Row="2" VerticalAlignment="Center" Height="38" Width="76" FontSize="16"/>
+                <TextBox x:Name="addressTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="0,11,-54,12" Grid.Row="2" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="299" Grid.ColumnSpan="4" FontSize="16"/>
+                <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,8,0,1" Grid.Row="1" VerticalAlignment="Center" Height="34" Width="56" FontSize="16"/>
+                <TextBox x:Name="codeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,9,0,11" Grid.Row="1" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+                <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,11,0,0" Grid.Row="3" VerticalAlignment="Center" Height="32" Width="77" FontSize="16"/>
+                <TextBox x:Name="latitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,11,0,8" Grid.Row="3" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Latitude,  Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+
+
+                <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,12,0,0" Grid.Row="4" VerticalAlignment="Center" Height="38" Width="91" FontSize="16"/>
+                <TextBox x:Name="longitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,14,0,12" Grid.Row="4" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+                <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Center" Height="38" Width="66" FontSize="16"/>
+                <TextBox x:Name="nameTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,8,-54,11" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="299" Grid.ColumnSpan="4" FontSize="16"/>
+            </Grid>
+        </DockPanel>
+
+
+        <Button x:Name="addStation" ToolTip="   Add a NEW Station  "  ToolTipService.ShowDuration="50000" 
+                Click="addStation_Click" Height="48"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     
+                Margin="636,339,72,132" Width="234"  >
+            <StackPanel Orientation="Horizontal" Height="48" Width="216">
+                <Image Source="Images/STATION.jpg" Width="63"/>
+                <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}" Width="102"/>
+            </StackPanel>
+        </Button>
+
+
+        <Button x:Name="DeleteStation" ToolTip="   Delete a Station  "  ToolTipService.ShowDuration="50000" 
+                Click="DeleteStation_Click" Height="48"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     
+                Margin="636,404,72,67" Width="234"  >
+            <StackPanel Orientation="Horizontal" Height="42" Width="231">
+                <Image Source="Images/delete.png" Width="50" Height="42" VerticalAlignment="Top"/>
+                <Label Content="Delete the Selection" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Background="{x:Null}" Width="170" BorderThickness="0,4,0,0" Margin="0,0,0,10"/>
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
+                Click="Menu_Click" Height="42"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                     
+                Margin="636,467,72,10" Width="234"  >
+            <StackPanel Orientation="Horizontal" Height="37" Width="229">
+                <Image Source="Images/SignOut.jpg" Width="61"/>
+                <Label Content="Back to Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Background="{x:Null}" Width="140"/>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</Window>

@@ -78,8 +78,7 @@ namespace PlGui
 
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            MenuWindow menu = new MenuWindow();   // JUST TO TEST
-            menu.Show();                        // JUST TO TEST
+            
             this.Close();
 
         }

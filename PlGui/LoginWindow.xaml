@@ -14,22 +14,22 @@
                 <GradientStop Color="#FF323231" Offset="0.996"/>
             </RadialGradientBrush>
         </Grid.Background>
-        <Label HorizontalAlignment="Left" Height="68" Content="Login as :" VerticalAlignment="Top" Width="235"  Margin="21,46,0,0" FontSize="35" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
-        <RadioButton Content=" Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="347,107,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center" Padding="6,-1,0,0"/>
-        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="! ברוך הבא" VerticalAlignment="Top" Width="272" Margin="210,-7,0,0" FontSize="48" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}">
+        <Label HorizontalAlignment="Left" Height="68" Content="Login as :" VerticalAlignment="Top" Width="235"  Margin="17,42,0,0" FontSize="35" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
+        <RadioButton Content=" Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="347,103,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center" Padding="6,-1,0,0"/>
+        <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="! ברוך הבא" VerticalAlignment="Top" Width="272" Margin="210,-9,0,0" FontSize="48" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <RadioButton Content=" Traveller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="45,107,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center"/>
-        <StackPanel Margin="336,160,23,0" Background="#FF444444">
+        <RadioButton Content=" Traveller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="45,103,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center"/>
+        <StackPanel Margin="336,154,23,10" Background="#FF444444">
             <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="User Name :" Background="#FF444444"/>
             <TextBox x:Name="UsernameEntrance" Height="42" FontSize="26" />
             <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="Password :" Background="#FF444444"/>
             <PasswordBox  x:Name="PassewordEntrance" Height="46"  FontSize="26"  />
             <TextBox x:Name="MyTextBox" MouseLeave="LicencePasswordBox_MouseLeave" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="333" FontSize="26"/>
             <CheckBox Name="Checkbox_passeword" Content="Display passeword" Unchecked="NotDisplayPasseword" Checked="DisplayPasseword"  HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="15" Height="24" Width="148" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <Button Content="Login" HorizontalAlignment="Right" Height="41" VerticalAlignment="Top" Width="116" FontSize="20" Click="Login_Click" Margin="0,0,28,0"/>
+            <Button Content="Login" HorizontalAlignment="Right" Height="35" VerticalAlignment="Top" Width="116" FontSize="20" Click="Login_Click" Margin="0,0,28,0"/>
 
         </StackPanel>
     </Grid>

@@ -26,7 +26,7 @@
                 ToolTip="  Add a New Bus "  ToolTipService.ShowDuration="50000"/>
 
         <ListView x:Name="ListView_Bus" HorizontalAlignment="Center" Width="920" MouseDoubleClick="ListBus_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}"  FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Grid.Row="1" Foreground="White" >
+            ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Grid.Row="1" Foreground="White" >
 
 
             <ListView.ItemContainerStyle>
@@ -37,7 +37,7 @@
 
 
             <ListView.Background>
-                <ImageBrush Opacity="0.3" ImageSource="Busesjpg.jpg"/>
+                <ImageBrush Opacity="0.3" ImageSource="Images\Busesjpg.jpg"/>
             </ListView.Background>
 
 

@@ -59,6 +59,9 @@
       <DependentUpon>AddLine_window.xaml</DependentUpon>
     </Compile>
     <Compile Include="PO\StationLine_View.cs" />
+    <Compile Include="StationsWindow.xaml.cs">
+      <DependentUpon>StationsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User_ControlWindow.xaml.cs">
       <DependentUpon>User_ControlWindow.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StationsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="User_ControlWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +129,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\DataSources\BO.Line.datasource" />
+    <None Include="Properties\DataSources\BO.Station.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,6 +157,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\TRAJET.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\STATION.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\disabledAccess.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,8 +12,7 @@
     </Window.Resources>
     <Grid DataContext="{StaticResource lineViewSource}">
         <ListView x:Name="ListView_Lines" HorizontalAlignment="Center" Width="598" MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" Margin="0,16,294,0" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFF7C07D" SelectionChanged="ListView_Lines_SelectionChanged"
-                  >
+            ItemsSource= "{Binding}" Margin="0,16,294,0" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFF7C07D" SelectionChanged="ListView_Lines_SelectionChanged">
 
 
             <ListView.ItemContainerStyle>
@@ -84,7 +83,7 @@
 
 
         </ListView>
-        <StackPanel HorizontalAlignment="Left" Height="122" Margin="620,16,0,0" VerticalAlignment="Top" Width="248">
+        <StackPanel HorizontalAlignment="Left" Height="122" Margin="617,10,0,0" VerticalAlignment="Top" Width="248">
             <Button x:Name="addLine" ToolTip="   Add a NEW Line  "  ToolTipService.ShowDuration="50000" 
               Click="addLine_Click" Height="45"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
