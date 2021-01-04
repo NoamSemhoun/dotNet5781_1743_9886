@@ -23,6 +23,10 @@ namespace PlGui
         public LoginWindow()
         {
             InitializeComponent();
+
+            //LinesWindow win = new LinesWindow();
+            //win.Show();
+            //this.Close();
           
         }
 

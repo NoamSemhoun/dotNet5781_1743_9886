@@ -13,6 +13,7 @@ namespace BL
     {
         DalApi.IDAL dal = DalApi.DalFactory.GetDal();
 
+        
 
         #region bus
 
@@ -396,11 +397,41 @@ namespace BL
                 dal.UpdateLine((DO.Line)l.CloneNew(typeof(DO.Line)));
         }
 
+        public void AddAdjStation(int station1, int station2, double distance, TimeSpan time)
+        {
+            
+            try 
+            {
+                dal.AddAdjacentStation(new DO.AdjacentStation 
+                {
+                    Statoin1 = station1,
+                    Station2 = station2,
+                    Distance = distance,
+                    Time = time
+                });
+                
+            }
+            catch (DO.ItemAlreadyExeistExeption)
+            { throw new ItemAlreadyExeistExeption(typeof(DO.AdjacentStation), station1, station2); }
+           
+        }
+        
+        public void UpdateAdjStation(int station1, int station2, double distance, TimeSpan time)
+        {
+            try 
+            {
+                dal.UpdateAdjacentStation(station1, station2, a => { a.Distance = distance; a.Time = time; });
+            }
+            catch (DO.ItemNotExeistExeption e)
+            {
+                throw (ItemNotExeistExeption) e.CloneNew(typeof(ItemNotExeistExeption));
+            }
+        }
 
         #endregion
 
         #region User 
-        
+
         public bool CheckAdmin(string userName, string password)
         {
             throw new NotImplementedException();

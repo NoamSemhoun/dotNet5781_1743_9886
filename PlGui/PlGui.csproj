@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,12 +57,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddAdjacentStation.xaml.cs">
+      <DependentUpon>AddAdjacentStation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddLine_window.xaml.cs">
       <DependentUpon>AddLine_window.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddStation_Window.xaml.cs">
       <DependentUpon>AddStation_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PO\myTime.cs" />
     <Compile Include="PO\StationLine_View.cs" />
     <Compile Include="StationsWindow.xaml.cs">
       <DependentUpon>StationsWindow.xaml</DependentUpon>
@@ -68,6 +74,10 @@
     <Compile Include="User_ControlWindow.xaml.cs">
       <DependentUpon>User_ControlWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddAdjacentStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddLine_window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,5 +184,6 @@
   <ItemGroup>
     <Resource Include="Images\disabledAccess.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

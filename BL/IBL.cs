@@ -31,6 +31,9 @@ namespace BlAPI
         void UpdateStation(Station station);
         void DeleteStation(int code);
 
+        void AddAdjStation(int station1, int station2, double distance, TimeSpan time);
+        void UpdateAdjStation(int station1, int station2, double distance, TimeSpan time);
+
         #endregion
       
       #region Line

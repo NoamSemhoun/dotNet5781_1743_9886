@@ -30,6 +30,7 @@ namespace PlGui
         List<int> selectedStationList = new List<int>();
         ObservableCollection<BO.Station> selectedStationListView = new ObservableCollection<BO.Station>();
         BO.Areas area;
+        private BO.AddLineExeption addLineEx;
 
         public AddLine_window()
         {
@@ -72,10 +73,46 @@ namespace PlGui
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
-            bl.AddLine(lineNumber, selectedStationList, area);
-            if (ALE != null)
-                ALE(this, new EventArgs());
-            this.Close();
+            try
+            {
+                bl.AddLine(lineNumber, selectedStationList, area);
+                if (ALE != null)
+                    ALE(this, new EventArgs());
+                this.Close();
+            }
+            catch (BO.ItemAlreadyExeistExeption)
+            {
+                MessageBox.Show("a bus with this data already exeist", "Error");
+            }
+            catch (BO.AddLineExeption ex)
+            {
+                MessageBoxResult result = MessageBox.Show("some stations miss adjacent data\n do you wont to add it?", "Error", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    addLineEx = ex;
+                    AddAdjacentStation win = new AddAdjacentStation(ex.StationAdjMisses[0].Station1, ex.StationAdjMisses[0].Station2);
+                    ex.StationAdjMisses.RemoveAt(0);
+                    win.ASAE += addAdj_event;
+                    win.Show();
+                }
+            }
+        }
+
+        private void addAdj_event(object sender, EventArgs e)
+        {
+            if (addLineEx.StationAdjMisses.Any())
+            {
+                MessageBoxResult result = MessageBox.Show("still some stations miss adjacent data\n do you wont to add it?", "Error", MessageBoxButton.OKCancel);
+                if (result == MessageBoxResult.OK)
+                {
+                    AddAdjacentStation win = new AddAdjacentStation(addLineEx.StationAdjMisses[0].Station1, addLineEx.StationAdjMisses[0].Station2);
+                    addLineEx.StationAdjMisses.RemoveAt(0);
+                    win.ASAE += addAdj_event;
+                    win.Show();
+                }
+            }
+            else
+                AddLine_Click(this, new RoutedEventArgs());
         }
 
 
