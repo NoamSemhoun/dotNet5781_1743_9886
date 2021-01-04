@@ -19,6 +19,12 @@ namespace PlGui
     /// </summary>
     public partial class AddStation_Window : Window
     {
+        BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
+        bool isShelterCovered = true;
+        bool isDisableOk = true;
+        bool isDigital = false;
+
+
         public AddStation_Window()
         {
             InitializeComponent();
@@ -32,9 +38,58 @@ namespace PlGui
             // stationViewSource.Source = [source de données générique]
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        
+
+        private void OK_Click(object sender, RoutedEventArgs e)
         {
+            //             grid1.DataContext = 
+
+            try
+                {
+                BO.Station myNewStation = new BO.Station {
+
+                    Address = addressTextBox.Text,
+                    Code = int.Parse(codeTextBox.Text),
+                    Longitude = SliderLongitude.Value,
+                    Latitude = SliderLatitude.Value,
+                    Name = nameTextBox.Text,
+                    disabled_access = isDisableOk,
+                    Digital_PANNEL = isDisableOk,
+                    covered_shelter = isShelterCovered };
+            
+            
+         
+            bl.AddStation(myNewStation);
+            }
+            catch { MessageBox.Show("Error"); } // IN : Name Code Or Adress
+            this.Close();
 
         }
+
+        private void ShelterC_Checked(object sender, RoutedEventArgs e)
+        {
+            isShelterCovered = true;
+        }
+
+        private void Digital_Checked(object sender, RoutedEventArgs e)
+        {
+            isDisableOk = true;
+        }
+
+        private void Disabled_Checked(object sender, RoutedEventArgs e)
+        {
+            isDisableOk = true;
+            //X_Notdisabled.Visibility = Visibility.Hidden;
+
+        }
+
+        private void NOT_Disabled_Checked(object sender, RoutedEventArgs e)
+        {
+            isDisableOk = false;
+            //X_Notdisabled.Visibility = Visibility.Visible;
+
+        }
+
+      
     }
 }

@@ -318,7 +318,7 @@ namespace DL
         public void AddStation(Station station)
         {
             if (DataSource.List_Stations.FirstOrDefault(l => l.Code == station.Code) != null)
-                throw new ItemAlreadyExeistExeption(typeof(Station), station.Code);
+                throw new ItemAlreadyExeistExeption(typeof(Station), station.Code); //   TO do
             DataSource.List_Stations.Add(station.Clone());
         }
 
