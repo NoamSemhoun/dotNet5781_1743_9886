@@ -47,9 +47,16 @@ namespace BlAPI
 
         int GetLineId(int lineNumber, int firstStation, int lastStation);
 
+        IEnumerable<Ferquency> GetFerquencies(int id);
+        IEnumerable<Ferquency> GetFerquencies(Line line);
+
+        void AddLineStation(int id, int station, int index);
+
+        LineStation GetLineStation(int lineID, int index);
+
         #endregion
 
-      #region User
+        #region User
 
 
         bool CheckAdmin(string userName, string password);

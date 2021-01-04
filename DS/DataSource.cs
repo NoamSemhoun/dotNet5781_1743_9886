@@ -485,6 +485,7 @@ namespace DS
             #region Create 10 Lines With 10 Line stations each, with Random Location :       
 
             List_Lines = new List<Line>(); // Create 10  Line 
+            List_LineTrips = new List<LineTrip>();
             List_LineStations = new List<LineStation>();   // With 10 Line stations each ( Masloul)
             for (int i = 0; i < 10; i++)
             {
@@ -516,6 +517,18 @@ namespace DS
                 List_LineStations.Last().NextStation = 0;
 
                 List_Lines.Last().LastStation = List_LineStations.Last().Code;
+
+                for (int j = 1; j <= 3; j++)
+                {
+                    List_LineTrips.Add(new LineTrip
+                    {
+                        Id = DO.statics.LineTripId++,
+                        LineID = i + 1,
+                        StartAt = new TimeSpan((j * 6) - 1,0,0),
+                        FinishAt = new TimeSpan((j+1) * 6 - 1, 0, 0),
+                        Frequency = new TimeSpan(0, j * 10, 0)
+                    });
+                }
             }
 
             List_AdjacentStations = new List<AdjacentStation>();
@@ -530,6 +543,9 @@ namespace DS
                         Time = new TimeSpan(0, random.Next(60), random.Next(60))
                     }) ;
             }
+
+            
+            
 
             #endregion
         }

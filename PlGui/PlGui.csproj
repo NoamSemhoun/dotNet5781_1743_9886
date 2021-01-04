@@ -60,6 +60,9 @@
     <Compile Include="AddAdjacentStation.xaml.cs">
       <DependentUpon>AddAdjacentStation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddLineStation_Window.xaml.cs">
+      <DependentUpon>AddLineStation_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddLine_window.xaml.cs">
       <DependentUpon>AddLine_window.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,10 @@
       <DependentUpon>User_ControlWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AddAdjacentStation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddLineStation_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

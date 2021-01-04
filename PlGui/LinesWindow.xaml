@@ -6,13 +6,17 @@
         xmlns:local="clr-namespace:PlGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.LinesWindow"
         mc:Ignorable="d"
-        Title="LinesWindow" Height="450" Width="900" Loaded="Window_Loaded">
+        Title="LinesWindow" Width="1200" Height="700" HorizontalAlignment="Center" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
     </Window.Resources>
     <Grid DataContext="{StaticResource lineViewSource}">
-        <ListView x:Name="ListView_Lines" HorizontalAlignment="Center" Width="598" MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" Margin="0,16,294,0" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFF7C07D" SelectionChanged="ListView_Lines_SelectionChanged">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800" />
+            <ColumnDefinition Width="400" />
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="ListView_Lines" Grid.Column="0" HorizontalAlignment="Stretch"  MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+            ItemsSource= "{Binding}"  FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFF7C07D" SelectionChanged="ListView_Lines_SelectionChanged">
 
 
             <ListView.ItemContainerStyle>
@@ -30,8 +34,8 @@
                     <GridViewColumn  Header="ID" Width="50" DisplayMemberBinding="{Binding LineID}" />
                     <GridViewColumn  Header="Line number" Width="90" DisplayMemberBinding="{Binding LineNumber}" />
                     <GridViewColumn  Header="Area" Width="90" DisplayMemberBinding="{Binding Area}" />
-                    <GridViewColumn Header="Start" Width="181" DisplayMemberBinding="{Binding FirstStationName}"/>
-                    <GridViewColumn Header="End" Width="181" DisplayMemberBinding="{Binding LastStationName}"/>
+                    <GridViewColumn Header="Start" Width="280"  DisplayMemberBinding="{Binding FirstStationName}"/>
+                    <GridViewColumn Header="End" Width="280" DisplayMemberBinding="{Binding LastStationName}"/>
 
 
 
@@ -66,54 +70,112 @@
             <TextBox x:Name="lineIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3,10,0,12" Grid.Row="4" Text="{Binding LineId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>-->
 
-
+        <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="200*"/>
+                <RowDefinition Height="200*"/>
+            </Grid.RowDefinitions>
 
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="849,3,0,0" Height="38" Width="43" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
-        <ListView x:Name="Station_ListView" ItemsSource="{Binding}"  
-            HorizontalAlignment="Right"  VerticalAlignment="Bottom"  Width="294" Height="300" Background="#FFF0B9A3" BorderBrush="#FFB1BDDF" BorderThickness="4">
+        <ListView x:Name="Station_ListView" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="1"
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF0B9A3" BorderBrush="#FFB1BDDF" BorderThickness="4">
 
             <ListView.View>
                 <GridView >
                     <GridViewColumn  Header="index" Width="40" DisplayMemberBinding="{Binding LineStationIndex}" />
                     <GridViewColumn  Header="Code" Width="50" DisplayMemberBinding="{Binding Code}" />
                     <GridViewColumn  Header="Name" Width="200" DisplayMemberBinding="{Binding Name}" />
-
+                    <GridViewColumn  Header="Time" Width ="80" />
+                    
                 </GridView>
             </ListView.View>
 
 
         </ListView>
-        <StackPanel HorizontalAlignment="Left" Height="122" Margin="617,10,0,0" VerticalAlignment="Top" Width="248">
-            <Button x:Name="addLine" ToolTip="   Add a NEW Line  "  ToolTipService.ShowDuration="50000" 
-              Click="addLine_Click" Height="45"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
+        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Grid.Column="1" Grid.Row="0">
+                <Button x:Name="addLine" ToolTip="   Add a NEW Line  " ToolTipService.ShowDuration="50000"  
+                Click="addLine_Click" Height="45"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
                                      
-                                        Margin="33,0,80,0" Width="135"  >
-                <StackPanel Orientation="Horizontal" Height="42" Width="134">
+                 Width="130"  >
+                <StackPanel Orientation="Horizontal" Height="42" Width="134" HorizontalAlignment="Right">
                     <Image Source="Images\TRAJET.png" Width="57"/>
                     <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                 </StackPanel>
             </Button>
 
             <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
-              Click="Menu_Click" Height="38"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
+              Click="Menu_Click" Height="45"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
                                      
-                                        Margin="33,0,80,0" Width="135"  >
+                                         Width="120"  >
                 <StackPanel Orientation="Horizontal" Height="37" Width="134">
                     <Image Source="Images\SignOut.jpg" Width="57"/>
                     <Label Content="Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                 </StackPanel>
             </Button>
-            <Button Content="Button" Click="Button_Click"/>
+
+                <Button x:Name="add_Station"  Click="add_Station_Click"  Height="45"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                        IsEnabled="False"             
+                                         Width="144"  >
+                    <StackPanel Orientation="Horizontal" Height="37" Width="134">
+                        <Image Source="Images\addStationImg.PNG" Width="50"/>
+                        <Label Content="Add Staion" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
+                    </StackPanel>
+                </Button>
 
 
 
-        </StackPanel>
+            </StackPanel>
+
+            <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="2" 
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF0B9A3" BorderBrush="#FFB1BDDF" BorderThickness="4" Visibility="Hidden">
+
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn  Header="Staet time" Width="120" DisplayMemberBinding="{Binding StartTime  }" />
+                        <GridViewColumn  Header="End time" Width="130" DisplayMemberBinding="{Binding EndTime  }" />
+                        <GridViewColumn  Header="Frequrncy" Width="120" DisplayMemberBinding="{Binding  Freq  }" />
+                    </GridView>
+                </ListView.View>
 
 
+            </ListView>
+
+            <Grid x:Name="addStation_Grid" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF60A091"  >
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="choose Station:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                    <ComboBox x:Name="Stations_CB" VerticalAlignment="Center"  ItemsSource="{Binding}" Width="200"  Height="40" FontSize="20" SelectionChanged="Stations_CB_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Code}" FontSize="15"/>
+                                    <Label Content="{Binding Name}" FontSize="15"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+
+                    </ComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="index: " Height="45" FontSize="30" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="index_TB" Text="index" Foreground="#FFC8BDBD" FontSize="30" Background="White"  Width="90" Height="45"
+                                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                 TextChanged="index_TB_TextChanged"/>
+                    </StackPanel>
+                    <Button x:Name="addStation_button" Content="Add"   FontStyle="Italic" FontSize="35" 
+                            VerticalContentAlignment="Top" HorizontalContentAlignment="Center" IsEnabled="False" Click="addStation_button_Click"/>
+
+                </StackPanel>
+
+                
+                
+             </Grid>
 
 
+        </Grid>
+        
 
     </Grid>
 </Window>

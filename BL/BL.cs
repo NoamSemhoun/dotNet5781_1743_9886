@@ -320,6 +320,8 @@ namespace BL
             return list;
         }
 
+        
+
         public int GetLineId(int lineNumber, int firstStation, int lastStation)
         {
             var l = dal.GetAllLinesBy(L => L.LineNumber == lineNumber && L.FirstStation == firstStation && L.LastStation == lastStation);
@@ -331,6 +333,13 @@ namespace BL
         public void UpdateLine(Line line)
         {
             dal.UpdateLine((DO.Line)line.CloneNew(typeof(DO.Line)));
+
+            IEnumerable<DO.AdjacentStation> adj = from item in line.List_LineStations
+                                                  where item.NextStation != -1 
+                                                  select dal.GetAdjacentStation(item.Code, item.NextStation);
+            
+
+
             foreach (LineStation l in line.List_LineStations)
                 dal.UpdateLineStation((DO.LineStation)l.CloneNew(typeof(DO.LineStation)));
         }
@@ -344,9 +353,129 @@ namespace BL
             return 1;
         }
 
-        
+        public IEnumerable<Ferquency> GetFerquencies(int id)
+        {
+            return from item in dal.GetAllLineTripsBy(lT => lT.LineID == id)
+                   select new Ferquency { StartTime = item.StartAt, EndTime = item.FinishAt, Freq = item.Frequency };                  
+        }
 
-        
+        public IEnumerable<Ferquency> GetFerquencies(Line line)
+        {
+            return from item in dal.GetAllLineTripsBy(lT => lT.LineID == line.LineID)
+                   select new Ferquency { StartTime = item.StartAt, EndTime = item.FinishAt, Freq = item.Frequency };
+        }
+
+        public void AddLineStation(int id, int station, int index)
+        {
+
+            Line line;
+            try { line = GetLine(id); }
+            catch (ItemNotExeistExeption)
+            { throw new Exception(); } // *************//lack of data exeption
+
+            string name;
+            try { name = dal.GetStation(station).Name; }
+            catch(DO.ItemNotExeistExeption)
+            { throw new Exception(); } // ***********//data not exeist
+
+            if (index < 0 || index > line.List_LineStations.Count())
+                throw new Exception(); // *******************// incorrect input exeption;
+
+            LineStation prev, next;
+            int prevCode, nextCode = -1;
+            double distance = -1;
+            TimeSpan time = new TimeSpan(0);
+
+
+
+            if (index != 0)
+            {
+                prev = line.List_LineStations[index - 1];
+                prevCode = prev.Code;
+                try
+                { DO.AdjacentStation adjData = dal.GetAdjacentStation(prev.Code, station);
+                    prev.Distance_ToNext = adjData.Distance;
+                    prev.NextStation = station;
+                    prev.Time_ToNext = adjData.Time;
+                }
+                catch ( DO.ItemNotExeistExeption)
+                { throw new Exception(); }//*******************//********lack of data exeption
+            }
+            else
+            {
+                prevCode = -1;
+            }
+            if (index != line.List_LineStations.Count)
+            {
+                next = line.List_LineStations[index];
+                nextCode = next.Code;
+                next.PrevStation = station;
+                
+                try
+                {
+                    DO.AdjacentStation adjData = dal.GetAdjacentStation(station, next.Code);
+                    distance = adjData.Distance;
+                    time = adjData.Time;
+                }
+                catch (DO.ItemNotExeistExeption)
+                { throw new Exception(); } //****************//********** lack pf data exeption
+            }
+            
+            foreach (LineStation l in line.List_LineStations)
+                if (l.LineStationIndex >= index)
+                    l.LineStationIndex++;
+
+
+
+            LineStation lineStation = new LineStation
+            {
+                Code = station,
+                LineStationIndex = index,
+                LineId = id,
+                PrevStation = prevCode,
+                NextStation = nextCode,
+                Distance_ToNext = distance,
+                Time_ToNext = time,
+                Name = name,
+            };
+
+            line.List_LineStations.Add(lineStation);
+            UpdateLine(line);
+        }
+
+        public LineStation GetLineStation(int lineID, int index)
+        {
+            DO.LineStation dalLineStation = dal.GetLineStation(lineID, index);
+            int nextStation;
+            try { nextStation = dal.GetLineStation(lineID, index + 1).Code; }
+            catch (DO.ItemNotExeistExeption)
+            { nextStation = -1; }
+
+            int prevStation;
+            if (index > 0)
+                prevStation = dal.GetLineStation(lineID, index - 1).Code;
+            else
+                prevStation = -1;
+            DO.AdjacentStation adjData;
+            try { adjData = dal.GetAdjacentStation(dalLineStation.Code, nextStation); }
+            catch(DO.ItemNotExeistExeption)
+            { throw new Exception(); } //******************//*************lack of data Exeption 
+
+            
+
+            return new LineStation
+            {
+                Code = dalLineStation.Code,
+                Distance_ToNext = adjData.Distance,
+                LineId = lineID,
+                LineStationIndex = index,
+                Time_ToNext = adjData.Time,
+                NextStation = nextStation,
+                PrevStation = prevStation,
+                Name = dal.GetStation(dalLineStation.Code).Name
+            };
+        }
+
 
 
         #endregion

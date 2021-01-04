@@ -4,12 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using BlAPI;
 
 namespace BL
 {
-    static class tools
+    
+    
+
+    
+ 
+
+    static class Tools
     {
-        public static bool isEqual(this object obj, object other)
+        
+        static bool isEqual(this object obj, object other)
         {
             if(obj.GetType().Name != other.GetType().Name)
             {
@@ -22,6 +30,8 @@ namespace BL
             }
             return true;
         }
+
+        
     }
 
 

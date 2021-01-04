@@ -24,10 +24,10 @@ namespace PlGui
         {
             InitializeComponent();
 
-            //LinesWindow win = new LinesWindow();
-            //win.Show();
-            //this.Close();
-          
+            LinesWindow win = new LinesWindow();
+            win.Show();
+            this.Close();
+
         }
 
 

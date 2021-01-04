@@ -9,5 +9,6 @@ namespace DO
     public class statics
     {
         public static int LineId = 1;
+        public static int LineTripId = 1;
     }
 }
