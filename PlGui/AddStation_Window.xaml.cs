@@ -56,6 +56,7 @@ namespace PlGui
                     disabled_access = isDisableOk,
                     Digital_PANNEL = isDisableOk,
                     covered_shelter = isShelterCovered };
+
             
             
          

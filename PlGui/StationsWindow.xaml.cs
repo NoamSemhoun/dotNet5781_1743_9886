@@ -85,6 +85,8 @@ namespace PlGui
                                bl.DeleteStation(item.Code);
                     }
                     //ListViewStations.Items.Refresh();
+                    // UPDATE LINE & ADJACENT STATION
+
                     Stations_list = new ObservableCollection<BO.Station>(bl.GetAllStations());
                     ListViewStations.DataContext = Stations_list;
 
