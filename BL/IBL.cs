@@ -51,6 +51,7 @@ namespace BlAPI
         IEnumerable<Ferquency> GetFerquencies(Line line);
 
         void AddLineStation(int id, int station, int index);
+        void DeleteLineStation(int lineId, int index);
 
         LineStation GetLineStation(int lineID, int index);
 

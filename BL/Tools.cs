@@ -14,10 +14,10 @@ namespace BL
     
  
 
-    static class Tools
+    public static class Tools
     {
         
-        static bool isEqual(this object obj, object other)
+        public static bool isEqual(this object obj, object other)
         {
             if(obj.GetType().Name != other.GetType().Name)
             {

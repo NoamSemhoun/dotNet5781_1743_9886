@@ -6,7 +6,7 @@ namespace DO
 {
     public class LineStation    // Station in Line Context
     {
-        public int LineID { get; set; }    
+        public int LineId { get; set; }    
         public int Code { get; set; }   // Of the Station 
         public int Num_Stations { get; set; }
         public int LineStationIndex { get; set; }
@@ -15,7 +15,7 @@ namespace DO
 
         public override string ToString()
         {
-            return $"LineID: {LineID} Code: {Code}  Num_Stations {Num_Stations} LineStationIndex { LineStationIndex } PrevStation { PrevStation } NextStation { NextStation }";
+            return $"LineID: {LineId} Code: {Code}  Num_Stations {Num_Stations} LineStationIndex { LineStationIndex } PrevStation { PrevStation } NextStation { NextStation }";
         }
     }
 }

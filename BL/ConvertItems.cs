@@ -43,7 +43,7 @@ namespace BL
             for (int i = 0; i < line.List_LineStations.Count; i++)
             {
                 var lS = (DO.LineStation)line.List_LineStations[i].CloneNew(typeof(DO.LineStation));
-                lS.LineID = id;
+                lS.LineId = id;
                 list.Add(lS);
             }
             return list;

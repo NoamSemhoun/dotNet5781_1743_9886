@@ -5,37 +5,63 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace BL.tools
+namespace BL
 {
-    class dataCheck<T>
+    internal class dataCheck<T>
     {
-        delegate T GetDeleget(int id);
- 
-        bool isExeist(Type type, int id)
+        delegate IEnumerable<T> GetDeleget(Predicate<T> predicate);
+        DalApi.IDAL dal = DalApi.DalFactory.GetDal();
+        
+        internal bool isExeist(Predicate<T> predicate)
         {
-            DalApi.IDAL dal = DalApi.DalFactory.GetDal();
-            GetDeleget getDeleget; 
+            
+            GetDeleget getDeleget;
+
+            Type type = typeof(GetDeleget);           
+            MethodInfo[] methodList = dal.GetType().GetMethods();
+
+            foreach (MethodInfo method in methodList)
+            {
+                if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
+                {
+                    getDeleget  = (GetDeleget)Delegate.CreateDelegate(type, null, method);
+
+                    if (getDeleget(predicate).Any())
+                        return true;
+                    else
+                        return false;
+                }                
+            }
+            return false;
+        }
+
+
+        internal bool didNeedUpdaete(object obj ,Predicate<T> predicate)
+        {
+            GetDeleget getDeleget;
 
 
             MethodInfo[] methodList = dal.GetType().GetMethods();
 
             foreach (MethodInfo method in methodList)
             {
-                if (method.ReturnType == type)
+                if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
                 {
-                    getDeleget = (GetDeleget)method.CreateDelegate(typeof(GetDeleget));
-                    try
-                    {
-                        getDeleget(id);
+                    getDeleget = (GetDeleget)Delegate.CreateDelegate(typeof(GetDeleget), null, method);
+
+                    T t = getDeleget(predicate).FirstOrDefault();
+
+                    if (t != null && t.isEqual(obj))
+                        return false;
+                    else
                         return true;
-                    }
-                    catch (DO.ItemNotExeistExeption)
-                    { return false; }
-                }                
+                    
+                        
+                }
+            
             }
             return false;
         }
-
 
 
 

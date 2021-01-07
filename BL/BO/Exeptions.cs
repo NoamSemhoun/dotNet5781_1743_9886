@@ -115,19 +115,35 @@ namespace BO
 
     }
 
+    
+
+    public class LackOfDataExeption : Exception
+    {
+        public DataType Data{ get; }
+        public int[] id { get; }
+        public LackOfDataExeption (DataType t, params int[] i) {Data = t; id = i; }
+        public LackOfDataExeption (DataType t, string message, params int[] i):base(message) {Data = t; id = i; }
+
+        public override string ToString()
+        { 
+            return $"the {Data} with the id {id} is missing";
+        }
+
+    }
+
 
         //public class BadActionExeption : Exception
         //{
         //    public readonly Type ItemType;
 
-        //    public BadActionExeption(Type t, string message) : base(message) => ItemType = t;
-        //    public BadActionExeption(Type t) => ItemType = t;
+    //    public BadActionExeption(Type t, string message) : base(message) => ItemType = t;
+    //    public BadActionExeption(Type t) => ItemType = t;
 
-        //    public override string ToString()
-        //    {
-        //        return $"ERROR! the Action is not adapt to {ItemType}";
-        //    }
-        //}
+    //    public override string ToString()
+    //    {
+    //        return $"ERROR! the Action is not adapt to {ItemType}";
+    //    }
+    //}
 
-    
+
 }

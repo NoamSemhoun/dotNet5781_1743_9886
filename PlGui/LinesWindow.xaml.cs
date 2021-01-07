@@ -31,7 +31,8 @@ namespace PlGui
         {
             InitializeComponent();
             Lines_list = new ObservableCollection<BO.Line>( bl.GetAllLines());
-            ListView_Lines.DataContext = Lines_list; 
+            ListView_Lines.DataContext = Lines_list;
+            ListView_Lines.SelectedIndex = 0;  
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -73,6 +74,7 @@ namespace PlGui
         {
             Lines_list = new ObservableCollection<BO.Line>(bl.GetAllLines());
             ListView_Lines.DataContext = Lines_list;
+            ListView_Lines.SelectedIndex = 0;
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
@@ -91,6 +93,7 @@ namespace PlGui
             freq_ListView.Visibility = Visibility.Hidden;
             addStation_Grid.Visibility = Visibility.Visible;
             Stations_CB.DataContext = bl.GetAllStations();
+
         }
 
         private void index_TB_TextChanged(object sender, TextChangedEventArgs e)
@@ -113,6 +116,86 @@ namespace PlGui
 
         private void addStation_button_Click(object sender, RoutedEventArgs e)
         {
+            addStation_Func();
+        }
+
+        private void addStation_addAdjSta_event(object sender, EventArgs e)
+        {
+            addStation_Func();
+        }
+
+        private void addStation_Func()
+        {
+            int id = (ListView_Lines.SelectedItem as BO.Line).LineID;
+            int station = (Stations_CB.SelectedItem as BO.Station).Code;
+            int index = int.Parse(index_TB.Text);
+
+
+            try
+            {
+                bl.AddLineStation(id, station, index);
+
+                Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
+
+                ListView_Lines.DataContext = bl.GetAllLines();
+                ListView_Lines.SelectedIndex = 0;
+                freq_ListView.Visibility = Visibility.Visible;
+                addStation_Grid.Visibility = Visibility.Hidden;
+            }
+            catch (BO.LackOfDataExeption ex)
+            {
+                if (ex.Data == BO.DataType.AdjacentStation)
+                {
+                    AddAdjacentStation win = new AddAdjacentStation(ex.id[0], ex.id[1]);
+                    win.ASAE += addStation_addAdjSta_event;
+                    win.Show();
+                }
+            }
+        }
+
+        private void X_Click(object sender, RoutedEventArgs e)
+        {
+            freq_ListView.Visibility = Visibility.Visible;
+            addStation_Grid.Visibility = Visibility.Hidden;
+        }
+
+        private void deleteStation_button_Click(object sender, RoutedEventArgs e)
+        {
+            delStation();
+        }
+
+        private void delStation_addAdj_event (object sender, EventArgs e)
+        {
+            delStation();
+        }
+
+        private void delStation()
+        {
+            int id = (ListView_Lines.SelectedItem as BO.Line).LineID;
+            int index = (Station_ListView.SelectedItem as BO.LineStation).LineStationIndex;
+            try 
+            {
+                bl.DeleteLineStation(id, index);
+                refresh();
+            }
+            catch (BO.LackOfDataExeption ex)
+            {
+                AddAdjacentStation win = new AddAdjacentStation(ex.id[0], ex.id[1]);
+                win.ASAE += delStation_addAdj_event;
+                win.Show();
+            }
+         
+
+        }
+
+        private void refresh()
+        {
+            int id = (ListView_Lines.SelectedItem as BO.Line).LineID;
+           
+
+            ListView_Lines.DataContext = bl.GetAllLines();
+            ListView_Lines.SelectedIndex = 0;
+            Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
 
         }
     }

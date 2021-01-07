@@ -70,7 +70,7 @@ namespace BL
             Station station = new Station();
             dal.GetStation(code).Clone(station);
             station.List_Lines = (from item in dal.GetAllLineStationsBy(lS => lS.Code == code)
-                                  select (Line)dal.GetLine(item.LineID).CloneNew(typeof(Line))).ToList();
+                                  select (Line)dal.GetLine(item.LineId).CloneNew(typeof(Line))).ToList();
             return station;
         }
 

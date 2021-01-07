@@ -215,18 +215,18 @@ namespace DL
 
         public void AddLineStation(LineStation lineStation)
         {
-            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID) != null)
-                throw new ItemAlreadyExeistExeption(typeof(LineStation), lineStation.Code, lineStation.LineID);
+            if (DataSource.List_LineStations.FirstOrDefault(l => l.LineStationIndex == lineStation.LineStationIndex && l.LineId == lineStation.LineId) != null)
+                throw new ItemAlreadyExeistExeption(typeof(LineStation), lineStation.LineStationIndex, lineStation.LineId);
 
             DataSource.List_LineStations.Add(lineStation.Clone());
         }
 
-        public void DeleteLineStation(int lineId, int stationId)
+        public void DeleteLineStation(int lineId, int index)
         {
-            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == stationId && l.LineID == lineId) == null)
-                throw new ItemNotExeistExeption(typeof(LineStation), lineId, stationId);
+            if (DataSource.List_LineStations.FirstOrDefault(l => l.LineStationIndex == index && l.LineId == lineId) == null)
+                throw new ItemNotExeistExeption(typeof(LineStation), lineId, index);
 
-            DataSource.List_LineStations.RemoveAll(l => l.Code == stationId && l.LineID == lineId);
+            DataSource.List_LineStations.RemoveAll(l => l.LineStationIndex == index && l.LineId == lineId);
         }
 
         public IEnumerable<LineStation> GetAllLineStations()
@@ -242,19 +242,19 @@ namespace DL
                    select item.Clone();
         }
 
-        public LineStation GetLineStation(int lineId, int stationId)
+        public LineStation GetLineStation(int lineId, int index)
         {
-            LineStation lineStation = DataSource.List_LineStations.FirstOrDefault(l => l.Code == stationId && l.LineID == lineId);
+            LineStation lineStation = DataSource.List_LineStations.FirstOrDefault(l => l.LineStationIndex == index && l.LineId == lineId);
             if (lineStation == null)
-                throw new ItemNotExeistExeption(typeof(LineStation), lineId, stationId);
+                throw new ItemNotExeistExeption(typeof(LineStation), lineId, index);
             return lineStation.Clone();
         }
 
         public void UpdateLineStation(LineStation lineStation)
         {
-            if (DataSource.List_LineStations.FirstOrDefault(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID) == null)
-                throw new ItemNotExeistExeption(typeof(LineStation), lineStation.LineID, lineStation.Code);
-            DataSource.List_LineStations.RemoveAll(l => l.Code == lineStation.Code && l.LineID == lineStation.LineID);
+            if (DataSource.List_LineStations.FirstOrDefault(l => l.LineStationIndex == lineStation.LineStationIndex && l.LineId == lineStation.LineId) == null)
+                throw new ItemNotExeistExeption(typeof(LineStation), lineStation.LineId, lineStation.LineStationIndex);
+            DataSource.List_LineStations.RemoveAll(l => l.LineStationIndex == lineStation.LineStationIndex && l.LineId == lineStation.LineId);
             DataSource.List_LineStations.Add(lineStation.Clone());
         }
 

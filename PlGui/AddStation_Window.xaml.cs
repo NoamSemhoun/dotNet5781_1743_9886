@@ -22,7 +22,7 @@ namespace PlGui
         BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
         bool isShelterCovered = true;
         bool isDisableOk = true;
-        bool isDigital = false;
+        //bool isDigital = false;
 
 
         public AddStation_Window()

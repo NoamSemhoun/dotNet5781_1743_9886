@@ -504,7 +504,7 @@ namespace DS
                 {
                     List_LineStations.Add(    // Create 10 LineStation for THIS Line
                         new LineStation {
-                            LineID= 1 + i ,
+                            LineId= 1 + i ,
                             LineStationIndex= 1+j,   // x/10
                             Code = thisStation,
                             NextStation = List_Stations[random.Next(0, 49)].Code,  // The Next of the LastStation = 0

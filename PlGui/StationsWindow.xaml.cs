@@ -87,15 +87,13 @@ namespace PlGui
                     //// DELETE THEM
                     // bl.DeleteStation(code);
 
-                    //foreach (ListViewItem o in ListViewStations.ItemsSource)
-                    //{
+                    foreach (var a in ListViewStations.SelectedItems)
+                    {
 
-                    //    //if (o.IsSelected)
-                    //    //    ListViewStations.Items[1].ToString();
-                    //    //bl.DeleteStation(o.Content as BO.Station);
+                        MessageBox.Show(a.GetType().Name, "haahah", MessageBoxButton.OK);
 
 
-                    //}
+                    }
 
                     MessageBox.Show("These Stations have been deleted", "Deleted Stations");
                     break;

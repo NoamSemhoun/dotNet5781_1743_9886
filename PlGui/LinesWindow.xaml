@@ -93,6 +93,7 @@
 
 
         </ListView>
+        <StackPanel Orientation ="Vertical">   
         <StackPanel  Orientation="Horizontal" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"  Grid.Column="1" Grid.Row="0">
                 <Button x:Name="addLine" ToolTip="   Add a NEW Line  " ToolTipService.ShowDuration="50000"  
                 Click="addLine_Click" Height="45"
@@ -105,16 +106,16 @@
                 </StackPanel>
             </Button>
 
-            <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
-              Click="Menu_Click" Height="45"
-                HorizontalAlignment="Right" VerticalAlignment="Top"
+                <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
+                     Click="Menu_Click" Height="45"
+                        HorizontalAlignment="Right" VerticalAlignment="Top"
                                      
                                          Width="120"  >
-                <StackPanel Orientation="Horizontal" Height="37" Width="134">
-                    <Image Source="Images\SignOut.jpg" Width="57"/>
-                    <Label Content="Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
-                </StackPanel>
-            </Button>
+                    <StackPanel Orientation="Horizontal" Height="37" Width="134">
+                        <Image Source="Images\SignOut.jpg" Width="57"/>
+                        <Label Content="Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
+                    </StackPanel>
+                </Button>
 
                 <Button x:Name="add_Station"  Click="add_Station_Click"  Height="45"
                 HorizontalAlignment="Left" VerticalAlignment="Top"
@@ -125,13 +126,15 @@
                         <Label Content="Add Staion" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                     </StackPanel>
                 </Button>
+                </StackPanel>
 
-
-
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="deleteStation_button" Content="DeleteStation"  Height="40" FontSize="15" Click="deleteStation_button_Click"  />
+                </StackPanel>
             </StackPanel>
 
             <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Column="1" Grid.Row="2" 
-              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF0B9A3" BorderBrush="#FFB1BDDF" BorderThickness="4" Visibility="Hidden">
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF0B9A3" BorderBrush="#FFB1BDDF" BorderThickness="4" >
 
                 <ListView.View>
                     <GridView >
@@ -144,8 +147,9 @@
 
             </ListView>
 
-            <Grid x:Name="addStation_Grid" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF60A091"  >
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid x:Name="addStation_Grid" Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF60A091" Visibility="Hidden" >
+                <Button x:Name="X" Content="X" Click="X_Click" Margin="350,0,10,250.8" FontSize="20"/>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
                     <Label Content="choose Station:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
                     <ComboBox x:Name="Stations_CB" VerticalAlignment="Center"  ItemsSource="{Binding}" Width="200"  Height="40" FontSize="20" SelectionChanged="Stations_CB_SelectionChanged">
                         <ComboBox.ItemTemplate>
@@ -165,7 +169,7 @@
                                  TextChanged="index_TB_TextChanged"/>
                     </StackPanel>
                     <Button x:Name="addStation_button" Content="Add"   FontStyle="Italic" FontSize="35" 
-                            VerticalContentAlignment="Top" HorizontalContentAlignment="Center" IsEnabled="False" Click="addStation_button_Click"/>
+                            VerticalContentAlignment="Top" HorizontalContentAlignment="Center" IsEnabled="False" Click="addStation_button_Click" />
 
                 </StackPanel>
 
