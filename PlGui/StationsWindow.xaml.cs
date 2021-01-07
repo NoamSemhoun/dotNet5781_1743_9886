@@ -52,8 +52,8 @@ namespace PlGui
 
             //gridStations.DataContext = sender....();
 
-            BO.Station S = (BO.Station)ListViewStations.SelectedItem;
-            addressTextBox.Text = S.Address; // To test
+            //BO.Station S = (BO.Station)ListViewStations.SelectedItem;
+            //addressTextBox.Text = S.Address; // To test
 
         }
 
@@ -74,26 +74,21 @@ namespace PlGui
 
         private void DeleteStation_Click(object sender, RoutedEventArgs e) // The selection
         {
-            //
 
-            MessageBoxResult result = MessageBox.Show("Are you sur to delete *** Elements ?","Delete this Stations", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            MessageBoxResult result = MessageBox.Show("Are you sur to delete "+ ListViewStations.SelectedItems.Count + " Elements ?","Delete this Stations", MessageBoxButton.OKCancel, MessageBoxImage.Information);
             switch (result)
             {
                 case MessageBoxResult.OK:
-                    //var StationOk = new List<BO.Station>();
-                    //foreach ( Station item in ListViewStations.SelectedItems)
-                    //    //users.Add((Chapter)item);
-                    //// ListViewStations.SelectedItems
-                    //// DELETE THEM
-                    // bl.DeleteStation(code);
-
-                    foreach (var a in ListViewStations.SelectedItems)
+                   
+                    foreach ( BO.Station item in ListViewStations.SelectedItems)
                     {
-
-                        MessageBox.Show(a.GetType().Name, "haahah", MessageBoxButton.OK);
-
-
+                               bl.DeleteStation(item.Code);
                     }
+                    //ListViewStations.Items.Refresh();
+                    // UPDATE LINE & ADJACENT STATION
+
+                    Stations_list = new ObservableCollection<BO.Station>(bl.GetAllStations());
+                    ListViewStations.DataContext = Stations_list;
 
                     MessageBox.Show("These Stations have been deleted", "Deleted Stations");
                     break;

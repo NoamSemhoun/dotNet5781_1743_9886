@@ -26,8 +26,8 @@ namespace BL
                 try
                 {
                     DO.AdjacentStation aS = dal.GetAdjacentStation(line.List_LineStations[i].Code, line.List_LineStations[i + 1].Code);
-                    if (!aS.isEqual(adjacentStation))
-                        throw new Exception(); // ***** /// ***** unadapt data exeption                
+                    //if (!aS.isEqual(adjacentStation))
+                        //throw new Exception(); // ***** /// ***** unadapt data exeption                
                 }
                 catch (DO.ItemNotExeistExeption)
                 {
