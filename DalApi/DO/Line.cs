@@ -12,7 +12,7 @@ namespace DO
         public int LastStation { get; set; }
         public Areas Area { get; set; }
 
-        public override string ToString()
+        public override string ToString() // ?
         {
             return $"ID: {LineID} lNUM: {LineNumber} fSt: {FirstStation} LaST: {LastStation}  Area: {Area}";
         }

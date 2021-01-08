@@ -191,6 +191,26 @@
   <ItemGroup>
     <Resource Include="Images\disabledAccess.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Station2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon Station Mps.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon_Station_Maps-removebg-preview %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon_Station_Maps-removebg-preview %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Help.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="STATION.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DRAPEAU-removebg-preview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
