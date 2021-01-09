@@ -69,8 +69,10 @@
     <Compile Include="AddStation_Window.xaml.cs">
       <DependentUpon>AddStation_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IsSelectedItemConvertor.cs" />
     <Compile Include="PO\myTime.cs" />
     <Compile Include="PO\StationLine_View.cs" />
+    <Compile Include="stationListCon.cs" />
     <Compile Include="StationsWindow.xaml.cs">
       <DependentUpon>StationsWindow.xaml</DependentUpon>
     </Compile>

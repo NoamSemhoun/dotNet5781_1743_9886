@@ -9,6 +9,10 @@
         Title="Lines Window" WindowState="Maximized"  Icon="Images\TRAJET.png" HorizontalAlignment="Center" Loaded="Window_Loaded" d:DesignWidth="1363" d:DesignHeight="719">
     <Window.Resources>
         <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
+        <local:IsSelectedItemConvertor
+            x:Key="convert"/>
+        <local:stationListCon
+            x:Key="stationListCon"/>
     </Window.Resources>
 
 
@@ -81,7 +85,7 @@
             </Grid.RowDefinitions>
 
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="849,3,-492,0" Height="38" Width="43" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
-            <ListView x:Name="Station_ListView" ItemsSource="{Binding}"
+            <ListView x:Name="Station_ListView" ItemsSource="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource stationListCon}}"
                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFDCE8DE" BorderBrush="#FFB1BDDF" BorderThickness="4" Grid.Row="1" Foreground="#FF050C1F" FontSize="16">
                 <ListView.ItemTemplate>
                     <DataTemplate>
@@ -162,14 +166,14 @@
 
                     <Button x:Name="add_Station"  Click="add_Station_Click"  Height="45"
                         HorizontalAlignment="Left" VerticalAlignment="Top"
-                        IsEnabled="False"             
+                        IsEnabled="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource convert}}"             
                         Width="134" Margin="0,0,0,-3"  >
                         <StackPanel Orientation="Horizontal" Height="45" Width="144">
                             <Image Source="Images\addStationImg.PNG" Width="50"/>
                             <Label Content="Add Staion" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                         </StackPanel>
                     </Button>
-                    <Button x:Name="deleteStation_button" Content="DeleteStation" FontSize="15" Click="deleteStation_button_Click" Width="114"  />
+                    <Button x:Name="deleteStation_button" Content="DeleteStation" FontSize="15" Click="deleteStation_button_Click" Width="114" IsEnabled="{Binding ElementName=Station_ListView, Path=SelectedItem, Converter={StaticResource convert}}"/> 
                 </StackPanel>
             </StackPanel>
 

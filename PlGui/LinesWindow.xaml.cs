@@ -24,6 +24,7 @@ namespace PlGui
         ObservableCollection<BO.Line> Lines_list;
         ObservableCollection<BO.LineStation> LineStations_list;
         ObservableCollection<BO.Ferquency> freq_List;
+        int index;
 
         string prevIndex = "";
 
@@ -33,6 +34,7 @@ namespace PlGui
             Lines_list = new ObservableCollection<BO.Line>( bl.GetAllLines());
             ListView_Lines.DataContext = Lines_list;
             ListView_Lines.SelectedIndex = 0;  
+       
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -54,9 +56,9 @@ namespace PlGui
         {
             if ((sender as ListView).SelectedItem != null)
             {
-                Station_ListView.DataContext = ((sender as ListView).SelectedItem as BO.Line).List_LineStations;
+                //Station_ListView.DataContext = ((sender as ListView).SelectedItem as BO.Line).List_LineStations;
                 freq_ListView.DataContext = bl.GetFerquencies((sender as ListView).SelectedItem as BO.Line);
-                add_Station.IsEnabled = true;
+                //add_Station.IsEnabled = true;
             }
             //LineStations_list = new ObservableCollection<BO.LineStation>(((sender as ListView).SelectedItem as BO.Line).List_LineStations);
             //Station_ListView.DataContext = LineStations_list;
@@ -72,9 +74,7 @@ namespace PlGui
 
         private void addLineEvent(object sender, EventArgs e)
         {
-            Lines_list = new ObservableCollection<BO.Line>(bl.GetAllLines());
-            ListView_Lines.DataContext = Lines_list;
-            ListView_Lines.SelectedIndex = 0;
+            refresh(ListView_Lines.SelectedIndex);
         }
 
         //private void Button_Click(object sender, RoutedEventArgs e)
@@ -104,8 +104,8 @@ namespace PlGui
                index_TB.Text = prevIndex;
             else
                 prevIndex = index_TB.Text;
-            if (Stations_CB.SelectedItem != null)
-                addStation_button.IsEnabled = true;
+            //if (Stations_CB.SelectedItem != null)
+            //    addStation_button.IsEnabled = true;
         }
 
         private void Stations_CB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -135,10 +135,9 @@ namespace PlGui
             {
                 bl.AddLineStation(id, station, index);
 
-                Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
+                //Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
 
-                ListView_Lines.DataContext = bl.GetAllLines();
-                ListView_Lines.SelectedIndex = 0;
+                refresh(ListView_Lines.SelectedIndex);
                 freq_ListView.Visibility = Visibility.Visible;
                 addStation_Grid.Visibility = Visibility.Hidden;
             }
@@ -176,7 +175,7 @@ namespace PlGui
             try 
             {
                 bl.DeleteLineStation(id, index);
-                refresh();
+                refresh(ListView_Lines.SelectedIndex);
             }
             catch (BO.LackOfDataExeption ex)
             {
@@ -188,14 +187,14 @@ namespace PlGui
 
         }
 
-        private void refresh()
+        private void refresh(int line)
         {
             int id = (ListView_Lines.SelectedItem as BO.Line).LineID;
            
 
             ListView_Lines.DataContext = bl.GetAllLines();
-            ListView_Lines.SelectedIndex = 0;
-            Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
+            ListView_Lines.SelectedIndex = line;
+            //Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
 
         }
     }
