@@ -40,7 +40,6 @@
         <CheckBox IsChecked="True" Content="Disabled Access" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,210,0,0" Height="23" Width="118" Unchecked="NOT_Disabled_Checked" Checked="Disabled_Checked"/>
         <CheckBox IsChecked="True" Content="Shelter Covered" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,239,0,0" Height="23" Width="118" Checked="ShelterC_Checked"/>
         <CheckBox Content="Digital Pannel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,265,0,0" Height="23" Width="118" Checked="Digital_Checked"/>
-        <Label Content="JUST TEST" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="412,56,0,0" Height="96" Width="243" FontSize="48"/>
         <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="280,342,0,0" Click="OK_Click"/>
         <Image Source="Images\disabledAccess.jpg" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="20" Margin="172,207,0,0"/>
         <Label Name="X_Notdisabled" Visibility="Hidden" Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="168,187,0,0" Foreground="Red" FontSize="30" Height="42"/>
