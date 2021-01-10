@@ -35,7 +35,7 @@ namespace PlGui
         private BO.AddLineExeption addLineEx;
 
 
-        //ObservableCollection<BO.Station> selectedStationListView = new ObservableCollection<BO.Station>();
+        ObservableCollection<BO.Station> selectedStationListBox = new ObservableCollection<BO.Station>();
 
         public AddLine_window()
         {
@@ -47,9 +47,20 @@ namespace PlGui
             InitializeComponent();
             AddLine.IsEnabled = false;
             LineNumber.DataContext = nums;
-            station_ListBox.DataContext = bl.GetAllStations();
+            Allstations_ListBox.DataContext = bl.GetAllStations();  // in this Area !!! 
+
+            station_Result_LB.DataContext = Allstations_ListBox.SelectedItem;
+
             //StationsCB.DataContext = bl.GetAllStations();
             //viewSelectedStationList.DataContext = selectedStationList;
+        }
+
+        private void del_Click(object sender, RoutedEventArgs e) // IN simulator list (for test)
+        {
+            station_Result_LB.Items.Remove(((sender as Button).DataContext as BO.Station).Code);
+
+
+            //selectedStationListView.Remove((sender as Button).DataContext as BO.Station);
         }
 
         private void LineNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -68,17 +79,7 @@ namespace PlGui
         //        AddLine.IsEnabled = true;
         //}
 
-        private void del_Click(object sender, RoutedEventArgs e)
-        {
-            selectedStationList.Remove(((sender as Button).DataContext as BO.Station).Code);
-            
-            
-            
-            
-            
-        
-            //selectedStationListView.Remove((sender as Button).DataContext as BO.Station);
-        }
+      
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
@@ -141,18 +142,26 @@ namespace PlGui
         private void ComboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             area = (BO.Areas)(AreaCB.SelectedItem) ;
+
             if (LineNumber.SelectedItem != null)
                 AddLine.IsEnabled = true;
+            stations_Area.Text = "All Stations in "+ area.ToString();
+
+            // Print just the Station in this area ? 
         }
 
-        private void check_Click(object sender, RoutedEventArgs e)
+        private void check_Click(object sender, RoutedEventArgs e) // Add
         {
-            if ((sender as Button).Content == "")
+            if  ((string)(sender as Button).Content == "+")    
             {
                 if (!indexes.Any())
                 {
                     (sender as Button).Content = ++index;
                     selectedStationList.Add(((sender as Button).DataContext as BO.Station).Code);
+                     station_Result_LB.Items.Add((sender as Button).DataContext as BO.Station) ; //     Simulator
+                   // INDEX  ...
+                    
+
                 }
                 else
                 {
@@ -165,7 +174,7 @@ namespace PlGui
             else
             {
                 int tmp = (int)(sender as Button).Content;
-                (sender as Button).Content = "";
+                (sender as Button).Content = "+";
                 indexes.Add(tmp);
                 while (indexes.Contains(index))
                 {
@@ -173,6 +182,21 @@ namespace PlGui
                     index--;
                 }
             }
+        }
+
+        private void station_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void check_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+
+        private void station_Result_LB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

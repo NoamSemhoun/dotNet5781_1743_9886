@@ -16,21 +16,20 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </Window.Resources>
-    
-    
-    <Grid Background="#FFA1CFE7">
+
+
+    <Grid Background="#FFBBCED8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "1*"/>
             <ColumnDefinition Width = "1*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ComboBox x:Name="LineNumber" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Width="100" Height="40" FontSize="20" SelectionChanged="LineNumber_SelectionChanged"/>
-        <Label Content="line number"  FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,85,0,0" Height="40" Width="121"/>
+        <ComboBox x:Name="LineNumber" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Width="100" Height="40" FontSize="20" SelectionChanged="LineNumber_SelectionChanged" Margin="174,33,122,346"/>
+        <Label Content="Line number"  FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="48,33,0,0" Height="40" Width="121"/>
 
         <!--<ComboBox x:Name="StationsCB" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" Width="200"  Height="40" FontSize="20" SelectionChanged="StationsCB_SelectionChanged">
             <ComboBox.ItemTemplate>
@@ -60,14 +59,15 @@
         </ListBox>-->
 
 
-        <ListBox x:Name="station_ListBox" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding}" Background="#FFADE295">
+        <ListBox x:Name="Allstations_ListBox" Grid.Column="1" ItemsSource="{Binding}" Background="#FFE2ECB7" Margin="0,37,0,0" SelectionChanged="station_ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
-                        <Button x:Name="del" Content="Remove"  FontSize="15" Click="del_Click" Background="Gray"  BorderBrush="White"/>
+
+                        <Button  x:Name="check"  Content="+" Click="check_Click" MinWidth="20" Height="25" Background="White" FontSize="16"/>
                         <Label Content="{Binding Code}" FontSize="15"/>
                         <Label Content="{Binding Name}" FontSize="15"/>
-                        <Button x:Name="check" Content="" Click="check_Click" MinWidth="10" Height="20" Background="White"/>
+
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -77,10 +77,33 @@
 
 
 
-        <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="98,149.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Height="39" FontSize="15" Click="AddLine_Click"/>
-        <ComboBox x:Name="AreaCB" HorizontalAlignment="Left" Margin="148,143,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="0.5,0.5" Height="27"
+        <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="98,360,0,0" VerticalAlignment="Top" Width="200" Height="39" FontSize="15" Click="AddLine_Click"/>
+        <ComboBox x:Name="AreaCB" HorizontalAlignment="Left" Margin="174,91,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="0.5,0.5" Height="27"
                   ItemsSource="{Binding Source={StaticResource AreasData}}" SelectionChanged="ComboBoxArea_SelectionChanged">
         </ComboBox>
-        <Label Content="Area" HorizontalAlignment="Left" Margin="47,138,0,0" VerticalAlignment="Top" Width="68" FontSize="20"/>
+
+        <Label Content="Area" HorizontalAlignment="Left" Margin="73,86,0,0" VerticalAlignment="Top" Width="68" FontSize="20"/>
+
+        <ListBox x:Name="station_Result_LB"  ItemsSource= "{Binding}" Background="#FFE2ECB7" Margin="27,169,52,79" SelectionChanged="station_Result_LB_SelectionChanged" FontSize="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
+
+                        <Grid Height="33" Width="34">
+                            <TextBox x:Name="IndexTB" Text="{Binding LineStationIndex }" Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" 
+                                   Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold"></TextBox>
+                            <Image Source="Images\icon_Station_Maps-removebg-preview (1).png" Margin="-15,0,-7,0"></Image>
+                        </Grid>
+
+                        <Label Content="{Binding Code}" FontSize="15"/>
+                        <Label Content="{Binding Name}" FontSize="15"/>
+                        <Button x:Name="del" Content="Remove"  FontSize="15" Click="del_Click" Background="Gray"  BorderBrush="White"/>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Simulator :" HorizontalAlignment="Left" Margin="27,132,0,0" VerticalAlignment="Top" Width="112" FontSize="20"/>
+        <TextBox x:Name="stations_Area" Margin="0,10,243,382" Grid.Column="1" Background="#FFE2ECB7"/>
     </Grid>
 </Window>

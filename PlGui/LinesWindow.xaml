@@ -77,7 +77,7 @@
 
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn  Header="Area" Width="90" DisplayMemberBinding="{Binding Area}" />
+                    <!--<GridViewColumn  Header="Area" Width="90" DisplayMemberBinding="{Binding Area}" />-->
                     <GridViewColumn Header="Start" Width="280"  DisplayMemberBinding="{Binding FirstStationName}"/>
                     <GridViewColumn Header="End" Width="280" DisplayMemberBinding="{Binding LastStationName}"/>
                     <GridViewColumn Header="Delete" x:Name="Delete" Width="50" >
@@ -173,14 +173,14 @@
             <Button x:Name="add_Station"  Click="add_Station_Click"  Height="45"
                         HorizontalAlignment="Left" VerticalAlignment="Top"
                         IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=ListView_Lines}"             
-                        Width="150" Margin="394,55,-13,0" Background="#FF5F832B"  >
+                        Width="155" Margin="389,55,-13,0" Background="#FF5F832B"  >
                 <StackPanel Orientation="Horizontal" Height="45" Width="150" Background="#FFE4F7E0" >
                     <Image Source="Images\icon AddStation Mps.jpg" Width="59" Height="55" VerticalAlignment="Top" Margin="0,-4,0,-6"/>
                     <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}" Width="98"/>
                 </StackPanel>
             </Button>
             <Button x:Name="deleteStation_button" FontSize="15" Click="deleteStation_button_Click"
-                    IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=Station_ListView}" Margin="238,55,137,0" Background="#FF5F832B">
+                    IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=Station_ListView}" Margin="233,55,137,0" Background="#FF5F832B">
                 <StackPanel Orientation="Horizontal" Height="45" Width="181" Background="#FFE4F7E0">
                     <Image Source="Images\delete.png" Width="46" Height="45" VerticalAlignment="Top"/>
                     <Label Content="Delete Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}" Width="120"/>
@@ -194,13 +194,13 @@
 
             <Button x:Name="addLine" ToolTip="   Add a NEW Line  " ToolTipService.ShowDuration="50000"  
                         Click="addLine_Click" Margin="-146,7,535,50"  >
-                <StackPanel Orientation="Horizontal" Height="44" Width="142" HorizontalAlignment="Right" Background="#FFC0D0DE">
+                <StackPanel Orientation="Horizontal" Height="43" Width="142" HorizontalAlignment="Right" Background="#FFC0D0DE">
                     <Image Source="Images/TRAJET.png" Width="51" Margin="0,-12,0,-8"/>
                     <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                 </StackPanel>
             </Button>
 
-                    <!--<Button x:Name="deleteLine_Button" ToolTip="  delete Line from the list  " ToolTipService.ShowDuration="50000"  
+            <!--<Button x:Name="deleteLine_Button" ToolTip="  delete Line from the list  " ToolTipService.ShowDuration="50000"  
                           Height="45" IsEnabled="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource convert}}"
                         HorizontalAlignment="Left" VerticalAlignment="Top"
                                      
@@ -211,7 +211,7 @@
                         </StackPanel>
                     </Button>-->
 
-                    <!--<Button x:Name="add_Station"  Click="add_Station_Click"  Height="45"
+            <!--<Button x:Name="add_Station"  Click="add_Station_Click"  Height="45"
                         HorizontalAlignment="Left" VerticalAlignment="Top"
                         IsEnabled="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource convert}}"             
                         Width="134" Margin="0,0,0,-3"  >
@@ -220,11 +220,11 @@
                             <Label Content="Add Staion" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                         </StackPanel>
                     </Button>-->
-                    <!--<Button x:Name="deleteStation_button" Content="DeleteStation" FontSize="15" Click="deleteStation_button_Click" Width="114" IsEnabled="{Binding ElementName=Station_ListView, Path=SelectedItem, Converter={StaticResource convert}}"/>--> 
-                
-            
+            <!--<Button x:Name="deleteStation_button" Content="DeleteStation" FontSize="15" Click="deleteStation_button_Click" Width="114" IsEnabled="{Binding ElementName=Station_ListView, Path=SelectedItem, Converter={StaticResource convert}}"/>-->
 
-           <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Row="2" 
+
+
+            <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Row="2" 
                 VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="#FFE6CCC3" BorderBrush="#FFB1BDDF" BorderThickness="4" Margin="0,0,-13,0" Height="244" FontSize="15" >
 
                 <ListView.View>
@@ -238,7 +238,8 @@
 
             </ListView>
 
-           <!--#region ADD STATION   HIDDEN    ///////////////////              -->
+
+            <!--#region ADD STATION   HIDDEN    ///////////////////              -->
 
             <Grid x:Name="addStation_Grid" Grid.Row="1"  Background="White" Visibility="Hidden" Margin="0,292,-13,0" Grid.RowSpan="2" >
                 <Button Panel.ZIndex="4" x:Name="X" Content="New Station" Click="X_Click" Margin="191,139,203,141" FontSize="20"/>
@@ -264,13 +265,13 @@
                 <Label Content="Or Create a " HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Margin="76,133,339,132" Panel.ZIndex="4"/>
                 <Rectangle HorizontalAlignment="Left" Height="320" Stroke="Red" VerticalAlignment="Top" Width="545" StrokeThickness="20" Margin="0,0,-14,0"/>
                 <Label Content="Add Station to Line n° " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="124,29,0,0" Width="204" Background="{x:Null}" Panel.ZIndex="1" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <TextBox  Panel.ZIndex="4" x:Name="Line_TB" Text="{Binding LineID}" Foreground="Red" FontSize="30" Background="White"
+                <TextBox  Panel.ZIndex="4" x:Name="Line_TB" Text="{Binding LineID}" Foreground="Red" FontSize="30" Background="White"
                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                             Margin="321,25,134,257" RenderTransformOrigin="1.244,-0.436" BorderBrush="{x:Null}" FontStyle="Italic" FontWeight="Bold"/>
 
 
 
-        </Grid>
+            </Grid>
 
             <!--#endregion-->
         </Grid>
