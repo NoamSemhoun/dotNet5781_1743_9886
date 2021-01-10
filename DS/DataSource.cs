@@ -544,10 +544,13 @@ namespace DS
                     }) ;
             }
 
-            
-            
+
+
 
             #endregion
+
+            List_Users = new List<User> { new User { ID_user = 1, is_Admin = true, Password = "1234", UserName = "Noam" },
+                                           new User {ID_user = 2, is_Admin = true, Password = "1234", UserName = "Yair"}};
         }
     }
 }

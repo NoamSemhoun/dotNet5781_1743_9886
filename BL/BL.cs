@@ -603,7 +603,7 @@ namespace BL
         public bool CheckAdmin(string userName, string password)
         {
             throw new NotImplementedException();
-            // Bool isAdmin    User.isAdmin=true;
+            //try { dal.getuser}
         }
 
         public void AddUser(User myuser)
