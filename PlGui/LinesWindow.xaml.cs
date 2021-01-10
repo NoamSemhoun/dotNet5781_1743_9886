@@ -207,7 +207,7 @@ namespace PlGui
 
         private void DeleteLine_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sur to delete the Line " + ListView_Lines.SelectedItem.ToString() + " ?", "Delete this Line", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            MessageBoxResult result = MessageBox.Show("Are you sur to delete the Line " + (ListView_Lines.SelectedItem as BO.Line).LineID + " ?", "Delete this Line", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             switch (result)
             {
                 case MessageBoxResult.OK:
@@ -219,11 +219,11 @@ namespace PlGui
 
                     //ListView_Lines.Items.Remove(sender);      
 
-                    MessageBox.Show("These Line have been deleted", "Deleted Line");
+                    MessageBox.Show("These Line have been deleted", "Deleted Line", MessageBoxButton.OK, MessageBoxImage.Information);
                     break;
 
                 case MessageBoxResult.Cancel:
-                    MessageBox.Show("Ouf...", "Cancel");
+                    MessageBox.Show("Ouf...", "Cancel",MessageBoxButton.OK,MessageBoxImage.Information);
                     break;
             }
         }
