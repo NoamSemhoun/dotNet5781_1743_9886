@@ -142,6 +142,7 @@
             <StackPanel Orientation ="Horizontal">
                 <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Stretch" Margin="0,40,0,18" Width="519">
 
+                    
                     <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
                         Click="Menu_Click" Height="45"
                         HorizontalAlignment="Right" VerticalAlignment="Top"
@@ -161,6 +162,17 @@
                         <StackPanel Orientation="Horizontal" Height="42" Width="134" HorizontalAlignment="Right">
                             <Image Source="Images/TRAJET.png" Width="57"/>
                             <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="deleteLine_Button" ToolTip="  delete Line from the list  " ToolTipService.ShowDuration="50000"  
+                        Click="deleteLine_Button_Click"  Height="45" IsEnabled="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource convert}}"
+                        HorizontalAlignment="Left" VerticalAlignment="Top"
+                                     
+                        Width="130"  >
+                        <StackPanel Orientation="Horizontal" Height="42" Width="134" HorizontalAlignment="Right">
+                            <!--<Image Source="Images/TRAJET.png" Width="57"/>-->
+                            <Label Content="Delete Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                         </StackPanel>
                     </Button>
 

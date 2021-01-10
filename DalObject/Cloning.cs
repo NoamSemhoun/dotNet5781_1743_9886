@@ -23,6 +23,18 @@ namespace DL
             return copyToObject;
         }
 
+        //internal static DO.LineStation LineStationClone(this DO.LineStation original)
+        //{
+        //    return new DO.LineStation
+        //    {
+        //        Code = original.Code,
+        //        LineId = original.LineId,
+        //        LineStationIndex = original.LineStationIndex,
+        //        NextStation = original.NextStation,
+        //        PrevStation = original.PrevStation
+        //    };
+        //}
+
 
     }
 }

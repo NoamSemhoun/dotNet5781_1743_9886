@@ -262,9 +262,9 @@ namespace BL
             try { dal.DeleteLine(id); }
             catch (DO.ItemNotExeistExeption)
             { throw new ItemNotExeistExeption(typeof(Line), id); }
-            IEnumerable<DO.LineStation> tmp = dal.GetAllLineStationsBy(lS => lS.LineId == id);
+            List<DO.LineStation> tmp = dal.GetAllLineStationsBy(lS => lS.LineId == id).ToList();
             foreach (DO.LineStation lS in tmp)
-                dal.DeleteLineStation(lS.LineId, lS.Code);
+                dal.DeleteLineStation(lS.LineId, lS.LineStationIndex);
         }
 
         public IEnumerable<Line> GetAllLines()

@@ -100,7 +100,7 @@ namespace PlGui
         {
             index_TB.Foreground = Brushes.Black; 
             int input;
-            if (((!int.TryParse(index_TB.Text, out input) || input > ((Station_ListView.DataContext as IEnumerable<BO.LineStation>).Count() + 1)) && index_TB.Text != ""))
+            if (((!int.TryParse(index_TB.Text, out input) || input > (ListView_Lines.SelectedItem as BO.Line).List_LineStations.Count) && index_TB.Text != ""))
                index_TB.Text = prevIndex;
             else
                 prevIndex = index_TB.Text;
@@ -196,6 +196,12 @@ namespace PlGui
             ListView_Lines.SelectedIndex = line;
             //Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
 
+        }
+
+        private void deleteLine_Button_Click(object sender, RoutedEventArgs e)
+        {
+            bl.DeleteLine((ListView_Lines.SelectedItem as BO.Line).LineID);
+            refresh(0);
         }
     }
 }
