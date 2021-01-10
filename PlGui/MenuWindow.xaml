@@ -46,7 +46,8 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="751,-5,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
 
-       
+
     </Grid>
 </Window>

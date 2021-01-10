@@ -86,6 +86,7 @@ namespace PlGui
         private void Menu_Click(object sender, RoutedEventArgs e)
         {            
             this.Close();
+            
         }
 
         private void add_Station_Click(object sender, RoutedEventArgs e)
@@ -93,6 +94,7 @@ namespace PlGui
             freq_ListView.Visibility = Visibility.Hidden;
             addStation_Grid.Visibility = Visibility.Visible;
             Stations_CB.DataContext = bl.GetAllStations();
+            Line_TB.Text = ((ListView_Lines.SelectedItem as BO.Line).LineID).ToString() ;
 
         }
 
@@ -196,6 +198,36 @@ namespace PlGui
             ListView_Lines.SelectedIndex = line;
             //Station_ListView.DataContext = bl.GetLine(id).List_LineStations;
 
+        }
+
+        private void Station_ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DeleteLine_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sur to delete the Line " + ListView_Lines.SelectedItem.ToString() + " ?", "Delete this Line", MessageBoxButton.OKCancel, MessageBoxImage.Information);
+            switch (result)
+            {
+                case MessageBoxResult.OK:
+
+                    foreach (BO.Line item in ListView_Lines.SelectedItems)
+                    {
+                        bl.DeleteLine(item.LineID);
+                    }
+                    //ListViewStations.Items.Refresh();
+                    // UPDATE LINE & ADJACENT STATION
+
+                    //ListView_Lines.Items.Remove(sender);      
+
+                    MessageBox.Show("These Line have been deleted", "Deleted Line");
+                    break;
+
+                case MessageBoxResult.Cancel:
+                    MessageBox.Show("Ouf...", "Cancel");
+                    break;
+            }
         }
     }
 }
