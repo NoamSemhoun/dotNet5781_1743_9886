@@ -99,5 +99,11 @@ namespace PlGui
             }
 
         }
+
+        private void Station_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            StationDétails_Window myWin = new StationDétails_Window((ListViewStations.SelectedItem as BO.Station));
+            myWin.Show();
+        }
     }
 }

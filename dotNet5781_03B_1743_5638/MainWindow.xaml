@@ -26,7 +26,7 @@
                 ToolTip="  Add a New Bus "  ToolTipService.ShowDuration="50000"/>
 
         <ListView x:Name="Lvbus" HorizontalAlignment="Center" Width="780" MouseDoubleClick="ListBus_SelectionDetail" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" Margin="0,45,12,0" Grid.RowSpan="2" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" >
+            ItemsSource= "{Binding}" Margin="0,45,12,0" Grid.RowSpan="2" FontWeight="Bold" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" SelectionChanged="Lvbus_SelectionChanged" >
 
 
             <ListView.ItemContainerStyle>

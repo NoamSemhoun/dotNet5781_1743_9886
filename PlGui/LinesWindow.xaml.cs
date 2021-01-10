@@ -24,7 +24,6 @@ namespace PlGui
         ObservableCollection<BO.Line> Lines_list;
         ObservableCollection<BO.LineStation> LineStations_list;
         ObservableCollection<BO.Ferquency> freq_List;
-        int index;
 
         string prevIndex = "";
 
@@ -226,6 +225,12 @@ namespace PlGui
                     MessageBox.Show("Ouf...", "Cancel",MessageBoxButton.OK,MessageBoxImage.Information);
                     break;
             }
+        }
+
+        private void StationDeatails_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            StationDétails_Window myWindow = new StationDétails_Window((sender as BO.Station));
+            myWindow.Show();
         }
     }
 }

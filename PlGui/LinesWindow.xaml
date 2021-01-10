@@ -23,14 +23,14 @@
             <ColumnDefinition Width="1202" />
         </Grid.ColumnDefinitions>
 
-        <DockPanel Margin="0,0,-164,666" Background="#FFE6E6E6" >
+        <DockPanel Margin="0,0,-164,660" Background="#FFE6E6E6" >
 
             <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
                         Click="Menu_Click" Height="44"
                         HorizontalAlignment="Left" VerticalAlignment="Center"
                                      
                         Width="120"  >
-                <StackPanel Orientation="Horizontal" Height="37" Width="134">
+                <StackPanel Orientation="Horizontal" Height="44" Width="134">
                     <Image Source="Images/SignOut.jpg" Width="57"/>
                     <Label Content="Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                 </StackPanel>
@@ -62,12 +62,12 @@
                 <GridView >
                     <GridViewColumn  Header="ID" Width="50" DisplayMemberBinding="{Binding LineID}" />
 
-                    <GridViewColumn  Header="Line" Width="90">
+                    <GridViewColumn  Header="Line" Width="95">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate >
                                 <StackPanel Margin="3">
                                     <DockPanel>
-                                        <TextBlock Text="{Binding LineID}" FontSize="20" Foreground="#FF780202" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding LineNumber}" FontSize="20" Foreground="#FF780202" FontWeight="Bold" Width="42" />
                                     </DockPanel>
                                     <DockPanel>
                                         <TextBlock Text="{Binding Area}" Foreground="#FF021ED1"/>
@@ -114,8 +114,9 @@
             </Grid.RowDefinitions>
 
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="850,3,-361,0" Height="38" Width="42" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
-            <ListView x:Name="Station_ListView" ItemsSource="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource stationListCon}}"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFCBF0D1" BorderBrush="#FFB1BDDF" BorderThickness="4" Grid.Row="1" Foreground="#FF050C1F" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" Margin="0,0,-13,0">
+            <ListView x:Name="Station_ListView" ItemsSource="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource stationListCon}}" MouseDoubleClick="StationDeatails_DoubleClick"
+                VerticalAlignment="Stretch"
+                      ToolTip=" Double Click to view Details" ToolTipService.ShowDuration="50000" HorizontalAlignment="Stretch" Background="#FFCBF0D1" BorderBrush="#FFB1BDDF" BorderThickness="4" Grid.Row="1" Foreground="#FF050C1F" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" Margin="0,0,-13,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
 
@@ -175,7 +176,7 @@
                         IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=ListView_Lines}"             
                         Width="155" Margin="389,55,-13,0" Background="#FF5F832B"  >
                 <StackPanel Orientation="Horizontal" Height="45" Width="150" Background="#FFE4F7E0" >
-                    <Image Source="Images\icon AddStation Mps.jpg" Width="59" Height="55" VerticalAlignment="Top" Margin="0,-4,0,-6"/>
+                    <Image Source="Images\icon AddStation Mps.jpg" Width="59" Height="60" VerticalAlignment="Top" Margin="0,-4,0,-11"/>
                     <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}" Width="98"/>
                 </StackPanel>
             </Button>
@@ -193,8 +194,8 @@
 
 
             <Button x:Name="addLine" ToolTip="   Add a NEW Line  " ToolTipService.ShowDuration="50000"  
-                        Click="addLine_Click" Margin="-146,7,535,50"  >
-                <StackPanel Orientation="Horizontal" Height="43" Width="142" HorizontalAlignment="Right" Background="#FFC0D0DE">
+                        Click="addLine_Click" Margin="-146,7,531,50"  >
+                <StackPanel Orientation="Horizontal" Height="43" Width="137" HorizontalAlignment="Right" Background="#FFC0D0DE">
                     <Image Source="Images/TRAJET.png" Width="51" Margin="0,-12,0,-8"/>
                     <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}"/>
                 </StackPanel>

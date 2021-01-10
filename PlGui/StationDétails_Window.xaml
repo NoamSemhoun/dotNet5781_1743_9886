@@ -1,0 +1,103 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PlGui"
+        xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.StationDétails_Window"
+        mc:Ignorable="d"
+        Title="StationDétails_Window" Height="710" Width="850">
+    <Window.Resources>
+        <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid x:Name="MyGrid">
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="#FFFFF8DE" Offset="0"/>
+                <GradientStop Color="#FFF7EDED" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Rectangle HorizontalAlignment="Left" Height="152" Stroke="#FF728B89" VerticalAlignment="Top" Width="494" Margin="218,10,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
+            <Rectangle.Effect>
+                <BlurEffect/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Label VerticalAlignment="Center" Margin="359,19,0,620" HorizontalAlignment="Left" Content="Station Code :" FontSize="14" Height="30"/>
+        <TextBox x:Name="codeTextBox" Width="89"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="460,19,0,621" Height="29" HorizontalAlignment="Left" BorderBrush="Red" Foreground="Red" FontWeight="Bold" FontSize="14"/>
+        <Label VerticalAlignment="Center" Margin="253,61,0,574" HorizontalAlignment="Left" Content="Name:" FontSize="14" Height="34" Width="53"/>
+        <TextBox x:Name="nameTextBox" Width="194" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="306,64,0,579" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <Label VerticalAlignment="Center" Margin="253,100,0,536" HorizontalAlignment="Left" Content="Address:" FontSize="14" Height="33" Width="67"/>
+        <TextBox x:Name="addressTextBox" Width="175" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="320,112,0,541" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <Label VerticalAlignment="Center" Margin="500,66,0,579" HorizontalAlignment="Left" Content="Latitude:" FontSize="14" Height="34"/>
+        <Label VerticalAlignment="Center" Margin="500,105,0,541" HorizontalAlignment="Left" Content="Longitude:" FontSize="14" Height="33"/>
+        <TextBox x:Name="addressTextBox_Copy" Width="120"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="581,109,0,548" Height="22" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <TextBox x:Name="addressTextBox_Copy1" Width="141"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="581,66,0,588" Height="25" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+
+        <Image Source="/Images/BUSstation .png" Margin="10,-16,647,453" />
+        <Rectangle HorizontalAlignment="Left" Height="152" Stroke="#FF728B89" VerticalAlignment="Top" Width="740" Margin="57,273,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
+            <Rectangle.Effect>
+                <BlurEffect/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <Label Content="Lines to this Station :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="326" Margin="76,273,0,0" FontSize="15"/>
+
+        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="134" VerticalAlignment="Center" Width="512" Margin="174,291,0,244">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="193*"/>
+                <ColumnDefinition Width="237*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <ListView   x:Name="ListView_Lines" Margin="10,10,0,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" Grid.ColumnSpan="2" >
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+
+            </ListView>
+
+        </Grid>
+        <Grid x:Name="Adjacent_Grid" HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="842" Margin="0,467,0,0">
+            <Label Content="Adjacents Stations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="36,-8,0,0" FontSize="19" FontWeight="Bold"/>
+            <Label Content="PrevStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="193" Margin="102,36,0,0" FontSize="15"/>
+            <Label Content="NextStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="463,36,0,0" FontSize="15"/>
+            <ListView HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="102,62,0,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="463,62,0,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid x:Name="MoreDetails" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="183" Margin="359,167,0,0">
+            <CheckBox Width="126" VerticalAlignment="Top"  Margin="18,10,0,0" IsChecked="True" Height="23" HorizontalAlignment="Left" Content="Disabled Access" />
+            <CheckBox Width="126" VerticalAlignment="Top" Margin="18,38,0,0" IsChecked="True" Height="23" HorizontalAlignment="Left" Content="Shelter Covered" />
+            <CheckBox Width="126" VerticalAlignment="Top" Margin="18,66,0,0" Height="23" HorizontalAlignment="Left" Content="Digital Pannel" />
+            <Image Width="20" VerticalAlignment="Top" Source="Images/disabledAccess.jpg" Margin="126,10,0,0" Height="26" HorizontalAlignment="Left"/>
+        </Grid>
+
+
+
+
+
+
+    </Grid>
+
+
+</Window>

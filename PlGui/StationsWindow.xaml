@@ -11,7 +11,8 @@
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
     </Window.Resources>
     <Grid>
-        <ListView x:Name="ListViewStations"  ItemsSource="{Binding}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="519"  Width="504" SelectionChanged="ListViewStations_SelectionChanged" FontSize="14" >
+        <ListView x:Name="ListViewStations"  ItemsSource="{Binding}" HorizontalContentAlignment="Center"
+                 MouseDoubleClick="Station_DoubleClick" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="519"  Width="504" SelectionChanged="ListViewStations_SelectionChanged" FontSize="14" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Center" />

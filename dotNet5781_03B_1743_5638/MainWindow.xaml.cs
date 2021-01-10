@@ -323,5 +323,10 @@ namespace dotNet5781_03B_1743_5638
         {
 
         }
+
+        private void Lvbus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

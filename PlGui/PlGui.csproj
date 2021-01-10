@@ -72,6 +72,9 @@
     <Compile Include="IsSelectedItemConvertor.cs" />
     <Compile Include="PO\myTime.cs" />
     <Compile Include="PO\StationLine_View.cs" />
+    <Compile Include="StationDétails_Window.xaml.cs">
+      <DependentUpon>StationDétails_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="stationListCon.cs" />
     <Compile Include="StationsWindow.xaml.cs">
       <DependentUpon>StationsWindow.xaml</DependentUpon>
@@ -121,6 +124,10 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationDétails_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +214,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\delete-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BUSstation .png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

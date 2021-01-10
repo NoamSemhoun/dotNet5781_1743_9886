@@ -33,9 +33,9 @@ namespace PlGui
             //win.Show();
             //this.Close();
 
-            LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
-            win.Show();
-            this.Close();
+            //LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
+            //win.Show();
+            //this.Close();
 
         }
 

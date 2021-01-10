@@ -11,6 +11,9 @@
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
     </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <Image Source="Images\STATION.jpg" HorizontalAlignment="Left" Height="193" VerticalAlignment="Top" Width="356" Margin="436,216,0,0"/>
 
         <Grid x:Name="grid1" DataContext="{StaticResource stationViewSource}" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" Height="187" Width="384">

@@ -97,6 +97,11 @@ namespace PlGui
             
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
 
         //private void Station1Code_TextChanged(object sender, TextChangedEventArgs e)
         //{
