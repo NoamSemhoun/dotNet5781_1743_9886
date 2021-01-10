@@ -23,14 +23,19 @@ namespace PlGui
     public partial class AddLine_window : Window
     {
 
-        public event AddLineEvent ALE;        
+        public event AddLineEvent ALE;
 
+        int index = 0;
         int lineNumber;
         BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
         List<int> selectedStationList = new List<int>();
-        ObservableCollection<BO.Station> selectedStationListView = new ObservableCollection<BO.Station>();
+        List<int> indexes = new List<int>();
+       
         BO.Areas area;
         private BO.AddLineExeption addLineEx;
+
+
+        //ObservableCollection<BO.Station> selectedStationListView = new ObservableCollection<BO.Station>();
 
         public AddLine_window()
         {
@@ -42,37 +47,54 @@ namespace PlGui
             InitializeComponent();
             AddLine.IsEnabled = false;
             LineNumber.DataContext = nums;
-            StationsCB.DataContext = bl.GetAllStations();
-            viewSelectedStationList.DataContext = selectedStationList;
+            station_ListBox.DataContext = bl.GetAllStations();
+            //StationsCB.DataContext = bl.GetAllStations();
+            //viewSelectedStationList.DataContext = selectedStationList;
         }
 
         private void LineNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             lineNumber = (int)(sender as ComboBox).SelectedItem;
-            if (selectedStationList.Count() >= 2 && AreaCB.SelectedItem != null)
+            if (AreaCB.SelectedItem != null)
                 AddLine.IsEnabled = true;
         }
 
-        private void StationsCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            selectedStationList.Add((((sender as ComboBox).SelectedItem) as BO.Station).Code);
-            selectedStationListView.Add((sender as ComboBox).SelectedItem as BO.Station);
-            viewSelectedStationList.DataContext = selectedStationListView;
-            if (selectedStationList.Count() >= 2 && AreaCB.SelectedItem != null &&  LineNumber.SelectedItem != null)
-                AddLine.IsEnabled = true;
-        }
+        //private void StationsCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    selectedStationList.Add((((sender as ComboBox).SelectedItem) as BO.Station).Code);
+        //    selectedStationListView.Add((sender as ComboBox).SelectedItem as BO.Station);
+        //    //viewSelectedStationList.DataContext = selectedStationListView;
+        //    if (selectedStationList.Count() >= 2 && AreaCB.SelectedItem != null &&  LineNumber.SelectedItem != null)
+        //        AddLine.IsEnabled = true;
+        //}
 
         private void del_Click(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show((sender as Button).DataContext.GetType().Name);
             selectedStationList.Remove(((sender as Button).DataContext as BO.Station).Code);
-            selectedStationListView.Remove((sender as Button).DataContext as BO.Station);
             
-
+            
+            
+            
+            
+        
+            //selectedStationListView.Remove((sender as Button).DataContext as BO.Station);
         }
 
         private void AddLine_Click(object sender, RoutedEventArgs e)
         {
+            
+            if(indexes.Any())
+            {
+                MessageBox.Show("some indexes are missing", "Error");
+                return;
+            }
+            if(index < 2)
+            {
+                MessageBox.Show("Not enough stations were selected", "Error");
+                return;
+            }
+
+
             try
             {
                 bl.AddLine(lineNumber, selectedStationList, area);
@@ -119,8 +141,38 @@ namespace PlGui
         private void ComboBoxArea_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             area = (BO.Areas)(AreaCB.SelectedItem) ;
-            if (selectedStationList.Count() >= 2 && LineNumber.SelectedItem != null)
+            if (LineNumber.SelectedItem != null)
                 AddLine.IsEnabled = true;
+        }
+
+        private void check_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as Button).Content == "")
+            {
+                if (!indexes.Any())
+                {
+                    (sender as Button).Content = ++index;
+                    selectedStationList.Add(((sender as Button).DataContext as BO.Station).Code);
+                }
+                else
+                {
+                    indexes.Sort();
+                    (sender as Button).Content = indexes[0];
+                    selectedStationList[indexes[0] - 1] = ((sender as Button).DataContext as BO.Station).Code;
+                    indexes.RemoveAt(0);
+                }
+            }
+            else
+            {
+                int tmp = (int)(sender as Button).Content;
+                (sender as Button).Content = "";
+                indexes.Add(tmp);
+                while (indexes.Contains(index))
+                {
+                    indexes.Remove(index);
+                    index--;
+                }
+            }
         }
     }
 }

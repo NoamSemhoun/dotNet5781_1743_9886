@@ -18,7 +18,7 @@
     </Window.Resources>
     
     
-    <Grid>
+    <Grid Background="#FFA1CFE7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "1*"/>
             <ColumnDefinition Width = "1*"/>
@@ -32,7 +32,7 @@
         <ComboBox x:Name="LineNumber" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Width="100" Height="40" FontSize="20" SelectionChanged="LineNumber_SelectionChanged"/>
         <Label Content="line number"  FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,85,0,0" Height="40" Width="121"/>
 
-        <ComboBox x:Name="StationsCB" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" Width="200"  Height="40" FontSize="20" SelectionChanged="StationsCB_SelectionChanged">
+        <!--<ComboBox x:Name="StationsCB" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" Width="200"  Height="40" FontSize="20" SelectionChanged="StationsCB_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -44,9 +44,9 @@
 
             </ComboBox.ItemTemplate>
 
-        </ComboBox>
+        </ComboBox>-->
 
-        <ListBox x:Name="viewSelectedStationList" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding}">
+        <!--<ListBox x:Name="viewSelectedStationList" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
@@ -57,7 +57,26 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+        </ListBox>-->
+
+
+        <ListBox x:Name="station_ListBox" Grid.Column="1" Grid.RowSpan="2" ItemsSource="{Binding}" Background="#FFADE295">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
+                        <Button x:Name="del" Content="Remove"  FontSize="15" Click="del_Click" Background="Gray"  BorderBrush="White"/>
+                        <Label Content="{Binding Code}" FontSize="15"/>
+                        <Label Content="{Binding Name}" FontSize="15"/>
+                        <Button x:Name="check" Content="" Click="check_Click" MinWidth="10" Height="20" Background="White"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
+
+
+
+
+
         <Button x:Name="AddLine" Content="Add Line" HorizontalAlignment="Left" Margin="98,149.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="200" Height="39" FontSize="15" Click="AddLine_Click"/>
         <ComboBox x:Name="AreaCB" HorizontalAlignment="Left" Margin="148,143,0,0" VerticalAlignment="Top" Width="102" RenderTransformOrigin="0.5,0.5" Height="27"
                   ItemsSource="{Binding Source={StaticResource AreasData}}" SelectionChanged="ComboBoxArea_SelectionChanged">

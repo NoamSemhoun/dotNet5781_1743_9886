@@ -212,10 +212,8 @@ namespace PlGui
             {
                 case MessageBoxResult.OK:
 
-                    foreach (BO.Line item in ListView_Lines.SelectedItems)
-                    {
-                        bl.DeleteLine(item.LineID);
-                    }
+                    bl.DeleteLine(((sender as Button).DataContext as BO.Line).LineID);
+                    refresh(0);
                     //ListViewStations.Items.Refresh();
                     // UPDATE LINE & ADJACENT STATION
 
@@ -228,12 +226,6 @@ namespace PlGui
                     MessageBox.Show("Ouf...", "Cancel");
                     break;
             }
-        }
-
-        private void deleteLine_Button_Click(object sender, RoutedEventArgs e)
-        {
-            bl.DeleteLine((ListView_Lines.SelectedItem as BO.Line).LineID);
-            refresh(0);
         }
     }
 }
