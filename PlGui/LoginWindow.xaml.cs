@@ -28,8 +28,10 @@ namespace PlGui
         {
             InitializeComponent();
 
+            //StationsWindow win = new StationsWindow();
 
-            //AddLine_window win = new AddLine_window();
+
+            ////AddLine_window win = new AddLine_window();
             //win.Show();
             //this.Close();
 

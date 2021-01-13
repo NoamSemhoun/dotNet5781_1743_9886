@@ -142,8 +142,15 @@ namespace DalApi
 
         void DeleteUser(string username);  // Or ID
 
+        User GetUser(string name);
+
+        IEnumerable<User> GetAllUsers();
+
+        IEnumerable<User> GetAllUsersBy (Predicate<User> predicate);
+
         void UpdateUser(User user);
 
+        void UpdateUaer(string name, Action<User> update);
         #endregion
     }
 }

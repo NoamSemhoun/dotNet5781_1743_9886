@@ -48,5 +48,20 @@ namespace BL
             }
             return list;
         }
+    
+        public static AdjacentStation GetAdjacentStation( int station1, int station2)
+        {
+            try
+            {
+                AdjacentStation adjacentStation = (AdjacentStation)dal.GetAdjacentStation(station1, station2).CloneNew(typeof(AdjacentStation));
+                adjacentStation.Station1_Name = dal.GetStation(station1).Name;
+                adjacentStation.Station2_Name = dal.GetStation(station2).Name;
+                return adjacentStation;
+            }
+            catch (DO.ItemNotExeistExeption e)
+            {
+                throw new ItemNotExeistExeption(e.ItemType, e.Id);
+            }
+        }
     }
 }

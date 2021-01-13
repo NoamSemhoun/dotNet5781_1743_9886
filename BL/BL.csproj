@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BL.cs" />
     <Compile Include="BLFactory.cs" />
+    <Compile Include="BO\AdjacentStation.cs" />
     <Compile Include="BO\Bus.cs" />
     <Compile Include="BO\Exeptions.cs" />
     <Compile Include="BO\Enumes.cs" />

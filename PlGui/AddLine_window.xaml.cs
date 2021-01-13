@@ -152,7 +152,7 @@ namespace PlGui
 
         private void check_Click(object sender, RoutedEventArgs e) // Add
         {
-            if  ((string)(sender as Button).Content == "+")    
+            if  ((sender as Button).Content is string)    
             {
                 if (!indexes.Any())
                 {

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+
 
 namespace PlGui
 {
@@ -19,13 +21,32 @@ namespace PlGui
     /// </summary>
     public partial class StationDétails_Window : Window
     {
+        BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
+        
+        ObservableCollection<BO.AdjacentStation> nextesData;
+        ObservableCollection<BO.AdjacentStation> prevsData;
+
+
         public StationDétails_Window(BO.Station MyStation)
         {
             InitializeComponent();
             MyGrid.DataContext = MyStation;
             Gridof_Lines.DataContext = (MyStation.List_Lines);
+            nextesData = new ObservableCollection<BO.AdjacentStation>(bl.GetNextStations(MyStation.Code));
+            nextStations_ListView.DataContext = nextesData;
+
+            prevsData = new ObservableCollection<BO.AdjacentStation>(bl.GetprevStations(MyStation.Code));
+            prevStations_ListView.DataContext = prevsData;
         }
 
-       
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBox).Text = "";
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
     }
 }

@@ -506,15 +506,53 @@ namespace DL
         public void AddUser(User user)
         {
             if (DataSource.List_Users.FirstOrDefault(l => l.UserName == user.UserName) != null)
-                throw new ItemAlreadyExeistExeption(typeof(LineTrip), user.ID_user);  // Or  Username with string
+                throw new ItemAlreadyExeistExeption(typeof(User), 1111);  // Or  Username with string
 
             DataSource.List_Users.Add(user.Clone());
         }
 
-        public void UpdateUser(User user)  // To new Password TOO
+        public User GetUser(string name)
         {
-            throw new NotImplementedException();
+            User user = DataSource.List_Users.FirstOrDefault(u => u.UserName == name);
+            if (user == null)
+                throw new ItemNotExeistExeption(typeof(User), 1111);
+            return user.Clone();
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return from item in DataSource.List_Users
+                   select item.Clone();
+        }
+
+
+        public IEnumerable<User> GetAllUsersBy(Predicate<User> predicate)
+        {
+            return from item in DataSource.List_Users
+                   where predicate(item)
+                   select item.Clone();
+        }
+
+
+        public void UpdateUser(User user)
+        {
+            if (DataSource.List_Users.FirstOrDefault(u => u.UserName == user.UserName) == null)
+                throw new ItemNotExeistExeption(typeof(User), 1111);
+            DataSource.List_Users.RemoveAll(u => u.UserName == user.UserName);
+            DataSource.List_Users.Add(user.Clone());
+        }
+
+        public void UpdateUaer(string name, Action<User> update)
+        {
+            User user = (DataSource.List_Users.FirstOrDefault(u => u.UserName == name));
+            if (user == null)
+                throw new ItemNotExeistExeption(typeof(User), 1111);
+            try { update(user); }
+            catch
+            { throw new BadActionExeption(typeof(AdjacentStation)); }
+        }
+
+
         #endregion
 
 

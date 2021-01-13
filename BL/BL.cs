@@ -540,7 +540,7 @@ namespace BL
         }
 
 
-
+          
         public IEnumerable<Station> GetAllStations()
         {
             return from item in dal.GetAllStationes()
@@ -596,14 +596,30 @@ namespace BL
             }
         }
 
+        public IEnumerable<AdjacentStation> GetNextStations(int station_id)
+        {
+            return from item in dal.GetAllAdjacentStations()
+                   where item.Statoin1 == station_id
+                   select ConvertItems.GetAdjacentStation(item.Statoin1, item.Station2); 
+        }
+        
+        
+        public IEnumerable<AdjacentStation> GetprevStations(int station_id)
+        {
+            return from item in dal.GetAllAdjacentStations()
+                   where item.Station2 == station_id
+                   select ConvertItems.GetAdjacentStation(item.Statoin1, item.Station2);
+        }
+
         #endregion
 
         #region User 
 
         public bool CheckAdmin(string userName, string password)
         {
-            throw new NotImplementedException();
-            //try { dal.getuser}
+            if (dal.GetAllUsersBy(u => u.UserName == userName && password == u.Password && u.is_Admin).Any())
+                return true;
+            return false;
         }
 
         public void AddUser(User myuser)

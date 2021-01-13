@@ -55,6 +55,10 @@ namespace BlAPI
 
         LineStation GetLineStation(int lineID, int index);
 
+        IEnumerable<AdjacentStation> GetNextStations(int station_id);
+        IEnumerable<AdjacentStation> GetprevStations(int station_id);
+
+
         #endregion
 
         #region User

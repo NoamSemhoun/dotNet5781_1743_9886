@@ -551,7 +551,14 @@ namespace DS
 
             List_Users = new List<User> { new User { ID_user = 1, is_Admin = true, Password = "1234", UserName = "Noam" },
                                            new User {ID_user = 2, is_Admin = true, Password = "1234", UserName = "Yair"}};
+
+            List_AdjacentStations.Add( new AdjacentStation { Statoin1 = 73, Station2 = 76, Distance = 10.000, Time = new TimeSpan(0,20,0)});
+        
+        
         }
+
+
+        
     }
 }
 
