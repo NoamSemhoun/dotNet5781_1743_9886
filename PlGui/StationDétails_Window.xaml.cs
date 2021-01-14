@@ -53,5 +53,22 @@ namespace PlGui
         {
 
         }
+
+        private void updaePrevStation_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to save the changes?", "", MessageBoxButton.YesNo);
+
+            if(result == MessageBoxResult.Yes)
+                bl.UpdateAdjStations(prevsData.ToList());
+        }
+
+        private void updaeNextStation_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to save the changes?", "", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+                bl.UpdateAdjStations(nextesData.ToList());
+
+        }
     }
 }

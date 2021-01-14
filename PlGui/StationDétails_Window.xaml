@@ -70,8 +70,8 @@
             <Label Content="Adjacents Stations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="36,-8,0,0" FontSize="19" FontWeight="Bold"/>
             <Label Content="PrevStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="193" Margin="102,36,0,0" FontSize="15"/>
             <Label Content="NextStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="463,36,0,0" FontSize="15"/>
-            
-            <ListView x:Name="prevStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="102,68,0,0" ItemsSource="{Binding}">
+
+            <ListView x:Name="prevStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="102,62,0,0" ItemsSource="{Binding}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="code" DisplayMemberBinding="{Binding Statoin1}"/>
@@ -110,17 +110,19 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Distance">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
                                     <local:DoubleTextBox Text ="{Binding Path=Distance, Mode=TwoWay}"  Height="30" Width="80"/>
-                                <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
+                                    <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
                     </GridView>
                 </ListView.View>
             </ListView>
+            <Button Content="update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="102,197,0,-13" x:Name="updaePrevStation_Button" Click="updaePrevStation_Button_Click" RenderTransformOrigin="1.6,0.521"/>
+            <Button Content="update" HorizontalAlignment="Left" Height="18" Margin="463,192,0,-8" VerticalAlignment="Top" Width="75" x:Name="updaeNextStation_Button" Click="updaeNextStation_Button_Click" />
         </Grid>
         <Grid x:Name="MoreDetails" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="183" Margin="359,167,0,0">
             <CheckBox Width="126" VerticalAlignment="Top"  Margin="18,10,0,0" IsChecked="True" Height="23" HorizontalAlignment="Left" Content="Disabled Access" />

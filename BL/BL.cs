@@ -336,24 +336,11 @@ namespace BL
 
             dataCheck<DO.AdjacentStation> adjDtChecker = new dataCheck<DO.AdjacentStation>();
 
-            IEnumerable<DO.AdjacentStation> adj = from item in line.List_LineStations
+            List<DO.AdjacentStation> adj = (from item in line.List_LineStations
                                                   where item.NextStation != -1
-                                                  select new DO.AdjacentStation { Statoin1 = item.Code, Station2 = item.NextStation, Distance = item.Distance_ToNext, Time = item.Time_ToNext };
+                                                  select new DO.AdjacentStation { Statoin1 = item.Code, Station2 = item.NextStation, Distance = item.Distance_ToNext, Time = item.Time_ToNext }).ToList();
 
-            foreach (DO.AdjacentStation aS in adj)
-            {
-                if (adjDtChecker.isExeist(a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
-                {
-                    if (adjDtChecker.didNeedUpdaete(aS, a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
-                    {
-                        dal.UpdateAdjacentStation(aS);
-                    }
-                }
-                else
-                {
-                    dal.AddAdjacentStation(aS);
-                }
-            }
+            updateAdjStations(adj);
 
             updateLineStations(line.List_LineStations);
 
@@ -735,6 +722,40 @@ namespace BL
         #endregion
 
 
+
+
+        public void UpdateAdjStations(List<AdjacentStation> adjacentStations)
+        {
+            dataCheck<DO.Station> dataCheck = new dataCheck<DO.Station>();
+
+            List<DO.AdjacentStation> DoAdjStations = (from item in adjacentStations
+                                                      where (dataCheck.isExeist(s => s.Code == item.Statoin1) && dataCheck.isExeist(s => s.Code == item.Station2))
+                                                      select (DO.AdjacentStation)item.CloneNew(typeof(DO.AdjacentStation))).ToList();
+            if (adjacentStations.Count != DoAdjStations.Count)
+                throw new LackOfDataExeption(DataType.StationData, -1);
+
+            updateAdjStations(DoAdjStations);
+        }
+
+        private void updateAdjStations(List<DO.AdjacentStation> adjacentStations)
+        {
+            dataCheck<DO.AdjacentStation> adjDtChecker = new dataCheck<DO.AdjacentStation>();
+
+            foreach (DO.AdjacentStation aS in adjacentStations)
+            {
+                if (adjDtChecker.isExeist(a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
+                {
+                    if (adjDtChecker.didNeedUpdaete(aS, a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
+                    {
+                        dal.UpdateAdjacentStation(aS);
+                    }
+                }
+                else
+                {
+                    dal.AddAdjacentStation(aS);
+                }
+            }
+        }
 
     }
 }

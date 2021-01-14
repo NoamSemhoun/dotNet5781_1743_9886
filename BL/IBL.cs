@@ -76,5 +76,7 @@ namespace BlAPI
 
 
         #endregion
+
+        void UpdateAdjStations(List<AdjacentStation> adjacentStations);
     }
 }
