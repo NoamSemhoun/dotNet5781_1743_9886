@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="PlGui.TimeTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PlGui"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <local:FontSizeConverter
+            x:Key="fontConvert"/>
+    </UserControl.Resources>
+
+
+    <TextBox x:Name="mainTextBox" Text = "{Binding Path=Text}" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"  TextAlignment="Justify"  FontSize="{Binding ElementName=mainTextBox, Path=ActualHeight, Converter={StaticResource fontConvert}}" 
+           PreviewKeyDown="mainTextBox_KeyDown" GotFocus="mainTextBox_GotFocus">
+
+    </TextBox>
+</UserControl>

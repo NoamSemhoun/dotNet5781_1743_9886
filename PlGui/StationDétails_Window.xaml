@@ -71,7 +71,7 @@
             <Label Content="PrevStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="193" Margin="102,36,0,0" FontSize="15"/>
             <Label Content="NextStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="463,36,0,0" FontSize="15"/>
             
-            <ListView x:Name="prevStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="102,62,0,0" ItemsSource="{Binding}">
+            <ListView x:Name="prevStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="102,68,0,0" ItemsSource="{Binding}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="code" DisplayMemberBinding="{Binding Statoin1}"/>
@@ -79,7 +79,8 @@
                         <GridViewColumn Header="Time" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>
+                                    <local:TimeTextBox Text ="{Binding Path=Time}"  Height="30" Width="60"/>
+                                    <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -93,7 +94,14 @@
                     <GridView>
                         <GridViewColumn Header="code" DisplayMemberBinding="{Binding Station2}"/>
                         <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Station2_Name}"/>
-                        <GridViewColumn Header="Time" DisplayMemberBinding="{Binding Time}"/>
+                        <GridViewColumn Header="Time" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <local:TimeTextBox Text ="{Binding Path=Time}"  Height="30" Width="60"/>
+                                    <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Distance" DisplayMemberBinding="{Binding Distance}"/>
 
 

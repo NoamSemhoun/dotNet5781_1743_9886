@@ -70,6 +70,9 @@
       <DependentUpon>AddStation_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="IsSelectedItemConvertor.cs" />
+    <Compile Include="My Controlles\TimeTextBox.xaml.cs">
+      <DependentUpon>TimeTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PO\myTime.cs" />
     <Compile Include="PO\StationLine_View.cs" />
     <Compile Include="StationDétails_Window.xaml.cs">
@@ -81,6 +84,9 @@
     </Compile>
     <Compile Include="User_ControlWindow.xaml.cs">
       <DependentUpon>User_ControlWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Page Include="AddAdjacentStation.xaml">
       <SubType>Designer</SubType>
@@ -127,6 +133,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="My Controlles\TimeTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StationDétails_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +146,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="User_ControlWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

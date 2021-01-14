@@ -299,7 +299,7 @@ namespace BL
             foreach (DO.LineStation lS in lS_List)
             {
                 DO.AdjacentStation aS;
-                if (lS.NextStation != -1)
+                if (lS.NextStation != -1 && lS.NextStation != 0)
                     aS = dal.GetAdjacentStation(lS.Code, lS.NextStation);
                 else
                     aS = new DO.AdjacentStation { Distance = 0, Time = new TimeSpan(0) };
@@ -543,8 +543,8 @@ namespace BL
           
         public IEnumerable<Station> GetAllStations()
         {
-            return from item in dal.GetAllStationes()
-                   select Cloning.DoObjectsToStation(item.Code);
+            return (from item in dal.GetAllStationes()
+                   select Cloning.DoObjectsToStation(item.Code)).OrderBy(s => s.Code);
         }
 
 
@@ -598,17 +598,17 @@ namespace BL
 
         public IEnumerable<AdjacentStation> GetNextStations(int station_id)
         {
-            return from item in dal.GetAllAdjacentStations()
-                   where item.Statoin1 == station_id
-                   select ConvertItems.GetAdjacentStation(item.Statoin1, item.Station2); 
+            return (from item in dal.GetAllAdjacentStations()
+                    where item.Statoin1 == station_id
+                    select ConvertItems.GetAdjacentStation(item.Statoin1, item.Station2)).OrderBy(s => s.Station2);
         }
         
         
         public IEnumerable<AdjacentStation> GetprevStations(int station_id)
         {
-            return from item in dal.GetAllAdjacentStations()
-                   where item.Station2 == station_id
-                   select ConvertItems.GetAdjacentStation(item.Statoin1, item.Station2);
+            return (from item in dal.GetAllAdjacentStations()
+                    where item.Station2 == station_id
+                    select ConvertItems.GetAdjacentStation(item.Statoin1, item.Station2)).OrderBy(s => s.Statoin1);
         }
 
         #endregion

@@ -534,7 +534,7 @@ namespace DS
             List_AdjacentStations = new List<AdjacentStation>();
             foreach (LineStation l in List_LineStations)
             {
-                if(!List_AdjacentStations.Any() || List_AdjacentStations.FirstOrDefault(a => a.Statoin1 == l.Code && a.Station2 == l.NextStation) == null)
+                if((!List_AdjacentStations.Any() || List_AdjacentStations.FirstOrDefault(a => a.Statoin1 == l.Code && a.Station2 == l.NextStation) == null) && l.NextStation != 0 )
                     List_AdjacentStations.Add(new AdjacentStation
                     {
                         Statoin1 = l.Code,
