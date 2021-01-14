@@ -63,6 +63,8 @@
             <Label Content="Distance :" Margin="0,0,147,143"/>
             <Slider x:Name="disSlide" TickFrequency="0.01" TickPlacement="BottomRight"
                     Minimum="0.01" Maximum="100" Height="25" Margin="10,31,10,193" Grid.ColumnSpan="2"   />
+           
+            
             <TextBox Text="{Binding ElementName=disSlide, Path=Value, UpdateSourceTrigger=PropertyChanged, StringFormat=F}" HorizontalAlignment="Center" Width="90"  FontSize="20" TextAlignment="Center" Margin="118,64,41,162" TextChanged="TextBox_TextChanged" BorderBrush="{x:Null}" >
                 <TextBox.Background>
                     <SolidColorBrush Color="#FFBB3A3A" Opacity="0.1"/>
