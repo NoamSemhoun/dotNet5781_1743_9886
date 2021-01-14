@@ -70,6 +70,9 @@
       <DependentUpon>AddStation_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="IsSelectedItemConvertor.cs" />
+    <Compile Include="My Controlles\DoubleTextBox.xaml.cs">
+      <DependentUpon>DoubleTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="My Controlles\TimeTextBox.xaml.cs">
       <DependentUpon>TimeTextBox.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="My Controlles\DoubleTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -8,6 +8,7 @@
         Title="Window1" Height="450" Width="800">
     
     <Grid>
-        <local:TimeTextBox x:Name="aa" Text="{Binding Path=Time}"/>
+        <local:DoubleTextBox Height="50" x:Name="aa" Text="{Binding Path=Time}"/>
+        <Button Content="Button" HorizontalAlignment="Left" Height="35" Margin="50,345,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click"/>
     </Grid>
 </Window>

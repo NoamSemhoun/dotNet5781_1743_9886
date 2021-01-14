@@ -19,22 +19,28 @@ namespace PlGui
     /// </summary>
     public partial class Window1 : Window
     {
-
+        MyTime myTime;
 
         public Window1()
         {
             InitializeComponent();
-            MyTime myTime = new MyTime();
+            myTime = new MyTime();
             aa.DataContext = myTime;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(InputLanguageManager.Current.CurrentInputLanguage.Name);
+        }
     }
 
     class MyTime
     {
+        
+
         private TimeSpan time;
         
-        public MyTime() { time = new TimeSpan(2, 2, 4); }
+        public MyTime() { time = new TimeSpan(2, 2, 4);}
 
         public TimeSpan Time { get => time; set => time = value; }
     }

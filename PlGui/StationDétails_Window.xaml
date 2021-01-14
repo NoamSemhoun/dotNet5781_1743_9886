@@ -79,13 +79,20 @@
                         <GridViewColumn Header="Time" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <local:TimeTextBox Text ="{Binding Path=Time}"  Height="30" Width="60"/>
+                                    <local:TimeTextBox  Text ="{Binding Path=Time, Mode=TwoWay}"  Height="30" Width="60"/>
                                     <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Distance" DisplayMemberBinding="{Binding Distance}"/>
-                        
+                        <GridViewColumn Header="Distance">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <local:DoubleTextBox Text ="{Binding Path=Distance, Mode=TwoWay}"  Height="30" Width="80"/>
+                                    <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -97,13 +104,19 @@
                         <GridViewColumn Header="Time" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <local:TimeTextBox Text ="{Binding Path=Time}"  Height="30" Width="60"/>
+                                    <local:TimeTextBox Text ="{Binding Path=Time, Mode=TwoWay}"  Height="30" Width="60"/>
                                     <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Distance" DisplayMemberBinding="{Binding Distance}"/>
-
+                        <GridViewColumn Header="Distance">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                    <local:DoubleTextBox Text ="{Binding Path=Distance, Mode=TwoWay}"  Height="30" Width="80"/>
+                                <!--<TextBox Text="{Binding Path=Time}" GotFocus="TextBox_GotFocus" TextChanged="TextBox_TextChanged"/>-->
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
                     </GridView>
                 </ListView.View>
@@ -115,6 +128,7 @@
             <CheckBox Width="126" VerticalAlignment="Top" Margin="18,66,0,0" Height="23" HorizontalAlignment="Left" Content="Digital Pannel" />
             <Image Width="20" VerticalAlignment="Top" Source="Images/disabledAccess.jpg" Margin="126,10,0,0" Height="26" HorizontalAlignment="Left"/>
         </Grid>
+        <Button Content="hold" Click="Button_Click" HorizontalAlignment="Left" Height="23" Margin="630,205,0,0" VerticalAlignment="Top" Width="92"/>
 
 
 
