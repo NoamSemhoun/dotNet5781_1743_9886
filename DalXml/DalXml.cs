@@ -22,11 +22,12 @@ namespace DL
         #region DS XML Files
 
         string BusPath = @"BusXml.xml"; //XElement
+        string LinePath = @"LineXml.xml"; //XElement
 
-     
 
 
         #endregion
+
 
         #region Bus
 
@@ -163,8 +164,148 @@ namespace DL
 
         }
 
-      #endregion
+        #endregion
 
+
+        #region Line
+
+
+        public Line GetLine(int id)
+        {
+            XElement LineElement = XMLTools.LoadListFromXMLElement(LinePath);
+
+            Line line = (from line1 in LineElement.Elements()
+                         where int.Parse(line1.Element("LineID").Value) == id
+                         select new Line()
+                         {
+                             LineID = int.Parse(line1.Element("LineID").Value),
+                             LineNumber = int.Parse(line1.Element("LineNumber").Value),
+                             FirstStation = int.Parse(line1.Element("FirstStation").Value),
+                             LastStation = int.Parse(line1.Element("LastStation").Value),
+                             Area = (Areas)Enum.Parse(typeof(Areas), line1.Element("Area").Value)  //  LIVDOKKKK 
+                         }
+                        ).FirstOrDefault();
+
+            if (line == null)
+                throw new ItemNotExeistExeption(typeof(Line), id);
+
+            return line;
+
+        }
+
+        public IEnumerable<Line> GetAllLines()
+        {
+            XElement LineElement = XMLTools.LoadListFromXMLElement(LinePath);
+
+            return (from line1 in LineElement.Elements()
+
+                    select new Line()
+                    {
+                        LineID = int.Parse(line1.Element("LineID").Value),
+                        LineNumber = int.Parse(line1.Element("LineNumber").Value),
+                        FirstStation = int.Parse(line1.Element("FirstStation").Value),
+                        LastStation = int.Parse(line1.Element("LastStation").Value),
+                        Area = (Areas)Enum.Parse(typeof(Areas), line1.Element("Area").Value)  //  LIVDOKKKK 
+                    }
+                        );
+
+        }
+
+
+        public IEnumerable<Line> GetAllLinesBy(Predicate<Line> predicate)
+        {
+            XElement LineElement = XMLTools.LoadListFromXMLElement(LinePath);
+
+            return from line1 in LineElement.Elements()
+                   let l = new Line()
+                   {
+                       LineID = int.Parse(line1.Element("LineID").Value),
+                       LineNumber = int.Parse(line1.Element("LineNumber").Value),
+                       FirstStation = int.Parse(line1.Element("FirstStation").Value),
+                       LastStation = int.Parse(line1.Element("LastStation").Value),
+                       Area = (Areas)Enum.Parse(typeof(Areas), line1.Element("Area").Value)  //   
+                   }
+                   where predicate(l)
+                   select l;
+
+
+        }
+
+
+        public void AddLine(Line line)
+        {
+            XElement LineElement = XMLTools.LoadListFromXMLElement(LinePath);
+
+            XElement line1 = (from l in LineElement.Elements()
+                           where int.Parse(l.Element("LineID").Value) == line.LineID
+                           select l).FirstOrDefault();
+
+            if (line1 != null)
+                throw new ItemAlreadyExeistExeption(typeof(Line), line.LineID);
+
+            XElement LineElem = new XElement("Line",
+                                  new XElement("LineID", line.LineID),
+                                  new XElement("LineNumber", line.LineNumber),
+                                  new XElement("FirstStation", line.FirstStation),
+                                  new XElement("LastStation", line.LastStation),
+                                  new XElement("Area", line.Area.ToString()));
+
+            LineElement.Add(LineElem);
+
+            XMLTools.SaveListToXMLElement(LineElement, LinePath);
+
+        }
+
+        public void UpdateLine(Line line)
+        {
+            XElement LineElement = XMLTools.LoadListFromXMLElement(LinePath);
+
+            XElement line1 = (from p in LineElement.Elements()
+                          where int.Parse(p.Element("LineID").Value) == line.LineID  //  LIVDOKKKK with LINE NUMBER 
+                          select p).FirstOrDefault();
+
+            if (line1 != null)
+            {
+                line1.Element("LineID").Value = line.LineID.ToString();
+                line1.Element("LineNumber").Value = line.LineNumber.ToString();
+                line1.Element("FirstStation").Value = line.FirstStation.ToString();
+                line1.Element("LastStation").Value = line.LastStation.ToString();
+                line1.Element("Area").Value = line.Area.ToString();
+
+                XMLTools.SaveListToXMLElement(LineElement, LinePath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(Line), line.LineID);
+        }
+
+
+        public void UpdateLine(int id, Action<Bus> update) //method that knows to updt specific fields in Person
+        {
+            throw new NotImplementedException();
+
+        }
+
+
+        public void DeleteLine(int id)
+        {
+            XElement LineElement = XMLTools.LoadListFromXMLElement(LinePath);
+
+            XElement line1 = (from p in LineElement.Elements()
+                          where int.Parse(p.Element("LineID").Value) == id
+                          select p).FirstOrDefault();
+
+            if (line1 != null)
+            {
+                line1.Remove();
+
+                XMLTools.SaveListToXMLElement(LineElement, LinePath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(Line), id);
+
+        }
+
+#endregion
 
 
 
