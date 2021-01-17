@@ -23,7 +23,7 @@ namespace DL
 
         string BusPath = @"BusXml.xml"; //XElement
         string LinePath = @"LineXml.xml"; //XElement
-
+        string BusOnTripPath = @"BusOnTripXml.xml";
 
 
         #endregion
@@ -307,7 +307,120 @@ namespace DL
 
         #endregion
 
+        #region BusOnTrip
 
+        BusOnTrip GetBusOnTrip(int id)
+        {
+            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
+
+            BusOnTrip busOnTrip = (from b in BusOnTripElement.Elements()
+                       where int.Parse(b.Element("Id").Value) == id
+                       select new BusOnTrip()
+                       {
+                           Id = int.Parse(b.Element("Id").Value),
+                           Depart_Planned = TimeSpan.Parse(b.Element("Depart_Planned").Value),
+                           LicenceNum = int.Parse(b.Element("LicenceNum").Value),
+                           LineID = int.Parse(b.Element("LineID").Value),
+                           PrevStation = int.Parse(b.Element("PrevStation").Value),
+                           Real_Depart = TimeSpan.Parse(b.Element("Real_Depart").Value),
+                           Timeto_NextStation = TimeSpan.Parse(b.Element("Timeto_NextStation").Value),
+                           Timeto_PrevStation = TimeSpan.Parse(b.Element("Timeto_PrevStation").Value)
+                       }
+                        ).FirstOrDefault();
+
+            if (busOnTrip == null)
+                throw new ItemNotExeistExeption(typeof(Bus), id);
+
+            return busOnTrip;
+        }
+        IEnumerable<BusOnTrip> GetAllBusesOnTrip()
+        {
+
+            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
+
+            return  from b in BusOnTripElement.Elements()
+                    select (BusOnTrip)b.xElementToItem(typeof(BusOnTrip));  
+
+        }
+        IEnumerable<BusOnTrip> GetAllBusesOnTripBy(Predicate<BusOnTrip> predicate)
+        {
+            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
+
+            return  from b in BusOnTripElement.Elements()
+                    let bOT = (BusOnTrip) b.xElementToItem(typeof(BusOnTrip))
+                    where(predicate(bOT))
+                    select bOT;
+
+
+        }
+        void AddBusOnTrip(BusOnTrip busOnTrip)
+        {
+            XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
+
+            XElement bOT = (from b in busOnTripElement.Elements()
+                           where int.Parse(b.Element("Id").Value) == busOnTrip.Id
+                           select b).FirstOrDefault();
+
+            if (bOT != null)
+                throw new ItemAlreadyExeistExeption(typeof(BusOnTrip), busOnTrip.Id);
+
+            busOnTripElement.Add(busOnTrip.itemToXElement());
+
+            XMLTools.SaveListToXMLElement(busOnTripElement, BusOnTripPath);
+        }
+        void UpdateBusOnTrip(BusOnTrip busOnTrip)
+        {
+            XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
+
+            XElement bOT = (from b1 in busOnTripElement.Elements()
+                          where int.Parse(b1.Element("Id").Value) == busOnTrip.Id
+                          select b1).FirstOrDefault();
+
+            if (bOT != null)
+            {
+                bOT.Remove();
+                busOnTripElement.Add(busOnTrip.itemToXElement());
+                XMLTools.SaveListToXMLElement(busOnTripElement, BusOnTripPath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(BusOnTrip), busOnTrip.Id);
+        }
+        void UpdateBusOnTrip(int id, Action<BusOnTrip> update) //method that knows to updt specific fields
+        {
+            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
+
+            XElement bOPxElement = (from b in BusOnTripElement.Elements()
+                                    where int.Parse(b.Element("Id").Value) == id
+                                    select b).FirstOrDefault();
+            if (bOPxElement == null)
+                throw new ItemNotExeistExeption(typeof(BusOnTrip), id);
+
+            var busOnTrip = (BusOnTrip)bOPxElement.xElementToItem(typeof(BusOnTrip));
+            update(busOnTrip);
+
+            bOPxElement.Remove();
+            BusOnTripElement.Add(busOnTrip.itemToXElement());
+            XMLTools.SaveListToXMLElement(BusOnTripElement, BusOnTripPath);
+        }
+        void DeleteBusOnTrip(int id)
+        {
+            XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
+
+            XElement b = (from b1 in busOnTripElement.Elements()
+                          where int.Parse(b1.Element("Id").Value) == id
+                          select b1).FirstOrDefault();
+
+            if (b != null)
+            {
+                b.Remove();
+
+                XMLTools.SaveListToXMLElement(busOnTripElement, BusOnTripPath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(BusOnTrip), id);
+        }
+
+        #endregion
 
 
     }
