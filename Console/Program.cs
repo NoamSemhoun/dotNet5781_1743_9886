@@ -14,6 +14,9 @@ namespace Console
     {
         static void Main(string[] args)
         {
+               
+
+
 
             //IBL bL = BLFactory.GetBL();
 
@@ -34,8 +37,8 @@ namespace Console
 
             IDAL dal = DalFactory.GetDal();
 
-            foreach (DO.Line l in dal.GetAllLines())
-                System.Console.WriteLine(l);
+            //foreach (DO.Line l in dal.GetAllLines())
+            //    System.Console.WriteLine(l);
         
             foreach (DO.LineStation l in dal.GetAllLineStations())
                 System.Console.WriteLine(l);
