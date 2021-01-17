@@ -24,7 +24,7 @@ namespace DL
         string BusPath = @"BusXml.xml"; //XElement
         string LinePath = @"LineXml.xml"; //XElement
         string BusOnTripPath = @"BusOnTripXml.xml";
-
+        string stationPath = @"StationXml.xml";
 
         #endregion
 
@@ -422,6 +422,106 @@ namespace DL
 
         #endregion
 
+        #region Station
+
+        IEnumerable<Station> GetAllStationes()
+        {
+            XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
+
+            return from S in stationElement.Elements()
+                   select (Station)S.xElementToItem(typeof(Station));
+        }
+        IEnumerable<Station> GetAllStationesBy(Predicate<Station> predicate)
+        {
+            XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
+
+            return from S in stationElement.Elements()
+                   let st = (Station)S.xElementToItem(typeof(Station))
+                   where (predicate(st))
+                   select st;
+        }
+        Station GetStation(int code)
+        {
+            XElement stationsElement = XMLTools.LoadListFromXMLElement(stationPath);
+
+            Station station = (from s in stationsElement.Elements()
+                                   where int.Parse(s.Element("Code").Value) == code
+                                   select (Station)s.xElementToItem(typeof(Station))).FirstOrDefault();
+
+            if (station == null)
+                throw new ItemNotExeistExeption(typeof(Station), code);
+
+            return station;
+        }
+        void AddStation(Station station)
+        {
+            XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
+
+            XElement stationXElem = (from S in stationElement.Elements()
+                            where int.Parse(S.Element("Code").Value) == station.Code
+                            select S).FirstOrDefault();
+
+            if (stationXElem != null)
+                throw new ItemAlreadyExeistExeption(typeof(Station), station.Code);
+
+            stationElement.Add(station.itemToXElement());
+
+            XMLTools.SaveListToXMLElement(stationElement, stationPath);
+        }
+        void UpdateStation(Station station)
+        {
+            XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
+
+            XElement SxElement = (from s in stationElement.Elements()
+                            where int.Parse(s.Element("Code").Value) == station.Code
+                            select s).FirstOrDefault();
+
+            if (SxElement != null)
+            {
+                SxElement.Remove();
+                stationElement.Add(station.itemToXElement());
+                XMLTools.SaveListToXMLElement(stationElement, stationPath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(Station), station.Code);
+        }
+        void UpdateStation(int code, Action<Station> update) //method that knows to updt specific fields
+        {
+            XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
+
+            XElement sxElement = (from s in stationElement.Elements()
+                                  where int.Parse(s.Element("Code").Value) == station.Code
+                                  select s).FirstOrDefault();
+
+            if (sxElement == null)
+                throw new ItemNotExeistExeption(typeof(Station), code);
+
+            var station = (Station)sxElement.xElementToItem(typeof(Station));
+            update(station);
+
+            sxElement.Remove();
+            stationElement.Add(station.itemToXElement());
+            XMLTools.SaveListToXMLElement(stationElement, stationPath);
+        }
+        void DeleteStation(int code)
+        {
+            XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
+
+            XElement s = (from s1 in stationElement.Elements()
+                          where int.Parse(s1.Element("Code").Value) == code
+                          select s1).FirstOrDefault();
+
+            if (s != null)
+            {
+                s.Remove();
+
+                XMLTools.SaveListToXMLElement(stationElement, stationPath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(Station), code);
+        }
+
+        #endregion
 
     }
 }
