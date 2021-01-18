@@ -25,6 +25,10 @@ namespace DL
         string LinePath = @"LineXml.xml"; //XElement
         string BusOnTripPath = @"BusOnTripXml.xml";
         string stationPath = @"StationXml.xml";
+        string adjacentStationsPath = @"AdjacentStationXml.xml";
+        string lineStationsPath = @"LineStationXml.xml";
+        string lineTripPath = @"LineTripXml.xml";
+        string userPath = @"UserXml.xml";
 
         #endregion
 
@@ -278,11 +282,9 @@ namespace DL
                 throw new ItemNotExeistExeption(typeof(Line), line.LineID);
         }
 
-
-        public void UpdateLine(int id, Action<Bus> update) //method that knows to updt specific fields in Person
+        public void UpdateLine(int id, Action<Line> update) //method that knows to updt specific fields in Person
         {
-            throw new NotImplementedException();
-
+            XmlCRUD.Update<Line>(LinePath, update, new int[] { id }, "LineID");
         }
 
 
@@ -309,7 +311,7 @@ namespace DL
 
         #region BusOnTrip
 
-        BusOnTrip GetBusOnTrip(int id)
+        public BusOnTrip GetBusOnTrip(int id)
         {
             XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
 
@@ -333,7 +335,7 @@ namespace DL
 
             return busOnTrip;
         }
-        IEnumerable<BusOnTrip> GetAllBusesOnTrip()
+        public IEnumerable<BusOnTrip> GetAllBusesOnTrip()
         {
 
             XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
@@ -342,7 +344,7 @@ namespace DL
                     select (BusOnTrip)b.xElementToItem(typeof(BusOnTrip));  
 
         }
-        IEnumerable<BusOnTrip> GetAllBusesOnTripBy(Predicate<BusOnTrip> predicate)
+        public IEnumerable<BusOnTrip> GetAllBusesOnTripBy(Predicate<BusOnTrip> predicate)
         {
             XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
 
@@ -353,7 +355,7 @@ namespace DL
 
 
         }
-        void AddBusOnTrip(BusOnTrip busOnTrip)
+        public void AddBusOnTrip(BusOnTrip busOnTrip)
         {
             XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
 
@@ -368,7 +370,7 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(busOnTripElement, BusOnTripPath);
         }
-        void UpdateBusOnTrip(BusOnTrip busOnTrip)
+        public void UpdateBusOnTrip(BusOnTrip busOnTrip)
         {
             XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
 
@@ -385,7 +387,7 @@ namespace DL
             else
                 throw new ItemNotExeistExeption(typeof(BusOnTrip), busOnTrip.Id);
         }
-        void UpdateBusOnTrip(int id, Action<BusOnTrip> update) //method that knows to updt specific fields
+        public void UpdateBusOnTrip(int id, Action<BusOnTrip> update) //method that knows to updt specific fields
         {
             XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
 
@@ -402,7 +404,7 @@ namespace DL
             BusOnTripElement.Add(busOnTrip.itemToXElement());
             XMLTools.SaveListToXMLElement(BusOnTripElement, BusOnTripPath);
         }
-        void DeleteBusOnTrip(int id)
+        public void DeleteBusOnTrip(int id)
         {
             XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
 
@@ -424,14 +426,14 @@ namespace DL
 
         #region Station
 
-        IEnumerable<Station> GetAllStationes()
+        public IEnumerable<Station> GetAllStationes()
         {
             XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
-
+            
             return from S in stationElement.Elements()
                    select (Station)S.xElementToItem(typeof(Station));
         }
-        IEnumerable<Station> GetAllStationesBy(Predicate<Station> predicate)
+        public IEnumerable<Station> GetAllStationesBy(Predicate<Station> predicate)
         {
             XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
 
@@ -440,7 +442,7 @@ namespace DL
                    where (predicate(st))
                    select st;
         }
-        Station GetStation(int code)
+        public Station GetStation(int code)
         {
             XElement stationsElement = XMLTools.LoadListFromXMLElement(stationPath);
 
@@ -453,7 +455,7 @@ namespace DL
 
             return station;
         }
-        void AddStation(Station station)
+        public void AddStation(Station station)
         {
             XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
 
@@ -468,7 +470,7 @@ namespace DL
 
             XMLTools.SaveListToXMLElement(stationElement, stationPath);
         }
-        void UpdateStation(Station station)
+        public void UpdateStation(Station station)
         {
             XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
 
@@ -485,12 +487,12 @@ namespace DL
             else
                 throw new ItemNotExeistExeption(typeof(Station), station.Code);
         }
-        void UpdateStation(int code, Action<Station> update) //method that knows to updt specific fields
+        public void UpdateStation(int code, Action<Station> update) //method that knows to updt specific fields
         {
             XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
 
             XElement sxElement = (from s in stationElement.Elements()
-                                  where int.Parse(s.Element("Code").Value) == station.Code
+                                  where int.Parse(s.Element("Code").Value) == code
                                   select s).FirstOrDefault();
 
             if (sxElement == null)
@@ -503,7 +505,7 @@ namespace DL
             stationElement.Add(station.itemToXElement());
             XMLTools.SaveListToXMLElement(stationElement, stationPath);
         }
-        void DeleteStation(int code)
+        public void DeleteStation(int code)
         {
             XElement stationElement = XMLTools.LoadListFromXMLElement(stationPath);
 
@@ -521,6 +523,207 @@ namespace DL
                 throw new ItemNotExeistExeption(typeof(Station), code);
         }
 
+        #endregion
+
+        #region AdjacentStation
+
+        public IEnumerable<AdjacentStation> GetAllAdjacentStations()
+        {
+            return XmlCRUD.GetAll<AdjacentStation>(adjacentStationsPath);
+        }
+        public IEnumerable<AdjacentStation> GetAllAdjacentStationsBy(Predicate<AdjacentStation> predicate)
+        {
+            return XmlCRUD.GetAllBy(adjacentStationsPath, predicate);
+        }
+        public AdjacentStation GetAdjacentStation(int station1, int station2)
+        {
+            return XmlCRUD.Get<AdjacentStation>(adjacentStationsPath, new int[] { station1, station1 }, "Statoin1", "Station2");
+        }
+        public void AddAdjacentStation(AdjacentStation adjacentStation)
+        {
+            XmlCRUD.Add<AdjacentStation>(adjacentStationsPath, adjacentStation, "Statoin1", "Station2");
+        }
+        public void UpdateAdjacentStation(AdjacentStation adjacentStation)
+        {
+            XmlCRUD.Update<AdjacentStation>(adjacentStationsPath, adjacentStation, "Statoin1", "Station2");
+        }
+        public void UpdateAdjacentStation(int station1, int station2, Action<AdjacentStation> update) //method that knows to updt specific fields
+        {
+            XmlCRUD.Update<AdjacentStation>(adjacentStationsPath, update, new int[] { station1, station2 }, "Statoin1", "Station2");
+        }
+        public void DeleteAdjacentStation(int station1, int station2)
+        {
+            XmlCRUD.Remove<AdjacentStation>(adjacentStationsPath, new int[] { station1, station2 }, "Statoin1", "Station2");
+        }
+
+        #endregion
+
+
+        #region LineStation
+
+        public IEnumerable<LineStation> GetAllLineStations()
+        {
+            return XmlCRUD.GetAll<LineStation>(lineStationsPath);
+        }
+        public IEnumerable<LineStation> GetAllLineStationsBy(Predicate<LineStation> predicate)
+        {
+            return XmlCRUD.GetAllBy(lineStationsPath, predicate);
+        }
+        public LineStation GetLineStation(int lineId, int stationId)
+        {
+            return XmlCRUD.Get<LineStation>(lineStationsPath, new int[] { lineId, stationId }, "LineId", "Code");
+        }
+        public void AddLineStation(LineStation lineStation)
+        {
+            XmlCRUD.Add<LineStation>(lineStationsPath, lineStation, "LineId", "Code");
+        }
+        public void UpdateLineStation(LineStation lineStation)
+        {
+            XmlCRUD.Update<LineStation>(lineStationsPath, lineStation, "LineId", "Code");
+        }
+        //void UpdateLineStation(int id, Action<Line> update); //method that knows to updt specific fields
+        public void DeleteLineStation(int lineId, int stationId)
+        {
+            XmlCRUD.Remove<LineStation>(lineStationsPath, new int[] { lineId, stationId }, "LineId", "Code");
+        }
+
+        #endregion
+
+        #region LineTrip
+
+        public IEnumerable<LineTrip> GetAllLineTrips()
+        {
+            return XmlCRUD.GetAll<LineTrip>(lineTripPath);
+        }
+        public IEnumerable<LineTrip> GetAllLineTripsBy(Predicate<LineTrip> predicate)
+        {
+            return XmlCRUD.GetAllBy<LineTrip>(lineTripPath, predicate);
+        }
+        public LineTrip GetLineTrip(int id)
+        {
+            return XmlCRUD.Get<LineTrip>(lineTripPath, new int[] { id }, "Id");
+        }
+        public void AddLineTrip(LineTrip lineTrip)
+        {
+            XmlCRUD.Add<LineTrip>(lineTripPath, lineTrip, "Id");
+        }
+        public void UpdateLineTrip(LineTrip lineTrip)
+        {
+            XmlCRUD.Update<LineTrip>(lineTripPath, lineTrip, "Id");
+        }
+        //void UpdateLineStation(int id, Action<Line> update); //method that knows to updt specific fields
+        public void DeleteLineTrip(int id)
+        {
+            XmlCRUD.Remove<LineTrip>(lineTripPath, new int[] { id }, "Id");
+        }
+        #endregion
+
+        #region User
+
+        public void AddUser(User user)
+        {
+            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+
+            XElement us = (from elem in UserElement.Elements()
+                           where elem.Element("UserName").Value == user.UserName
+                           select elem
+                        ).FirstOrDefault();
+
+            if (us != null)
+                throw new ItemAlreadyExeistExeption(typeof(User), 00);
+
+            UserElement.Add(user.itemToXElement());
+            XMLTools.SaveListToXMLElement(UserElement, userPath);
+        }
+
+        public void DeleteUser(string username)
+        {
+            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+
+            XElement us = (from elem in UserElement.Elements()
+                           where elem.Element("UserName").Value == username
+                           select elem
+                        ).FirstOrDefault();
+
+            if (us != null)
+            {
+                us.Remove();
+
+                XMLTools.SaveListToXMLElement(UserElement, userPath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(User), 00);
+        }// Or ID
+
+        public User GetUser(string name)
+        {
+            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+
+            User us = (from elem in UserElement.Elements()
+                       where elem.Element("UserName").Value == name
+                       select (User)elem.xElementToItem(typeof(User))
+                        ).FirstOrDefault();
+
+            if (us == null)
+                throw new ItemNotExeistExeption(typeof(User), 00);
+
+            return us;
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+
+            return from u in UserElement.Elements()
+                   select (User)u.xElementToItem(typeof(User));
+        }
+
+        public IEnumerable<User> GetAllUsersBy(Predicate<User> predicate)
+        {
+            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+
+            return from u in UserElement.Elements()
+                   let us = (User)u.xElementToItem(typeof(User))
+                   where predicate(us)
+                   select (User)u.xElementToItem(typeof(User));
+        }
+
+        public void UpdateUser(User user)
+        {
+            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+
+            XElement us = (from elem in UserElement.Elements()
+                           where elem.Element("UserName").Value == user.UserName
+                           select elem).FirstOrDefault();
+
+            if (us != null)
+            {
+                us.Remove();
+                UserElement.Add(user.itemToXElement());
+                XMLTools.SaveListToXMLElement(UserElement, userPath);
+            }
+            else
+                throw new ItemNotExeistExeption(typeof(User), 00);
+        }
+
+        public void UpdateUaer(string name, Action<User> update)
+        {
+            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+
+
+            XElement us = (from elem in UserElement.Elements()
+                           where elem.Element("UserName").Value == name
+                           select elem).FirstOrDefault();
+            if (us == null)
+                throw new ItemNotExeistExeption(typeof(User), 00);
+
+            var user = (User)us.xElementToItem(typeof(User));
+            update(user);
+
+            us.Remove();
+            UserElement.Add(user.itemToXElement());
+            XMLTools.SaveListToXMLElement(UserElement, userPath);
+        }
         #endregion
 
     }
