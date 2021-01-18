@@ -14,25 +14,46 @@ namespace BL
         
         internal bool isExeist(Predicate<T> predicate)
         {
-            
-            GetDeleget getDeleget;
 
-            Type type = typeof(GetDeleget);           
-            MethodInfo[] methodList = dal.GetType().GetMethods();
-
-            foreach (MethodInfo method in methodList)
+            switch(typeof(T).Name)
             {
-                if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
-                {
-                    getDeleget  = (GetDeleget)Delegate.CreateDelegate(type, null, method);
-
-                    if (getDeleget(predicate).Any())
-                        return true;
-                    else
-                        return false;
-                }                
+                case "AdjacentStation":
+                    return dal.GetAllAdjacentStationsBy(predicate as Predicate<DO.AdjacentStation>).Any();
+                case "Bus":
+                    return dal.GetAllBusBy(predicate as Predicate<DO.Bus>).Any();
+                case "BusOnTrip":
+                    return dal.GetAllBusesOnTripBy(predicate as Predicate<DO.BusOnTrip>).Any();
+                case "Line":
+                    return dal.GetAllLinesBy(predicate as Predicate<DO.Line>).Any();
+                case "LineStation":
+                    return dal.GetAllLineStationsBy(predicate as Predicate<DO.LineStation>).Any();
+                case "LineTrip":
+                    return dal.GetAllLineTripsBy(predicate as Predicate<DO.LineTrip>).Any();
+                case "Station":
+                    return dal.GetAllStationesBy(predicate as Predicate<DO.Station>).Any();
+                case "User":
+                    return dal.GetAllStationesBy(predicate as Predicate<DO.Station>).Any();
             }
-            return false;
+
+            throw new Exception("ERROR incorect type");
+            //GetDeleget getDeleget;
+
+            //Type type = typeof(GetDeleget);           
+            //MethodInfo[] methodList = dal.GetType().GetMethods();
+
+            //foreach (MethodInfo method in methodList)
+            //{
+            //    if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
+            //    {
+            //        getDeleget  = (GetDeleget)Delegate.CreateDelegate(type, null ,method);
+
+            //        if (getDeleget(predicate).Any())
+            //            return true;
+            //        else
+            //            return false;
+            //    }                
+            //}
+            //return false;
         }
 
 

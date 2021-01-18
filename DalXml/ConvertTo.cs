@@ -18,14 +18,19 @@ namespace DL
                 if (!xElement.Elements(prop.Name).Any())
                     continue;
 
-                if (!prop.PropertyType.IsEnum)
+                if (prop.PropertyType.IsEnum)
                 {
-                    try { prop.SetValue(item, Convert.ChangeType(xElement.Element(prop.Name).Value, prop.PropertyType)); }
-                    catch { throw new Exception($"ERROR! could not convert the property type {prop.PropertyType.Name}"); } //*********************//**********************//**
+                    prop.SetValue(item, Enum.Parse(prop.PropertyType, xElement.Element(prop.Name).Value));
+                  //*********************//**********************//**
+                }
+                else if(prop.PropertyType.Name ==  "TimeSpan")
+                {
+                    prop.SetValue(item, TimeSpan.Parse(xElement.Element(prop.Name).Value));
                 }
                 else
                 {
-                    prop.SetValue(item, Enum.Parse(prop.PropertyType, xElement.Element(prop.Name).Value));
+                    try { prop.SetValue(item, Convert.ChangeType(xElement.Element(prop.Name).Value, prop.PropertyType)); }
+                    catch { throw new Exception($"ERROR! could not convert the property type {prop.PropertyType.Name}"); }
                 }
             }
             return item;
