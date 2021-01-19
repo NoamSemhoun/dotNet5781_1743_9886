@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
-using System.Threading;
 
 namespace PlGui
 {
@@ -25,7 +24,6 @@ namespace PlGui
         ObservableCollection<BO.Line> Lines_list;
         ObservableCollection<BO.LineStation> LineStations_list;
         ObservableCollection<BO.Ferquency> freq_List;
-        bool addFlag = false;
 
         string prevIndex = "";
 
@@ -34,8 +32,8 @@ namespace PlGui
             InitializeComponent();
             Lines_list = new ObservableCollection<BO.Line>( bl.GetAllLines());
             ListView_Lines.DataContext = Lines_list;
-            ListView_Lines.SelectedIndex = 0;
-           
+            ListView_Lines.SelectedIndex = 0;  
+       
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -95,7 +93,7 @@ namespace PlGui
             freq_ListView.Visibility = Visibility.Hidden;
             addStation_Grid.Visibility = Visibility.Visible;
             Stations_CB.DataContext = bl.GetAllStations();
-            Line_TB.Text = ((ListView_Lines.SelectedItem as BO.Line).LineID).ToString() ;
+            Line_TB.Text = ((ListView_Lines.SelectedItem as BO.Line).LineNumber).ToString() ; // No by Binding ??
 
         }
 
@@ -113,8 +111,8 @@ namespace PlGui
 
         private void Stations_CB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (prevIndex != "")
-            //    addStation_button.IsEnabled = true;
+            if (prevIndex != "")
+                addStation_button.IsEnabled = true;
         }
 
         private void addStation_button_Click(object sender, RoutedEventArgs e)
@@ -142,7 +140,7 @@ namespace PlGui
 
                 refresh(ListView_Lines.SelectedIndex);
                 freq_ListView.Visibility = Visibility.Visible;
-                addStation_Grid.Visibility = Visibility.Collapsed;
+                addStation_Grid.Visibility = Visibility.Hidden;
             }
             catch (BO.LackOfDataExeption ex)
             {
@@ -155,10 +153,11 @@ namespace PlGui
             }
         }
 
-        private void X_Click(object sender, RoutedEventArgs e)
+        private void CreateANewStation_Click(object sender, RoutedEventArgs e)
         {
             freq_ListView.Visibility = Visibility.Visible;
-            addStation_Grid.Visibility = Visibility.Collapsed;
+            addStation_Grid.Visibility = Visibility.Hidden;
+            AddStation_Window ad = new AddStation_Window();
         }
 
         private void deleteStation_button_Click(object sender, RoutedEventArgs e)
@@ -231,8 +230,7 @@ namespace PlGui
 
         private void StationDeatails_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //MessageBox.Show(sender.GetType().Name);
-            StationDétails_Window myWindow = new StationDétails_Window(bl.GetStation(((sender as ListView).SelectedItem as BO.LineStation).Code));
+            StationDétails_Window myWindow = new StationDétails_Window((sender as BO.Station));
             myWindow.Show();
         }
     }
