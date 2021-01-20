@@ -722,6 +722,12 @@ namespace BL
         #endregion
 
 
+        public IEnumerable<LineSchedule> GetLinesSchedule(TimeSpan now, int station)
+        {
+            return from item in dal.GetAllLineStationsBy(s => s.Code == station)
+                   select Schedules.GetLineScadual(now, item.LineId, station);
+            
+        }
 
 
         public void UpdateAdjStations(List<AdjacentStation> adjacentStations)

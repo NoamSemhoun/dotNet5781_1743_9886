@@ -51,6 +51,7 @@
     <Compile Include="BO\Enumes.cs" />
     <Compile Include="BO\Ferquency.cs" />
     <Compile Include="BO\Line.cs" />
+    <Compile Include="BO\LineSchedule.cs" />
     <Compile Include="BO\Station.cs" />
     <Compile Include="BO\LineStation.cs" />
     <Compile Include="BO\User.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="ConvertItems.cs" />
     <Compile Include="IBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedules.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="tools\dataCheck.cs" />
   </ItemGroup>

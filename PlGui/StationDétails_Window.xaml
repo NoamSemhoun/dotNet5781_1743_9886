@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PlGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.StationDétails_Window"
         mc:Ignorable="d"
+        xmlns:myControll ="clr-namespace:PlGui.My_Controlles"
         Title="StationDétails_Window" Height="710" Width="850">
     <Window.Resources>
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
@@ -40,29 +41,34 @@
         <TextBox x:Name="addressTextBox_Copy1" Width="141"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="581,66,0,588" Height="25" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
 
         <Image Source="/Images/BUSstation .png" Margin="10,-16,647,453" />
-        <Rectangle HorizontalAlignment="Left" Height="152" Stroke="#FF728B89" VerticalAlignment="Top" Width="740" Margin="57,273,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
+        <Rectangle HorizontalAlignment="Left" Height="189" Stroke="#FF728B89" VerticalAlignment="Top" Width="740" Margin="57,273,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
             <Rectangle.Effect>
                 <BlurEffect/>
             </Rectangle.Effect>
         </Rectangle>
         <Label Content="Lines to this Station :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="326" Margin="76,273,0,0" FontSize="15"/>
 
-        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="134" VerticalAlignment="Center" Width="512" Margin="174,291,0,244">
+        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="160" VerticalAlignment="Center" Width="541" Margin="145,285,0,235.8">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
                 <ColumnDefinition Width="237*"/>
             </Grid.ColumnDefinitions>
 
+            <myControll:Clock x:Name="clock" Margin="198.6,5,-0.2,125" Height="30" Width="100" FontSize="20" Grid.Column="1" />
 
-            <ListView   x:Name="ListView_Lines" Margin="10,10,0,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+            <ListView   x:Name="ListView_Lines" Margin="10,35,-0.2,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" Grid.ColumnSpan="2" >
 
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"></StackPanel>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
+             
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Line number" DisplayMemberBinding="{Binding LineNumber}"/>
+                        <GridViewColumn Header="Destination" DisplayMemberBinding="{Binding Destenation}"/>
+                        <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding NextArrival}"/>
+                        <GridViewColumn Header="Follow" DisplayMemberBinding="{Binding NextArrival_2}"/>
 
+                    </GridView>
+                </ListView.View>
             </ListView>
 
         </Grid>

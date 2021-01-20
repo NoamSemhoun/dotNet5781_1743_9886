@@ -78,5 +78,7 @@ namespace BlAPI
         #endregion
 
         void UpdateAdjStations(List<AdjacentStation> adjacentStations);
+
+        IEnumerable<LineSchedule> GetLinesSchedule(TimeSpan now, int station);
     }
 }

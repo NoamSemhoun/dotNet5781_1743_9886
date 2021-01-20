@@ -7,6 +7,8 @@ using System.Reflection;
 
 namespace BL
 {
+    
+
     internal class dataCheck<T>
     {
         delegate IEnumerable<T> GetDeleget(Predicate<T> predicate);
@@ -45,7 +47,7 @@ namespace BL
             //{
             //    if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
             //    {
-            //        getDeleget  = (GetDeleget)Delegate.CreateDelegate(type, null ,method);
+            //        getDeleget  = (GetDeleget)Delegate.CreateDelegate(type, dal ,method);
 
             //        if (getDeleget(predicate).Any())
             //            return true;
@@ -68,7 +70,7 @@ namespace BL
             {
                 if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
                 {
-                    getDeleget = (GetDeleget)Delegate.CreateDelegate(typeof(GetDeleget), null, method);
+                    getDeleget = (GetDeleget)Delegate.CreateDelegate(typeof(GetDeleget), dal, method);
 
                     T t = getDeleget(predicate).FirstOrDefault();
 

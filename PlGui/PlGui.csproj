@@ -71,6 +71,9 @@
     </Compile>
     <Compile Include="coverors\BoolMultiConvertor.cs" />
     <Compile Include="IsSelectedItemConvertor.cs" />
+    <Compile Include="My Controlles\Clock.xaml.cs">
+      <DependentUpon>Clock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="My Controlles\DoubleTextBox.xaml.cs">
       <DependentUpon>DoubleTextBox.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="My Controlles\Clock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
