@@ -69,6 +69,7 @@
     <Compile Include="AddStation_Window.xaml.cs">
       <DependentUpon>AddStation_Window.xaml</DependentUpon>
     </Compile>
+    <Compile Include="coverors\BoolMultiConvertor.cs" />
     <Compile Include="IsSelectedItemConvertor.cs" />
     <Compile Include="My Controlles\DoubleTextBox.xaml.cs">
       <DependentUpon>DoubleTextBox.xaml</DependentUpon>

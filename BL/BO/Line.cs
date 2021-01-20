@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace BO
 {
-    public class Line
+    public class Line: IComparable
     {
         public int LineID { get; set; } // 1 to 9999
         public int LineNumber { get; set; }  
@@ -19,5 +19,16 @@ namespace BO
         public Areas Area { get; set; }
 
         public List<LineStation> List_LineStations { get; set; }  // Masloul
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Line)
+                if (this.LineID < (obj as Line).LineID)
+                    return 1;
+                else 
+                    return -1;
+            throw new Exception();
+                   
+        }
     }
 }

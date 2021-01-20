@@ -45,6 +45,7 @@
     <Compile Include="XmlCRUD.cs" />
     <Compile Include="DalXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlStatics.cs" />
     <Compile Include="XMLTools.cs" />
   </ItemGroup>
   <ItemGroup>

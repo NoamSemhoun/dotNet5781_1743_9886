@@ -38,6 +38,7 @@ namespace PlGui
             //this.Close();         //  TYPESCRIPT :  
 
             LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
+            //AddAdjacentStation win = new AddAdjacentStation();
             win.Show();
             this.Close();
 

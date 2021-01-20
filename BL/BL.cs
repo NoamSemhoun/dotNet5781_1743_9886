@@ -269,8 +269,8 @@ namespace BL
 
         public IEnumerable<Line> GetAllLines()
         {
-            return from item in dal.GetAllLines()
-                   select GetLine(item.LineID);
+            return (from item in dal.GetAllLines()
+                   select GetLine(item.LineID)).OrderBy(l => l.LineID);
         }
 
         public Line GetLine(int id)

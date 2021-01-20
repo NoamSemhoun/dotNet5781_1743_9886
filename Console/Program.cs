@@ -21,9 +21,16 @@ namespace Console
             //    string adjacentStationsPath = @"AdjacentStationXml.xml";
             //    string lineStationsPath = @"LineStationXml.xml";
             //    string lineTripPath = @"LineTripXml.xml";
+            string path = @"StaticsXml.xml";
 
+            XElement Statics = new XElement("statics");
 
+            
+            Statics.Add(new XElement("Line", 11));
+            Statics.Add(new XElement("BusOnTrip", 1));
+            Statics.Add(new XElement("LineTrip", 1));
 
+            XMLTools.SaveListToXMLElement(Statics, path);
 
 
             //    XElement LineElement = new XElement("Lines");

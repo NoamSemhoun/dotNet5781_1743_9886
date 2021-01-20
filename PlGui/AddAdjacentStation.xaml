@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
+        xmlns:Convertors ="clr-namespace:PlGui.coverors"
         mc:Ignorable="d"
         Title="AddAdjacentStation" Height="285.5" Width="703">
+    <Window.Resources>
+        <Convertors:BoolMultiConvertor
+            x:Key="multiBollCon"/>
+    </Window.Resources>
     <Grid Background="Gray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="321*"/>
@@ -87,7 +92,18 @@
                 </StackPanel>
             </StackPanel>
             <Label Content="Km" Margin="182,0,21,162" FontSize="14" VerticalAlignment="Bottom" />
-            <Button Content="Add" HorizontalAlignment="Right" Height="19" VerticalAlignment="Bottom"  Width="70" Click="Button_Click" Margin="0,0,10,10" Grid.Column="1"/>
+            <Button Content="Add" HorizontalAlignment="Right" Height="19" VerticalAlignment="Bottom"  Width="70" Click="Button_Click" Margin="0,0,10,10" Grid.Column="1">
+                <Button.IsEnabled>
+                    <MultiBinding Converter="{StaticResource multiBollCon}">
+                        <Binding ElementName="hTB" Path="Text" />
+                        <Binding ElementName="mTB" Path="Text"  />
+                        <Binding ElementName="sTB" Path="Text"  />
+                        <Binding ElementName="Station1CB" Path="SelectedItem"  />
+                        <Binding ElementName="Station2CB" Path="SelectedItem"  />
+                    </MultiBinding>
+                </Button.IsEnabled>
+            
+            </Button>
         </Grid>
 
     </Grid>
