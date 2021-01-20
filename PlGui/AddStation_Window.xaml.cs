@@ -63,6 +63,8 @@ namespace PlGui
             bl.AddStation(myNewStation);
             }
             catch { MessageBox.Show("Error"); } // IN : Name Code Or Adress
+
+
             this.Close();
 
         }
