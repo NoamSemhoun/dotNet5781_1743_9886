@@ -234,6 +234,11 @@ namespace PlGui
             StationDétails_Window myWindow = new StationDétails_Window(bl.GetStation(((sender as ListView).SelectedItem as BO.LineStation).Code));
             myWindow.Show();
         }
+
+        private void X_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
-    }
+    
 }
