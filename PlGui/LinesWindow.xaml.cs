@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Threading;
 
 namespace PlGui
 {
@@ -32,8 +33,8 @@ namespace PlGui
             InitializeComponent();
             Lines_list = new ObservableCollection<BO.Line>( bl.GetAllLines());
             ListView_Lines.DataContext = Lines_list;
-            ListView_Lines.SelectedIndex = 0;  
-       
+            ListView_Lines.SelectedIndex = 0;
+           
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -229,8 +230,9 @@ namespace PlGui
 
         private void StationDeatails_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            StationDétails_Window myWindow = new StationDétails_Window((sender as BO.Station));
-            myWindow.Show();
+            MessageBox.Show(sender.GetType().Name);
+            //StationDétails_Window myWindow = new StationDétails_Window(bl.GetStation(((sender as ListView).SelectedItem as BO.LineStation).Code));
+            //myWindow.Show();
         }
     }
 }

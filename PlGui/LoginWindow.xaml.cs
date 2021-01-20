@@ -28,7 +28,7 @@ namespace PlGui
         {
             InitializeComponent();
 
-            StationsWindow win = new StationsWindow();
+            //StationsWindow win = new StationsWindow();
             //MenuWindow win = new MenuWindow();
 
 
@@ -37,9 +37,9 @@ namespace PlGui
             //win.Show();
             //this.Close();         //  TYPESCRIPT :  
 
-            //LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
-            //win.Show();
-            //this.Close();
+            LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
+            win.Show();
+            this.Close();
 
         }
 
