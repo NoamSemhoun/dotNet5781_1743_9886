@@ -230,8 +230,10 @@ namespace PlGui
 
         private void StationDeatails_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            StationDétails_Window myWindow = new StationDétails_Window((sender as BO.Station));
+            //MessageBox.Show(sender.GetType().Name);
+            StationDétails_Window myWindow = new StationDétails_Window(bl.GetStation(((sender as ListView).SelectedItem as BO.LineStation).Code));
             myWindow.Show();
         }
+    }
     }
 }
