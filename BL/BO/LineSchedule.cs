@@ -8,6 +8,7 @@ namespace BO
 {
     public class LineSchedule
     {
+        //***//
         public int id { get; set; }
         public int LineNumber { get; set; }
         public TimeSpan NextArrival { get; set; }
