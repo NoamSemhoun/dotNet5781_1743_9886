@@ -151,7 +151,7 @@
                                                 </TransformGroup>
                                             </Path.RenderTransform>
                                         </Path>
-                                        <TextBox Text="{Binding LineStationIndex }" Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold">
+                                        <TextBox Text="{Binding LineStationIndex }" IsReadOnly="True" Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold">
 
 
                                         </TextBox>
