@@ -30,7 +30,7 @@
                                 <Image ToolTip="Disabled Access" Source="C:\Users\33768\source\repos\dotNet5781_1743_9886\PlGui\Images\disabledAccess.jpg" Width="20"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                        
+
                     </GridViewColumn>
                     <GridViewColumn Header="Delete" Width="50">
                         <GridViewColumn.CellTemplate>
@@ -46,7 +46,7 @@
             </ListView.View>
         </ListView>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="901,0,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
-        <DockPanel HorizontalAlignment="Left" Height="256" LastChildFill="False" VerticalAlignment="Top" Width="410" Margin="522,28,0,0" DataContext="{StaticResource stationViewSource}" Background="#FFCDC8C8">
+        <DockPanel HorizontalAlignment="Left" Height="306" LastChildFill="False" VerticalAlignment="Top" Width="410" Margin="522,28,0,0" DataContext="{StaticResource stationViewSource}" Background="#FFCDC8C8">
             <Grid x:Name="gridStations"   HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Width="348" Height="227">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="103"/>
@@ -64,18 +64,59 @@
                 </Grid.RowDefinitions>
                 <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7,0,1" Grid.Row="2" VerticalAlignment="Center" Height="38" Width="76" FontSize="16"/>
                 <TextBox x:Name="addressTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="0,11,-54,12" Grid.Row="2"  Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="299" Grid.ColumnSpan="4" FontSize="16"/>
-                <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,8,0,1" Grid.Row="1" VerticalAlignment="Center" Height="34" Width="56" FontSize="16"/>
+                <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,5,0,5" Grid.Row="1" VerticalAlignment="Center" Height="34" Width="56" FontSize="16"/>
                 <TextBox x:Name="codeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,9,0,11" Grid.Row="1" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
-                <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,11,0,0" Grid.Row="3" VerticalAlignment="Center" Height="32" Width="77" FontSize="16"/>
-                <TextBox x:Name="latitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,11,0,8" Grid.Row="3" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Latitude,  Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+                <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,5,0,6" Grid.Row="3" VerticalAlignment="Center" Height="32" Width="77" FontSize="16"/>
+                <TextBox x:Name="latitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,9,0,10" Grid.Row="3" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Latitude,  Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
 
 
-                <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,12,0,0" Grid.Row="4" VerticalAlignment="Center" Height="38" Width="91" FontSize="16"/>
-                <TextBox x:Name="longitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,14,0,12" Grid.Row="4" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+                <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,6,0,6" Grid.Row="4" VerticalAlignment="Center" Height="38" Width="91" FontSize="16"/>
+                <TextBox x:Name="longitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,10,0,16" Grid.Row="4" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
                 <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Center" Height="38" Width="66" FontSize="16"/>
                 <TextBox x:Name="nameTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,8,-54,11" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="299" Grid.ColumnSpan="4" FontSize="16"/>
+
+
+
             </Grid>
+
         </DockPanel>
+        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="69" VerticalAlignment="Center" Width="410" Margin="522,265,0,185">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="193*"/>
+                <ColumnDefinition Width="237*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <ListView   x:Name="ListView_Lines" Margin="10,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"  Grid.ColumnSpan="2" ItemsSource="{Binding}" >
+                <!--ItemsSource="{Binding  ElementName=ListViewStations, Path=SelectedItem.List_Lines, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >-->
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal">
+                        </StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <Button HorizontalAlignment="Stretch" x:Name="ViewLine" ToolTip="   View this Line  "  ToolTipService.ShowDuration="50000" 
+                                       Click="ViewLine_Click" Height="42" Width="41" Background="{x:Null}" BorderBrush="{x:Null}" >
+                                        <TextBox IsReadOnly="True" Text="{Binding ElementName=ListView_Lines, Path=SelectedItem.LineNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                    </Button>
+
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+
+            </ListView>
+
+        </Grid>
 
 
         <Button x:Name="addStation" ToolTip="   Add a NEW Station  "  ToolTipService.ShowDuration="50000" 
@@ -111,6 +152,7 @@
                 <Label Content="Back to Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Background="{x:Null}" Width="140"/>
             </StackPanel>
         </Button>
+        <Button Content="Lines  I  v" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="834,250,0,0" Click="Button_Click"/>
 
     </Grid>
 </Window>

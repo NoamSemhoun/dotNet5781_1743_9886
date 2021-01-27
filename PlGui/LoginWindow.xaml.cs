@@ -28,17 +28,14 @@ namespace PlGui
         {
             InitializeComponent();
 
+            // TO TEST  WINDOW :
             //StationsWindow win = new StationsWindow();
-            //MenuWindow win = new MenuWindow();
-
-
-            //Window1 win = new Window1();
-            //////AddLine_window win = new AddLine_window();
-            //win.Show();
-            //this.Close();         //  TYPESCRIPT :  
-
-            LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
+            MenuWindow win = new MenuWindow();
+            //LinesWindow win = new LinesWindow();  
+            //AddLine_window win = new AddLine_window();
             //AddAdjacentStation win = new AddAdjacentStation();
+
+
             win.Show();
             this.Close();
 

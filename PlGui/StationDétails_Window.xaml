@@ -57,7 +57,7 @@
             <myControll:Clock x:Name="clock" Margin="198.6,5,-0.2,125" Height="30" Width="100" FontSize="20" Grid.Column="1" />
 
             <ListView   x:Name="ListView_Lines" Margin="10,35,-0.2,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
-                        ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" Grid.ColumnSpan="2" >
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" Grid.ColumnSpan="2" SelectionChanged="ListView_Lines_SelectionChanged" >
 
 
                 <ListView.View>

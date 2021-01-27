@@ -74,6 +74,7 @@
 
 
                 <GridView >
+                    
                     <GridViewColumn  Header="ID" Width="50" DisplayMemberBinding="{Binding LineID}" />
 
                     <GridViewColumn  Header="Line" Width="95">
