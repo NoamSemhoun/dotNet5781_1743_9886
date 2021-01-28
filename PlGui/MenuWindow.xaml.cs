@@ -23,6 +23,11 @@ namespace PlGui
         {
             InitializeComponent();
         }
+        public MenuWindow(string username) // Can we send informations by windows ?
+        {
+            InitializeComponent();
+            UsernameTXT.Text = username + " !";
+        }
 
         private void UserName_TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -51,6 +56,7 @@ namespace PlGui
 
         private void SignOut_Click(object sender, RoutedEventArgs e)
         {
+
             LoginWindow login = new LoginWindow();  // Return to the Login Window
             login.Show();
             this.Close();
@@ -58,7 +64,7 @@ namespace PlGui
 
         private void StationsButton_Click(object sender, RoutedEventArgs e)
         {
-            StationsWindow stations = new StationsWindow();  // Return to the Login Window
+            StationsWindow stations = new StationsWindow();  
             stations.Show();
             //this.Close();
 

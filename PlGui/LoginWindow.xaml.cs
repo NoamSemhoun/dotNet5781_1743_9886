@@ -30,14 +30,17 @@ namespace PlGui
 
             // TO TEST  WINDOW :
             //StationsWindow win = new StationsWindow();
-            MenuWindow win = new MenuWindow();
-            //LinesWindow win = new LinesWindow();  
-            //AddLine_window win = new AddLine_window();
-            //AddAdjacentStation win = new AddAdjacentStation();
+            //MenuWindow win = new MenuWindow();
+            ////LinesWindow win = new LinesWindow();  
+            ////AddLine_window win = new AddLine_window();
+            ////AddAdjacentStation win = new AddAdjacentStation();
 
 
-            win.Show();
-            this.Close();
+            //win.Show();
+            //this.Close();
+
+            UsernameEntrance.Text = "Noam";  // For all test
+            PassewordEntrance.Password = "1234";
 
         }
 
@@ -56,9 +59,9 @@ namespace PlGui
 
 
 
-            if (bl.CheckAdmin(UsernameEntrance.Text, PassewordEntrance.Password))
+            if (bl.CheckAdmin(UsernameEntrance.Text, PassewordEntrance.Password) && isAdmin.IsChecked == true )
             {
-                MenuWindow Menu = new MenuWindow();
+                MenuWindow Menu = new MenuWindow(UsernameEntrance.Text);  // Can we send information by Window
                 Menu.Show();
                 this.Close();
             }
