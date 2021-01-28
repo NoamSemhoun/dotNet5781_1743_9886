@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PlGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.AddStation_Window"
         mc:Ignorable="d"
-        Title="AddStation_Window" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="AddStation_Window" Height="400" Width="500" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
     </Window.Resources>
@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="Images\STATION.jpg" HorizontalAlignment="Left" Height="193" VerticalAlignment="Top" Width="356" Margin="436,216,0,0"/>
+        <Image Source="Images\STATION.jpg" HorizontalAlignment="Left" Height="193" VerticalAlignment="Top" Width="241" Margin="241,26,0,0"/>
 
         <Grid x:Name="grid1" DataContext="{StaticResource stationViewSource}" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" Height="187" Width="384">
             <Grid.ColumnDefinitions>
@@ -43,17 +43,17 @@
         <CheckBox IsChecked="True" Content="Disabled Access" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,210,0,0" Height="23" Width="118" Unchecked="NOT_Disabled_Checked" Checked="Disabled_Checked"/>
         <CheckBox IsChecked="True" Content="Shelter Covered" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,239,0,0" Height="23" Width="118" Checked="ShelterC_Checked"/>
         <CheckBox Content="Digital Pannel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,265,0,0" Height="23" Width="118" Checked="Digital_Checked"/>
-        <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="280,342,0,0" Click="OK_Click"/>
+        <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="301,312,0,0" Click="OK_Click"/>
         <Image Source="Images\disabledAccess.jpg" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="20" Margin="172,207,0,0"/>
         <Label Name="X_Notdisabled" Visibility="Hidden" Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="168,187,0,0" Foreground="Red" FontSize="30" Height="42"/>
         <DockPanel VerticalAlignment="Center" Margin="102,121,493,260" Height="38">
             <TextBox Text="{Binding Value, ElementName=SliderLatitude, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Left" Width="52" Margin="0,11,0,10" />
-            <Slider Minimum="31" Maximum="33.3"  TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLatitude"  Width="143" Margin="0,10,0,0" />
+            <Slider Minimum="31" Maximum="33.3"  TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLatitude"  Width="143" Margin="0,28,0,-18" />
             <!--ValueChanged="Latitude"-->
         </DockPanel>
         <DockPanel VerticalAlignment="Center" Margin="102,157,493,224" Height="38">
             <TextBox Text="{Binding Value, ElementName=SliderLongitude, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Left" Width="52" Margin="0,11,0,10" />
-            <Slider Minimum="34.3" Maximum="35.5" TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLongitude"  Width="143" Margin="0,10,0,0"  />
+            <Slider Minimum="34.3" Maximum="35.5" TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLongitude"  Width="163" Margin="0,18,0,-18"  />
         </DockPanel>
 
     </Grid>
