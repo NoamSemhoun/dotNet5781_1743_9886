@@ -80,5 +80,10 @@ namespace BlAPI
         void UpdateAdjStations(List<AdjacentStation> adjacentStations);
 
         IEnumerable<LineSchedule> GetLinesSchedule(TimeSpan now, int station);
+
+        //IEnumerable<TimeSpan> GetLineDepartureTimes(int lineID);
+        //IEnumerable<TimeSpan> GetLineStationsTimes(int lineID);
+
+
     }
 }

@@ -7,61 +7,63 @@ using System.Reflection;
 
 namespace BL
 {
-    
 
-    internal class dataCheck<T>
+    delegate IEnumerable<T> GetDeleget<T>(Predicate<T> predicate);
+
+    internal class DataCheck
     {
-        delegate IEnumerable<T> GetDeleget(Predicate<T> predicate);
-        DalApi.IDAL dal = DalApi.DalFactory.GetDal();
         
-        internal bool isExeist(Predicate<T> predicate)
+        static DalApi.IDAL dal = DalApi.DalFactory.GetDal();
+        
+        internal static bool isExeist<T>(Predicate<T> predicate)
         {
+            GetDeleget<T> getDeleget;
 
-            switch(typeof(T).Name)
+            Type type = typeof(GetDeleget<T>);
+            MethodInfo[] methodList = dal.GetType().GetMethods();
+
+            foreach (MethodInfo method in methodList)
             {
-                case "AdjacentStation":
-                    return dal.GetAllAdjacentStationsBy(predicate as Predicate<DO.AdjacentStation>).Any();
-                case "Bus":
-                    return dal.GetAllBusBy(predicate as Predicate<DO.Bus>).Any();
-                case "BusOnTrip":
-                    return dal.GetAllBusesOnTripBy(predicate as Predicate<DO.BusOnTrip>).Any();
-                case "Line":
-                    return dal.GetAllLinesBy(predicate as Predicate<DO.Line>).Any();
-                case "LineStation":
-                    return dal.GetAllLineStationsBy(predicate as Predicate<DO.LineStation>).Any();
-                case "LineTrip":
-                    return dal.GetAllLineTripsBy(predicate as Predicate<DO.LineTrip>).Any();
-                case "Station":
-                    return dal.GetAllStationesBy(predicate as Predicate<DO.Station>).Any();
-                case "User":
-                    return dal.GetAllStationesBy(predicate as Predicate<DO.Station>).Any();
+                if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
+                {
+                    getDeleget = (GetDeleget<T>)Delegate.CreateDelegate(type, dal, method);
+
+                    if (getDeleget(predicate).Any())
+                        return true;
+                    else
+                        return false;
+                }
             }
+            return false;
 
-            throw new Exception("ERROR incorect type");
-            //GetDeleget getDeleget;
-
-            //Type type = typeof(GetDeleget);           
-            //MethodInfo[] methodList = dal.GetType().GetMethods();
-
-            //foreach (MethodInfo method in methodList)
+            //switch(typeof(T).Name)
             //{
-            //    if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
-            //    {
-            //        getDeleget  = (GetDeleget)Delegate.CreateDelegate(type, dal ,method);
-
-            //        if (getDeleget(predicate).Any())
-            //            return true;
-            //        else
-            //            return false;
-            //    }                
+            //    case "AdjacentStation":
+            //        return dal.GetAllAdjacentStationsBy(predicate as Predicate<DO.AdjacentStation>).Any();
+            //    case "Bus":
+            //        return dal.GetAllBusBy(predicate as Predicate<DO.Bus>).Any();
+            //    case "BusOnTrip":
+            //        return dal.GetAllBusesOnTripBy(predicate as Predicate<DO.BusOnTrip>).Any();
+            //    case "Line":
+            //        return dal.GetAllLinesBy(predicate as Predicate<DO.Line>).Any();
+            //    case "LineStation":
+            //        return dal.GetAllLineStationsBy(predicate as Predicate<DO.LineStation>).Any();
+            //    case "LineTrip":
+            //        return dal.GetAllLineTripsBy(predicate as Predicate<DO.LineTrip>).Any();
+            //    case "Station":
+            //        return dal.GetAllStationesBy(predicate as Predicate<DO.Station>).Any();
+            //    case "User":
+            //        return dal.GetAllStationesBy(predicate as Predicate<DO.Station>).Any();
             //}
-            //return false;
+
+            //throw new Exception("ERROR incorect type");
+
         }
 
 
-        internal bool didNeedUpdaete(object obj ,Predicate<T> predicate)
+        internal static bool didNeedUpdaete<T>(object obj ,Predicate<T> predicate)
         {
-            GetDeleget getDeleget;
+            GetDeleget<T> getDeleget;
 
 
             MethodInfo[] methodList = dal.GetType().GetMethods();
@@ -70,7 +72,7 @@ namespace BL
             {
                 if (method.ReturnType == typeof(IEnumerable<T>) && method.GetParameters().Any())
                 {
-                    getDeleget = (GetDeleget)Delegate.CreateDelegate(typeof(GetDeleget), dal, method);
+                    getDeleget = (GetDeleget<T>)Delegate.CreateDelegate(typeof(GetDeleget<T>), dal, method);
 
                     T t = getDeleget(predicate).FirstOrDefault();
 

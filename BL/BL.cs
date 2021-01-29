@@ -334,8 +334,6 @@ namespace BL
         {
             dal.UpdateLine((DO.Line)line.CloneNew(typeof(DO.Line)));
 
-            dataCheck<DO.AdjacentStation> adjDtChecker = new dataCheck<DO.AdjacentStation>();
-
             List<DO.AdjacentStation> adj = (from item in line.List_LineStations
                                                   where item.NextStation != -1
                                                   select new DO.AdjacentStation { Statoin1 = item.Code, Station2 = item.NextStation, Distance = item.Distance_ToNext, Time = item.Time_ToNext }).ToList();
@@ -347,7 +345,7 @@ namespace BL
             //var lineStList = from item in line.List_LineStations
             //                 select new DO.LineStation { Code = item.Code, LineId = item.LineId, LineStationIndex = item.LineStationIndex, NextStation = item.NextStation, PrevStation = item.PrevStation };
 
-            //dataCheck<DO.LineStation> lSCheck = new dataCheck<DO.LineStation>();
+            //DataCheck<DO.LineStation> lSCheck = new DataCheck<DO.LineStation>();
 
             //foreach (DO.LineStation lS in lineStList)
             //{
@@ -651,11 +649,10 @@ namespace BL
         private void updateLineStations(List<LineStation> lineStations_list)
         {
             Predicate<DO.LineStation> predicate;
-            dataCheck <DO.LineStation> check = new dataCheck<DO.LineStation>();
             foreach (LineStation lineStation in lineStations_list)
             {
                 predicate = l => l.LineId == lineStation.LineId && l.LineStationIndex == lineStation.LineStationIndex;
-                if (check.isExeist(predicate))
+                if (DataCheck.isExeist(predicate))
                 {
                     updateLineStation((DO.LineStation)lineStation.CloneNew(typeof(DO.LineStation))) ;
                 }
@@ -732,10 +729,10 @@ namespace BL
 
         public void UpdateAdjStations(List<AdjacentStation> adjacentStations)
         {
-            dataCheck<DO.Station> dataCheck = new dataCheck<DO.Station>();
+          
 
             List<DO.AdjacentStation> DoAdjStations = (from item in adjacentStations
-                                                      where (dataCheck.isExeist(s => s.Code == item.Statoin1) && dataCheck.isExeist(s => s.Code == item.Station2))
+                                                      where (DataCheck.isExeist<DO.Station>(s => s.Code == item.Statoin1) && DataCheck.isExeist<Station>(s => s.Code == item.Station2))
                                                       select (DO.AdjacentStation)item.CloneNew(typeof(DO.AdjacentStation))).ToList();
             if (adjacentStations.Count != DoAdjStations.Count)
                 throw new LackOfDataExeption(DataType.StationData, -1);
@@ -745,13 +742,13 @@ namespace BL
 
         private void updateAdjStations(List<DO.AdjacentStation> adjacentStations)
         {
-            dataCheck<DO.AdjacentStation> adjDtChecker = new dataCheck<DO.AdjacentStation>();
+            
 
             foreach (DO.AdjacentStation aS in adjacentStations)
             {
-                if (adjDtChecker.isExeist(a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
+                if (DataCheck.isExeist<DO.AdjacentStation>(a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
                 {
-                    if (adjDtChecker.didNeedUpdaete(aS, a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
+                    if (DataCheck.didNeedUpdaete<AdjacentStation>(aS, a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
                     {
                         dal.UpdateAdjacentStation(aS);
                     }
@@ -761,6 +758,20 @@ namespace BL
                     dal.AddAdjacentStation(aS);
                 }
             }
+        }
+
+
+        IEnumerable<TimeSpan> GetLineDepartureTimes(int lineID)
+        {
+            Line line = GetLine(lineID);
+            Schedules schedules = new Schedules(line);
+            return schedules.DepartureTimes;
+        }
+        IEnumerable<TimeSpan> GetLineStationsTimes(int lineID)
+        {
+            Line line = GetLine(lineID);
+            Schedules schedules = new Schedules(line);
+            return schedules.StatinsTimes;
         }
 
     }

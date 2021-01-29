@@ -61,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedules.cs" />
     <Compile Include="Tools.cs" />
-    <Compile Include="tools\dataCheck.cs" />
+    <Compile Include="tools\DataCheck.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

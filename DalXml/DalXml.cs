@@ -203,113 +203,34 @@ namespace DL
 
         public BusOnTrip GetBusOnTrip(int id)
         {
-            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
-
-            BusOnTrip busOnTrip = (from b in BusOnTripElement.Elements()
-                                   where int.Parse(b.Element("Id").Value) == id
-                                   select new BusOnTrip()
-                                   {
-                                       Id = int.Parse(b.Element("Id").Value),
-                                       Depart_Planned = TimeSpan.Parse(b.Element("Depart_Planned").Value),
-                                       LicenceNum = int.Parse(b.Element("LicenceNum").Value),
-                                       LineID = int.Parse(b.Element("LineID").Value),
-                                       PrevStation = int.Parse(b.Element("PrevStation").Value),
-                                       Real_Depart = TimeSpan.Parse(b.Element("Real_Depart").Value),
-                                       Timeto_NextStation = TimeSpan.Parse(b.Element("Timeto_NextStation").Value),
-                                       Timeto_PrevStation = TimeSpan.Parse(b.Element("Timeto_PrevStation").Value)
-                                   }
-                        ).FirstOrDefault();
-
-            if (busOnTrip == null)
-                throw new ItemNotExeistExeption(typeof(Bus), id);
-
-            return busOnTrip;
+            return XmlCRUD.Get<BusOnTrip>(BusOnTripPath, new int[] { id }, "Id");
         }
         public IEnumerable<BusOnTrip> GetAllBusesOnTrip()
         {
-
-            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
-
-            return from b in BusOnTripElement.Elements()
-                   select (BusOnTrip)b.xElementToItem(typeof(BusOnTrip));
-
+            return XmlCRUD.GetAll<BusOnTrip>(BusOnTripPath);
         }
         public IEnumerable<BusOnTrip> GetAllBusesOnTripBy(Predicate<BusOnTrip> predicate)
         {
-            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
-
-            return from b in BusOnTripElement.Elements()
-                   let bOT = (BusOnTrip)b.xElementToItem(typeof(BusOnTrip))
-                   where (predicate(bOT))
-                   select bOT;
-
-
+            return XmlCRUD.GetAllBy<BusOnTrip>(BusOnTripPath, predicate);
         }
         public void AddBusOnTrip(BusOnTrip busOnTrip)
         {
-            XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
-
-            XElement bOT = (from b in busOnTripElement.Elements()
-                            where int.Parse(b.Element("Id").Value) == busOnTrip.Id
-                            select b).FirstOrDefault();
-
-            if (bOT != null)
-                throw new ItemAlreadyExeistExeption(typeof(BusOnTrip), busOnTrip.Id);
-
-            busOnTripElement.Add(busOnTrip.itemToXElement());
-
-            XMLTools.SaveListToXMLElement(busOnTripElement, BusOnTripPath);
+            if (busOnTrip.Id != 0)
+                throw new Exception();//**********************//****************************//
+            busOnTrip.Id = XmlStatics.GetNextId("BusOnTrip");
+            XmlCRUD.Add(BusOnTripPath, busOnTrip, "Id");
         }
         public void UpdateBusOnTrip(BusOnTrip busOnTrip)
         {
-            XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
-
-            XElement bOT = (from b1 in busOnTripElement.Elements()
-                            where int.Parse(b1.Element("Id").Value) == busOnTrip.Id
-                            select b1).FirstOrDefault();
-
-            if (bOT != null)
-            {
-                bOT.Remove();
-                busOnTripElement.Add(busOnTrip.itemToXElement());
-                XMLTools.SaveListToXMLElement(busOnTripElement, BusOnTripPath);
-            }
-            else
-                throw new ItemNotExeistExeption(typeof(BusOnTrip), busOnTrip.Id);
+            XmlCRUD.Update(BusOnTripPath, busOnTrip, "Id");    
         }
         public void UpdateBusOnTrip(int id, Action<BusOnTrip> update) //method that knows to updt specific fields
         {
-            XElement BusOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
-
-            XElement bOPxElement = (from b in BusOnTripElement.Elements()
-                                    where int.Parse(b.Element("Id").Value) == id
-                                    select b).FirstOrDefault();
-            if (bOPxElement == null)
-                throw new ItemNotExeistExeption(typeof(BusOnTrip), id);
-
-            var busOnTrip = (BusOnTrip)bOPxElement.xElementToItem(typeof(BusOnTrip));
-            update(busOnTrip);
-
-            bOPxElement.Remove();
-            BusOnTripElement.Add(busOnTrip.itemToXElement());
-            XMLTools.SaveListToXMLElement(BusOnTripElement, BusOnTripPath);
+            XmlCRUD.Update(BusOnTripPath, update, new int[] { id }, "Id");
         }
         public void DeleteBusOnTrip(int id)
         {
-            XElement busOnTripElement = XMLTools.LoadListFromXMLElement(BusOnTripPath);
-
-            XElement b = (from b1 in busOnTripElement.Elements()
-                          where int.Parse(b1.Element("Id").Value) == id
-                          select b1).FirstOrDefault();
-
-            if (b != null)
-            {
-                b.Remove();
-
-                XMLTools.SaveListToXMLElement(busOnTripElement, BusOnTripPath);
-            }
-            else
-                throw new ItemNotExeistExeption(typeof(BusOnTrip), id);
+            XmlCRUD.Remove<BusOnTrip>(BusOnTripPath, new int[] { id }, "Id");    
         }
 
         #endregion
@@ -512,107 +433,72 @@ namespace DL
 
         public void AddUser(User user)
         {
-            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
-
-            XElement us = (from elem in UserElement.Elements()
-                           where elem.Element("UserName").Value == user.UserName
-                           select elem
-                        ).FirstOrDefault();
-
-            if (us != null)
-                throw new ItemAlreadyExeistExeption(typeof(User), 00);
-
-            UserElement.Add(user.itemToXElement());
-            XMLTools.SaveListToXMLElement(UserElement, userPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(userPath);
+            if (users.Any(U => U.UserName == user.UserName))
+                throw new ItemAlreadyExeistExeption(typeof(User), 000);
+            users.Add(user);
+            XMLTools.SaveListToXMLSerializer(users, userPath);
         }
 
         public void DeleteUser(string username)
         {
-            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(userPath);
 
-            XElement us = (from elem in UserElement.Elements()
-                           where elem.Element("UserName").Value == username
-                           select elem
-                        ).FirstOrDefault();
+            User user = users.FirstOrDefault(u => u.UserName == username);
+            if (user == null)
+                throw new ItemNotExeistExeption(typeof(User), 000);
+            users.Remove(user);
+            XMLTools.SaveListToXMLSerializer(users, userPath);
 
-            if (us != null)
-            {
-                us.Remove();
-
-                XMLTools.SaveListToXMLElement(UserElement, userPath);
-            }
-            else
-                throw new ItemNotExeistExeption(typeof(User), 00);
+            
         }// Or ID
 
         public User GetUser(string name)
         {
-            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(userPath);
 
-            User us = (from elem in UserElement.Elements()
-                       where elem.Element("UserName").Value == name
-                       select (User)elem.xElementToItem(typeof(User))
-                        ).FirstOrDefault();
-
-            if (us == null)
-                throw new ItemNotExeistExeption(typeof(User), 00);
-
-            return us;
+            User user = users.FirstOrDefault(u => u.UserName == name);
+            if (user == null)
+                throw new ItemNotExeistExeption(typeof(User), 000);
+            return user;
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
-
-            return from u in UserElement.Elements()
-                   select (User)u.xElementToItem(typeof(User));
+            return XMLTools.LoadListFromXMLSerializer<User>(userPath);
         }
 
         public IEnumerable<User> GetAllUsersBy(Predicate<User> predicate)
         {
-            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
-
-            return from u in UserElement.Elements()
-                   let us = (User)u.xElementToItem(typeof(User))
-                   where predicate(us)
-                   select (User)u.xElementToItem(typeof(User));
+            Func<User, bool> Mypredicat = (x) => predicate(x);
+            return XMLTools.LoadListFromXMLSerializer<User>(userPath).Where(Mypredicat);
         }
 
         public void UpdateUser(User user)
         {
-            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(userPath);
 
-            XElement us = (from elem in UserElement.Elements()
-                           where elem.Element("UserName").Value == user.UserName
-                           select elem).FirstOrDefault();
+            User UpUser = users.FirstOrDefault(u => u.UserName == user.UserName);
+            if (UpUser == null)
+                throw new ItemNotExeistExeption(typeof(User), 000);
 
-            if (us != null)
-            {
-                us.Remove();
-                UserElement.Add(user.itemToXElement());
-                XMLTools.SaveListToXMLElement(UserElement, userPath);
-            }
-            else
-                throw new ItemNotExeistExeption(typeof(User), 00);
+            users.Remove(UpUser);
+            users.Add(user);
+
+            XMLTools.SaveListToXMLSerializer(users, userPath);
         }
 
         public void UpdateUaer(string name, Action<User> update)
         {
-            XElement UserElement = XMLTools.LoadListFromXMLElement(userPath);
+            List<User> users = XMLTools.LoadListFromXMLSerializer<User>(userPath);
 
+            User user = users.FirstOrDefault(u => u.UserName == name);
+            if (user == null)
+                throw new ItemNotExeistExeption(typeof(User), 000);
 
-            XElement us = (from elem in UserElement.Elements()
-                           where elem.Element("UserName").Value == name
-                           select elem).FirstOrDefault();
-            if (us == null)
-                throw new ItemNotExeistExeption(typeof(User), 00);
-
-            var user = (User)us.xElementToItem(typeof(User));
             update(user);
 
-            us.Remove();
-            UserElement.Add(user.itemToXElement());
-            XMLTools.SaveListToXMLElement(UserElement, userPath);
+            XMLTools.SaveListToXMLSerializer(users, userPath);
         }
         #endregion
 

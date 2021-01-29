@@ -16,21 +16,39 @@ namespace Console
     {
         static void Main(string[] args)
         {
+
+            string path = @"UserXml.xml";
+
+            List<User> users = new List<User>() { new User { UserName = "Yair", ID_user = 1, Password = "1234", is_Admin = true},
+            new User { UserName = "Noam", ID_user = 2, Password = "1234", is_Admin = true}};
+
+            XMLTools.SaveListToXMLSerializer(users, path);
+
+
+
+
+
+
+
+
+
+
+
             //string LinePath = @"LineXml.xml";
             //    string LinePath = @"LineXml.xml"; //XElemen
             //    string adjacentStationsPath = @"AdjacentStationXml.xml";
             //    string lineStationsPath = @"LineStationXml.xml";
             //    string lineTripPath = @"LineTripXml.xml";
-            string path = @"StaticsXml.xml";
+            //string path = @"StaticsXml.xml";
 
-            XElement Statics = new XElement("statics");
+            //XElement Statics = new XElement("statics");
 
-            
-            Statics.Add(new XElement("Line", 11));
-            Statics.Add(new XElement("BusOnTrip", 1));
-            Statics.Add(new XElement("LineTrip", 1));
 
-            XMLTools.SaveListToXMLElement(Statics, path);
+            //Statics.Add(new XElement("Line", 11));
+            //Statics.Add(new XElement("BusOnTrip", 1));
+            //Statics.Add(new XElement("LineTrip", 1));
+
+            //XMLTools.SaveListToXMLElement(Statics, path);
 
 
             //    XElement LineElement = new XElement("Lines");
@@ -541,14 +559,14 @@ namespace Console
 
             //#endregion
 
-            string userPath = @"UserXml.xml";
+            //string userPath = @"UserXml.xml";
 
-            XElement useres = new XElement("users");
+            //XElement useres = new XElement("users");
 
-            useres.Add((new User { ID_user = 1, is_Admin = true, Password = "1234", UserName = "Noam" }).itemToXElement());
-            useres.Add((new User { ID_user = 2, is_Admin = true, Password = "1234", UserName = "Yair" }).itemToXElement());
+            //useres.Add((new User { ID_user = 1, is_Admin = true, Password = "1234", UserName = "Noam" }).itemToXElement());
+            //useres.Add((new User { ID_user = 2, is_Admin = true, Password = "1234", UserName = "Yair" }).itemToXElement());
 
-            XMLTools.SaveListToXMLElement(useres, userPath);    
+            //XMLTools.SaveListToXMLElement(useres, userPath);    
 
 
 

@@ -37,10 +37,10 @@ namespace PlGui
             //win.Show();
             //this.Close();         //  TYPESCRIPT :  
 
-            LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
+            //LinesWindow win = new LinesWindow();  // TO TEST LINE WINDOW
             //AddAdjacentStation win = new AddAdjacentStation();
-            win.Show();
-            this.Close();
+            //win.Show();
+            //this.Close();
 
         }
 
