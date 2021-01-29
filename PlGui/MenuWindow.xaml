@@ -9,16 +9,16 @@
     <Grid>
         <Grid.Background>
             <RadialGradientBrush>
-                <GradientStop Color="#FF2B5A6C"/>
-                <GradientStop Color="#FF394F64" Offset="0.901"/>
+                <GradientStop Color="#FF3C1515" Offset="0.013"/>
+                <GradientStop Color="#FF2C2424" Offset="0.832"/>
             </RadialGradientBrush>
         </Grid.Background>
         <Label HorizontalAlignment="Left" Height="48" Margin="103,29,0,0" Content="Welcome to you  " VerticalAlignment="Top" Width="390"  FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" />
         <TextBox x:Name="UsernameTXT" HorizontalAlignment="Left" Height="48" Margin="362,33,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="282" TextChanged="UserName_TextBox_TextChanged" FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
         <Button Content="BUS " HorizontalAlignment="Left" VerticalAlignment="Top" Click="Bus_ButtonClick" Width="155" Margin="28,207,0,0" Height="96" FontSize="36"/>
         <Button Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="576,207,0,0" Height="96" FontSize="36" Click="StationsButton_Click"/>
-        <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Margin="292,207,0,0" Height="96" FontSize="36" Click="Lines_ButtonClick"/>
-        <Label Content="Choose your Display screen :" HorizontalAlignment="Left" Height="48" Margin="0,127,0,0"  VerticalAlignment="Top" Width="477" FontSize="30" Background="{x:Null}" FontFamily="Arial Nova Cond Light" BorderBrush="{x:Null}" Foreground="White"  />
+        <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Margin="315,207,0,0" Height="96" FontSize="36" Click="Lines_ButtonClick"/>
+        <Label Content="Choose your Display screen :" HorizontalAlignment="Left" Height="48" Margin="0,121,0,0"  VerticalAlignment="Top" Width="477" FontSize="30" Background="{x:Null}" FontFamily="Arial Nova Cond Light" BorderBrush="{x:Null}" Foreground="White"  />
 
         <DockPanel Background="Wheat" Margin="628,18,10,360">
             <Menu DockPanel.Dock="Top" HorizontalAlignment="Right" Background="#FFDEDEDE" Height="40" Width="154">
@@ -47,7 +47,7 @@
             </Menu>
         </DockPanel>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="751,-5,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
-        <Label Content="Our LOGO" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="346,359,0,0" Foreground="White" FontSize="30"/>
+        <Image Source="Images\NY.png" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="351,319,0,0"/>
 
 
     </Grid>

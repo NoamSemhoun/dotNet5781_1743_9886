@@ -218,7 +218,7 @@
 
 
             <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Row="1" Visibility="Visible"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF0D9D1" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" >
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF5DCD4" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" >
 
                 <ListView.View>
                     <GridView >

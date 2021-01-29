@@ -9,16 +9,16 @@
 
     <Grid RenderTransformOrigin="0.033,1">
         <Grid.Background>
-            <ImageBrush ImageSource="FONDlog.jpg"/>
+            <ImageBrush  ImageSource="Images\FONDlogin.jpg"/>
         </Grid.Background>
         <Label HorizontalAlignment="Left" Height="68" Content="Login as :" VerticalAlignment="Top" Width="235"  Margin="16,122,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}"/>
-        <RadioButton  x:Name="isAdmin"  IsChecked="True"  Content=" Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="238" Margin="371,128,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center" Padding="6,-1,0,0"/>
+        <RadioButton IsChecked="True" x:Name="isAdmin"   Content=" Administrator" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="238" Margin="371,128,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center" Padding="6,-1,0,0"/>
         <TextBox IsReadOnly="True" HorizontalAlignment="Left" Height="68" TextWrapping="Wrap" Text="! ברוך הבא" VerticalAlignment="Top" Width="272" Margin="204,6,0,0" FontSize="55" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="{x:Null}">
             <TextBox.Effect>
                 <DropShadowEffect/>
             </TextBox.Effect>
         </TextBox>
-        <RadioButton Content=" Traveller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="280" Margin="205,128,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center"/>
+        <RadioButton x:Name="isClient" Content=" Traveller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="139" Margin="205,128,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center"/>
         <StackPanel Margin="213,192,146,20" Background="#FF2E1818">
             <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="User Name :" Background="#FF2E1818"/>
             <TextBox x:Name="UsernameEntrance" Height="42" FontSize="26" />
@@ -29,7 +29,7 @@
             <Button Content="Login" HorizontalAlignment="Right" Height="35" VerticalAlignment="Top" Width="116" FontSize="20" Click="Login_Click" Margin="0,0,28,0"/>
 
         </StackPanel>
-        <Label Content="Our LOGO" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="535,37,0,0" Foreground="White" FontSize="30"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="661,0,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
+        <Image  Source="Images\NY.png" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="102" Margin="580,23,0,0"/>
     </Grid>
 </Window>
