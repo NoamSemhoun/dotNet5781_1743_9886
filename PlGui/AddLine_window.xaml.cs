@@ -39,14 +39,17 @@ namespace PlGui
 
         public AddLine_window()
         {
-           
-            List<int> nums = new List<int>();
-            for (int i = 1; i <= 999; i++)
-                nums.Add(i);
-            
             InitializeComponent();
-            AddLine.IsEnabled = false;
+
+            //List<int> nums = new List<int>();
+            //for (int i = 1; i <= 999; i++)
+            //    nums.Add(i);    // take a LOT of Time
+
+            IEnumerable<int> enumerable = Enumerable.Range(1, 999);  // More faster ++
+            List<int> nums = enumerable.ToList(); 
             LineNumber.DataContext = nums;
+
+            AddLine.IsEnabled = false;
             Allstations_ListBox.DataContext = bl.GetAllStations();  // in this Area !!! 
 
             station_Result_LB.DataContext = Allstations_ListBox.SelectedItem;

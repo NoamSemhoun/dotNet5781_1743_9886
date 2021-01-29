@@ -18,7 +18,7 @@ namespace BO
 
         public Areas Area { get; set; }
 
-        public List<LineStation> List_LineStations { get; set; }  // Masloul
+        public List<LineStation> List_LineStations { get; set; }  // Masloul  Atention to the order !
 
         public int CompareTo(object obj)
         {

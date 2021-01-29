@@ -31,12 +31,11 @@ namespace PlGui
             InitializeComponent();
             Stations_list = new ObservableCollection<BO.Station>(bl.GetAllStations());
             ListViewStations.DataContext = Stations_list;
-        }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            //Gridof_Lines.DataContext = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
 
         }
+
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
@@ -48,12 +47,9 @@ namespace PlGui
 
         private void ListViewStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if ((sender as ListView).SelectedItem != null)
-
-            //gridStations.DataContext = sender....();
 
             //BO.Station S = (BO.Station)ListViewStations.SelectedItem;
-            //addressTextBox.Text = S.Address; // To test
+            //addressTextBox.Text = S.Address; // To test   
 
         }
 
@@ -104,6 +100,18 @@ namespace PlGui
         {
             StationDétails_Window myWin = new StationDétails_Window((ListViewStations.SelectedItem as BO.Station));
             myWin.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Gridof_Lines.DataContext = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
+
+        }
+
+        private void ViewLine_Click(object sender, RoutedEventArgs e)
+        {
+            LinesWindow win = new LinesWindow();
+            win.ShowDialog() ;  // Send the Line to Selection 
         }
     }
 }

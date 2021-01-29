@@ -45,20 +45,25 @@ namespace PlGui
             Station1CB.SelectedIndex = 0;
             Station2CB.SelectedIndex = 0;
 
-            Station1CB.IsEnabled = false;
-            Station2CB.IsEnabled = false;
+            //Station1CB.IsReadOnly = false;
+            //Station2CB.IsEnabled = false;
         }
 
-        private void hTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void hTB_TextChanged(object sender, TextChangedEventArgs e) // Hours
         {
             int input;
-            if ((!int.TryParse(hTB.Text, out input) || input >= 24) && hTB.Text != "")
+            bool ok = int.TryParse(hTB.Text, out input);
+            if ( (!ok || input >= 24) && hTB.Text != "") // Incorect input
                 hTB.Text = prevHTB;
+
+            else if (hTB.Text == "") // Not obligation to input hours
+                prevHTB = "0";
+
             else
                 prevHTB = hTB.Text;
         }
 
-        private void mTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void mTB_TextChanged(object sender, TextChangedEventArgs e) // Minuts
         {
             int input;
             if ((!int.TryParse(mTB.Text, out input) || input >= 60) && mTB.Text != "")
@@ -67,7 +72,7 @@ namespace PlGui
                 prevMTB = mTB.Text;
         }
 
-        private void sTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void sTB_TextChanged(object sender, TextChangedEventArgs e) // Seconds
         {
             int input;
             if ((!int.TryParse(sTB.Text, out input) || input >= 60) && sTB.Text != "")

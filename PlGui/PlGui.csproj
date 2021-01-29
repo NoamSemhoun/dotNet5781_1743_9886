@@ -247,5 +247,15 @@
   <ItemGroup>
     <Resource Include="Images\BUSstation .png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FONDlogin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\NY.png" />
+    <Resource Include="Images\N&amp;Y logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="N&amp;Y logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

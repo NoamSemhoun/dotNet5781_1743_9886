@@ -7,15 +7,15 @@
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.StationDétails_Window"
         mc:Ignorable="d"
         xmlns:myControll ="clr-namespace:PlGui.My_Controlles"
-        Title="StationDétails_Window" Height="710" Width="850">
+        Title="StationDétails_Window" Height="741" Width="850">
     <Window.Resources>
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
     </Window.Resources>
     <Grid x:Name="MyGrid">
         <Grid.Background>
             <RadialGradientBrush>
-                <GradientStop Color="#FFFFF8DE" Offset="0"/>
-                <GradientStop Color="#FFF7EDED" Offset="1"/>
+                <GradientStop Color="#FFFDF8E3" Offset="0"/>
+                <GradientStop Color="#FFF1DDDD" Offset="1"/>
             </RadialGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
@@ -24,45 +24,60 @@
 
 
 
-        <Rectangle HorizontalAlignment="Left" Height="152" Stroke="#FF728B89" VerticalAlignment="Top" Width="494" Margin="218,10,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
+        <Rectangle HorizontalAlignment="Left" Height="152" Stroke="#FF728B89" VerticalAlignment="Top" Width="494" Margin="207,23,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
             <Rectangle.Effect>
                 <BlurEffect/>
             </Rectangle.Effect>
         </Rectangle>
         <Label VerticalAlignment="Center" Margin="359,19,0,620" HorizontalAlignment="Left" Content="Station Code :" FontSize="14" Height="30"/>
-        <TextBox x:Name="codeTextBox" Width="89"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="460,19,0,621" Height="29" HorizontalAlignment="Left" BorderBrush="Red" Foreground="Red" FontWeight="Bold" FontSize="14"/>
-        <Label VerticalAlignment="Center" Margin="253,61,0,574" HorizontalAlignment="Left" Content="Name:" FontSize="14" Height="34" Width="53"/>
-        <TextBox x:Name="nameTextBox" Width="194" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="306,64,0,579" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
-        <Label VerticalAlignment="Center" Margin="253,100,0,536" HorizontalAlignment="Left" Content="Address:" FontSize="14" Height="33" Width="67"/>
-        <TextBox x:Name="addressTextBox" Width="175" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="320,112,0,541" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
-        <Label VerticalAlignment="Center" Margin="500,66,0,579" HorizontalAlignment="Left" Content="Latitude:" FontSize="14" Height="34"/>
-        <Label VerticalAlignment="Center" Margin="500,105,0,541" HorizontalAlignment="Left" Content="Longitude:" FontSize="14" Height="33"/>
-        <TextBox x:Name="addressTextBox_Copy" Width="120"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="581,109,0,548" Height="22" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
-        <TextBox x:Name="addressTextBox_Copy1" Width="141"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="581,66,0,588" Height="25" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <TextBox x:Name="codeTextBox" Width="89"  IsReadOnly="True" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="460,19,0,621" Height="29" HorizontalAlignment="Left" BorderBrush="Red" Foreground="Red" FontWeight="Bold" FontSize="14"/>
+        <Label VerticalAlignment="Center" Margin="229,82,0,594" HorizontalAlignment="Left" Content="Name:" FontSize="14" Height="34" Width="53"/>
+        <TextBox x:Name="nameTextBox" Width="194" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="285,82,0,602" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <Label VerticalAlignment="Center" Margin="229,120,0,556" HorizontalAlignment="Left" Content="Address:" FontSize="14" Height="34" Width="67"/>
+        <TextBox x:Name="addressTextBox" Width="187" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="292,120,0,564" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <Label VerticalAlignment="Center" Margin="484,82,0,594" HorizontalAlignment="Left" Content="Latitude:" FontSize="14" Height="34"/>
+        <Label VerticalAlignment="Center" Margin="484,120,0,556" HorizontalAlignment="Left" Content="Longitude:" FontSize="14" Height="34"/>
+        <TextBox x:Name="addressTextBox_Copy" Width="120"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="565,120,0,564" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <TextBox x:Name="addressTextBox_Copy1" Width="133"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="552,82,0,602" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
 
         <Image Source="/Images/BUSstation .png" Margin="10,-16,647,453" />
-        <Rectangle HorizontalAlignment="Left" Height="189" Stroke="#FF728B89" VerticalAlignment="Top" Width="740" Margin="57,273,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
+        <Rectangle HorizontalAlignment="Left" Height="217" Stroke="#FF728B89" VerticalAlignment="Top" Width="740" Margin="57,250,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
             <Rectangle.Effect>
                 <BlurEffect/>
             </Rectangle.Effect>
         </Rectangle>
-        <Label Content="Lines to this Station :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="326" Margin="76,273,0,0" FontSize="15"/>
+        <Label HorizontalAlignment="Left" VerticalAlignment="Top"
+               Height="44" Width="326" Margin="61,257,0,0" FontSize="19" Content="Lines to this Stations :"
+            FontWeight="Bold"/>
 
-        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="160" VerticalAlignment="Center" Width="541" Margin="145,285,0,235.8">
+        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="198" VerticalAlignment="Center" Width="603" Margin="109,262,0,250">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="193*"/>
-                <ColumnDefinition Width="237*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <myControll:Clock x:Name="clock" Margin="198.6,5,-0.2,125" Height="30" Width="100" FontSize="20" Grid.Column="1" />
+            <myControll:Clock x:Name="clock" Margin="501,5,14,163" FontSize="20" />
 
-            <ListView   x:Name="ListView_Lines" Margin="10,35,-0.2,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
-                        ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" Grid.ColumnSpan="2" >
+            <ListView   x:Name="ListView_Lines" Margin="10,35,0,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" SelectionChanged="ListView_Lines_SelectionChanged" >
 
-             
+
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Line number" DisplayMemberBinding="{Binding LineNumber}"/>
+                        <GridViewColumn Header="Line number">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate >
+                                    <StackPanel Margin="3">
+                                        <DockPanel>
+                                            <TextBlock Text="{Binding LineNumber}" FontSize="20" Foreground="#FF780202" FontWeight="Bold" Width="42" Panel.ZIndex="2" />
+                                        </DockPanel>
+                                        <DockPanel>
+                                            <Ellipse Fill="#FFE24213" />
+                                        </DockPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Destination" DisplayMemberBinding="{Binding Destenation}"/>
                         <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding NextArrival}"/>
                         <GridViewColumn Header="Follow" DisplayMemberBinding="{Binding NextArrival_2}"/>
@@ -73,11 +88,11 @@
 
         </Grid>
         <Grid x:Name="Adjacent_Grid" HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="842" Margin="0,467,0,0">
-            <Label Content="Adjacents Stations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="36,-8,0,0" FontSize="19" FontWeight="Bold"/>
+            <Label Content="Adjacents Stations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="10,6,0,0" FontSize="19" FontWeight="Bold"/>
             <Label Content="PrevStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="193" Margin="102,36,0,0" FontSize="15"/>
             <Label Content="NextStations :" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="325" Margin="463,36,0,0" FontSize="15"/>
 
-            <ListView x:Name="prevStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="102,62,0,0" ItemsSource="{Binding}">
+            <ListView x:Name="prevStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="350" Margin="56,62,0,0" ItemsSource="{Binding}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="code" DisplayMemberBinding="{Binding Statoin1}"/>
@@ -102,7 +117,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListView x:Name="nextStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="304" Margin="463,62,0,0" ItemsSource="{Binding}">
+            <ListView x:Name="nextStations_ListView" HorizontalAlignment="Left" Height="130" VerticalAlignment="Top" Width="325" Margin="463,62,0,0" ItemsSource="{Binding}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="code" DisplayMemberBinding="{Binding Station2}"/>
@@ -127,16 +142,16 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Content="update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="102,197,0,-13" x:Name="updaePrevStation_Button" Click="updaePrevStation_Button_Click" RenderTransformOrigin="1.6,0.521"/>
+            <Button Content="update" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="72,192,0,-8" x:Name="updaePrevStation_Button" Click="updaePrevStation_Button_Click" RenderTransformOrigin="1.6,0.521"/>
             <Button Content="update" HorizontalAlignment="Left" Height="18" Margin="463,192,0,-8" VerticalAlignment="Top" Width="75" x:Name="updaeNextStation_Button" Click="updaeNextStation_Button_Click" />
         </Grid>
-        <Grid x:Name="MoreDetails" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="183" Margin="359,167,0,0">
+        <Grid x:Name="MoreDetails" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="141" Margin="696,54,0,0">
             <CheckBox Width="126" VerticalAlignment="Top"  Margin="18,10,0,0" IsChecked="True" Height="23" HorizontalAlignment="Left" Content="Disabled Access" />
             <CheckBox Width="126" VerticalAlignment="Top" Margin="18,38,0,0" IsChecked="True" Height="23" HorizontalAlignment="Left" Content="Shelter Covered" />
             <CheckBox Width="126" VerticalAlignment="Top" Margin="18,66,0,0" Height="23" HorizontalAlignment="Left" Content="Digital Pannel" />
-            <Image Width="20" VerticalAlignment="Top" Source="Images/disabledAccess.jpg" Margin="126,10,0,0" Height="26" HorizontalAlignment="Left"/>
+            <Image Width="23" VerticalAlignment="Top" Source="Images/disabledAccess.jpg" Margin="123,8,-5,0" Height="28" HorizontalAlignment="Left"/>
         </Grid>
-        <Button Content="hold" Click="Button_Click" HorizontalAlignment="Left" Height="23" Margin="630,205,0,0" VerticalAlignment="Top" Width="92"/>
+        <Button Content="hold" Click="Button_Click" HorizontalAlignment="Left" Height="22" Margin="640,202,0,0" VerticalAlignment="Top" Width="92"/>
 
 
 

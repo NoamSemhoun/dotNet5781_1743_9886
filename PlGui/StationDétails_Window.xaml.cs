@@ -117,6 +117,10 @@ namespace PlGui
         {
             worker.CancelAsync();
         }
-       
+
+        private void ListView_Lines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
