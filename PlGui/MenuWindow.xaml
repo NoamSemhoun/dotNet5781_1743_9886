@@ -14,7 +14,7 @@
             </RadialGradientBrush>
         </Grid.Background>
         <Label HorizontalAlignment="Left" Height="48" Margin="103,29,0,0" Content="Welcome to you  " VerticalAlignment="Top" Width="390"  FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" />
-        <TextBox x:Name="UsernameTXT" HorizontalAlignment="Left" Height="48" Margin="362,33,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="282" TextChanged="UserName_TextBox_TextChanged" FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
+        <TextBox IsReadOnly="True" x:Name="UsernameTXT" HorizontalAlignment="Left" Height="48" Margin="362,33,0,0" TextWrapping="Wrap" Text="UserName" VerticalAlignment="Top" Width="282" TextChanged="UserName_TextBox_TextChanged" FontSize="36" Background="{x:Null}" FontFamily="Franklin Gothic Medium Cond" BorderBrush="{x:Null}" Foreground="White" TextDecorations="{x:Null}"/>
         <Button Content="BUS " HorizontalAlignment="Left" VerticalAlignment="Top" Click="Bus_ButtonClick" Width="155" Margin="28,207,0,0" Height="96" FontSize="36"/>
         <Button Content="Stations" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Margin="576,207,0,0" Height="96" FontSize="36" Click="StationsButton_Click"/>
         <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Margin="315,207,0,0" Height="96" FontSize="36" Click="Lines_ButtonClick"/>

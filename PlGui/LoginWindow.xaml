@@ -19,10 +19,10 @@
             </TextBox.Effect>
         </TextBox>
         <RadioButton x:Name="isClient" Content=" Traveller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="44" Width="139" Margin="205,128,0,0" FontSize="30" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" VerticalContentAlignment="Center"/>
-        <StackPanel Margin="213,192,146,20" Background="#FF2E1818">
-            <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="User Name :" Background="#FF2E1818"/>
+        <StackPanel Margin="213,192,146,20" Background="#FF251313">
+            <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="User Name :" Background="#FF251313"/>
             <TextBox x:Name="UsernameEntrance" Height="42" FontSize="26" />
-            <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="Password :" Background="#FF2E1818"/>
+            <Label Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="30" Content="Password :" Background="#FF251313"/>
             <PasswordBox  x:Name="PassewordEntrance" Height="46"  FontSize="26"  />
             <TextBox x:Name="MyTextBox" MouseLeave="LicencePasswordBox_MouseLeave" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="333" FontSize="26"/>
             <CheckBox Name="Checkbox_passeword" Content="Display passeword" Unchecked="NotDisplayPasseword" Checked="DisplayPasseword"  HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="15" Height="24" Width="148" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
