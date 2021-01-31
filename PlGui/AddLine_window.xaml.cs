@@ -50,7 +50,7 @@ namespace PlGui
             LineNumber.DataContext = nums;
 
             AddLine.IsEnabled = false;
-            Allstations_ListBox.DataContext = bl.GetAllStations();  // in this Area !!! 
+            Allstations_ListBox.DataContext = bl.GetAllStations();  // linQ  in this Area !!! 
 
             station_Result_LB.DataContext = Allstations_ListBox.SelectedItem;
 
@@ -58,13 +58,7 @@ namespace PlGui
             //viewSelectedStationList.DataContext = selectedStationList;
         }
 
-        private void del_Click(object sender, RoutedEventArgs e) // IN simulator list (for test)
-        {
-            station_Result_LB.Items.Remove(((sender as Button).DataContext as BO.Station).Code);
-
-
-            //selectedStationListView.Remove((sender as Button).DataContext as BO.Station);
-        }
+     
 
         private void LineNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -84,7 +78,7 @@ namespace PlGui
 
       
 
-        private void AddLine_Click(object sender, RoutedEventArgs e)
+        private void AddLine_Click(object sender, RoutedEventArgs e) 
         {
             
             if(indexes.Any())
@@ -94,7 +88,7 @@ namespace PlGui
             }
             if(index < 2)
             {
-                MessageBox.Show("Not enough stations were selected", "Error");
+                MessageBox.Show("Not enough stations were selected \n (Select 2 stations minimum)", "Error");
                 return;
             }
 
@@ -153,6 +147,16 @@ namespace PlGui
             // Print just the Station in this area ? 
         }
 
+        private void refreshSimulator()                 // simulator = List of stations
+        {
+            station_Result_LB.DataContext = (from code in selectedStationList
+                                             select bl.GetStation(code))   .ToList();
+
+            //station_Result_LB.Items.Add(  (sender as Button).DataContext as BO.Station); //    send to Simulator
+
+
+        }
+
         private void check_Click(object sender, RoutedEventArgs e) // Add
         {
             if  ((sender as Button).Content is string)    
@@ -161,8 +165,10 @@ namespace PlGui
                 {
                     (sender as Button).Content = ++index;
                     selectedStationList.Add(((sender as Button).DataContext as BO.Station).Code);
-                     station_Result_LB.Items.Add((sender as Button).DataContext as BO.Station) ; //     Simulator
-                   // INDEX  ...
+
+                    refreshSimulator();
+
+                   // INDEX  ...  problem
                     
 
                 }
@@ -171,6 +177,7 @@ namespace PlGui
                     indexes.Sort();
                     (sender as Button).Content = indexes[0];
                     selectedStationList[indexes[0] - 1] = ((sender as Button).DataContext as BO.Station).Code;
+                    refreshSimulator();
                     indexes.RemoveAt(0);
                 }
             }
@@ -187,6 +194,16 @@ namespace PlGui
             }
         }
 
+        private void del_Click(object sender, RoutedEventArgs e) // IN simulator list (for test)
+        {
+            selectedStationList.Remove(((sender as Button).DataContext as BO.Station).Code);
+
+            refreshSimulator();
+            //  INDEX refresh        to do                                &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+
+            //selectedStationListView.Remove((sender as Button).DataContext as BO.Station);
+        }
         private void station_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

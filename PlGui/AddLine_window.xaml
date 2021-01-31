@@ -84,12 +84,17 @@
 
         <Label Content="Area" HorizontalAlignment="Left" Margin="73,86,0,0" VerticalAlignment="Top" Width="68" FontSize="20"/>
 
-        <ListBox x:Name="station_Result_LB"  ItemsSource= "{Binding}" Background="#FFE2ECB7" Margin="27,169,52,79" SelectionChanged="station_Result_LB_SelectionChanged" FontSize="5">
+        <ListBox x:Name="station_Result_LB"  ItemsSource= "{Binding}" Background="#FFE2ECB7" Margin="17,173,30,75" SelectionChanged="station_Result_LB_SelectionChanged" FontSize="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
 
-                        <Grid Height="33" Width="34">
+                        <Button HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalContentAlignment="Center" x:Name="DeleteLine" ToolTip="   Delete this STATION  "  ToolTipService.ShowDuration="5000" 
+                                    Click="del_Click"  Height="35" Width="30" Background="{x:Null}" BorderBrush="{x:Null}"   >
+                            <Image Source="Images\delete-removebg-preview.png" Width="29" Height="40" VerticalAlignment="Center"/>
+                        </Button>
+                        
+                        <Grid Height="30" Width="30">
                             <TextBox x:Name="IndexTB" Text="{Binding LineStationIndex }" Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" 
                                    Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold"></TextBox>
                             <Image Source="Images\icon_Station_Maps-removebg-preview (1).png" Margin="-15,0,-7,0"></Image>
@@ -97,13 +102,14 @@
 
                         <Label Content="{Binding Code}" FontSize="15"/>
                         <Label Content="{Binding Name}" FontSize="15"/>
-                        <Button x:Name="del" Content="Remove"  FontSize="15" Click="del_Click" Background="Gray"  BorderBrush="White"/>
+                        
+
 
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Simulator :" HorizontalAlignment="Left" Margin="27,132,0,0" VerticalAlignment="Top" Width="112" FontSize="20"/>
-        <TextBox x:Name="stations_Area" Margin="0,10,243,382" Grid.Column="1" Background="#FFE2ECB7"/>
+        <Label Content="Simulator :" HorizontalAlignment="Left" Margin="19,134,0,0" VerticalAlignment="Top" Width="112" FontSize="20"/>
+        <TextBox x:Name="stations_Area" Margin="0,6,243,386" Grid.Column="1" Background="#FFE2ECB7"/>
     </Grid>
 </Window>
