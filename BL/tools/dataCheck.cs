@@ -19,6 +19,7 @@ namespace BL
         {
             GetDeleget<T> getDeleget;
 
+
             Type type = typeof(GetDeleget<T>);
             MethodInfo[] methodList = dal.GetType().GetMethods();
 

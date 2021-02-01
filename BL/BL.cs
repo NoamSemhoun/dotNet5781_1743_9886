@@ -732,7 +732,7 @@ namespace BL
           
 
             List<DO.AdjacentStation> DoAdjStations = (from item in adjacentStations
-                                                      where (DataCheck.isExeist<DO.Station>(s => s.Code == item.Statoin1) && DataCheck.isExeist<Station>(s => s.Code == item.Station2))
+                                                      where (DataCheck.isExeist<DO.Station>(s => s.Code == item.Statoin1) && DataCheck.isExeist<DO.Station>(s => s.Code == item.Station2))
                                                       select (DO.AdjacentStation)item.CloneNew(typeof(DO.AdjacentStation))).ToList();
             if (adjacentStations.Count != DoAdjStations.Count)
                 throw new LackOfDataExeption(DataType.StationData, -1);
@@ -748,7 +748,7 @@ namespace BL
             {
                 if (DataCheck.isExeist<DO.AdjacentStation>(a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
                 {
-                    if (DataCheck.didNeedUpdaete<AdjacentStation>(aS, a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
+                    if (DataCheck.didNeedUpdaete<DO.AdjacentStation>(aS, a => a.Statoin1 == aS.Statoin1 && a.Station2 == aS.Station2))
                     {
                         dal.UpdateAdjacentStation(aS);
                     }

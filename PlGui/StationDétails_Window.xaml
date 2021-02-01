@@ -60,7 +60,12 @@
 
             <ListView   x:Name="ListView_Lines" Margin="10,35,0,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" SelectionChanged="ListView_Lines_SelectionChanged" >
-
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Focusable" Value="False"/>
+                        <Setter Property="IsHitTestVisible" Value="False" />
+                    </Style>
+                </ListView.ItemContainerStyle>
 
                 <ListView.View>
                     <GridView>
