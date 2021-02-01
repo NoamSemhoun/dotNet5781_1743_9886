@@ -132,10 +132,10 @@
                                                 </TransformGroup>
                                             </Path.RenderTransform>
                                         </Path>
-                                        <TextBox Text="{Binding LineStationIndex }" IsReadOnly="True" Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold">
+                                        <TextBlock Text="{Binding LineStationIndex }"  Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" FontWeight="Bold">
 
 
-                                        </TextBox>
+                                        </TextBlock>
                                         <Image Source="Images\icon_Station_Maps-removebg-preview (1).png" Margin="-15,0,-7,0"></Image>
                                     </Grid>
 
@@ -145,12 +145,10 @@
                         <GridViewColumn   Header="Code" Width="65" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox FontSize="15"  Text="{Binding Code}" TextAlignment="Center" IsReadOnly="True" Width="41" RenderTransformOrigin="0.5,0.5" BorderBrush="#FFF70000" Height="28">
-                                        <TextBox.Background>
-                                            <SolidColorBrush Color="White" Opacity="0.45"/>
-                                        </TextBox.Background>
+                                    <TextBlock FontSize="15"  Text="{Binding Code}" TextAlignment="Center"  Width="41" RenderTransformOrigin="0.5,0.5"  Height="28">
+                               
 
-                                    </TextBox>
+                                    </TextBlock>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

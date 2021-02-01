@@ -32,12 +32,12 @@ namespace PlGui
             //StationsWindow win = new StationsWindow();
             //MenuWindow win = new MenuWindow();
             ////LinesWindow win = new LinesWindow();  
-            ////AddLine_window win = new AddLine_window();
+            //AddLine_window win = new AddLine_window();
             ////AddAdjacentStation win = new AddAdjacentStation();
 
 
             //win.Show();
-            //this.Close();
+            // this.Close();
 
             UsernameEntrance.Text = "Noam";  // For all test
             PassewordEntrance.Password = "1234";

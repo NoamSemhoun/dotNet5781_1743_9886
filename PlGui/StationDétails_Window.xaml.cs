@@ -110,7 +110,18 @@ namespace PlGui
 
         private void refreshSchedual(object sendr, ProgressChangedEventArgs e)
         {
-            ListView_Lines.DataContext = bl.GetLinesSchedule(clock.Time, stationCode).OrderBy(l => l.NextArrival);
+
+            List<BO.LineSchedule> list = bl.GetLinesSchedule(clock.Time, stationCode).ToList();
+            list.Sort((l1, l2) =>
+            {
+                if (l1.NextArrivals == null || !l1.NextArrivals.Any())
+                    return 1;
+                if (l2.NextArrivals == null || !l2.NextArrivals.Any())
+                    return -1;
+                return l1.NextArrivals[0].CompareTo(l2.NextArrivals[0]);
+            });
+
+            ListView_Lines.DataContext = list;
         }
 
         private void closing_evenet(object sender, EventArgs e)

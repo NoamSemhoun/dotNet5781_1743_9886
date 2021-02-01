@@ -95,8 +95,7 @@ namespace BL
             return new BO.LineSchedule {
                 id = lineId,
                 LineNumber = line.LineNumber,
-                NextArrival = GetNextesArrivalTime(now, lineId, station).ElementAt(0),
-                NextArrival_2 = GetNextesArrivalTime(now, lineId, station).ElementAt(1),
+                NextArrivals = GetNextesArrivalTime(now, lineId, station).ToArray(),
                 Destenation = dal.GetStation(line.LastStation).Address
             };
         }

@@ -11,8 +11,7 @@ namespace BO
         //***//
         public int id { get; set; }
         public int LineNumber { get; set; }
-        public TimeSpan NextArrival { get; set; }
-        public TimeSpan NextArrival_2 { get; set; }
+        public TimeSpan[] NextArrivals { get; set; }
         public string Destenation { get; set; }
     }
 }

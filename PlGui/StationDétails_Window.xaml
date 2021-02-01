@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
+        xmlns:convs="clr-namespace:PlGui.coverors"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.StationDétails_Window"
         mc:Ignorable="d"
         xmlns:myControll ="clr-namespace:PlGui.My_Controlles"
@@ -79,8 +80,8 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Destination" DisplayMemberBinding="{Binding Destenation}"/>
-                        <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding NextArrival}"/>
-                        <GridViewColumn Header="Follow" DisplayMemberBinding="{Binding NextArrival_2}"/>
+                        <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding NextArrivals[0]}"/>
+                        <GridViewColumn Header="Follow" DisplayMemberBinding="{Binding NextArrivals[1]}"/>
 
                     </GridView>
                 </ListView.View>
@@ -151,7 +152,6 @@
             <CheckBox Width="126" VerticalAlignment="Top" Margin="18,66,0,0" Height="23" HorizontalAlignment="Left" Content="Digital Pannel" />
             <Image Width="23" VerticalAlignment="Top" Source="Images/disabledAccess.jpg" Margin="123,8,-5,0" Height="28" HorizontalAlignment="Left"/>
         </Grid>
-        <Button Content="hold" Click="Button_Click" HorizontalAlignment="Left" Height="22" Margin="640,202,0,0" VerticalAlignment="Top" Width="92"/>
 
 
 

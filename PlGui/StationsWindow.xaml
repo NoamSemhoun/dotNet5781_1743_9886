@@ -80,16 +80,33 @@
             </Grid>
 
         </DockPanel>
-        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="69" VerticalAlignment="Center" Width="410" Margin="522,265,0,185">
-            <Grid.ColumnDefinitions>
+        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="69" VerticalAlignment="Center" Width="410" Margin="522,265,0,185" Background="White">
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
                 <ColumnDefinition Width="237*"/>
-            </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>-->
 
 
-            <ListView   x:Name="ListView_Lines" Margin="10,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+            <ItemsControl Background="Beige" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Ellipse Width="20" Height="20" Opacity="0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+
+                <ItemsControl Background="Black"/>
+                <ItemsControl Background="Black"/>
+                <ItemsControl Background="Black"/>
+            
+                
+
+            </ItemsControl>
+
+            <!--<ListView   x:Name="ListView_Lines" Margin="10,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto"  Grid.ColumnSpan="2" ItemsSource="{Binding}" >
-                <!--ItemsSource="{Binding  ElementName=ListViewStations, Path=SelectedItem.List_Lines, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >-->
+                --><!--ItemsSource="{Binding  ElementName=ListViewStations, Path=SelectedItem.List_Lines, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >--><!--
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -111,10 +128,10 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
-                </ListView.View>
+                </ListView.View>-->
 
 
-            </ListView>
+            <!--</ListView>-->
 
         </Grid>
 
