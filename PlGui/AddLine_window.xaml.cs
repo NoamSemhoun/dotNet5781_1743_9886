@@ -25,11 +25,11 @@ namespace PlGui
 
         public event AddLineEvent ALE;
 
-        int index = 0;
+        //int index = 0;
         int lineNumber;
         BlAPI.IBL bl = BlAPI.BLFactory.GetBL();
         List<int> selectedStationList = new List<int>();
-        List<int> indexes = new List<int>();
+        //List<int> indexes = new List<int>();
        
         BO.Areas area;
         private BO.AddLineExeption addLineEx;
@@ -81,16 +81,16 @@ namespace PlGui
         private void AddLine_Click(object sender, RoutedEventArgs e) 
         {
             
-            if(indexes.Any())
-            {
-                MessageBox.Show("some indexes are missing", "Error");
-                return;
-            }
-            if(index < 2)
-            {
-                MessageBox.Show("Not enough stations were selected \n (Select 2 stations minimum)", "Error");
-                return;
-            }
+            //if(indexes.Any())
+            //{
+            //    MessageBox.Show("some indexes are missing", "Error");
+            //    return;
+            //}
+            //if(index < 2)
+            //{
+            //    MessageBox.Show("Not enough stations were selected \n (Select 2 stations minimum)", "Error");
+            //    return;
+            //}
 
 
             try
@@ -159,39 +159,43 @@ namespace PlGui
 
         private void check_Click(object sender, RoutedEventArgs e) // Add
         {
-            if  ((sender as Button).Content is string)    
-            {
-                if (!indexes.Any())
-                {
-                    (sender as Button).Content = ++index;
-                    selectedStationList.Add(((sender as Button).DataContext as BO.Station).Code);
+            //if  ((sender as Button).Content is string)    
+            //{
+            //    if (!indexes.Any())
+            //    {
+            //        (sender as Button).Content = ++index;
+            //        selectedStationList.Add(((sender as Button).DataContext as BO.Station).Code);
 
-                    refreshSimulator();
+            //        refreshSimulator();
 
-                   // INDEX  ...  problem
-                    
+            //       // INDEX  ...  problem
 
-                }
-                else
-                {
-                    indexes.Sort();
-                    (sender as Button).Content = indexes[0];
-                    selectedStationList[indexes[0] - 1] = ((sender as Button).DataContext as BO.Station).Code;
-                    refreshSimulator();
-                    indexes.RemoveAt(0);
-                }
-            }
-            else
-            {
-                int tmp = (int)(sender as Button).Content;
-                (sender as Button).Content = "+";
-                indexes.Add(tmp);
-                while (indexes.Contains(index))
-                {
-                    indexes.Remove(index);
-                    index--;
-                }
-            }
+
+            //    }
+            //    else
+            //    {
+            //        indexes.Sort();
+            //        (sender as Button).Content = indexes[0];
+            //        selectedStationList[indexes[0] - 1] = ((sender as Button).DataContext as BO.Station).Code;
+            //        refreshSimulator();
+            //        indexes.RemoveAt(0);
+            //    }
+            //}
+            //else
+            //{
+            //    int tmp = (int)(sender as Button).Content;
+            //    (sender as Button).Content = "+";
+            //    indexes.Add(tmp);
+            //    while (indexes.Contains(index))
+            //    {
+            //        indexes.Remove(index);
+            //        index--;
+            //    }
+            //}
+            selectedStationList.Add(((sender as Button).DataContext as BO.Station).Code);
+
+            refreshSimulator();
+
         }
 
         private void del_Click(object sender, RoutedEventArgs e) // IN simulator list (for test)
