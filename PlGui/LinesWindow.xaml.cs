@@ -101,7 +101,7 @@ namespace PlGui
         {
             index_TB.Foreground = Brushes.Black; 
             int input;
-            if (((!int.TryParse(index_TB.Text, out input) || input > (ListView_Lines.SelectedItem as BO.Line).List_LineStations.Count) && index_TB.Text != ""))
+            if (((!int.TryParse(index_TB.Text, out input)|| input <= 0 || input > (ListView_Lines.SelectedItem as BO.Line).List_LineStations.Count + 1) && index_TB.Text != ""))
                index_TB.Text = prevIndex;
             else
                 prevIndex = index_TB.Text;

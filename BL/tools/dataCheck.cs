@@ -89,7 +89,36 @@ namespace BL
             return false;
         }
 
+        //internal static IEnumerable<T> GetmissItems<T>(List<T> listToCheck, Type doType)
+        //{
+        //    Type type = typeof(IEnumerable<>).MakeGenericType(doType);
+        //    Type delegateType = typeof(GetDeleget<>).MakeGenericType(type);
 
+        //    MethodInfo[] methodList = dal.GetType().GetMethods();
+
+        //    dynamic getAllBy = Convert.ChangeType(GenerateDeleget(doType), delegateType);
+
+        //    foreach (T obj in listToCheck)
+        //}
+
+
+        //private static object GenerateDeleget(Type type)
+        //{
+        //    MethodInfo[] methodList = dal.GetType().GetMethods();
+
+        //    Type delegateType = typeof(GetDeleget<>).MakeGenericType(type);
+        //    Type iEnumerableType = typeof(IEnumerable<>).MakeGenericType(type);
+
+        //    foreach (MethodInfo method in methodList)
+        //    {
+        //        if (method.ReturnType == iEnumerableType && method.GetParameters().Any())
+        //        {
+        //            return Delegate.CreateDelegate(delegateType, dal, method);
+        //        }
+        //    }
+        //    return null;
+
+        //}
 
     }
 }

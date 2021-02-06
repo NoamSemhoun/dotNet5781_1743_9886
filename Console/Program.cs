@@ -16,13 +16,17 @@ namespace Console
     {
         static void Main(string[] args)
         {
+            System.Console.WriteLine(typeof(IEnumerable<string>).ToString());
+            System.Console.WriteLine(typeof(IEnumerable<>).MakeGenericType(typeof(string)).ToString());
+            System.Console.WriteLine(typeof( IEnumerable<>).ToString());
+            System.Console.ReadLine();
 
-            string path = @"UserXml.xml";
+            //string path = @"UserXml.xml";
 
-            List<User> users = new List<User>() { new User { UserName = "Yair", ID_user = 1, Password = "1234", is_Admin = true},
-            new User { UserName = "Noam", ID_user = 2, Password = "1234", is_Admin = true}};
+            //List<User> users = new List<User>() { new User { UserName = "Yair", ID_user = 1, Password = "1234", is_Admin = true},
+            //new User { UserName = "Noam", ID_user = 2, Password = "1234", is_Admin = true}};
 
-            XMLTools.SaveListToXMLSerializer(users, path);
+            //XMLTools.SaveListToXMLSerializer(users, path);
 
 
 

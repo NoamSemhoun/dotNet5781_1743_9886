@@ -21,7 +21,7 @@ namespace PlGui
     /// </summary>
     public partial class AddAdjacentStation : Window
     {
-        string prevHTB = "";
+        string prevHTB = "0";
         string prevMTB = "";
         string prevSTB = "";
 
