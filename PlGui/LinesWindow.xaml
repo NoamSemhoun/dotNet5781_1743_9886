@@ -21,8 +21,8 @@
 
     <Grid DataContext="{StaticResource lineViewSource}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="331*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="66*"/>
         </Grid.RowDefinitions>
 
 
@@ -31,13 +31,13 @@
             <ColumnDefinition Width="229*" />
         </Grid.ColumnDefinitions>
 
-        <DockPanel  Background="#FFE6E6E6" Grid.ColumnSpan="2" Margin="0,-82,10,82" />
+        <DockPanel  Background="White" Margin="10,0,0,0" Grid.ColumnSpan="2" />
 
 
         <ListView x:Name="ListView_Lines" Grid.Column="0" Grid.Row="1"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                   MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFC4E4FF" SelectionChanged="ListView_Lines_SelectionChanged"   Foreground="#FF001B97" FontWeight="Bold">
+            ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFDFEFFD" SelectionChanged="ListView_Lines_SelectionChanged"   Foreground="#FF001B97" FontWeight="Bold">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -99,7 +99,7 @@
         </ListView>
 
 
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   RenderTransformOrigin="0.411,0.493" Grid.Column="1" Grid.Row="2">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   RenderTransformOrigin="0.411,0.493" Grid.Column="1" Grid.Row="1">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="436"/>
@@ -109,7 +109,7 @@
             <!--<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="850,3,-361,0" Height="38" Width="42" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>-->
             <ListView x:Name="Station_ListView" ItemsSource="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource stationListCon}}" MouseDoubleClick="StationDeatails_DoubleClick"
                 VerticalAlignment="Stretch"
-                      ToolTip=" Double Click to view Details" ToolTipService.ShowDuration="50000" HorizontalAlignment="Stretch" Background="#FFCFECD3" BorderBrush="#FFB1BDDF" BorderThickness="4" Foreground="#FF050C1F" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" >
+                      ToolTip=" Double Click to view Details" ToolTipService.ShowDuration="50000" HorizontalAlignment="Stretch" Background="#FFDBF0DF" BorderBrush="#FFB1BDDF" BorderThickness="4" Foreground="#FF050C1F" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
 
@@ -142,11 +142,11 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn   Header="Code" Width="65" >
+                        <GridViewColumn   Header="Code" Width="60" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock FontSize="15"  Text="{Binding Code}" TextAlignment="Center"  Width="41" RenderTransformOrigin="0.5,0.5"  Height="28">
-                               
+
 
                                     </TextBlock>
                                 </DataTemplate>
@@ -162,8 +162,8 @@
             </ListView>
 
 
-            <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Horizontal" Background="White" Margin="0,-48,0,442">
-                <Button x:Name="add_Station"  Click="add_Station_Click"  Height="45" 
+            <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Horizontal" Background="White" Margin="100,-48,0,436">
+                <Button x:Name="add_Station"  Click="add_Station_Click"  Height="48" 
                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=ListView_Lines}"             
                         Width="155"  Background="#FF5F832B"  >
@@ -173,8 +173,8 @@
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="deleteStation_button" FontSize="15" Click="deleteStation_button_Click" Height="45" VerticalAlignment="Bottom"
-                    IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=Station_ListView}" Background="#FF5F832B">
+                <Button x:Name="deleteStation_button" FontSize="15" Click="deleteStation_button_Click" Height="48" VerticalAlignment="Bottom"
+                    IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=Station_ListView}" Background="#FF5F832B" Width="154">
                     <StackPanel Orientation="Horizontal" Height="45" Width="159" Background="#FFE4F7E0">
                         <Image Source="Images\delete.png" Width="46" Height="45" VerticalAlignment="Top"/>
                         <Label Content="Delete Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Width="120"/>
@@ -216,7 +216,7 @@
 
 
             <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Row="1" Visibility="Visible"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF5DCD4" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" >
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF5EDD0" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" >
 
                 <ListView.View>
                     <GridView >
@@ -309,20 +309,20 @@
         <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
                         Click="Menu_Click" Height="44"
                         HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                                                             Width="128" Margin="320,0,10,6" Grid.Column="1"  >
+                                                             Width="128" Margin="2,0,779,4"  >
             <StackPanel Orientation="Horizontal" Height="44" Width="134">
                 <Image Source="Images/SignOut.jpg" Width="57"/>
                 <Label Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Height="38" Margin="0,0,0,6"/>
             </StackPanel>
         </Button>
         <Button x:Name="addLine" ToolTip="   Add a NEW Line  " ToolTipService.ShowDuration="50000"
-                        Click="addLine_Click"  Margin="750,0,9,6"  >
-            <StackPanel Orientation="Horizontal" Height="43" Width="140" HorizontalAlignment="Right" Background="#FFC4E4FF">
+                        Click="addLine_Click"  Margin="752,2,7,0" Background="#FFDFEFFD"  >
+            <StackPanel Orientation="Horizontal" Height="44" Width="140" HorizontalAlignment="Right" Background="#FFC4E4FF">
                 <Image Source="Images/TRAJET.png" Width="51" />
                 <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}"/>
             </StackPanel>
         </Button>
-        <Label Content="All Lines" HorizontalAlignment="Left" Margin="288,0,0,10" Height="38" VerticalAlignment="Bottom" FontSize="30" Width="184" Foreground="#FF66ABE6" FontFamily="Lucida Handwriting"/>
+        <Label Content="All Lines" HorizontalAlignment="Left" Margin="162,0,0,0" Height="48" VerticalAlignment="Bottom" FontSize="30" Width="184" Foreground="#FF66ABE6" FontFamily="Lucida Handwriting"/>
 
 
 
