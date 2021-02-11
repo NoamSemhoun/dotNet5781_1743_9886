@@ -37,10 +37,10 @@ namespace PlGui
 
 
             //win.Show();
-           // this.Close();
+            //this.Close();
 
-            UsernameEntrance.Text = "Noam";  // For all test
-            PassewordEntrance.Password = "1234";
+            //UsernameEntrance.Text = "Noam";  // For all test
+            //PassewordEntrance.Password = "1234";
 
         }
 

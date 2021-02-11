@@ -9,6 +9,8 @@ namespace BlAPI
 {
     public interface IBL
     {
+
+    
       #region Bus
 
         IEnumerable<Bus> GetAllBuses();
@@ -84,6 +86,13 @@ namespace BlAPI
         //IEnumerable<TimeSpan> GetLineDepartureTimes(int lineID);
         //IEnumerable<TimeSpan> GetLineStationsTimes(int lineID);
 
+        #region Simulator
+
+        void RunSimulator(TimeSpan startTime, int rate, Func<TimeSpan> simulatorProgerssChanged);
+
+        //void StopSimulator();
+                
+        #endregion
 
     }
 }

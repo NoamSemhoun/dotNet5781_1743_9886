@@ -13,7 +13,8 @@ namespace BL
     {
         DalApi.IDAL dal = DalApi.DalFactory.GetDal();
 
-        
+        ClockSimulator simulator;
+
 
         #region bus
 
@@ -36,7 +37,7 @@ namespace BL
         public void MaintenanceBus(int liscenseNumber)
         {
             try { dal.UpdateBus(liscenseNumber, maintenance); }
-            catch (DO.ItemNotExeistExeption) 
+            catch (DO.ItemNotExeistExeption)
             {
                 throw new ItemNotExeistExeption(typeof(Bus), liscenseNumber);
             }
@@ -101,24 +102,24 @@ namespace BL
                 throw new Exception();//*********//  not adapt params exeption
             Line line = ManageBoItems.CreateLine(lineNumber, StationsCode, area);
             AddLine(line);
-        }      
+        }
 
         public void DeleteLine(int id)
         {
-            ManageDoData.DeleteLine(id);           
+            ManageDoData.DeleteLine(id);
         }
 
         public IEnumerable<Line> GetAllLines()
         {
             return GetBOItems.GetLines(l => true);
-          
+
         }
 
         public Line GetLine(int id)
         {
             return GetBOItems.GetLine(l => l.LineID == id);
         }
-      
+
         public int GetLineId(int lineNumber, int firstStation, int lastStation)
         {
             var l = dal.GetAllLinesBy(L => L.LineNumber == lineNumber && L.FirstStation == firstStation && L.LastStation == lastStation);
@@ -129,7 +130,7 @@ namespace BL
 
         public void UpdateLine(Line line)
         {
-            ManageDoData.UpdateLine(line);           
+            ManageDoData.UpdateLine(line);
         }
 
         public static int LineStationComparison(DO.LineStation A, DO.LineStation B)
@@ -144,7 +145,7 @@ namespace BL
         public IEnumerable<Ferquency> GetFerquencies(int id)
         {
             return from item in dal.GetAllLineTripsBy(lT => lT.LineID == id)
-                   select new Ferquency { StartTime = item.StartAt, EndTime = item.FinishAt, Freq = item.Frequency };                  
+                   select new Ferquency { StartTime = item.StartAt, EndTime = item.FinishAt, Freq = item.Frequency };
         }
 
         public IEnumerable<Ferquency> GetFerquencies(Line line)
@@ -193,7 +194,7 @@ namespace BL
             //catch(DO.ItemNotExeistExeption)
             //{ throw new Exception(); } //******************//*************lack of data Exeption 
 
-            
+
 
             //return new LineStation
             //{
@@ -233,11 +234,11 @@ namespace BL
         {
             return Cloning.DoObjectsToStation(code);
         }
-          
+
         public IEnumerable<Station> GetAllStations()
         {
             return (from item in dal.GetAllStationes()
-                   select Cloning.DoObjectsToStation(item.Code)).OrderBy(s => s.Code);
+                    select Cloning.DoObjectsToStation(item.Code)).OrderBy(s => s.Code);
         }
 
 
@@ -260,32 +261,32 @@ namespace BL
 
         public void AddAdjStation(int station1, int station2, double distance, TimeSpan time)
         {
-            
-            try 
+
+            try
             {
-                dal.AddAdjacentStation(new DO.AdjacentStation 
+                dal.AddAdjacentStation(new DO.AdjacentStation
                 {
                     Statoin1 = station1,
                     Station2 = station2,
                     Distance = distance,
                     Time = time
                 });
-                
+
             }
             catch (DO.ItemAlreadyExeistExeption)
             { throw new ItemAlreadyExeistExeption(typeof(DO.AdjacentStation), station1, station2); }
-           
+
         }
-        
+
         public void UpdateAdjStation(int station1, int station2, double distance, TimeSpan time)
         {
-            try 
+            try
             {
                 dal.UpdateAdjacentStation(station1, station2, a => { a.Distance = distance; a.Time = time; });
             }
             catch (DO.ItemNotExeistExeption e)
             {
-                throw (ItemNotExeistExeption) e.CloneNew(typeof(ItemNotExeistExeption));
+                throw (ItemNotExeistExeption)e.CloneNew(typeof(ItemNotExeistExeption));
             }
         }
 
@@ -295,8 +296,8 @@ namespace BL
                     where item.Statoin1 == station_id
                     select ConvertItems.GetAdjacentStation(item.Statoin1, item.Station2)).OrderBy(s => s.Station2);
         }
-        
-        
+
+
         public IEnumerable<AdjacentStation> GetprevStations(int station_id)
         {
             return (from item in dal.GetAllAdjacentStations()
@@ -319,7 +320,7 @@ namespace BL
         {
             DO.User User1 = new DO.User();
             myuser.Clone(User1);
-            dal.AddUser(User1); 
+            dal.AddUser(User1);
         }
 
         public void DeleteUser(string username)  // Or ID           
@@ -349,14 +350,14 @@ namespace BL
         public IEnumerable<LineSchedule> GetLinesSchedule(TimeSpan now, int station)
         {
             return from item in dal.GetAllLineStationsBy(s => s.Code == station)
-                   select Schedules.GetLineScadual(now, item.LineId, station);
-            
+                   select (LineSchedule) Schedules.GetLineScadual(now, item.LineId, station);
+
         }
 
 
         public void UpdateAdjStations(List<AdjacentStation> adjacentStations)
         {
-          
+
 
             List<DO.AdjacentStation> DoAdjStations = (from item in adjacentStations
                                                       where (DataCheck.isExeist<DO.Station>(s => s.Code == item.Statoin1) && DataCheck.isExeist<DO.Station>(s => s.Code == item.Station2))
@@ -369,7 +370,7 @@ namespace BL
 
         private void updateAdjStations(List<DO.AdjacentStation> adjacentStations)
         {
-            
+
 
             foreach (DO.AdjacentStation aS in adjacentStations)
             {
@@ -400,6 +401,22 @@ namespace BL
             Schedules schedules = new Schedules(line);
             return schedules.StatinsTimes;
         }
+
+        public void RunSimulator(TimeSpan startTime, int rate, Func<TimeSpan> progressChanged)
+        {
+            if (simulator != null)
+                simulator.stop();
+            simulator = new ClockSimulator(rate, startTime);
+            //simulator.TimeChanged += 
+        }
+
+
+        //public void StopSimulator()
+        //{
+        //    if (simulator != null)
+        //        simulator.stop();
+        //}
+
 
     }
 }

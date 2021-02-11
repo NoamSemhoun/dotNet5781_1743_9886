@@ -47,6 +47,7 @@
     <Compile Include="BLFactory.cs" />
     <Compile Include="BO\AdjacentStation.cs" />
     <Compile Include="BO\Bus.cs" />
+    <Compile Include="BO\ClockProgressChangedEventArgs.cs" />
     <Compile Include="BO\Exeptions.cs" />
     <Compile Include="BO\Enumes.cs" />
     <Compile Include="BO\Ferquency.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="BO\Station.cs" />
     <Compile Include="BO\LineStation.cs" />
     <Compile Include="BO\User.cs" />
+    <Compile Include="ClockSimulator.cs" />
     <Compile Include="Cloning.cs" />
     <Compile Include="ConvertItems.cs" />
     <Compile Include="ManageBoItems.cs" />
