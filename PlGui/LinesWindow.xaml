@@ -7,7 +7,7 @@
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.LinesWindow"
         xmlns:convertrs ="clr-namespace:PlGui.coverors"
         mc:Ignorable="d"
-        Title="Lines Window" WindowState="Maximized"  Icon="Images\TRAJET.png" HorizontalAlignment="Center" Loaded="Window_Loaded" Height="741" Width="1375">
+        Title="Lines Window"  Icon="Images\TRAJET.png" HorizontalAlignment="Center" Loaded="Window_Loaded" Height="741" Width="1375">
     <Window.Resources>
         <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
         <local:IsSelectedItemConvertor
