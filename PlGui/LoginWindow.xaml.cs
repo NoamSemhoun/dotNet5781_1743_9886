@@ -34,6 +34,7 @@ namespace PlGui
             ////LinesWindow win = new LinesWindow();  
             //AddLine_window win = new AddLine_window();
             ////AddAdjacentStation win = new AddAdjacentStation();
+            UsernameEntrance.Text = "Noam";
 
 
             //win.Show();
