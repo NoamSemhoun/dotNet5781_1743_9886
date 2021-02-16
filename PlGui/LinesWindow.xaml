@@ -11,6 +11,8 @@
     WindowStartupLocation="CenterScreen" Height="700" Width="1300"
     Icon="Images\TRAJET.png"  Loaded="Window_Loaded">
     <Window.Resources>
+        
+
         <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
         <local:IsSelectedItemConvertor
             x:Key="convert"/>
@@ -35,31 +37,40 @@
 
 
 
-        <ListView x:Name="ListView_Lines" Grid.Column="0" Grid.Row="1"
+        <ListView x:Name="ListView_Lines" Grid.Column="0" Grid.Row="1"   
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                   MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FF496F90" SelectionChanged="ListView_Lines_SelectionChanged"   Foreground="White" FontWeight="Bold" Margin="0,0,10,0">
-
+            ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontSize="14" Background="#FF496F90" SelectionChanged="ListView_Lines_SelectionChanged"   Foreground="White" FontWeight="Bold" Margin="0,0,10,0">
+               
             <ListView.ItemTemplate>
                 <DataTemplate>
 
                 </DataTemplate>
             </ListView.ItemTemplate>
 
+            
             <ListView.ItemContainerStyle>
+                
                 <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Resources>
+                        <!-- Background of selected item when focussed -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
+                        <!-- Background of selected item when not focussed -->
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Green" />
+                    </Style.Resources>
+
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                 </Style>
             </ListView.ItemContainerStyle>
 
             <ListView.View>
 
+            
+            <GridView >
 
-                <GridView >
+                    <GridViewColumn  Header="ID" Width="40" DisplayMemberBinding="{Binding LineID}" />
 
-                    <GridViewColumn  Header="ID" Width="50" DisplayMemberBinding="{Binding LineID}" />
-
-                    <GridViewColumn  Header="Line" Width="95">
+                    <GridViewColumn  Header="Line" Width="93">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate >
                                 <StackPanel Margin="3">
