@@ -89,7 +89,7 @@ namespace PlGui.My_Controlles
 
         private void runSimulation(object sender, DoWorkEventArgs e)
         {
-            bl.RunSimulator(Time, Rate, getProgress );
+            bl.RunSimulator(Time, Rate, getProgress);
         }
 
         private void getProgress(TimeSpan simTime)

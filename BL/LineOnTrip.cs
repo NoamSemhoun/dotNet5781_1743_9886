@@ -56,16 +56,11 @@ namespace BL
             TimeSpan sleepTime;
             //Action<TimeSpan> lineInStation;
 
-            Console.WriteLine("run line" + line.LineID + " " + clock.Time);
+           
             foreach(LineStation station in line.List_LineStations)
             {
-                Console.WriteLine("line" + line.LineID + " station "+ station.LineStationIndex + " " + clock.Time);
+              
                 CurrentStation = station;
-                //if (stationInTracking.ContainsKey(station.Code))
-                //{
-                //    stationInTracking.TryGetValue(station.Code, out Action<TimeSpan> lineInStation);
-                //    lineInStation(TimeSpan.Zero);
-                //}
                 if (LineOnStation != null)
                     LineOnStation(this, new EventArgs());
                 sleepTime = clock.GetSimTimeSpan(new TimeSpan((long)(station.Time_ToNext.Ticks * ((random.NextDouble() * 0.35) + 0.9))));
@@ -73,7 +68,7 @@ namespace BL
                 if (stopFlag)
                     break;
             }
-            Console.WriteLine("stop line" + line.LineID + " " + clock.Time);
+            
         }
 
         internal TimeSpan GetExpectedTime(int stationId)

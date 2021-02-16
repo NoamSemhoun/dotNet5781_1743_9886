@@ -29,15 +29,12 @@ namespace PlGui
             InitializeComponent();
 
             // TO TEST  WINDOW :
-            StationsWindow win = new StationsWindow();
+            //StationsWindow win = new StationsWindow();
             //MenuWindow win = new MenuWindow();
             ////LinesWindow win = new LinesWindow();  
             //AddLine_window win = new AddLine_window();
             ////AddAdjacentStation win = new AddAdjacentStation();
             UsernameEntrance.Text = "Noam";
-            PassewordEntrance.Password = "1234";
-
-            UsernameEntrance.Text = "Noam";  // For all test
             PassewordEntrance.Password = "1234";
 
         }

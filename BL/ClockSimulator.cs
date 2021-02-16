@@ -19,13 +19,20 @@ namespace BL
 
         private bool isRun = false;
         public bool IsRun { get => isRun; }
-        
+
+        #region singlton
+
         private static ClockSimulator instance;
 
-       /* internal*/ public static ClockSimulator Instance { get => instance; }
+        internal static ClockSimulator Instance { get => instance; }
 
+        static ClockSimulator()
+        {
+            instance = new ClockSimulator();
+        }
+        private ClockSimulator() { stopFlag = false; }
 
-        
+        #endregion
 
         internal TimeSpan Time
         {
@@ -44,20 +51,17 @@ namespace BL
         
         internal event  Action<TimeSpan> TimeChanged;
         
-        static ClockSimulator()
-        {
-            instance = new ClockSimulator();            
-        }
-        private ClockSimulator() { stopFlag = false; }
+       
 
 
         internal void Run(int rate, TimeSpan startTime)
         {
-            stopFlag = false;
-            simulationRate = rate;
-            time = startTime;
             if (!isRun)
             {
+                stopFlag = false;
+                simulationRate = rate;
+                time = startTime;
+            
                 isRun = true;
                 while (!stopFlag)
                 {
