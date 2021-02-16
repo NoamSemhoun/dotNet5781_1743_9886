@@ -89,6 +89,9 @@
       <DependentUpon>StationDétails_Window.xaml</DependentUpon>
     </Compile>
     <Compile Include="stationListCon.cs" />
+    <Compile Include="StationPanelSimulatorWindow.xaml.cs">
+      <DependentUpon>StationPanelSimulatorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StationsWindow.xaml.cs">
       <DependentUpon>StationsWindow.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationDétails_Window.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationPanelSimulatorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

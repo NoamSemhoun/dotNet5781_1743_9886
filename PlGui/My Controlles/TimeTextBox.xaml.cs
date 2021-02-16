@@ -52,7 +52,16 @@ namespace PlGui
                     index++;
                 if (index == 8)
                     index = 0;
-                e.Handled = false;
+
+                if ((index == 1 && ((int)e.Key >= 74 && (int)e.Key <= 76 || (int)e.Key >= 34 && (int)e.Key <= 36)) ||
+                  (index == 3)||// && ((int)e.Key >= 74 && (int)e.Key <= 77 || (int)e.Key >= 34 && (int)e.Key <= 37)) ||
+                  (index == 4 && ((int)e.Key >= 74 && (int)e.Key <= 79 || (int)e.Key >= 34 && (int)e.Key <= 39)) ||
+                  (index == 6) ||
+                  (index == 7 && ((int)e.Key >= 74 && (int)e.Key <= 79 || (int)e.Key >= 34 && (int)e.Key <= 39)) ||
+                  (index == 0))
+                    e.Handled = false;
+                else
+                    e.Handled = true;
             }
        
             else

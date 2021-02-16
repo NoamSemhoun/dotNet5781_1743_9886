@@ -41,8 +41,8 @@ namespace PlGui
             Gridof_Lines.DataContext = (MyStation.List_Lines);
             nextesData = new ObservableCollection<BO.AdjacentStation>(bl.GetNextStations(MyStation.Code));
             nextStations_ListView.DataContext = nextesData;
-            clock.SimulationRate = simulationRate;
-            clock.Run();
+            //clock.SimulationRate = simulationRate;
+            //clock.Run();
 
             prevsData = new ObservableCollection<BO.AdjacentStation>(bl.GetprevStations(MyStation.Code));
             prevStations_ListView.DataContext = prevsData;

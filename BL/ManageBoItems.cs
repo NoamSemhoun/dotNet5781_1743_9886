@@ -120,10 +120,17 @@ namespace BL
             line.List_LineStations.Remove(lineStation);
 
             if (index == line.List_LineStations.Count() + 1)
-                line.GetLineStation(index - 1).setLast();
+            {
+                LineStation newLast = line.GetLineStation(index - 1);
+                newLast.setLast();
+                line.LastStation = newLast.Code;
+            }
             else if (index != 1)
+            {
                 line.GetLineStation(index - 1).setNextStation(line.GetLineStation(index + 1));
-
+            }
+            else
+                line.FirstStation = line.GetLineStation(1).Code;
             foreach (LineStation lS in line.List_LineStations)
                 if (lS.LineStationIndex > index)
                     lS.LineStationIndex--;
@@ -140,7 +147,7 @@ namespace BL
         }
         #endregion
 
-
+        #region LineStation
         internal static LineStation CreateLineStation(int lineId, int index, int code, int next, int prev)
         {   
             LineStation lineStation = new LineStation
@@ -207,5 +214,9 @@ namespace BL
             lineStation.Time_ToNext = new TimeSpan(0);
             lineStation.Distance_ToNext = 0;
         }
+        #endregion
+
+     
+
     }
 }

@@ -53,12 +53,15 @@
     <Compile Include="BO\Ferquency.cs" />
     <Compile Include="BO\Line.cs" />
     <Compile Include="BO\LineSchedule.cs" />
+    <Compile Include="BO\LineTiming.cs" />
     <Compile Include="BO\Station.cs" />
     <Compile Include="BO\LineStation.cs" />
     <Compile Include="BO\User.cs" />
     <Compile Include="ClockSimulator.cs" />
     <Compile Include="Cloning.cs" />
     <Compile Include="ConvertItems.cs" />
+    <Compile Include="LineOnTrip.cs" />
+    <Compile Include="LineTrips.cs" />
     <Compile Include="ManageBoItems.cs" />
     <Compile Include="GetBOItems.cs" />
     <Compile Include="IBL.cs" />
@@ -69,6 +72,7 @@
     <Compile Include="Schedules.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="tools\DataCheck.cs" />
+    <Compile Include="TravelOperator.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

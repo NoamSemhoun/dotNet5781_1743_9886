@@ -88,10 +88,12 @@ namespace BlAPI
 
         #region Simulator
 
-        void RunSimulator(TimeSpan startTime, int rate, Func<TimeSpan> simulatorProgerssChanged);
+        void RunSimulator(TimeSpan startTime, int rate, Action<TimeSpan> simulatorProgerssChanged);
 
-        //void StopSimulator();
-                
+        void StopSimulator();
+
+        void SetStationPanel(int station, Action<LineTiming> updateBus);
+
         #endregion
 
     }

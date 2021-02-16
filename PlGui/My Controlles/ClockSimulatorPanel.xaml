@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PlGui.My_Controlles"
              xmlns:main ="clr-namespace:PlGui"
+             xmlns:con ="clr-namespace:PlGui.coverors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid x:Name="mainGrid">
@@ -12,14 +13,14 @@
             <RowDefinition Height="66*"/>
             <RowDefinition Height="33*"/>
         </Grid.RowDefinitions>
-        <main:TimeTextBox Text="{Binding Path= time}"/>
+        <main:TimeTextBox x:Name="time_textbox" Text = "{Binding Path= Time, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="66*"/>
                 <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="run_Button" Content="run" Click="Button_Click" />
-            <TextBox Name="rate_TextBox" Text="{Binding Path=rate}" Grid.Column="1"/>
+            <Button Name="run_Button" Content="run" Click="Button_Click"  />
+            <TextBox Name="rate_TextBox" Text="{Binding Path=Rate}" Grid.Column="1" FontSize="30" PreviewKeyDown="rate_TextBox_PreviewKeyDown" />
         </Grid>
        
     </Grid>

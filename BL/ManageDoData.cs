@@ -127,5 +127,11 @@ namespace BL
             line.DeleteStation(lineStation);
             UpdateLine(line);
         }
+
+        internal static IEnumerable<int> GetLinesInStation(int stationId)
+        {
+            return from item in dal.GetAllLineStationsBy(s => s.Code == stationId)
+                   select item.LineId;
+        }
     }
 }

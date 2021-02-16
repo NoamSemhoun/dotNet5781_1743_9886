@@ -13,7 +13,9 @@ namespace BL
     {
         DalApi.IDAL dal = DalApi.DalFactory.GetDal();
 
-        ClockSimulator simulator;
+        ClockSimulator simulator = ClockSimulator.Instance;
+
+        TravelOperator travelOperator = TravelOperator.Instance;
 
 
         #region bus
@@ -402,21 +404,27 @@ namespace BL
             return schedules.StatinsTimes;
         }
 
-        public void RunSimulator(TimeSpan startTime, int rate, Func<TimeSpan> progressChanged)
+        public void RunSimulator(TimeSpan startTime, int rate, Action<TimeSpan> progressChanged)
         {
-            if (simulator != null)
+            if (simulator.IsRun)
                 simulator.stop();
-            simulator = new ClockSimulator(rate, startTime);
-            //simulator.TimeChanged += 
+            travelOperator.RunTravelOperator();
+
+            simulator.TimeChanged += progressChanged;
+            simulator.Run(rate, startTime);
         }
 
 
-        //public void StopSimulator()
-        //{
-        //    if (simulator != null)
-        //        simulator.stop();
-        //}
+        public void StopSimulator()
+        {
+            if (simulator != null)
+                simulator.stop();
+        }
 
+        public void SetStationPanel(int station, Action<LineTiming> updateBus)
+        {
+            travelOperator.AddStation(station, updateBus);
+        }
 
     }
 }

@@ -56,7 +56,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <myControll:Clock x:Name="clock" Margin="501,5,14,163" FontSize="20" />
+            <myControll:ClockSimulatorPanel x:Name="clock" Height="90" Margin="488,-17,0,0" VerticalAlignment="Top" Width="115" FontSize="20"/>
 
             <ListView   x:Name="ListView_Lines" Margin="10,35,0,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" SelectionChanged="ListView_Lines_SelectionChanged" >
@@ -91,6 +91,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+          
 
         </Grid>
         <Grid x:Name="Adjacent_Grid" HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="842" Margin="0,467,0,0">

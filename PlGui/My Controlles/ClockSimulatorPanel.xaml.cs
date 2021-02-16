@@ -22,49 +22,97 @@ namespace PlGui.My_Controlles
     /// <summary>
     /// Interaction logic for ClockSimulatorPanel.xaml
     /// </summary>
-    public partial class ClockSimulatorPanel : UserControl
+    public partial class ClockSimulatorPanel : UserControl, INotifyPropertyChanged
     {
         TimeSpan time;
-        int rate;
+        public int Rate { get; set; }
+
+        public TimeSpan Time
+        {
+            get => time;
+            set
+            {
+                time = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Time"));
+            }
+        }
+
+        public bool RunFlag { get => runFlag; set => runFlag = value; }
+
+        public event EventHandler ButtonClick;
+
+        //public static readonly DependencyProperty ClockSimulationTimeProperty = DependencyProperty.Register("Time", typeof(TimeSpan), typeof(ClockSimulatorPanel));
+
+
         bool runFlag = false;
         BackgroundWorker worker;
         IBL bl = BlAPI.BLFactory.GetBL();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ClockSimulatorPanel()
         {
             InitializeComponent();
             mainGrid.DataContext = this;
+            worker = new BackgroundWorker();
+            worker.DoWork += runSimulation;
+            worker.WorkerReportsProgress = true;
+            worker.ProgressChanged += clockProgressEvent;
+            Rate = 1;
+            time = new TimeSpan(0);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            if (!runFlag)
+            if (ButtonClick != null)
+                ButtonClick(this, new EventArgs());
+            if (!RunFlag)
             {
                 run_Button.Content = "stop";
-                worker = new BackgroundWorker();
-                worker.DoWork += runSimulation;
-                worker.RunWorkerAsync();
-                runFlag = true;
+                if(!worker.IsBusy)
+                {   
+                    worker.RunWorkerAsync();
+                    rate_TextBox.IsEnabled = false;
+                    time_textbox.IsEnabled = false;
+                }
+                    RunFlag = true;
             }
             else
             {
                 run_Button.Content = "run";
                 stopSimulator();
-                runFlag = false;
+                RunFlag = false;
+                rate_TextBox.IsEnabled = true;
+                time_textbox.IsEnabled = true;
             }
         }
 
         private void runSimulation(object sender, DoWorkEventArgs e)
         {
-            /*  bl.RunSimulator(time, rate)*/
-            ;
+            bl.RunSimulator(Time, Rate, getProgress );
+        }
+
+        private void getProgress(TimeSpan simTime)
+        {
+            worker.ReportProgress(0, simTime);
+        }
+
+        private void clockProgressEvent(object sender, ProgressChangedEventArgs e)
+        {
+            Time = (TimeSpan)e.UserState;
         }
 
         private void stopSimulator()
         {
-            //bl.stopSimulator();
+            bl.StopSimulator();
         }
 
+        private void rate_TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if ((int)e.Key < 74 || (int)e.Key > 83)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
