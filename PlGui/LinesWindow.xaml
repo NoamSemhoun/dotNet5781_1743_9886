@@ -7,9 +7,9 @@
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.LinesWindow"
         xmlns:convertrs ="clr-namespace:PlGui.coverors"
         mc:Ignorable="d"
-        Title="Lines Window" WindowState="Maximized" SizeToContent="WidthAndHeight"
-    WindowStartupLocation="CenterScreen"
-    Icon="Images\TRAJET.png" HorizontalAlignment="Center" Loaded="Window_Loaded">
+        Title="Lines Window"  
+    WindowStartupLocation="CenterScreen" Height="700" Width="1300"
+    Icon="Images\TRAJET.png"  Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
         <local:IsSelectedItemConvertor
@@ -29,17 +29,16 @@
 
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="864" />
-            <ColumnDefinition Width="525" />
+            <ColumnDefinition Width="784" />
+            <ColumnDefinition Width="605" />
         </Grid.ColumnDefinitions>
 
-        <DockPanel  Background="White" Margin="10,0,0,0" Grid.Column="1" />
 
 
         <ListView x:Name="ListView_Lines" Grid.Column="0" Grid.Row="1"
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                   MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-            ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FFDFEFFD" SelectionChanged="ListView_Lines_SelectionChanged"   Foreground="#FF001B97" FontWeight="Bold" Margin="0,0,10,0">
+            ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}" FontSize="14" Background="#FF496F90" SelectionChanged="ListView_Lines_SelectionChanged"   Foreground="White" FontWeight="Bold" Margin="0,0,10,0">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -65,10 +64,10 @@
                             <DataTemplate >
                                 <StackPanel Margin="3">
                                     <DockPanel>
-                                        <TextBlock Text="{Binding LineNumber}" FontSize="20" Foreground="#FF780202" FontWeight="Bold" Width="42" />
+                                        <TextBlock Text="{Binding LineNumber}" FontSize="22" Foreground="#FFA2A6DF" FontWeight="Bold" Width="42" />
                                     </DockPanel>
                                     <DockPanel>
-                                        <TextBlock Text="{Binding Area}" Foreground="#FF021ED1"/>
+                                        <TextBlock Text="{Binding Area}" Foreground="#FFF99888" FontWeight="Normal"/>
                                     </DockPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -83,6 +82,7 @@
                             <DataTemplate >
                                 <Button HorizontalAlignment="Stretch" x:Name="DeleteLine" ToolTip="   Delete this Line  "  ToolTipService.ShowDuration="50000" 
                                        Click="DeleteLine_Click" Height="42" Width="41" Background="{x:Null}" BorderBrush="{x:Null}"   >
+
                                     <Image Source="Images\delete-removebg-preview.png" Width="43" Height="37" VerticalAlignment="Top"/>
                                 </Button>
 
@@ -101,7 +101,7 @@
         </ListView>
 
 
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   RenderTransformOrigin="0.411,0.493" Grid.Column="1" Grid.Row="1">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   RenderTransformOrigin="0.411,0.493" Grid.Column="1" Grid.Row="1" Margin="0,0,97,0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="436"/>
@@ -111,7 +111,13 @@
             <!--<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="850,3,-361,0" Height="38" Width="42" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>-->
             <ListView x:Name="Station_ListView" ItemsSource="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource stationListCon}}" MouseDoubleClick="StationDeatails_DoubleClick"
                 VerticalAlignment="Stretch"
-                      ToolTip=" Double Click to view Details" ToolTipService.ShowDuration="50000" HorizontalAlignment="Stretch" Background="#FFDBF0DF" BorderBrush="#FFB1BDDF" BorderThickness="4" Foreground="#FF050C1F" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" >
+                      ToolTip=" Double Click to view Details" ToolTipService.ShowDuration="50000" HorizontalAlignment="Stretch" BorderBrush="#FFB1BDDF" BorderThickness="4" Foreground="White" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" >
+                <ListView.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF3A0000" Offset="0"/>
+                        <GradientStop Color="#FF2C1F1F" Offset="1"/>
+                    </RadialGradientBrush>
+                </ListView.Background>
                 <ListView.ItemTemplate>
                     <DataTemplate>
 
@@ -134,7 +140,7 @@
                                                 </TransformGroup>
                                             </Path.RenderTransform>
                                         </Path>
-                                        <TextBlock Text="{Binding LineStationIndex }"  Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" FontWeight="Bold">
+                                        <TextBlock Text="{Binding LineStationIndex }"  Panel.ZIndex="9"  TextAlignment="Center" FontSize="14" FontFamily="Century Gothic" Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" FontWeight="Bold">
 
 
                                         </TextBlock>
@@ -147,7 +153,7 @@
                         <GridViewColumn   Header="Code" Width="60" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock FontSize="15"  Text="{Binding Code}" TextAlignment="Center"  Width="41" RenderTransformOrigin="0.5,0.5"  Height="28">
+                                    <TextBlock FontSize="16"  Text="{Binding Code}" TextAlignment="Center"  Width="41" RenderTransformOrigin="0.5,0.5"  Height="28" FontWeight="Bold" TextDecorations="Underline">
 
 
                                     </TextBlock>
@@ -164,22 +170,22 @@
             </ListView>
 
 
-            <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Orientation="Horizontal" Background="White" Margin="100,-48,0,436">
+            <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Left" Orientation="Horizontal" Background="White" Margin="112,-48,0,436">
                 <Button x:Name="add_Station"  Click="add_Station_Click"  Height="48" 
                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=ListView_Lines}"             
-                        Width="155"  Background="#FF5F832B"  >
-                    <StackPanel Orientation="Horizontal" Height="45" Width="150" Background="#FFE4F7E0" >
-                        <Image Source="Images\icon AddStation Mps.jpg" Width="59" Height="72" VerticalAlignment="Top" Margin="0,0,0,-27" />
-                        <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Width="98"/>
+                        Width="156"  Background="#FF4F0C0C" BorderBrush="{x:Null}"  >
+                    <StackPanel Orientation="Horizontal" Height="45" Width="150" Background="#FF4F0C0C" >
+                        <Image Source="Images\icon AddStation Mps.jpg" Width="55" Height="45" VerticalAlignment="Top" />
+                        <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="White" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="#FF4F0C0C" Width="92" BorderBrush="#FFB92828" Margin="0,6,0,0"/>
                     </StackPanel>
                 </Button>
 
                 <Button x:Name="deleteStation_button" FontSize="15" Click="deleteStation_button_Click" Height="48" VerticalAlignment="Bottom"
-                    IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=Station_ListView}" Background="#FF5F832B" Width="154">
-                    <StackPanel Orientation="Horizontal" Height="45" Width="159" Background="#FFE4F7E0">
-                        <Image Source="Images\delete.png" Width="46" Height="45" VerticalAlignment="Top"/>
-                        <Label Content="Delete Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Width="120"/>
+                    IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=Station_ListView}" Background="#FF4F0C0C" Width="154" BorderBrush="{x:Null}" Foreground="Red">
+                    <StackPanel Orientation="Horizontal" Height="45" Width="153" Background="#FF4F0C0C">
+                        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="Images\delete.png" Width="44" Height="42" Margin="0,2,0,1" />
+                        <Label Content="Delete Station" HorizontalAlignment="Center"  Foreground="White" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="#FF4F0C0C" Width="120" BorderBrush="#FFB92828" Height="39" VerticalAlignment="Bottom"/>
                     </StackPanel>
                 </Button>
 
@@ -218,7 +224,7 @@
 
 
             <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Row="1" Visibility="Visible"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FFF5EDD0" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" >
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF383A4D" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" Foreground="#FFEDF0C3" >
 
                 <ListView.View>
                     <GridView >
@@ -237,22 +243,21 @@
             <Grid x:Name="addStation_Grid" Grid.Row="1"  Background="White" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                   >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Path Stroke="Red"  StrokeThickness="4"  Data="M 10,50 L 200,70" Margin="272.668,62.249,181.332,20.584" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Fill="Red" Panel.ZIndex="8" >
+                <Path Stroke="Red"  StrokeThickness="5"  Data="M 10,50 L 200,70" Margin="264.925,58.448,191.249,65.375" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Fill="Red" Panel.ZIndex="8" >
                     <Path.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="-1" ScaleX="-1"/>
                             <SkewTransform/>
-                            <RotateTransform/>
+                            <RotateTransform Angle="39.226"/>
                             <TranslateTransform/>
                         </TransformGroup>
                     </Path.RenderTransform>
                 </Path>
 
-                <ComboBox Panel.ZIndex="4" x:Name="Stations_CB" VerticalAlignment="Center"  ItemsSource="{Binding}" Height="40" FontSize="20" SelectionChanged="Stations_CB_SelectionChanged" Margin="26,91,232,37" >
+                <ComboBox Panel.ZIndex="4" x:Name="Stations_CB" VerticalAlignment="Center"  ItemsSource="{Binding}" Height="32" FontSize="20" SelectionChanged="Stations_CB_SelectionChanged" Margin="26,91,232,63" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -264,20 +269,20 @@
 
                 </ComboBox>
 
-                <Label Panel.ZIndex="4" Content="Choose an Existing Station:" HorizontalAlignment="Left"  VerticalAlignment="Stretch" FontSize="20" Margin="10,52,0,77" Width="256"/>
+                <Label Panel.ZIndex="4" Content="Choose an Existing Station:" HorizontalAlignment="Left"  VerticalAlignment="Stretch" FontSize="20" Margin="26,48,0,95" Width="256"/>
 
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="271,47,6,0" Width="181">
-                    <Label Content="Or Create a :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"  Panel.ZIndex="4" Height="43" Margin="30,0,31,0"/>
-                    <Button Panel.ZIndex="4" x:Name="X" Content="New Station" Click="X_Click"  FontSize="20" Margin="35,0" Height="38"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="299,39,27,63" Width="182">
+                    <Label Content="Or Create a :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"  Panel.ZIndex="4" Height="34" Margin="30,0,32,0"/>
+                    <Button Panel.ZIndex="4" x:Name="X" Content="New Station" Click="X_Click"  FontSize="20" Margin="35,0" Height="35"/>
                 </StackPanel>
 
-                <Label Panel.ZIndex="4" Content="Index : " FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="1,0.19" Margin="79,167,279,19" Grid.RowSpan="2"/>
+                <Label Panel.ZIndex="4" Content="Index : " FontSize="25" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RenderTransformOrigin="1,0.19" Margin="26,130,332,17"/>
                 <TextBox Panel.ZIndex="4" x:Name="index_TB" Text="index" Foreground="#FFC8BDBD" FontSize="25" Background="White"
                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                            TextChanged="index_TB_TextChanged"  RenderTransformOrigin="1.244,-0.436" Margin="184,1,192,14" Grid.Row="1"/>
+                            TextChanged="index_TB_TextChanged"  RenderTransformOrigin="1.244,-0.436" Margin="144,134,232,14"/>
                 <Button x:Name="addStation_button" Content="Add" FontSize="35" 
-                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="addStation_button_Click"  Panel.ZIndex="4" Margin="322,1,10,14" Grid.Row="1" Foreground="Red" FontWeight="Bold">
+                         VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="addStation_button_Click"  Panel.ZIndex="4" Margin="322,124,10,14" Foreground="Red" FontWeight="Bold">
                     <Button.IsEnabled>
                         <MultiBinding Converter="{StaticResource multiBollCon}">
                             <Binding ElementName="Stations_CB" Path="SelectedItem" />
@@ -290,13 +295,13 @@
 
 
 
-                <Rectangle   Stroke="Red"   StrokeThickness="10" Grid.RowSpan="2" Margin="0,-10,-6,0" Panel.ZIndex="-1"/>
+                <Rectangle   Stroke="Red"   StrokeThickness="10" Margin="0,-10,0,0" Panel.ZIndex="-1"/>
 
-                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="79,12,79,132" Height="24">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="148,-7,80,145" Height="48">
                     <Label Content="Add Station to Line n° " HorizontalAlignment="Left" VerticalAlignment="Center" Width="204" Background="{x:Null}" Panel.ZIndex="1" HorizontalContentAlignment="Center" FontSize="20" Height="40"/>
                     <TextBox  Panel.ZIndex="4" x:Name="Line_TB" Text="{Binding LineID}" Foreground="Red" FontSize="25" Background="White"
                              VerticalAlignment="Top"   HorizontalContentAlignment="Left" VerticalContentAlignment="Top" 
-                                RenderTransformOrigin="1.244,-0.436" BorderBrush="{x:Null}" FontStyle="Italic" FontWeight="Bold" Height="40" Width="50" Margin="0,-8"/>
+                                RenderTransformOrigin="1.244,-0.436" BorderBrush="{x:Null}" FontStyle="Italic" FontWeight="Bold" Height="37" Width="50" Margin="0,7,0,0"/>
 
                 </StackPanel>
 
@@ -306,25 +311,28 @@
 
             <!--#endregion-->
         </Grid>
+
+
+
         <Image Source="Images\DRAPEAU-removebg-preview.png" HorizontalAlignment="Left" Height="54" VerticalAlignment="Top" Width="55" Margin="10,27,0,0" Grid.Row="1" Grid.Column="1"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="484,0,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652" FontSize="10" Grid.Column="1"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
         <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
                         Click="Menu_Click" Height="44"
                         HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                                                             Width="128" Margin="6,0,730,4"  >
-            <StackPanel Orientation="Horizontal" Height="39" Width="118">
+                                                             Width="106" Margin="-3,0,681,3"  >
+            <StackPanel Orientation="Horizontal" Height="39" Width="106">
                 <Image Source="Images/SignOut.jpg" Width="41"/>
-                <Label Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Height="34" Width="81" Margin="0,0,0,5"/>
+                <Label Content="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Height="34" Width="56" Margin="0,0,0,5"/>
             </StackPanel>
         </Button>
         <Button x:Name="addLine" ToolTip="   Add a NEW Line  " ToolTipService.ShowDuration="50000"
-                        Click="addLine_Click"  Margin="719,2,10,0" Background="#FFDFEFFD"  >
-            <StackPanel Orientation="Horizontal" Height="44" Width="128" HorizontalAlignment="Right" Background="#FFC4E4FF">
+                        Click="addLine_Click"  Margin="637,0,15,0" Background="#FFDFEFFD"  >
+            <StackPanel Orientation="Horizontal" Height="44" Width="128" HorizontalAlignment="Right" Background="#FF496F90">
                 <Image Source="Images/TRAJET.png" Width="51" RenderTransformOrigin="-0.02,0.477" />
-                <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Margin="0,10,0,0"/>
+                <Label Content="Add Line" HorizontalAlignment="Center"  Foreground="White" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Margin="0,6,0,0"/>
             </StackPanel>
         </Button>
-        <Label Content="All Lines" HorizontalAlignment="Left" Margin="162,0,0,0" Height="48" VerticalAlignment="Bottom" FontSize="30" Width="184" Foreground="#FF66ABE6" FontFamily="Lucida Handwriting"/>
+        <Label Content="All Lines" HorizontalAlignment="Left" Margin="162,-1,0,0" Height="48" VerticalAlignment="Bottom" FontSize="30" Width="184" Foreground="#FF5893C5" FontFamily="Lucida Handwriting"/>
 
 
 

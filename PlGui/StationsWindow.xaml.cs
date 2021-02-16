@@ -33,7 +33,7 @@ namespace PlGui
             ListViewStations.DataContext = Stations_list;
 
             //Gridof_Lines.DataContext = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
-
+            
         }
 
 
@@ -102,9 +102,11 @@ namespace PlGui
             myWin.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)  // Print the kavim
         {
-            Gridof_Lines.DataContext = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
+            //Gridof_Lines.DataContext = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
+
+            Kavim_list.ItemsSource = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
 
         }
 
