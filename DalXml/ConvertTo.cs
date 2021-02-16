@@ -29,8 +29,8 @@ namespace DL
                 }
                 else
                 {
-                    try { prop.SetValue(item, Convert.ChangeType(xElement.Element(prop.Name).Value, prop.PropertyType)); }
-                    catch { throw new Exception($"ERROR! could not convert the property type {prop.PropertyType.Name}"); }
+                    try { prop.SetValue(item, Convert.ChangeType(xElement.Element(prop.Name).Value, prop.PropertyType).ToString() ); }    //  CultureInfo.InvariantCulture ?
+                    catch (Exception e) { throw e ;} // { throw new Exception($"ERROR! could not convert the property type {prop.PropertyType.Name}"); }
                 }
             }
             return item;

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PlGui"
         xmlns:convs="clr-namespace:PlGui.coverors"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.StationDétails_Window"
-        mc:Ignorable="d"
+        mc:Ignorable="d"  WindowStartupLocation="CenterScreen"
         xmlns:myControll ="clr-namespace:PlGui.My_Controlles"
         Title="StationDétails_Window" Height="741" Width="850">
     <Window.Resources>

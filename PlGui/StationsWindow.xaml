@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.StationsWindow"
-        mc:Ignorable="d"
-        Title="StationsWindow" Height="550" Width="950" Loaded="Window_Loaded_1">
+        mc:Ignorable="d"  WindowStartupLocation="CenterScreen"
+        Title="StationsWindow" Height="700" Width="1300" Loaded="Window_Loaded_1">
     <Window.Resources>
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
     </Window.Resources>
     <Grid Background="#FF5D1B1B">
         <ListView x:Name="ListViewStations"  ItemsSource="{Binding}" HorizontalContentAlignment="Center"
-                 MouseDoubleClick="Station_DoubleClick" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="519"  Width="504" SelectionChanged="ListViewStations_SelectionChanged" FontSize="16" Background="#FFE4E4E4" >
+                 MouseDoubleClick="Station_DoubleClick" VerticalContentAlignment="Center" HorizontalAlignment="Left"  Width="510" SelectionChanged="ListViewStations_SelectionChanged" FontSize="16" Background="#FFE4E4E4" Margin="314,50,0,10" >
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -23,8 +23,8 @@
                 <GridView>
 
                     <GridViewColumn  Header="Code" Width="50" DisplayMemberBinding="{Binding Code}" />
-                    <GridViewColumn  Header="Name" Width="300" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Width="30" >
+                    <GridViewColumn  Header="Name" Width="320" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="disabled" Width="65" >
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Image ToolTip="Disabled Access" Source="C:\Users\33768\source\repos\dotNet5781_1743_9886\PlGui\Images\disabledAccess.jpg" Width="20"/>
@@ -45,8 +45,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="901,0,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
-        <DockPanel HorizontalAlignment="Left" Height="306" LastChildFill="False" VerticalAlignment="Top" Width="410" Margin="522,28,0,0" DataContext="{StaticResource stationViewSource}" Background="#FFCDC8C8">
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="1251,5,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
+        <DockPanel HorizontalAlignment="Left" Height="266" LastChildFill="False" VerticalAlignment="Top" Width="430" Margin="838,50,0,0" DataContext="{StaticResource stationViewSource}" Background="#FFCDC8C8">
             <Grid x:Name="gridStations"   HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top" Width="348" Height="227">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="103"/>
@@ -63,31 +63,72 @@
                     <RowDefinition Height="Auto" MinHeight="45"/>
                 </Grid.RowDefinitions>
                 <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,7,0,1" Grid.Row="2" VerticalAlignment="Center" Height="38" Width="76" FontSize="16"/>
-                <TextBox x:Name="addressTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="0,11,-54,12" Grid.Row="2"  Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="299" Grid.ColumnSpan="4" FontSize="16"/>
+                <TextBox x:Name="addressTextBox" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Height="24" Margin="0,14,-74,9" Grid.Row="2"  Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="319" Grid.ColumnSpan="4" FontSize="18"/>
                 <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,5,0,5" Grid.Row="1" VerticalAlignment="Center" Height="34" Width="56" FontSize="16"/>
-                <TextBox x:Name="codeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,9,0,11" Grid.Row="1" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+                <TextBox x:Name="codeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="25" Margin="0,10,0,9" Grid.Row="1" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="103" Grid.ColumnSpan="2" FontSize="18"/>
                 <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,5,0,6" Grid.Row="3" VerticalAlignment="Center" Height="32" Width="77" FontSize="16"/>
-                <TextBox x:Name="latitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,9,0,10" Grid.Row="3" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Latitude,  Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+                <TextBox x:Name="latitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="25" Margin="0,13,0,5" Grid.Row="3" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Latitude,  Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="103" Grid.ColumnSpan="2" FontSize="18"/>
 
 
                 <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,6,0,6" Grid.Row="4" VerticalAlignment="Center" Height="38" Width="91" FontSize="16"/>
-                <TextBox x:Name="longitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,10,0,16" Grid.Row="4" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="97" Grid.ColumnSpan="2" FontSize="16"/>
+                <TextBox x:Name="longitudeTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="25" Margin="0,15,0,10" Grid.Row="4" Text="{Binding ElementName=ListViewStations, Path=SelectedItem.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="103" Grid.ColumnSpan="2" FontSize="18"/>
                 <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3,4,0,0" VerticalAlignment="Center" Height="38" Width="66" FontSize="16"/>
-                <TextBox x:Name="nameTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="24" Margin="0,8,-54,11" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="299" Grid.ColumnSpan="4" FontSize="16"/>
+                <TextBox x:Name="nameTextBox" Grid.Column="1" IsReadOnly="True" HorizontalAlignment="Left" Height="25" Margin="0,8,-74,10" Text="{Binding  ElementName=ListViewStations, Path=SelectedItem.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="319" Grid.ColumnSpan="4" FontSize="18"/>
 
 
 
             </Grid>
 
         </DockPanel>
-        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="69" VerticalAlignment="Center" Width="410" Margin="522,265,0,185" Background="White">
+        <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="94" VerticalAlignment="Center" Width="430" Margin="838,316,0,259" Background="#FFD4D4D4">
             <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="193*"/>
                 <ColumnDefinition Width="237*"/>
             </Grid.ColumnDefinitions>-->
+            <ListBox Name="Kavim_list" Margin="5,0,10,0" HorizontalContentAlignment="Stretch"  ItemsSource="{Binding}">
 
 
-            <ItemsControl Background="Beige" >
+                <ListBox.ItemsPanel>
+
+
+                    <ItemsPanelTemplate>
+
+
+                        <StackPanel Margin="5" Orientation="Horizontal">
+
+                        </StackPanel>
+
+
+                    </ItemsPanelTemplate>
+
+
+                </ListBox.ItemsPanel>
+
+
+                <ListBox.ItemTemplate>
+
+
+                    <DataTemplate>
+
+
+                        <Border Margin="6" BorderBrush="#FFA81A1A" CornerRadius="9"  BorderThickness="2">
+
+
+                            <TextBlock Margin="5" FontSize="14" Text="{Binding ElementName=ListViewStations.List_Lines ,Path=SelectedItem.List_Lines.LineNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true }"/>
+
+
+                        </Border>
+
+
+                    </DataTemplate>
+
+
+                </ListBox.ItemTemplate>
+
+
+            </ListBox>
+
+            <!--<ItemsControl Background="Beige" Margin="0,0,-20,0" >
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -99,14 +140,16 @@
                 <ItemsControl Background="Black"/>
                 <ItemsControl Background="Black"/>
                 <ItemsControl Background="Black"/>
-            
-                
 
-            </ItemsControl>
+
+
+            </ItemsControl>-->
 
             <!--<ListView   x:Name="ListView_Lines" Margin="10,0" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto"  Grid.ColumnSpan="2" ItemsSource="{Binding}" >
-                --><!--ItemsSource="{Binding  ElementName=ListViewStations, Path=SelectedItem.List_Lines, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >--><!--
+                -->
+            <!--ItemsSource="{Binding  ElementName=ListViewStations, Path=SelectedItem.List_Lines, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" >-->
+            <!--
 
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -140,7 +183,7 @@
                 Click="addStation_Click" Height="48"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                      
-                Margin="636,339,72,132" Width="234"  >
+                Margin="27,85,1031,536" Width="234"  >
             <StackPanel Orientation="Horizontal" Height="48" Width="216">
                 <Image Source="Images/STATION.jpg" Width="63"/>
                 <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Margin="0,4,0,6" Background="{x:Null}" Width="102"/>
@@ -149,10 +192,10 @@
 
 
         <Button x:Name="DeleteStation" ToolTip="   Delete a Station  "  ToolTipService.ShowDuration="50000" 
-                Click="DeleteStation_Click" Height="48"
+                Click="DeleteStation_Click" Height="45"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                      
-                Margin="636,404,72,67" Width="234"  >
+                Margin="27,152,1031,472" Width="234"  >
             <StackPanel Orientation="Horizontal" Height="42" Width="231">
                 <Image Source="Images/delete.png" Width="50" Height="42" VerticalAlignment="Top"/>
                 <Label Content="Delete the Selection" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Background="{x:Null}" Width="170" BorderThickness="0,4,0,0" Margin="0,0,0,10"/>
@@ -160,16 +203,18 @@
         </Button>
 
         <Button x:Name="MENU" ToolTip="   Back to menu  "  ToolTipService.ShowDuration="50000" 
-                Click="Menu_Click" Height="42"
+                Click="Menu_Click" Height="46"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                                      
-                Margin="636,467,72,10" Width="234"  >
+                Margin="27,22,1031,601" Width="234"  >
             <StackPanel Orientation="Horizontal" Height="37" Width="229">
                 <Image Source="Images/SignOut.jpg" Width="61"/>
                 <Label Content="Back to Menu" HorizontalAlignment="Center"  Foreground="#FF0F0F0F" FontSize="16" RenderTransformOrigin="0.444,0.659" Background="{x:Null}" Width="140"/>
             </StackPanel>
         </Button>
-        <Button Content="Lines  I  v" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="834,250,0,0" Click="Button_Click"/>
+        <Button Content="Lines  I  v" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="1173,294,0,0" Click="Button_Click"/>
+        <Label Content="All Stations" HorizontalAlignment="Left" Margin="382,0,0,621" Height="48" VerticalAlignment="Bottom" FontSize="30" Width="214" Foreground="#FFC6D9EA" FontFamily="Lucida Handwriting"/>
+        <Image Source="Images\Station2.jpg" Margin="838,440,44,16"/>
 
     </Grid>
 </Window>
