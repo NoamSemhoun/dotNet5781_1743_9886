@@ -268,5 +268,10 @@
     <Resource Include="Images\NY.png" />
     <Resource Include="Images\N&amp;Y logo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\playpause.png" />
+    <Resource Include="Images\sppeed.png" />
+    <Resource Include="Images\Time.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

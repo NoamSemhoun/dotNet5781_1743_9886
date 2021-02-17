@@ -27,7 +27,7 @@ namespace PlGui
         ObservableCollection<BO.AdjacentStation> nextesData;
         ObservableCollection<BO.AdjacentStation> prevsData;
         ObservableCollection<BO.LineSchedule> schedules;
-
+        public BO.Station station;
         BackgroundWorker worker;
         int simulationRate = 10;
         
@@ -37,6 +37,7 @@ namespace PlGui
         public StationDétails_Window(BO.Station MyStation)
         {
             InitializeComponent();
+            station = MyStation;
             MyGrid.DataContext = MyStation;
             Gridof_Lines.DataContext = (MyStation.List_Lines);
             nextesData = new ObservableCollection<BO.AdjacentStation>(bl.GetNextStations(MyStation.Code));
@@ -136,7 +137,7 @@ namespace PlGui
 
         private void SimulatorClick(object sender, RoutedEventArgs e)   
         {
-            StationPanelSimulatorWindow win = new StationPanelSimulatorWindow(sender as BO.Station);
+            StationPanelSimulatorWindow win = new StationPanelSimulatorWindow(station);
             win.ShowDialog();
         }
     }

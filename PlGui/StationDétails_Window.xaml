@@ -48,18 +48,18 @@
             </Rectangle.Effect>
         </Rectangle>
         <Label VerticalAlignment="Center" Margin="359,19,0,620" HorizontalAlignment="Left" Content="Station Code :" FontSize="14" Height="30"/>
-        <TextBox x:Name="codeTextBox" Width="89"  IsReadOnly="True" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="460,19,0,621" Height="29" HorizontalAlignment="Left" BorderBrush="Red" Foreground="Red" FontWeight="Bold" FontSize="14"/>
+        <TextBox x:Name="codeTextBox" Width="89"  IsReadOnly="True" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="460,19,0,621" Height="29" HorizontalAlignment="Left" BorderBrush="Red" Foreground="Red" FontWeight="Bold" FontSize="20"/>
         <Label VerticalAlignment="Center" Margin="229,82,0,594" HorizontalAlignment="Left" Content="Name:" FontSize="14" Height="34" Width="53"/>
-        <TextBox x:Name="nameTextBox" Width="194" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="285,82,0,602" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <TextBox x:Name="nameTextBox" Width="194" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="283,86,0,598" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
         <Label VerticalAlignment="Center" Margin="229,120,0,556" HorizontalAlignment="Left" Content="Address:" FontSize="14" Height="34" Width="67"/>
-        <TextBox x:Name="addressTextBox" Width="187" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="292,120,0,564" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
-        <Label VerticalAlignment="Center" Margin="484,82,0,594" HorizontalAlignment="Left" Content="Latitude:" FontSize="14" Height="34"/>
+        <TextBox x:Name="addressTextBox" Width="187" VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="292,122,0,562" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <Label VerticalAlignment="Center" Margin="484,80,0,596" HorizontalAlignment="Left" Content="Latitude:" FontSize="14" Height="34"/>
         <Label VerticalAlignment="Center" Margin="484,120,0,556" HorizontalAlignment="Left" Content="Longitude:" FontSize="14" Height="34"/>
-        <TextBox x:Name="addressTextBox_Copy" Width="120"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="565,120,0,564" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
-        <TextBox x:Name="addressTextBox_Copy1" Width="133"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="552,82,0,602" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <TextBox x:Name="addressTextBox_Copy" Width="120"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="565,122,0,562" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+        <TextBox x:Name="addressTextBox_Copy1" Width="133"  IsReadOnly="True" VerticalAlignment="Center" Text="{Binding Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Margin="547,82,0,602" Height="26" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
 
         <Image Source="/Images/BUSstation .png" Margin="10,-16,647,453" />
-        <Rectangle HorizontalAlignment="Left" Height="217" Stroke="#FF728B89" VerticalAlignment="Top" Width="740" Margin="57,250,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
+        <Rectangle HorizontalAlignment="Left" Height="224" Stroke="#FF728B89" VerticalAlignment="Top" Width="740" Margin="57,243,0,0" RadiusX="25.833" RadiusY="25.833" StrokeThickness="4">
             <Rectangle.Effect>
                 <BlurEffect/>
             </Rectangle.Effect>
@@ -175,7 +175,7 @@
             <CheckBox Width="126" VerticalAlignment="Top" Margin="18,66,0,0" Height="23" HorizontalAlignment="Left" Content="Digital Pannel" />
             <Image Width="23" VerticalAlignment="Top" Source="Images/disabledAccess.jpg" Margin="123,8,-5,0" Height="28" HorizontalAlignment="Left"/>
         </Grid>
-        <Button Content="view the simulator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="137" Margin="387,250,0,0" Height="39" BorderBrush="Red" Background="#FFE86161" Click="SimulatorClick"/>
+        <Button Content="view the simulator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="146" Margin="366,250,0,0" Height="44" BorderBrush="Red" Background="#FFE86161" Click="SimulatorClick"/>
 
 
 
