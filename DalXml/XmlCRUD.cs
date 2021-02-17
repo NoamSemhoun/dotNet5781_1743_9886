@@ -31,7 +31,7 @@ namespace DL
             return false;
         }
 
-        public static T Get<T>(string path ,int[] ids, params string[] idsProps)
+        public static T Get<T>(string path ,int[] ids , params string[] idsProps)
         {
             XElement rootElement = XMLTools.LoadListFromXMLElement(path);
 

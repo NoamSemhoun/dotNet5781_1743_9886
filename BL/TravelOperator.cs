@@ -43,9 +43,17 @@ namespace BL
             updateLinePanel.Add(stationId, updateLines);
         }
 
+        internal void forceStoping()
+        {
+            if (travelOperatorThread.IsAlive)
+                travelOperatorThread.Interrupt();
+        }
+
 
         internal void RunTravelOperator()
         {
+            
+
             if (travelOperatorThread == null || !travelOperatorThread.IsAlive)
             {
                 travelOperatorThread = new Thread(runTravelOperator);
@@ -69,14 +77,21 @@ namespace BL
                 foreach (LineTrips lineTrip in lineTrips_List.Where(lT => lT.DepartureTime >= clock.Time).OrderBy(lT => lT.DepartureTime))
                 {
                     sleepTime = clock.GetSimTimeSpan(lineTrip.DepartureTime - clock.Time);
-                    if(sleepTime >= TimeSpan.Zero)
-                        Thread.Sleep(sleepTime);
+                    try
+                    {
+                        if (sleepTime >= TimeSpan.Zero)
+                            Thread.Sleep(sleepTime);
+                    }
+                    catch (ThreadInterruptedException)
+                    {; }
                     if (clock.StopFlag)
-                        break;
+                            break;
                     LineOnTrip lineOnTrip = new LineOnTrip(lineTrip);
                     lineOnTrip.LineOnStation += updateStationsPanel;
                     lineOnTrips_list.Add(lineOnTrip);
-                    lineOnTrip.RunTrip();                    
+                    lineOnTrip.RunTrip();
+                    
+                    
                 }
             }
             foreach (LineOnTrip lineOnTrip1 in lineOnTrips_list)

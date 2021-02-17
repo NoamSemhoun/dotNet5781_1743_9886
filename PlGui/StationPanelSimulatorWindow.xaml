@@ -6,47 +6,31 @@
         xmlns:local="clr-namespace:PlGui"
         xmlns:controlers ="clr-namespace:PlGui.My_Controlles"
         mc:Ignorable="d"
-        Title="StationPanelSimulatorWindow" Height="450" Width="800">
+        Title="StationPanelSimulatorWindow" Height="450" Width="800" Closing="closed_event">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="201*" />
-            <RowDefinition Height="218*" />
+            <RowDefinition Height="190*" />
+            <RowDefinition Height="43*" />
+            <RowDefinition Height="187*" />
         </Grid.RowDefinitions>
 
-        <controlers:ClockSimulatorPanel x:Name="cSP" Grid.RowSpan="2" Margin="0,-7,0,208" RenderTransformOrigin="0.505,0.466"/>
+        <controlers:ClockSimulatorPanel x:Name="cSP" Grid.RowSpan="1" Margin="0,0,-0.4,4.6"/>
         <Image Source="Images\Time.png" HorizontalAlignment="Left" Height="85" VerticalAlignment="Top" Width="82" Margin="62,10,0,0"/>
-        <Image Source="Images\sppeed.png" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="76" Margin="706,80,0,0" RenderTransformOrigin="0.625,0.442"/>
-        <Image Source="Images\playpause.png" HorizontalAlignment="Left" Height="72" VerticalAlignment="Top" Width="108" Margin="75,134,0,0" RenderTransformOrigin="0.625,0.442" Grid.RowSpan="2"/>
-        <Label Content="Speed : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="540,134,0,0" FontSize="30" Height="57" Width="147"/>
-        <ListView   x:Name="ListView_Lines" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                       ItemsSource="{Binding }" Margin="0,10,0,0" >
+        <Image Source="Images\sppeed.png" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="64" Margin="720,75,0,0" RenderTransformOrigin="0.625,0.442"/>
+        <Image Source="Images\playpause.png" HorizontalAlignment="Left" Height="39" VerticalAlignment="Top" Width="94" Margin="50,134,0,0" RenderTransformOrigin="0.625,0.442"/>
+        <Label Content="Speed : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="540,134,0,0" FontSize="30" Height="57" Width="147" Grid.RowSpan="2"/>
+        <ListView   x:Name="ListView_Lines" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                       ItemsSource="{Binding }" Margin="0,0.2,-0.4,0" >
             <ListView.View>
                 <GridView>
-                    <!--<GridViewColumn Header="Line number">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate >
-                                <StackPanel Margin="3">
-                                    <DockPanel>
-                                        <TextBlock Text="{Binding LineNumber}" FontSize="20" Foreground="#FF780202" FontWeight="Bold" Width="42" Panel.ZIndex="2" />
-                                    </DockPanel>
-                                    <DockPanel>
-                                        <Ellipse Fill="#FFE24213" />
-                                    </DockPanel>
-                                </StackPanel>
-                            </DataTemplate>
-
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
                     <GridViewColumn Header="Line Number" DisplayMemberBinding="{Binding LineNumber}"/>
                     <GridViewColumn Header="Destination" DisplayMemberBinding="{Binding LastStationName}"/>
                     <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding ExpectedTime}"/>
-                    <!--<GridViewColumn Header="Follow" DisplayMemberBinding="{Binding NextArrivals[1]}"/>-->
-
                 </GridView>
             </ListView.View>
         </ListView>
 
-        <TextBlock x:Name="LineOnStation_TextBox" HorizontalAlignment="Center" FontSize="40" Margin="521,61,16,61" Width="255" Grid.Row="1"/>
+        <TextBlock x:Name="LineOnStation_TextBox" HorizontalAlignment="Center" FontSize="40" Grid.Row="1"   />
 
     </Grid>
 </Window>

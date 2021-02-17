@@ -227,9 +227,10 @@ namespace BL
 
         public void DeleteStation(int code)
         {
-            foreach (LineStation lineStation in GetBOItems.GetLineStations(lS => lS.Code == code))
+            foreach (LineStation lineStation in GetBOItems.GetLineStations(lS => lS.Code == code).ToList())
                 ManageDoData.DeleteLineStation(lineStation);
             dal.DeleteStation(code);
+
         }
 
         public Station GetStation(int code)
@@ -419,6 +420,7 @@ namespace BL
         {
             if (simulator != null)
                 simulator.stop();
+            travelOperator.forceStoping();
         }
 
         public void SetStationPanel(int station, Action<LineTiming> updateBus)

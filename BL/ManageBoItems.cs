@@ -129,11 +129,14 @@ namespace BL
             {
                 line.GetLineStation(index - 1).setNextStation(line.GetLineStation(index + 1));
             }
-            else
-                line.FirstStation = line.GetLineStation(1).Code;
+            
             foreach (LineStation lS in line.List_LineStations)
                 if (lS.LineStationIndex > index)
                     lS.LineStationIndex--;
+            if (index == 1)
+            {
+                        line.FirstStation = line.GetLineStation(1).Code;
+            }
         }
         
         internal static void DeleteStation(this Line line, LineStation lineStation)

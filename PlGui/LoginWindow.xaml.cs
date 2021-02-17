@@ -34,6 +34,11 @@ namespace PlGui
             ////LinesWindow win = new LinesWindow();  
             //AddLine_window win = new AddLine_window();
             ////AddAdjacentStation win = new AddAdjacentStation();
+            ///
+            //StationPanelSimulatorWindow win = new StationPanelSimulatorWindow(bl.GetStation(113));
+            //win.Show();
+            //this.Close();
+
             UsernameEntrance.Text = "Noam";
             PassewordEntrance.Password = "1234";
 

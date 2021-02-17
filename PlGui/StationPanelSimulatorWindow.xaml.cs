@@ -62,7 +62,6 @@ namespace PlGui
                 linesTimes.Add(newLineTiming);
             }
             Dispatcher.Invoke(updatelineinvok);
-                        
         }
 
         private void lineOnStationinvoke(object xx)
@@ -82,10 +81,10 @@ namespace PlGui
 
         private void lineOnStation(object sender, DoWorkEventArgs e)
         {
-            for (int i = 1; i < 16; i++)
+            for (int i = 1; i < 12; i++)
             {
                 lineInstationWorker.ReportProgress(i, e.Argument);
-                Thread.Sleep(300);
+                Thread.Sleep(150);
             }
         }
 
@@ -103,6 +102,10 @@ namespace PlGui
         {
             LineOnStation_TextBox.Text = "";
         }
-        
+
+        private void closed_event(object sender, CancelEventArgs e)
+        {
+            bl.StopSimulator();
+        }
     }
 }

@@ -61,7 +61,7 @@ namespace BL
             {
               
                 CurrentStation = station;
-                if (LineOnStation != null)
+                if (LineOnStation != null )
                     LineOnStation(this, new EventArgs());
                 sleepTime = clock.GetSimTimeSpan(new TimeSpan((long)(station.Time_ToNext.Ticks * ((random.NextDouble() * 0.35) + 0.9))));
                 Thread.Sleep(sleepTime);
@@ -98,11 +98,11 @@ namespace BL
             return new LineTiming
             {
                 DepertureTime = startTime,
+                ExpectedTime = GetExpectedTime(stationId),
                 LineId = line.LineID,
                 LastStationName = line.LastStationName,
                 LineNumber = line.LineNumber,
                 StationId = stationId,
-                ExpectedTime = GetExpectedTime(stationId)
             };
         }
 

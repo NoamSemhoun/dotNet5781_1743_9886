@@ -50,7 +50,8 @@ namespace PlGui
 
             try 
             {
-                Kavim_list.ItemsSource = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
+                if(ListViewStations.SelectedItem != null)
+                    Kavim_list.ItemsSource = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
             }
             catch { }
 
@@ -83,18 +84,8 @@ namespace PlGui
             switch (result)
             {
                 case MessageBoxResult.OK:
-                   
-                    foreach ( BO.Station item in ListViewStations.SelectedItems)
-                    {
-                               bl.DeleteStation(item.Code);
-                    }
-                    //ListViewStations.Items.Refresh();
-                    // UPDATE LINE & ADJACENT STATION
 
-                    Stations_list = new ObservableCollection<BO.Station>(bl.GetAllStations());
-                    ListViewStations.DataContext = Stations_list;
-
-                    MessageBox.Show("These Stations have been deleted", "Deleted Stations");
+                    DeleteStation_func();
                     break;
                 
                 case MessageBoxResult.Cancel:
@@ -102,6 +93,42 @@ namespace PlGui
                     break;
             }
 
+        }
+
+        private void DeleteStation_func()
+        {
+            foreach (BO.Station item in ListViewStations.SelectedItems)
+            {
+                try
+                {
+                    bl.DeleteStation(item.Code);
+                    Stations_list = new ObservableCollection<BO.Station>(bl.GetAllStations());
+                    
+
+                    MessageBox.Show("These Stations have been deleted", "Deleted Stations");
+
+                }
+                catch (BO.LackOfDataExeption exp)
+                {
+                    if (exp.Data == BO.DataType.AdjacentStation)
+                    {
+                        MessageBox.Show("lack of Adjacent Station data:");
+                        AddAdjacentStation win = new AddAdjacentStation(exp.id[0], exp.id[1]);
+                        win.ASAE += AddAdjStation_event;
+                        win.Show();
+                    }
+                }
+
+            }
+            ListViewStations.DataContext = Stations_list;
+            //ListViewStations.Items.Refresh();
+            // UPDATE LINE & ADJACENT STATION
+
+        }
+
+        private void AddAdjStation_event(object sender, EventArgs e)
+        {
+            DeleteStation_func();
         }
 
         private void Station_DoubleClick(object sender, MouseButtonEventArgs e)

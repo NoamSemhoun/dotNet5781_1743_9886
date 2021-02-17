@@ -87,9 +87,9 @@ namespace BL
 
         private static void deleteUnnecessaryStations(Line line)
         {
-            var stationsForDelete = from item in dal.GetAllLineStations()
+            var stationsForDelete = (from item in dal.GetAllLineStations()
                                     where item.LineId == line.LineID && item.LineStationIndex > line.List_LineStations.Count
-                                    select new { lineID = item.LineId, index = item.LineStationIndex };
+                                    select new { lineID = item.LineId, index = item.LineStationIndex }).ToList();
 
             foreach (var v in stationsForDelete)
                 dal.DeleteLineStation(v.lineID, v.index);
@@ -132,6 +132,13 @@ namespace BL
         {
             return from item in dal.GetAllLineStationsBy(s => s.Code == stationId)
                    select item.LineId;
+        }
+
+        internal static void DeleteAdjStations(int stationId)
+        {
+            List<DO.AdjacentStation> dataToDelete = dal.GetAllAdjacentStationsBy(a => (a.Statoin1 == stationId || a.Station2 == stationId)).ToList();
+            foreach (var adj in dataToDelete)
+                dal.DeleteAdjacentStation(adj.Statoin1, adj.Station2);
         }
     }
 }
