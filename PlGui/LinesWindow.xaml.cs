@@ -239,6 +239,11 @@ namespace PlGui
         {
 
         }
+
+        private void freq_ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
     
 }

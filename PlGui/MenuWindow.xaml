@@ -20,19 +20,18 @@
         <Button Content="Lines" HorizontalAlignment="Left" VerticalAlignment="Top" Width="162" Margin="315,207,0,0" Height="96" FontSize="36" Click="Lines_ButtonClick"/>
         <Label Content="Choose your Display screen :" HorizontalAlignment="Left" Height="48" Margin="0,121,0,0"  VerticalAlignment="Top" Width="477" FontSize="30" Background="{x:Null}" FontFamily="Arial Nova Cond Light" BorderBrush="{x:Null}" Foreground="White"  />
 
-        <DockPanel Background="Wheat" Margin="628,18,10,360">
-            <Menu DockPanel.Dock="Top" HorizontalAlignment="Right" Background="#FFDEDEDE" Height="40" Width="154">
-                <MenuItem Header="  Admin" FontSize="26" FontWeight="Bold" Foreground="#FF25166A" Height="40" Width="154" >
+        <DockPanel Background="Wheat" Margin="624,24,10,352">
+            <Menu DockPanel.Dock="Top" HorizontalAlignment="Right" Background="#FFDEDEDE" Height="44" Width="154">
+                <MenuItem Header="  Admin" FontSize="26" FontWeight="Bold" Foreground="#FF25166A" Height="40" Width="163" >
                     <MenuItem.Icon>
-                        <Image Source="C:\Users\33768\source\repos\dotNet5781_1743_9886\PlGui\Images\Admin.jpg" Margin="-12,-12,-27,-10" />
+                        <Image Source="Images\AddAdmin.png" Margin="0,-9,-23,-14" />
                     </MenuItem.Icon>
-                    <MenuItem  Header="Help">
+                    <MenuItem  Header="Help" Click="Help_Click">
                         <MenuItem.Icon>
                             <Image Source="Images\Help.jpg" Margin="-3,-8,-8,-10"/>
                         </MenuItem.Icon>
                     </MenuItem>
 
-                    <MenuItem Header="Admin Access" Icon="Images\Admin.jpg" />
                     <MenuItem Header="Sign Out" Click="SignOut_Click">
                         <MenuItem.Icon>
                             <Image Source="Images\SignOut.jpg" Margin="-6,-6,-12,-6"/>
@@ -46,7 +45,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="751,-5,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="752,-3,0,0" Height="23" Width="31" Foreground="#FFB84343" RenderTransformOrigin="-0.29,0.652"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>
         <Image Source="Images\NY.png" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="351,319,0,0"/>
 
 

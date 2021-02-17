@@ -9,7 +9,7 @@ namespace BO
     public class LineTiming
     {
         public int LineId { get; set; }
-        public int LineNumber { get; set; }
+        public int LineNumber { get; set; } 
         public TimeSpan DepertureTime { get; set; }
         public TimeSpan ExpectedTime { get; set; }
         public string LastStationName { get; set; }

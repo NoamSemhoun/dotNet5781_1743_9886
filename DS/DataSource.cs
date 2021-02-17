@@ -518,15 +518,16 @@ namespace DS
 
                 List_Lines.Last().LastStation = List_LineStations.Last().Code;
 
-                for (int j = 1; j <= 3; j++)
+                int num = random.Next(3, 6);
+                for (int j = 2; j <=num ; j++)     
                 {
                     List_LineTrips.Add(new LineTrip
                     {
                         Id = DO.statics.LineTripId++,
                         LineID = i + 1,
-                        StartAt = new TimeSpan((j * 6) - 1,0,0),
-                        FinishAt = new TimeSpan((j+1) * 6 - 1, 0, 0),
-                        Frequency = new TimeSpan(0, j * 10, 0)
+                        StartAt = new TimeSpan( ((j * 4 )%25) - 1,0,0),
+                        FinishAt = new TimeSpan(  ( ((j+1) * 4) % 24) + 0, num, 0),
+                        Frequency = new TimeSpan(0, random.Next(6, 45), 0)
                     });
                 }
             }

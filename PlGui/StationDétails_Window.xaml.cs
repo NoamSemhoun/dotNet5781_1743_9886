@@ -47,7 +47,7 @@ namespace PlGui
             prevsData = new ObservableCollection<BO.AdjacentStation>(bl.GetprevStations(MyStation.Code));
             prevStations_ListView.DataContext = prevsData;
 
-            schedules = new ObservableCollection<BO.LineSchedule>(bl.GetLinesSchedule(clock.Time, MyStation.Code));
+            schedules = new ObservableCollection<BO.LineSchedule>(bl.GetLinesSchedule(TimeSpan.Zero, MyStation.Code));
             ListView_Lines.DataContext = schedules;
 
             stationCode = MyStation.Code;
@@ -111,7 +111,7 @@ namespace PlGui
         private void refreshSchedual(object sendr, ProgressChangedEventArgs e)
         {
 
-            List<BO.LineSchedule> list = bl.GetLinesSchedule(clock.Time, stationCode).ToList();
+            List<BO.LineSchedule> list = bl.GetLinesSchedule(TimeSpan.Zero, stationCode).ToList();
             list.Sort((l1, l2) =>
             {
                 if (l1.NextArrivals == null || !l1.NextArrivals.Any())
@@ -132,6 +132,12 @@ namespace PlGui
         private void ListView_Lines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void SimulatorClick(object sender, RoutedEventArgs e)   
+        {
+            StationPanelSimulatorWindow win = new StationPanelSimulatorWindow(sender as BO.Station);
+            win.ShowDialog();
         }
     }
 }

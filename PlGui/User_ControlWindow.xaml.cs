@@ -37,6 +37,8 @@ namespace PlGui
             newUser.Password = "ok";
             bl.AddUser(newUser);
 
+            MessageBox.Show("You have not authorised to add a New Admin", "Admin", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
     }
 }

@@ -13,6 +13,23 @@
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
     </Window.Resources>
     <Grid x:Name="MyGrid">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <Grid.Background>
             <RadialGradientBrush>
                 <GradientStop Color="#FFFDF8E3" Offset="0"/>
@@ -53,10 +70,10 @@
 
         <Grid x:Name="Gridof_Lines" HorizontalAlignment="Left" Height="198" VerticalAlignment="Center" Width="603" Margin="109,262,0,250">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="599*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
-            <myControll:ClockSimulatorPanel x:Name="clock" Height="90" Margin="488,-17,0,0" VerticalAlignment="Top" Width="115" FontSize="20"/>
 
             <ListView   x:Name="ListView_Lines" Margin="10,35,0,10" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding }" SelectionChanged="ListView_Lines_SelectionChanged" >
@@ -91,7 +108,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-          
+
 
         </Grid>
         <Grid x:Name="Adjacent_Grid" HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="842" Margin="0,467,0,0">
@@ -158,6 +175,7 @@
             <CheckBox Width="126" VerticalAlignment="Top" Margin="18,66,0,0" Height="23" HorizontalAlignment="Left" Content="Digital Pannel" />
             <Image Width="23" VerticalAlignment="Top" Source="Images/disabledAccess.jpg" Margin="123,8,-5,0" Height="28" HorizontalAlignment="Left"/>
         </Grid>
+        <Button Content="view the simulator" HorizontalAlignment="Left" VerticalAlignment="Top" Width="137" Margin="387,250,0,0" Height="39" BorderBrush="Red" Background="#FFE86161" Click="SimulatorClick"/>
 
 
 

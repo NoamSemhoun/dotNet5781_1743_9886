@@ -27,10 +27,14 @@ namespace DL
                 {
                     prop.SetValue(item, TimeSpan.Parse(xElement.Element(prop.Name).Value));
                 }
+                else if (prop.PropertyType.Name == typeof(double).Name) 
+                {
+                    prop.SetValue(item, double.Parse(xElement.Element(prop.Name).Value));
+                }
                 else
                 {
                     try { prop.SetValue(item, Convert.ChangeType(xElement.Element(prop.Name).Value, prop.PropertyType).ToString() ); }    //  CultureInfo.InvariantCulture ?
-                    catch (Exception e) { throw e ;} // { throw new Exception($"ERROR! could not convert the property type {prop.PropertyType.Name}"); }
+                    catch  { throw new Exception($"ERROR! could not convert the property type {prop.PropertyType.Name}"); }
                 }
             }
             return item;

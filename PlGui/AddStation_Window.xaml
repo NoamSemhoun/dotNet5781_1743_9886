@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PlGui"
         xmlns:BO="clr-namespace:BO;assembly=BL" x:Class="PlGui.AddStation_Window"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="AddStation_Window" Height="400" Width="500" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="stationViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Station}, CreateList=True}"/>
     </Window.Resources>
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\STATION.jpg" Opacity="0.3" Stretch="Uniform"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Source="Images\STATION.jpg" HorizontalAlignment="Left" Height="193" VerticalAlignment="Top" Width="241" Margin="241,26,0,0"/>
 
-        <Grid x:Name="grid1" DataContext="{StaticResource stationViewSource}" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" Height="187" Width="384">
+        <Grid x:Name="grid1" DataContext="{StaticResource stationViewSource}" HorizontalAlignment="Left" Margin="98,23,0,0" VerticalAlignment="Top" Height="187" Width="384">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -28,32 +30,32 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
+            <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
             <TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
+            <Label Content="Code:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
             <TextBox x:Name="codeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Code, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center"/>
+            <Label Content="Latitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="3" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
 
 
 
-            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center"/>
-            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center"/>
+            <Label Content="Longitude:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="4" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
+            <Label Content="Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" FontSize="15" FontWeight="Bold"/>
             <TextBox x:Name="nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <CheckBox IsChecked="True" Content="Disabled Access" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,210,0,0" Height="23" Width="118" Unchecked="NOT_Disabled_Checked" Checked="Disabled_Checked"/>
-        <CheckBox IsChecked="True" Content="Shelter Covered" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,239,0,0" Height="23" Width="118" Checked="ShelterC_Checked"/>
-        <CheckBox Content="Digital Pannel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="54,265,0,0" Height="23" Width="118" Checked="Digital_Checked"/>
-        <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="301,312,0,0" Click="OK_Click"/>
-        <Image Source="Images\disabledAccess.jpg" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="20" Margin="172,207,0,0"/>
+        <CheckBox IsChecked="True" Content="Disabled Access" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="113,237,0,0" Height="23" Width="118" Unchecked="NOT_Disabled_Checked" Checked="Disabled_Checked" FontWeight="Bold"/>
+        <CheckBox IsChecked="True" Content="Shelter Covered" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="113,266,0,0" Height="23" Width="118" Checked="ShelterC_Checked" FontWeight="Bold"/>
+        <CheckBox Content="Digital Pannel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="113,292,0,0" Height="23" Width="118" Checked="Digital_Checked" FontWeight="Bold"/>
+        <Button Content="OK" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="290,339,0,0" Click="OK_Click"/>
+        <Image Source="Images\disabledAccess.jpg" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="20" Margin="231,237,0,0" RenderTransformOrigin="2.7,1.231"/>
         <Label Name="X_Notdisabled" Visibility="Hidden" Content="x" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="168,187,0,0" Foreground="Red" FontSize="30" Height="42"/>
-        <DockPanel VerticalAlignment="Center" Margin="102,121,493,260" Height="38">
-            <TextBox Text="{Binding Value, ElementName=SliderLatitude, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Left" Width="52" Margin="0,11,0,10" />
-            <Slider Minimum="31" Maximum="33.3"  TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLatitude"  Width="143" Margin="0,28,0,-18" />
+        <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="197,131,126,200" Height="38" Width="169">
+            <TextBox Text="{Binding Value, ElementName=SliderLatitude, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Left" Width="55" Margin="0,10" />
+            <Slider Minimum="31" Maximum="33.3"  TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLatitude"  Width="104" Margin="0,10,0,5" />
             <!--ValueChanged="Latitude"-->
         </DockPanel>
-        <DockPanel VerticalAlignment="Center" Margin="102,157,493,224" Height="38">
-            <TextBox Text="{Binding Value, ElementName=SliderLongitude, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Left" Width="52" Margin="0,11,0,10" />
-            <Slider Minimum="34.3" Maximum="35.5" TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLongitude"  Width="163" Margin="0,18,0,-18"  />
+        <DockPanel VerticalAlignment="Center" Margin="197,169,126,161" Height="39">
+            <TextBox Text="{Binding Value, ElementName=SliderLongitude, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Left" Width="55" Margin="0,11,0,10" />
+            <Slider Minimum="34.3" Maximum="35.5" TickPlacement="None" TickFrequency="0.00005" IsSnapToTickEnabled="True" x:Name="SliderLongitude"  Width="106" Margin="0,11,0,0"  />
         </DockPanel>
 
     </Grid>

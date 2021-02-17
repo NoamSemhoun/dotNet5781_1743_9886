@@ -18,7 +18,7 @@
     </Window.Resources>
 
 
-    <Grid Background="#FFBBCED8">
+    <Grid Background="#FFAAB9C1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "1*"/>
             <ColumnDefinition Width = "1*"/>
@@ -59,7 +59,7 @@
         </ListBox>-->
 
 
-        <ListBox x:Name="Allstations_ListBox" Grid.Column="1" ItemsSource="{Binding}" Background="#FFE2ECB7" Margin="0,37,0,0" SelectionChanged="station_ListBox_SelectionChanged">
+        <ListBox x:Name="Allstations_ListBox" Grid.Column="1" ItemsSource="{Binding}" Background="#FFECCBC7" Margin="0,37,0,0" SelectionChanged="station_ListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
@@ -84,7 +84,7 @@
 
         <Label Content="Area" HorizontalAlignment="Left" Margin="73,86,0,0" VerticalAlignment="Top" Width="68" FontSize="20"/>
 
-        <ListBox x:Name="station_Result_LB"  ItemsSource= "{Binding}" Background="#FFE2ECB7" Margin="17,173,30,75" SelectionChanged="station_Result_LB_SelectionChanged" FontSize="4">
+        <ListBox x:Name="station_Result_LB"  ItemsSource= "{Binding}" Background="#FFECCBC7" Margin="17,173,30,75" SelectionChanged="station_Result_LB_SelectionChanged" FontSize="4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
@@ -93,7 +93,7 @@
                                     Click="del_Click"  Height="35" Width="30" Background="{x:Null}" BorderBrush="{x:Null}"   >
                             <Image Source="Images\delete-removebg-preview.png" Width="29" Height="40" VerticalAlignment="Center"/>
                         </Button>
-                        
+
                         <Grid Height="30" Width="30">
                             <TextBox x:Name="IndexTB" Text="{Binding LineStationIndex }" Panel.ZIndex="9"  TextAlignment="Center" FontSize="16" FontFamily="Perpetua Titling MT" 
                                    Margin="-10,4,4,17" Foreground="Black" Background="{x:Null}" BorderBrush="{x:Null}" FontWeight="Bold"></TextBox>
@@ -102,7 +102,7 @@
 
                         <Label Content="{Binding Code}" FontSize="15"/>
                         <Label Content="{Binding Name}" FontSize="15"/>
-                        
+
 
 
                     </StackPanel>
@@ -110,6 +110,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Label Content="Simulator :" HorizontalAlignment="Left" Margin="19,134,0,0" VerticalAlignment="Top" Width="112" FontSize="20"/>
-        <TextBox x:Name="stations_Area" Margin="0,6,243,386" Grid.Column="1" Background="#FFE2ECB7"/>
+        <TextBox x:Name="stations_Area" Margin="0,6,243,386" Grid.Column="1" Background="#FFECCBC7"/>
     </Grid>
 </Window>

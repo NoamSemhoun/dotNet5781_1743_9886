@@ -11,7 +11,7 @@
     WindowStartupLocation="CenterScreen" Height="700" Width="1300"
     Icon="Images\TRAJET.png"  Loaded="Window_Loaded">
     <Window.Resources>
-        
+
 
         <CollectionViewSource x:Key="lineViewSource" d:DesignSource="{d:DesignInstance {x:Type BO:Line}, CreateList=True}"/>
         <local:IsSelectedItemConvertor
@@ -41,16 +41,16 @@
                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                   MouseDoubleClick="ListLine_SelectionDetail_DoubleClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
             ItemsSource= "{Binding}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" FontSize="14" Background="#FF496F90" SelectionChanged="ListView_Lines_SelectionChanged"   Foreground="White" FontWeight="Bold" Margin="0,0,10,0">
-               
+
             <ListView.ItemTemplate>
                 <DataTemplate>
 
                 </DataTemplate>
             </ListView.ItemTemplate>
 
-            
+
             <ListView.ItemContainerStyle>
-                
+
                 <Style TargetType="{x:Type ListViewItem}">
                     <Style.Resources>
                         <!-- Background of selected item when focussed -->
@@ -65,8 +65,8 @@
 
             <ListView.View>
 
-            
-            <GridView >
+
+                <GridView >
 
                     <GridViewColumn  Header="ID" Width="40" DisplayMemberBinding="{Binding LineID}" />
 
@@ -122,11 +122,11 @@
             <!--<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="850,3,-361,0" Height="38" Width="42" Foreground="#FFB84343"><Run FlowDirection="RightToLeft" Text="בס''ד"/></TextBlock>-->
             <ListView x:Name="Station_ListView" ItemsSource="{Binding ElementName=ListView_Lines, Path=SelectedItem, Converter={StaticResource stationListCon}}" MouseDoubleClick="StationDeatails_DoubleClick"
                 VerticalAlignment="Stretch"
-                      ToolTip=" Double Click to view Details" ToolTipService.ShowDuration="50000" HorizontalAlignment="Stretch" BorderBrush="#FFB1BDDF" BorderThickness="4" Foreground="White" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" >
+                      ToolTip=" Double Click to view Details" ToolTipService.ShowDuration="50000" HorizontalAlignment="Stretch" BorderBrush="#FFB1BDDF" BorderThickness="4" Foreground="#FFB9B9B9" FontSize="16" SelectionChanged="Station_ListView_SelectionChanged" >
                 <ListView.Background>
                     <RadialGradientBrush>
-                        <GradientStop Color="#FF3A0000" Offset="0"/>
-                        <GradientStop Color="#FF2C1F1F" Offset="1"/>
+                        <GradientStop Color="#FF262630"/>
+                        <GradientStop Color="#FF2A3A57" Offset="1"/>
                     </RadialGradientBrush>
                 </ListView.Background>
                 <ListView.ItemTemplate>
@@ -172,7 +172,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn  Header="Name" Width="260" DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn  Header="Time" Width ="100" />
+                        <GridViewColumn  Header="Time to Next" Width ="100" DisplayMemberBinding="{Binding Time_ToNext}"/>
 
                     </GridView>
                 </ListView.View>
@@ -186,17 +186,17 @@
                         HorizontalAlignment="Left" VerticalAlignment="Bottom"
                         IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=ListView_Lines}"             
                         Width="156"  Background="#FF4F0C0C" BorderBrush="{x:Null}"  >
-                    <StackPanel Orientation="Horizontal" Height="45" Width="150" Background="#FF4F0C0C" >
+                    <StackPanel Orientation="Horizontal" Height="45" Width="150" Background="#FF2A3A57" >
                         <Image Source="Images\icon AddStation Mps.jpg" Width="55" Height="45" VerticalAlignment="Top" />
-                        <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="White" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="#FF4F0C0C" Width="92" BorderBrush="#FFB92828" Margin="0,6,0,0"/>
+                        <Label Content="Add Station" HorizontalAlignment="Center"  Foreground="White" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Width="92" BorderBrush="#FFB92828" Margin="0,6,0,0"/>
                     </StackPanel>
                 </Button>
 
                 <Button x:Name="deleteStation_button" FontSize="15" Click="deleteStation_button_Click" Height="48" VerticalAlignment="Bottom"
                     IsEnabled="{Binding SelectedItem, Converter={StaticResource convert}, ElementName=Station_ListView}" Background="#FF4F0C0C" Width="154" BorderBrush="{x:Null}" Foreground="Red">
-                    <StackPanel Orientation="Horizontal" Height="45" Width="153" Background="#FF4F0C0C">
+                    <StackPanel Orientation="Horizontal" Height="45" Width="153" Background="#FF2A3A57">
                         <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="Images\delete.png" Width="44" Height="42" Margin="0,2,0,1" />
-                        <Label Content="Delete Station" HorizontalAlignment="Center"  Foreground="White" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="#FF4F0C0C" Width="120" BorderBrush="#FFB92828" Height="39" VerticalAlignment="Bottom"/>
+                        <Label Content="Delete Station" HorizontalAlignment="Center"  Foreground="White" FontSize="16" RenderTransformOrigin="0.444,0.659"  Background="{x:Null}" Width="114" BorderBrush="#FFB92828" Height="39" VerticalAlignment="Bottom"/>
                     </StackPanel>
                 </Button>
 
@@ -235,7 +235,7 @@
 
 
             <ListView x:Name="freq_ListView" ItemsSource="{Binding}" Grid.Row="1" Visibility="Visible"
-                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF383A4D" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" Foreground="#FFEDF0C3" >
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF383A4D" BorderBrush="#FFB1BDDF" BorderThickness="4"  FontSize="15" Foreground="#FFEDF0C3" SelectionChanged="freq_ListView_SelectionChanged" >
 
                 <ListView.View>
                     <GridView >

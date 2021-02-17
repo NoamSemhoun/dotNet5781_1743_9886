@@ -48,14 +48,22 @@ namespace PlGui
         private void ListViewStations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            try 
+            {
+                Kavim_list.ItemsSource = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
+            }
+            catch { }
+
             //BO.Station S = (BO.Station)ListViewStations.SelectedItem;
-            //addressTextBox.Text = S.Address; // To test   
+            //addressTextBox.Text = S.Address; // To test not by binding  
 
         }
 
-        private void Menu_Click(object sender, RoutedEventArgs e)
+        private void Linesview_Click(object sender, RoutedEventArgs e)
         {
-                   this.Close();
+            LinesWindow linesWindow = new LinesWindow();
+            linesWindow.Show(); 
+            this.Close();
         }
 
         private void addStation_Click(object sender, RoutedEventArgs e)
@@ -102,18 +110,18 @@ namespace PlGui
             myWin.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)  // Print the kavim
-        {
-            //Gridof_Lines.DataContext = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
-
-            Kavim_list.ItemsSource = ((ListViewStations.SelectedItem as BO.Station).List_Lines);
-
-        }
+        
 
         private void ViewLine_Click(object sender, RoutedEventArgs e)
         {
             LinesWindow win = new LinesWindow();
-            win.ShowDialog() ;  // Send the Line to Selection 
+            win.ShowDialog() ;  // Send the Line to Selection
+            //Kavim_list.SelectedItem;
+        }
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

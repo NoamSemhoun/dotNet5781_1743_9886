@@ -69,5 +69,11 @@ namespace PlGui
             //this.Close();
 
         }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("You can join Yair or Noam for HELP", "Help", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        }
     }
 }
