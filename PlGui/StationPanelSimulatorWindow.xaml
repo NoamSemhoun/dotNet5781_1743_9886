@@ -14,23 +14,22 @@
             <RowDefinition Height="187*" />
         </Grid.RowDefinitions>
 
-        <controlers:ClockSimulatorPanel x:Name="cSP" Grid.RowSpan="1" Margin="0,0,-0.4,4.6"/>
+        <controlers:ClockSimulatorPanel x:Name="cSP" Grid.RowSpan="2" Margin="0,0,0,41"/>
         <Image Source="Images\Time.png" HorizontalAlignment="Left" Height="85" VerticalAlignment="Top" Width="82" Margin="62,10,0,0"/>
-        <Image Source="Images\sppeed.png" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="64" Margin="720,75,0,0" RenderTransformOrigin="0.625,0.442"/>
-        <Image Source="Images\playpause.png" HorizontalAlignment="Left" Height="39" VerticalAlignment="Top" Width="94" Margin="50,134,0,0" RenderTransformOrigin="0.625,0.442"/>
+        <Image Source="Images\sppeed.png" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="64" Margin="718,96,0,0" RenderTransformOrigin="0.625,0.442"/>
+        <Image Source="Images\playpause.png" HorizontalAlignment="Left" Height="51" VerticalAlignment="Top" Width="113" Margin="50,122,0,0" RenderTransformOrigin="0.625,0.442"/>
         <Label Content="Speed : " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="540,134,0,0" FontSize="30" Height="57" Width="147" Grid.RowSpan="2"/>
         <ListView   x:Name="ListView_Lines" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                       ItemsSource="{Binding }" Margin="0,0.2,-0.4,0" >
+                       ItemsSource="{Binding }" Margin="0,0.2,-0.4,0" Background="#FF0A0505" Foreground="#FFCFBD07" FontSize="16" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Line Number" DisplayMemberBinding="{Binding LineNumber}"/>
-                    <GridViewColumn Header="Destination" DisplayMemberBinding="{Binding LastStationName}"/>
-                    <GridViewColumn Header="Arrival Time" DisplayMemberBinding="{Binding ExpectedTime}"/>
+                    <GridViewColumn Header="Line Number" Width="160" DisplayMemberBinding="{Binding LineNumber}"/>
+                    <GridViewColumn Header="Destination" Width="190" DisplayMemberBinding="{Binding LastStationName}"/>
+                    <GridViewColumn Header="Arrival Time" Width="150" DisplayMemberBinding="{Binding ExpectedTime}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <TextBlock x:Name="LineOnStation_TextBox" HorizontalAlignment="Center" FontSize="40" Grid.Row="1"   />
+        <TextBlock x:Name="LineOnStation_TextBox" HorizontalAlignment="Center" FontSize="40" Grid.Row="1" Margin="124,0,170,0" Width="498"   />
 
     </Grid>
 </Window>

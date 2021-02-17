@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="66*"/>
                 <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="run_Button" Content="Run" Click="Button_Click" FontSize="60" BorderBrush="{x:Null}"  />
+            <Button Name="run_Button" Content="Run" Click="Button_Click" FontSize="60" BorderBrush="{x:Null}" Margin="0,-24,0,0"  />
 
             <TextBox Name="rate_TextBox" Text="{Binding Path=Rate}" HorizontalContentAlignment="Right" Grid.Column="1" FontSize="30" PreviewKeyDown="rate_TextBox_PreviewKeyDown" BorderBrush="{x:Null}" />
         </Grid>

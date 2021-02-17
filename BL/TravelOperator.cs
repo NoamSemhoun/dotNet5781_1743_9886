@@ -34,15 +34,19 @@ namespace BL
             //travelOperatorThread = new Thread(runTravelOperator);                    
         }
 
-       
+
 
         internal void AddStation(int stationId, Action<LineTiming> updateLines)
         {
             foreach (int lineId in ManageDoData.GetLinesInStation(stationId))
                 AddLine(lineId);
-            updateLinePanel.Add(stationId, updateLines);
-        }
+            try
+            {
+                updateLinePanel.Add(stationId, updateLines);
+            }
 
+            catch { }
+}
         internal void forceStoping()
         {
             if (travelOperatorThread.IsAlive)

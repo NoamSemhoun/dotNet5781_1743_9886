@@ -94,7 +94,12 @@ namespace PlGui.My_Controlles
 
         private void getProgress(TimeSpan simTime)
         {
-            worker.ReportProgress(0, simTime);
+            try  // exception ?
+            {
+                worker.ReportProgress(0, simTime);
+
+            }
+            catch { }
         }
 
         private void clockProgressEvent(object sender, ProgressChangedEventArgs e)
