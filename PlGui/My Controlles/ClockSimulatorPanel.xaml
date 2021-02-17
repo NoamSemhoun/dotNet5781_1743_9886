@@ -7,25 +7,23 @@
              xmlns:main ="clr-namespace:PlGui"
              xmlns:con ="clr-namespace:PlGui.coverors"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="350" d:DesignWidth="800">
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="66*"/>
-            <RowDefinition Height="33*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <main:TimeTextBox x:Name="time_textbox" Text = "{Binding Path= Time, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0,0,10,0" Width="790"/>
+        <main:TimeTextBox x:Name="time_textbox" Text = "{Binding Path= Time, Mode=TwoWay}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,0,10,0" Width="790"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="66*"/>
                 <ColumnDefinition Width="33*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="run_Button" Content="Run" Click="Button_Click" FontSize="60"  />
+            <Button Name="run_Button" Content="Run" Click="Button_Click" FontSize="60" BorderBrush="{x:Null}"  />
 
-            <TextBox Name="rate_TextBox" Text="{Binding Path=Rate}" Grid.Column="1" FontSize="30" PreviewKeyDown="rate_TextBox_PreviewKeyDown" />
+            <TextBox Name="rate_TextBox" Text="{Binding Path=Rate}" HorizontalContentAlignment="Right" Grid.Column="1" FontSize="30" PreviewKeyDown="rate_TextBox_PreviewKeyDown" BorderBrush="{x:Null}" />
         </Grid>
-        <Image Source="Images\Time.png" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="28,39,0,0"/>
-        <Image Source="Images\sppeed.png" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="100" Margin="690,222,0,0" RenderTransformOrigin="0.625,0.442"/>
-        <Image Source="Images\playpause.png" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="100" Margin="69,44,0,0" RenderTransformOrigin="0.625,0.442" Grid.Row="1"/>
+
 
     </Grid>
 </UserControl>

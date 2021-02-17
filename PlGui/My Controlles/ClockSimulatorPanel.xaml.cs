@@ -68,7 +68,7 @@ namespace PlGui.My_Controlles
                 ButtonClick(this, new EventArgs());
             if (!RunFlag)
             {
-                run_Button.Content = "stop";
+                run_Button.Content = "Stop";
                 if(!worker.IsBusy)
                 {   
                     worker.RunWorkerAsync();
@@ -79,7 +79,7 @@ namespace PlGui.My_Controlles
             }
             else
             {
-                run_Button.Content = "run";
+                run_Button.Content = "Run";
                 stopSimulator();
                 RunFlag = false;
                 rate_TextBox.IsEnabled = true;
